@@ -1,0 +1,2109 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SNK Business | Business Management</title>
+
+  <meta
+    name="description"
+    content="SNK Business — Premium Multi-Business Management Dashboard"
+  >
+
+  <style>
+    :root{
+      --bg:#070b12;
+      --bg2:#0b111b;
+      --panel:#101722;
+      --panel2:#141d2a;
+      --panel3:#182333;
+      --line:rgba(255,255,255,.08);
+
+      --text:#f5f7fb;
+      --muted:#8d99aa;
+
+      --blue:#4f8cff;
+      --blue2:#2869e8;
+      --cyan:#27c8ff;
+      --green:#28d17c;
+      --yellow:#ffbd4a;
+      --red:#ff5f6d;
+      --purple:#9b72ff;
+
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 80% -10%,
+          rgba(79,140,255,.16),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 10% 20%,
+          rgba(39,200,255,.07),
+          transparent 25%
+        ),
+        var(--bg);
+
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    button,
+    input{
+      font:inherit;
+    }
+
+    button{
+      cursor:pointer;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    /* =========================
+       APP
+    ========================= */
+
+    .app{
+      display:flex;
+      min-height:100vh;
+    }
+
+    /* =========================
+       SIDEBAR
+    ========================= */
+
+    .sidebar{
+      width:270px;
+      min-height:100vh;
+      position:fixed;
+      left:0;
+      top:0;
+      bottom:0;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(17,24,36,.98),
+          rgba(8,12,19,.98)
+        );
+
+      border-right:1px solid var(--line);
+      padding:22px 16px;
+      z-index:100;
+
+      display:flex;
+      flex-direction:column;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:5px 8px 24px;
+    }
+
+    .brand-logo{
+      width:44px;
+      height:44px;
+      border-radius:13px;
+
+      display:grid;
+      place-items:center;
+
+      font-weight:900;
+      font-size:17px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--blue),
+          var(--cyan)
+        );
+
+      color:white;
+      box-shadow:
+        0 10px 30px rgba(79,140,255,.28);
+    }
+
+    .brand-text strong{
+      display:block;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+
+    .brand-text span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      margin-top:2px;
+    }
+
+    .section-label{
+      color:#647084;
+      font-size:10px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1.4px;
+      padding:15px 12px 8px;
+    }
+
+    .nav{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+
+    .nav-item{
+      width:100%;
+      border:1px solid transparent;
+      background:transparent;
+      color:#aeb8c8;
+
+      display:flex;
+      align-items:center;
+      gap:12px;
+
+      padding:11px 12px;
+      border-radius:11px;
+
+      text-align:left;
+      transition:.2s;
+    }
+
+    .nav-item:hover{
+      background:rgba(255,255,255,.045);
+      color:white;
+    }
+
+    .nav-item.active{
+      background:
+        linear-gradient(
+          90deg,
+          rgba(79,140,255,.17),
+          rgba(79,140,255,.05)
+        );
+
+      border-color:rgba(79,140,255,.18);
+      color:white;
+    }
+
+    .nav-icon{
+      width:21px;
+      text-align:center;
+      font-size:17px;
+    }
+
+    .nav-text{
+      font-size:13px;
+      font-weight:600;
+    }
+
+    .nav-badge{
+      margin-left:auto;
+      font-size:10px;
+      padding:3px 7px;
+      border-radius:20px;
+      background:rgba(255,255,255,.07);
+      color:#9da9bb;
+    }
+
+    .sidebar-bottom{
+      margin-top:auto;
+    }
+
+    .upgrade-box{
+      margin:15px 4px;
+      padding:15px;
+
+      border:1px solid rgba(79,140,255,.18);
+      border-radius:15px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(79,140,255,.12),
+          rgba(39,200,255,.04)
+        );
+    }
+
+    .upgrade-box strong{
+      font-size:12px;
+      display:block;
+      margin-bottom:5px;
+    }
+
+    .upgrade-box p{
+      color:#7f8ca0;
+      font-size:10px;
+      line-height:1.5;
+      margin-bottom:11px;
+    }
+
+    .upgrade-btn{
+      width:100%;
+      border:0;
+      border-radius:9px;
+      padding:8px;
+      background:var(--blue);
+      color:white;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .admin-mini{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:14px 8px 4px;
+      border-top:1px solid var(--line);
+    }
+
+    .avatar{
+      width:37px;
+      height:37px;
+      border-radius:11px;
+      display:grid;
+      place-items:center;
+
+      background:
+        linear-gradient(
+          135deg,
+          #24395e,
+          #162338
+        );
+
+      border:1px solid rgba(255,255,255,.08);
+      font-weight:800;
+      font-size:12px;
+    }
+
+    .admin-info{
+      min-width:0;
+      flex:1;
+    }
+
+    .admin-info strong{
+      display:block;
+      font-size:11px;
+    }
+
+    .admin-info span{
+      display:block;
+      color:var(--muted);
+      font-size:9px;
+      margin-top:2px;
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .main{
+      width:calc(100% - 270px);
+      margin-left:270px;
+      min-height:100vh;
+    }
+
+    .topbar{
+      height:76px;
+      border-bottom:1px solid var(--line);
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      padding:0 30px;
+
+      background:rgba(7,11,18,.72);
+      backdrop-filter:blur(20px);
+
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+
+    .page-title h1{
+      font-size:19px;
+      font-weight:750;
+    }
+
+    .page-title p{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:4px;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+
+    .icon-btn{
+      width:39px;
+      height:39px;
+      border-radius:11px;
+      border:1px solid var(--line);
+      background:#0d141f;
+      color:#aeb8c7;
+      display:grid;
+      place-items:center;
+      position:relative;
+    }
+
+    .notification-dot{
+      position:absolute;
+      width:7px;
+      height:7px;
+      background:var(--red);
+      border-radius:50%;
+      right:8px;
+      top:7px;
+      box-shadow:0 0 0 3px #0d141f;
+    }
+
+    .business-select{
+      border:1px solid var(--line);
+      background:#0d141f;
+      color:#dfe6f0;
+      border-radius:11px;
+      padding:10px 12px;
+      font-size:11px;
+      outline:none;
+    }
+
+    /* =========================
+       CONTENT
+    ========================= */
+
+    .content{
+      padding:28px 30px 50px;
+      max-width:1600px;
+      margin:auto;
+    }
+
+    /* HERO */
+
+    .hero{
+      border:1px solid var(--line);
+      border-radius:24px;
+
+      padding:28px;
+
+      background:
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(79,140,255,.20),
+          transparent 28%
+        ),
+        linear-gradient(
+          135deg,
+          #101a29,
+          #0d141e
+        );
+
+      box-shadow:var(--shadow);
+
+      display:flex;
+      justify-content:space-between;
+      gap:25px;
+
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      width:250px;
+      height:250px;
+      border-radius:50%;
+      right:-110px;
+      bottom:-130px;
+
+      border:1px solid rgba(79,140,255,.15);
+      box-shadow:
+        0 0 0 40px rgba(79,140,255,.025),
+        0 0 0 80px rgba(79,140,255,.015);
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+
+      padding:5px 9px;
+      border-radius:30px;
+
+      background:rgba(79,140,255,.10);
+      border:1px solid rgba(79,140,255,.15);
+
+      color:#82adff;
+      font-size:9px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    .live-dot{
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 10px rgba(40,209,124,.8);
+    }
+
+    .hero h2{
+      font-size:31px;
+      line-height:1.1;
+      margin:15px 0 8px;
+      letter-spacing:-.7px;
+    }
+
+    .hero p{
+      color:#8794a7;
+      font-size:12px;
+      max-width:570px;
+      line-height:1.7;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:9px;
+      margin-top:20px;
+    }
+
+    .primary-btn,
+    .secondary-btn{
+      border-radius:10px;
+      padding:11px 15px;
+      font-size:11px;
+      font-weight:750;
+      border:1px solid var(--line);
+    }
+
+    .primary-btn{
+      background:linear-gradient(135deg,var(--blue),var(--blue2));
+      color:white;
+      border-color:transparent;
+      box-shadow:0 8px 25px rgba(79,140,255,.2);
+    }
+
+    .secondary-btn{
+      background:rgba(255,255,255,.035);
+      color:#d4dbe6;
+    }
+
+    /* =========================
+       STAT GRID
+    ========================= */
+
+    .section-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin:28px 0 13px;
+    }
+
+    .section-head h3{
+      font-size:14px;
+      font-weight:750;
+    }
+
+    .section-head span{
+      color:#657184;
+      font-size:10px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+    }
+
+    .stat-card{
+      padding:18px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(16,23,34,.82);
+      transition:.2s;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .stat-card:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,.12);
+    }
+
+    .stat-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .stat-label{
+      color:#7f8b9e;
+      font-size:10px;
+      font-weight:600;
+    }
+
+    .stat-icon{
+      width:32px;
+      height:32px;
+      border-radius:9px;
+      display:grid;
+      place-items:center;
+      font-size:14px;
+      background:rgba(79,140,255,.10);
+    }
+
+    .stat-value{
+      font-size:24px;
+      font-weight:800;
+      margin-top:13px;
+      letter-spacing:-.5px;
+    }
+
+    .stat-bottom{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      margin-top:7px;
+      font-size:9px;
+    }
+
+    .positive{
+      color:var(--green);
+    }
+
+    .negative{
+      color:var(--red);
+    }
+
+    .stat-note{
+      color:#657184;
+    }
+
+    /* =========================
+       BUSINESS GRID
+    ========================= */
+
+    .business-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:15px;
+    }
+
+    .business-card{
+      border:1px solid var(--line);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(20,29,42,.96),
+          rgba(13,19,28,.96)
+        );
+
+      border-radius:19px;
+      padding:20px;
+      transition:.22s;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .business-card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(79,140,255,.27);
+      box-shadow:0 18px 40px rgba(0,0,0,.25);
+    }
+
+    .business-card::after{
+      content:"";
+      position:absolute;
+      width:100px;
+      height:100px;
+      border-radius:50%;
+      right:-45px;
+      top:-45px;
+      background:rgba(79,140,255,.07);
+    }
+
+    .business-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      position:relative;
+      z-index:2;
+    }
+
+    .business-icon{
+      width:45px;
+      height:45px;
+      border-radius:13px;
+      display:grid;
+      place-items:center;
+      font-size:19px;
+      font-weight:800;
+    }
+
+    .sarakat{
+      background:rgba(155,114,255,.13);
+      color:#b99cff;
+      border:1px solid rgba(155,114,255,.16);
+    }
+
+    .website{
+      background:rgba(39,200,255,.11);
+      color:#55d7ff;
+      border:1px solid rgba(39,200,255,.15);
+    }
+
+    .marketing{
+      background:rgba(40,209,124,.11);
+      color:#45df91;
+      border:1px solid rgba(40,209,124,.15);
+    }
+
+    .business-status{
+      font-size:9px;
+      padding:5px 8px;
+      border-radius:20px;
+      background:rgba(40,209,124,.09);
+      color:#48d88e;
+      border:1px solid rgba(40,209,124,.12);
+    }
+
+    .business-card h4{
+      font-size:15px;
+      margin-top:17px;
+    }
+
+    .business-desc{
+      color:#727f92;
+      font-size:10px;
+      line-height:1.6;
+      margin-top:5px;
+      min-height:32px;
+    }
+
+    .business-metrics{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:8px;
+      margin-top:17px;
+    }
+
+    .metric{
+      padding:9px;
+      background:rgba(255,255,255,.025);
+      border:1px solid rgba(255,255,255,.045);
+      border-radius:9px;
+    }
+
+    .metric span{
+      display:block;
+      color:#687588;
+      font-size:8px;
+    }
+
+    .metric strong{
+      display:block;
+      margin-top:4px;
+      font-size:11px;
+    }
+
+    .business-footer{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-top:17px;
+      padding-top:13px;
+      border-top:1px solid rgba(255,255,255,.05);
+    }
+
+    .business-revenue{
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .open-link{
+      color:#76a7ff;
+      font-size:10px;
+      font-weight:750;
+    }
+
+    .add-business{
+      border:1px dashed rgba(255,255,255,.12);
+      background:rgba(255,255,255,.015);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:250px;
+    }
+
+    .add-inner{
+      text-align:center;
+    }
+
+    .add-circle{
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      margin:auto;
+      display:grid;
+      place-items:center;
+      border:1px dashed #526075;
+      color:#8b98aa;
+      font-size:21px;
+    }
+
+    .add-inner strong{
+      display:block;
+      margin-top:12px;
+      font-size:12px;
+    }
+
+    .add-inner span{
+      display:block;
+      color:#667386;
+      font-size:9px;
+      margin-top:5px;
+    }
+
+    /* =========================
+       LOWER GRID
+    ========================= */
+
+    .lower-grid{
+      display:grid;
+      grid-template-columns:1.5fr 1fr;
+      gap:15px;
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:17px;
+      background:rgba(16,23,34,.78);
+      overflow:hidden;
+    }
+
+    .panel-head{
+      padding:16px 18px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .panel-head h3{
+      font-size:12px;
+    }
+
+    .panel-head button{
+      border:0;
+      background:transparent;
+      color:#709eff;
+      font-size:9px;
+    }
+
+    /* table */
+
+    .table-wrap{
+      overflow:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:580px;
+    }
+
+    th{
+      text-align:left;
+      color:#667386;
+      font-size:8px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      padding:12px 18px;
+      font-weight:750;
+    }
+
+    td{
+      padding:12px 18px;
+      border-top:1px solid rgba(255,255,255,.045);
+      font-size:10px;
+      color:#bac3d0;
+    }
+
+    .customer{
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+
+    .customer-avatar{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+      display:grid;
+      place-items:center;
+      background:#182438;
+      color:#91b7ff;
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .customer-name strong{
+      display:block;
+      color:#e6ebf3;
+      font-size:10px;
+    }
+
+    .customer-name span{
+      display:block;
+      color:#647184;
+      font-size:8px;
+      margin-top:2px;
+    }
+
+    .payment-status{
+      display:inline-block;
+      padding:4px 7px;
+      border-radius:20px;
+      font-size:8px;
+    }
+
+    .paid{
+      background:rgba(40,209,124,.08);
+      color:#45d98b;
+    }
+
+    .pending{
+      background:rgba(255,189,74,.09);
+      color:#ffca67;
+    }
+
+    .partial{
+      background:rgba(79,140,255,.09);
+      color:#78a5ff;
+    }
+
+    /* quick actions */
+
+    .quick-actions{
+      padding:15px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px;
+    }
+
+    .quick-btn{
+      border:1px solid rgba(255,255,255,.06);
+      background:rgba(255,255,255,.025);
+      border-radius:12px;
+      padding:13px;
+      text-align:left;
+      color:#dce3ed;
+      transition:.2s;
+    }
+
+    .quick-btn:hover{
+      background:rgba(79,140,255,.07);
+      border-color:rgba(79,140,255,.16);
+    }
+
+    .quick-icon{
+      font-size:17px;
+    }
+
+    .quick-btn strong{
+      display:block;
+      margin-top:8px;
+      font-size:10px;
+    }
+
+    .quick-btn span{
+      display:block;
+      margin-top:3px;
+      color:#687588;
+      font-size:8px;
+      line-height:1.4;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    .mobile-menu{
+      display:none;
+    }
+
+    @media(max-width:1150px){
+      .stats{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .business-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .lower-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:850px){
+      .sidebar{
+        transform:translateX(-100%);
+        transition:.25s;
+      }
+
+      .sidebar.open{
+        transform:translateX(0);
+      }
+
+      .main{
+        width:100%;
+        margin-left:0;
+      }
+
+      .mobile-menu{
+        display:grid;
+        place-items:center;
+        width:38px;
+        height:38px;
+        border-radius:10px;
+        border:1px solid var(--line);
+        background:#0d141f;
+        color:white;
+      }
+
+      .topbar{
+        padding:0 17px;
+      }
+
+      .business-select{
+        display:none;
+      }
+
+      .content{
+        padding:20px 16px 40px;
+      }
+
+      .hero{
+        padding:22px;
+      }
+
+      .hero h2{
+        font-size:25px;
+      }
+    }
+
+    @media(max-width:650px){
+      .stats{
+        grid-template-columns:1fr 1fr;
+        gap:9px;
+      }
+
+      .stat-card{
+        padding:14px;
+      }
+
+      .stat-value{
+        font-size:19px;
+      }
+
+      .business-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        display:block;
+      }
+
+      .hero-actions{
+        flex-wrap:wrap;
+      }
+
+      .page-title h1{
+        font-size:15px;
+      }
+
+      .page-title p{
+        display:none;
+      }
+
+      .top-actions .icon-btn{
+        display:none;
+      }
+    }
+
+    @media(max-width:430px){
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .business-metrics{
+        grid-template-columns:repeat(3,1fr);
+      }
+
+      .hero h2{
+        font-size:22px;
+      }
+
+      .hero p{
+        font-size:10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- =========================
+       SIDEBAR
+  ========================== -->
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+      <div class="brand-logo">SNK</div>
+
+      <div class="brand-text">
+        <strong>SNK Business</strong>
+        <span>Business Command Center</span>
+      </div>
+    </div>
+
+    <div class="section-label">Workspace</div>
+
+    <nav class="nav">
+
+      <button class="nav-item active">
+        <span class="nav-icon">⌂</span>
+        <span class="nav-text">Dashboard</span>
+      </button>
+
+      <button class="nav-item" onclick="openBusinesses()">
+        <span class="nav-icon">▦</span>
+        <span class="nav-text">My Businesses</span>
+        <span class="nav-badge">3</span>
+      </button>
+
+      <button class="nav-item">
+        <span class="nav-icon">◉</span>
+        <span class="nav-text">Customers</span>
+      </button>
+
+      <button class="nav-item">
+        <span class="nav-icon">৳</span>
+        <span class="nav-text">Payments</span>
+        <span class="nav-badge">8</span>
+      </button>
+
+      <button class="nav-item">
+        <span class="nav-icon">▣</span>
+        <span class="nav-text">Inventory</span>
+      </button>
+
+      <button class="nav-item">
+        <span class="nav-icon">▤</span>
+        <span class="nav-text">Invoices</span>
+      </button>
+
+    </nav>
+
+    <div class="section-label">Management</div>
+
+    <nav class="nav">
+
+      <button class="nav-item">
+        <span class="nav-icon">◫</span>
+        <span class="nav-text">Projects</span>
+      </button>
+
+      <button class="nav-item">
+        <span class="nav-icon">⌁</span>
+        <span class="nav-text">Digital Marketing</span>
+      </button>
+
+      <button class="nav-item">
+        <span class="nav-icon">◴</span>
+        <span class="nav-text">Tasks</span>
+      </button>
+
+      <button class="nav-item">
+        <span class="nav-icon">◌</span>
+        <span class="nav-text">Reports</span>
+      </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <div class="upgrade-box">
+        <strong>Premium Business Suite</strong>
+
+        <p>
+          Manage multiple businesses, customers,
+          payments and projects from one place.
+        </p>
+
+        <button class="upgrade-btn">
+          Business Settings
+        </button>
+      </div>
+
+      <div class="admin-mini">
+
+        <div class="avatar">SU</div>
+
+        <div class="admin-info">
+          <strong>Super Admin</strong>
+          <span>Owner • Full Access</span>
+        </div>
+
+        <span style="color:#657184;">⋮</span>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div style="display:flex;align-items:center;gap:12px;">
+
+        <button
+          class="mobile-menu"
+          onclick="toggleSidebar()"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+
+        <div class="page-title">
+          <h1>Business Dashboard</h1>
+          <p>Manage your complete business ecosystem</p>
+        </div>
+
+      </div>
+
+      <div class="top-actions">
+
+        <select class="business-select" id="businessSelect">
+          <option value="all">All Businesses</option>
+          <option value="sarakat">Sarakat Agency</option>
+          <option value="website">Website Sale</option>
+          <option value="marketing">Digital Marketing</option>
+        </select>
+
+        <button class="icon-btn">
+          🔍
+        </button>
+
+        <button class="icon-btn">
+          🔔
+          <span class="notification-dot"></span>
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <section class="content">
+
+      <!-- HERO -->
+
+      <div class="hero">
+
+        <div class="hero-content">
+
+          <span class="eyebrow">
+            <span class="live-dot"></span>
+            Business Center Online
+          </span>
+
+          <h2>
+            Welcome to<br>
+            SNK Business.
+          </h2>
+
+          <p>
+            One premium workspace for managing your businesses,
+            customers, websites, marketing projects, payments,
+            invoices and business operations.
+          </p>
+
+          <div class="hero-actions">
+
+            <button
+              class="primary-btn"
+              onclick="addBusiness()"
+            >
+              + Add New Business
+            </button>
+
+            <button
+              class="secondary-btn"
+              onclick="openBusinesses()"
+            >
+              View All Businesses
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- STATISTICS -->
+
+      <div class="section-head">
+        <h3>Business Overview</h3>
+        <span>September 2026</span>
+      </div>
+
+      <div class="stats">
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+            <span class="stat-label">Total Revenue</span>
+            <div class="stat-icon">৳</div>
+          </div>
+
+          <div class="stat-value">৳4,20,000</div>
+
+          <div class="stat-bottom">
+            <span class="positive">+18.4%</span>
+            <span class="stat-note">vs last month</span>
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+            <span class="stat-label">Received</span>
+            <div
+              class="stat-icon"
+              style="
+                background:rgba(40,209,124,.09);
+                color:#45d98b;
+              "
+            >
+              ✓
+            </div>
+          </div>
+
+          <div class="stat-value">৳3,15,000</div>
+
+          <div class="stat-bottom">
+            <span class="positive">+12.8%</span>
+            <span class="stat-note">collected</span>
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+            <span class="stat-label">Pending Payment</span>
+            <div
+              class="stat-icon"
+              style="
+                background:rgba(255,189,74,.09);
+                color:#ffca67;
+              "
+            >
+              !
+            </div>
+          </div>
+
+          <div class="stat-value">৳1,05,000</div>
+
+          <div class="stat-bottom">
+            <span class="negative">8 pending</span>
+            <span class="stat-note">payments</span>
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+            <span class="stat-label">Customers</span>
+            <div
+              class="stat-icon"
+              style="
+                background:rgba(155,114,255,.09);
+                color:#b99cff;
+              "
+            >
+              ◉
+            </div>
+          </div>
+
+          <div class="stat-value">51</div>
+
+          <div class="stat-bottom">
+            <span class="positive">+7</span>
+            <span class="stat-note">this month</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- BUSINESSES -->
+
+      <div class="section-head">
+
+        <h3>My Businesses</h3>
+
+        <button
+          onclick="openBusinesses()"
+          style="
+            background:none;
+            border:0;
+            color:#709eff;
+            font-size:10px;
+            cursor:pointer;
+          "
+        >
+          View all →
+        </button>
+
+      </div>
+
+
+      <div class="business-grid">
+
+
+        <!-- SARAKAT -->
+
+        <article
+          class="business-card"
+          onclick="openBusiness('sarakat')"
+        >
+
+          <div class="business-head">
+
+            <div class="business-icon sarakat">
+              SA
+            </div>
+
+            <span class="business-status">
+              ● Active
+            </span>
+
+          </div>
+
+          <h4>Sarakat Agency</h4>
+
+          <p class="business-desc">
+            Digital agency, advertising, design and
+            client project management.
+          </p>
+
+          <div class="business-metrics">
+
+            <div class="metric">
+              <span>Customers</span>
+              <strong>18</strong>
+            </div>
+
+            <div class="metric">
+              <span>Projects</span>
+              <strong>12</strong>
+            </div>
+
+            <div class="metric">
+              <span>Pending</span>
+              <strong>৳25K</strong>
+            </div>
+
+          </div>
+
+          <div class="business-footer">
+
+            <span class="business-revenue">
+              ৳85,000 revenue
+            </span>
+
+            <span class="open-link">
+              Open Business →
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <!-- WEBSITE SALE -->
+
+        <article
+          class="business-card"
+          onclick="openBusiness('website')"
+        >
+
+          <div class="business-head">
+
+            <div class="business-icon website">
+              🌐
+            </div>
+
+            <span class="business-status">
+              ● Active
+            </span>
+
+          </div>
+
+          <h4>Website Sale</h4>
+
+          <p class="business-desc">
+            Ready-made websites, business sites,
+            domain, hosting and website delivery.
+          </p>
+
+          <div class="business-metrics">
+
+            <div class="metric">
+              <span>Websites</span>
+              <strong>14</strong>
+            </div>
+
+            <div class="metric">
+              <span>Sold</span>
+              <strong>8</strong>
+            </div>
+
+            <div class="metric">
+              <span>Pending</span>
+              <strong>৳30K</strong>
+            </div>
+
+          </div>
+
+          <div class="business-footer">
+
+            <span class="business-revenue">
+              ৳1,25,000 revenue
+            </span>
+
+            <span class="open-link">
+              Open Business →
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <!-- DIGITAL MARKETING -->
+
+        <article
+          class="business-card"
+          onclick="openBusiness('marketing')"
+        >
+
+          <div class="business-head">
+
+            <div class="business-icon marketing">
+              📢
+            </div>
+
+            <span class="business-status">
+              ● Active
+            </span>
+
+          </div>
+
+          <h4>Digital Marketing</h4>
+
+          <p class="business-desc">
+            Facebook Ads, Google Ads, campaigns,
+            content and client marketing management.
+          </p>
+
+          <div class="business-metrics">
+
+            <div class="metric">
+              <span>Clients</span>
+              <strong>11</strong>
+            </div>
+
+            <div class="metric">
+              <span>Campaigns</span>
+              <strong>17</strong>
+            </div>
+
+            <div class="metric">
+              <span>Pending</span>
+              <strong>৳35K</strong>
+            </div>
+
+          </div>
+
+          <div class="business-footer">
+
+            <span class="business-revenue">
+              ৳1,80,000 revenue
+            </span>
+
+            <span class="open-link">
+              Open Business →
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <!-- ADD BUSINESS -->
+
+        <article
+          class="business-card add-business"
+          onclick="addBusiness()"
+        >
+
+          <div class="add-inner">
+
+            <div class="add-circle">
+              +
+            </div>
+
+            <strong>Add New Business</strong>
+
+            <span>
+              Create another business workspace
+            </span>
+
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <!-- LOWER SECTION -->
+
+      <div class="section-head">
+        <h3>Recent Activity</h3>
+        <span>Latest business transactions</span>
+      </div>
+
+
+      <div class="lower-grid">
+
+
+        <!-- PAYMENTS -->
+
+        <div class="panel">
+
+          <div class="panel-head">
+
+            <h3>Recent Payments</h3>
+
+            <button onclick="openPayments()">
+              View all →
+            </button>
+
+          </div>
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Customer</th>
+                  <th>Business</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                <tr>
+
+                  <td>
+
+                    <div class="customer">
+
+                      <div class="customer-avatar">
+                        AR
+                      </div>
+
+                      <div class="customer-name">
+                        <strong>Arif Rahman</strong>
+                        <span>Website Client</span>
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>Website Sale</td>
+
+                  <td>৳15,000</td>
+
+                  <td>
+                    <span class="payment-status paid">
+                      Paid
+                    </span>
+                  </td>
+
+                  <td>30 Sep</td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+
+                    <div class="customer">
+
+                      <div class="customer-avatar">
+                        NS
+                      </div>
+
+                      <div class="customer-name">
+                        <strong>Nusrat Studio</strong>
+                        <span>Marketing Client</span>
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>Digital Marketing</td>
+
+                  <td>৳20,000</td>
+
+                  <td>
+                    <span class="payment-status partial">
+                      Partial
+                    </span>
+                  </td>
+
+                  <td>29 Sep</td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+
+                    <div class="customer">
+
+                      <div class="customer-avatar">
+                        SK
+                      </div>
+
+                      <div class="customer-name">
+                        <strong>SK Fashion</strong>
+                        <span>Agency Client</span>
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>Sarakat Agency</td>
+
+                  <td>৳12,000</td>
+
+                  <td>
+                    <span class="payment-status pending">
+                      Pending
+                    </span>
+                  </td>
+
+                  <td>28 Sep</td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+
+                    <div class="customer">
+
+                      <div class="customer-avatar">
+                        RA
+                      </div>
+
+                      <div class="customer-name">
+                        <strong>Rasel Ahmed</strong>
+                        <span>Website Client</span>
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>Website Sale</td>
+
+                  <td>৳8,500</td>
+
+                  <td>
+                    <span class="payment-status paid">
+                      Paid
+                    </span>
+                  </td>
+
+                  <td>27 Sep</td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="panel">
+
+          <div class="panel-head">
+
+            <h3>Quick Actions</h3>
+
+            <span style="color:#667386;font-size:9px;">
+              Shortcuts
+            </span>
+
+          </div>
+
+
+          <div class="quick-actions">
+
+            <button
+              class="quick-btn"
+              onclick="newCustomer()"
+            >
+              <div class="quick-icon">👤</div>
+              <strong>New Customer</strong>
+              <span>Add a customer to a business</span>
+            </button>
+
+
+            <button
+              class="quick-btn"
+              onclick="newPayment()"
+            >
+              <div class="quick-icon">৳</div>
+              <strong>Add Payment</strong>
+              <span>Record received payment</span>
+            </button>
+
+
+            <button
+              class="quick-btn"
+              onclick="newWebsite()"
+            >
+              <div class="quick-icon">🌐</div>
+              <strong>Add Website</strong>
+              <span>Add website to inventory</span>
+            </button>
+
+
+            <button
+              class="quick-btn"
+              onclick="newInvoice()"
+            >
+              <div class="quick-icon">🧾</div>
+              <strong>Create Invoice</strong>
+              <span>Generate customer invoice</span>
+            </button>
+
+
+            <button
+              class="quick-btn"
+              onclick="newProject()"
+            >
+              <div class="quick-icon">📋</div>
+              <strong>New Project</strong>
+              <span>Create business project</span>
+            </button>
+
+
+            <button
+              class="quick-btn"
+              onclick="openReports()"
+            >
+              <div class="quick-icon">📊</div>
+              <strong>View Reports</strong>
+              <span>Revenue and business reports</span>
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<script>
+
+  /* ==========================================
+     SNK BUSINESS — MAIN DASHBOARD JS
+  ========================================== */
+
+  function toggleSidebar(){
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("open");
+  }
+
+
+  function openBusiness(type){
+
+    const names = {
+      sarakat: "Sarakat Agency",
+      website: "Website Sale",
+      marketing: "Digital Marketing"
+    };
+
+    const name = names[type] || "Business";
+
+    /*
+      Later:
+      window.location.href =
+      "business.html?business=" + type;
+    */
+
+    alert(
+      name +
+      " workspace will open in the next step."
+    );
+  }
+
+
+  function openBusinesses(){
+
+    /*
+      Later:
+      window.location.href = "businesses.html";
+    */
+
+    alert(
+      "Businesses Management page will be connected next."
+    );
+  }
+
+
+  function addBusiness(){
+
+    alert(
+      "New Business form will be added in the next step."
+    );
+  }
+
+
+  function openPayments(){
+
+    alert(
+      "Payments page will be connected next."
+    );
+  }
+
+
+  function newCustomer(){
+
+    alert(
+      "New Customer form will be added next."
+    );
+  }
+
+
+  function newPayment(){
+
+    alert(
+      "Payment form will be added next."
+    );
+  }
+
+
+  function newWebsite(){
+
+    alert(
+      "Website Inventory will be added next."
+    );
+  }
+
+
+  function newInvoice(){
+
+    alert(
+      "Invoice system will be added next."
+    );
+  }
+
+
+  function newProject(){
+
+    alert(
+      "Project management will be added next."
+    );
+  }
+
+
+  function openReports(){
+
+    alert(
+      "Reports dashboard will be added next."
+    );
+  }
+
+
+  /* ==========================================
+     BUSINESS FILTER
+  ========================================== */
+
+  const businessSelect =
+    document.getElementById("businessSelect");
+
+  if(businessSelect){
+
+    businessSelect.addEventListener(
+      "change",
+      function(){
+
+        const value = this.value;
+
+        if(value === "all"){
+          return;
+        }
+
+        openBusiness(value);
+
+      }
+    );
+
+  }
+
+
+  /* ==========================================
+     NAV ACTIVE STATE
+  ========================================== */
+
+  document
+    .querySelectorAll(".nav-item")
+    .forEach(item => {
+
+      item.addEventListener(
+        "click",
+        function(){
+
+          document
+            .querySelectorAll(".nav-item")
+            .forEach(nav => {
+              nav.classList.remove("active");
+            });
+
+          this.classList.add("active");
+
+        }
+      );
+
+    });
+
+
+  /* ==========================================
+     MOBILE SIDEBAR CLOSE
+  ========================================== */
+
+  document.addEventListener(
+    "click",
+    function(event){
+
+      const sidebar =
+        document.getElementById("sidebar");
+
+      const menu =
+        document.querySelector(".mobile-menu");
+
+      if(
+        window.innerWidth <= 850 &&
+        sidebar.classList.contains("open") &&
+        !sidebar.contains(event.target) &&
+        !menu.contains(event.target)
+      ){
+
+        sidebar.classList.remove("open");
+
+      }
+
+    }
+  );
+
+</script>
+
+</body>
+</html>
+```
