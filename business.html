@@ -6,22 +6,33 @@
 
 <title>Business Workspace | SNK Business</title>
 
+<meta
+  name="description"
+  content="Premium live business workspace dashboard for SNK Business."
+>
+
 <style>
 :root{
   --bg:#070b12;
-  --panel:#0f1623;
-  --panel2:#121c2b;
-  --panel3:#182437;
-  --line:#243247;
+  --panel:#101722;
+  --panel2:#151e2c;
+  --panel3:#1a2535;
+  --line:#253247;
+  --line2:#304057;
+
   --text:#f5f7fb;
-  --muted:#8d9ab0;
+  --muted:#8e9aae;
+  --muted2:#647086;
+
   --blue:#4f8cff;
-  --purple:#8b5cf6;
-  --green:#22c55e;
-  --yellow:#f59e0b;
-  --red:#ef4444;
-  --cyan:#06b6d4;
-  --radius:18px;
+  --cyan:#28d7ff;
+  --green:#22c983;
+  --yellow:#f4bd4f;
+  --red:#ff6678;
+  --purple:#9b7cff;
+  --orange:#ff9b5b;
+
+  --shadow:0 20px 60px rgba(0,0,0,.35);
 }
 
 *{
@@ -31,96 +42,183 @@
 }
 
 body{
-  font-family:Inter,Segoe UI,Arial,sans-serif;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
   background:
-    radial-gradient(circle at top right,rgba(79,140,255,.10),transparent 30%),
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(79,140,255,.09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(40,215,255,.06),
+      transparent 28%
+    ),
     var(--bg);
+
   color:var(--text);
   min-height:100vh;
 }
 
-button{
+button,
+input,
+select,
+textarea{
   font:inherit;
+}
+
+button{
   cursor:pointer;
 }
 
 a{
-  text-decoration:none;
   color:inherit;
+  text-decoration:none;
 }
 
-/* ================= SIDEBAR ================= */
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
 .sidebar{
   position:fixed;
+  left:0;
   top:0;
   bottom:0;
-  left:0;
+
   width:270px;
-  background:rgba(9,14,22,.98);
-  border-right:1px solid var(--line);
+
   padding:22px 16px;
-  overflow-y:auto;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16,23,34,.98),
+      rgba(9,14,22,.98)
+    );
+
+  border-right:1px solid var(--line);
+
   z-index:1000;
+
+  overflow-y:auto;
 }
 
-.logo{
+.brand{
   display:flex;
-  gap:12px;
   align-items:center;
-  padding:4px 10px 24px;
+  gap:12px;
+
+  padding:
+    6px 10px 24px;
 }
 
-.logo-mark{
+.brand-logo{
   width:42px;
   height:42px;
-  border-radius:13px;
+
   display:grid;
   place-items:center;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--cyan)
+    );
+
+  color:#fff;
+
+  font-weight:900;
+
+  box-shadow:
+    0 10px 30px
+    rgba(79,140,255,.28);
+}
+
+.brand-title{
   font-size:17px;
   font-weight:900;
-  background:linear-gradient(135deg,#4f8cff,#7c3aed);
 }
 
-.logo h2{
-  font-size:18px;
-}
-
-.logo span{
-  color:#77859b;
+.brand-subtitle{
+  margin-top:2px;
+  color:var(--muted);
   font-size:11px;
-  display:block;
-  margin-top:3px;
 }
 
 .nav-title{
-  color:#65738a;
-  text-transform:uppercase;
+  padding:
+    12px 11px 8px;
+
+  color:var(--muted2);
+
   font-size:10px;
-  letter-spacing:1.5px;
-  padding:13px 12px 8px;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.2px;
+
+  font-weight:800;
+}
+
+.nav{
+  display:grid;
+  gap:5px;
 }
 
 .nav a{
   display:flex;
   align-items:center;
   gap:11px;
-  padding:11px 12px;
-  color:#aab6c9;
-  border-radius:11px;
-  font-size:12px;
-  margin-bottom:4px;
+
+  min-height:43px;
+
+  padding:0 12px;
+
+  color:#aeb8c8;
+
+  border:1px solid transparent;
+
+  border-radius:12px;
+
+  transition:.2s ease;
 }
 
 .nav a:hover{
-  background:#141f30;
-  color:white;
+  color:#fff;
+  background:#131c2a;
+  border-color:#26354b;
+  transform:translateX(2px);
 }
 
 .nav a.active{
-  background:rgba(79,140,255,.13);
   color:#fff;
-  border:1px solid rgba(79,140,255,.18);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.18),
+      rgba(40,215,255,.07)
+    );
+
+  border-color:
+    rgba(79,140,255,.28);
+
+  box-shadow:
+    inset 3px 0 0
+    var(--blue);
 }
 
 .nav-icon{
@@ -128,42 +226,62 @@ a{
   text-align:center;
 }
 
-.current-business{
-  margin:17px 4px 0;
-  padding:15px;
-  border-radius:15px;
-  background:linear-gradient(
-    135deg,
-    rgba(79,140,255,.14),
-    rgba(139,92,246,.10)
-  );
-  border:1px solid rgba(79,140,255,.17);
+.nav-label{
+  font-size:13px;
+  font-weight:700;
 }
 
-.current-business small{
-  color:#74839a;
-  font-size:9px;
+.admin-card{
+  margin-top:22px;
+
+  padding:16px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.12),
+      rgba(155,124,255,.08)
+    );
+
+  border:1px solid #273752;
+}
+
+.admin-card .mini{
+  color:#6da5ff;
+
+  font-size:10px;
+
+  font-weight:900;
+
   text-transform:uppercase;
+
   letter-spacing:1px;
 }
 
-.current-business strong{
+.admin-card strong{
   display:block;
-  font-size:13px;
-  margin-top:6px;
+
+  margin-top:7px;
+
+  font-size:14px;
 }
 
-.current-business span{
-  display:inline-block;
-  margin-top:8px;
-  padding:4px 8px;
-  border-radius:20px;
-  background:rgba(34,197,94,.1);
-  color:#4ade80;
-  font-size:9px;
+.admin-card span{
+  display:block;
+
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:11px;
 }
 
-/* ================= MAIN ================= */
+
+/* =========================================================
+   MAIN
+========================================================= */
 
 .main{
   margin-left:270px;
@@ -171,531 +289,1165 @@ a{
 }
 
 .topbar{
-  height:72px;
-  position:sticky;
-  top:0;
-  z-index:500;
+  height:76px;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
+
+  gap:20px;
+
   padding:0 30px;
-  background:rgba(7,11,18,.75);
-  backdrop-filter:blur(18px);
+
+  background:
+    rgba(7,11,18,.72);
+
   border-bottom:1px solid var(--line);
+
+  backdrop-filter:blur(18px);
+
+  position:sticky;
+  top:0;
+
+  z-index:500;
 }
 
 .top-left{
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:12px;
 }
 
-.menu-btn{
+.mobile-menu{
   display:none;
+
   width:40px;
   height:40px;
-  background:var(--panel);
-  color:white;
+
   border:1px solid var(--line);
-  border-radius:10px;
+
+  border-radius:11px;
+
+  background:var(--panel);
+
+  color:white;
 }
 
-.breadcrumb{
-  color:#7f8ca2;
+.page-location{
+  color:var(--muted);
   font-size:12px;
 }
 
-.breadcrumb strong{
-  color:white;
+.page-location strong{
+  color:#fff;
+  font-size:13px;
 }
 
 .top-actions{
   display:flex;
-  gap:9px;
   align-items:center;
+  gap:9px;
 }
 
-.top-btn{
-  width:40px;
-  height:40px;
-  background:var(--panel);
-  color:#b8c3d4;
+.icon-btn,
+.avatar-btn{
   border:1px solid var(--line);
-  border-radius:10px;
+
+  background:var(--panel);
+
+  color:#dce4f0;
+
+  border-radius:11px;
+
+  min-width:40px;
+
+  height:40px;
+
+  padding:0 12px;
+
+  transition:.2s ease;
+}
+
+.icon-btn:hover,
+.avatar-btn:hover{
+  border-color:#3a4c68;
+  background:var(--panel2);
+}
+
+.avatar-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:800;
 }
 
 .avatar{
-  width:40px;
-  height:40px;
+  width:25px;
+  height:25px;
+
   display:grid;
   place-items:center;
-  border-radius:50%;
-  font-size:12px;
-  font-weight:800;
-  background:linear-gradient(135deg,#4f8cff,#7c3aed);
-}
 
-/* ================= CONTENT ================= */
+  border-radius:8px;
 
-.content{
-  max-width:1700px;
-  margin:auto;
-  padding:30px;
-}
-
-.business-hero{
-  padding:25px;
-  border:1px solid var(--line);
-  border-radius:20px;
   background:
     linear-gradient(
       135deg,
-      rgba(79,140,255,.12),
-      rgba(139,92,246,.06)
-    ),
-    var(--panel);
+      var(--blue),
+      var(--purple)
+    );
+
+  font-size:11px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+  padding:30px;
+  max-width:1800px;
+  margin:auto;
+}
+
+
+/* =========================================================
+   BUSINESS HERO
+========================================================= */
+
+.business-hero{
+  position:relative;
+
+  padding:25px;
+
+  border-radius:22px;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.14),
+      rgba(40,215,255,.05),
+      rgba(16,23,34,.98)
+    );
+
+  border:1px solid #2a3b55;
+
   margin-bottom:20px;
 }
 
+.business-hero::before{
+  content:"";
+
+  position:absolute;
+
+  width:240px;
+  height:240px;
+
+  right:-90px;
+  top:-110px;
+
+  border-radius:50%;
+
+  background:
+    rgba(79,140,255,.08);
+}
+
 .hero-top{
+  position:relative;
+
   display:flex;
+
   justify-content:space-between;
+
   gap:20px;
-  align-items:flex-start;
 }
 
-.eyebrow{
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:1.6px;
-  color:#6ea8ff;
-  font-weight:800;
-  margin-bottom:8px;
-}
-
-.hero-title{
+.business-title-row{
   display:flex;
+
   align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
+
+  gap:14px;
 }
 
-.hero-title h1{
+.business-icon{
+  width:58px;
+  height:58px;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--cyan)
+    );
+
+  font-size:25px;
+
+  box-shadow:
+    0 14px 35px
+    rgba(79,140,255,.22);
+}
+
+.business-title{
   font-size:31px;
-  letter-spacing:-.9px;
+
+  letter-spacing:-1px;
+
+  font-weight:950;
 }
 
-.category-badge{
-  padding:6px 10px;
-  border-radius:30px;
-  background:rgba(79,140,255,.1);
-  border:1px solid rgba(79,140,255,.18);
-  color:#83b4ff;
-  font-size:10px;
+.business-meta{
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+
+  margin-top:6px;
+}
+
+.business-category{
+  color:#91b6ff;
+
+  font-size:11px;
+
   font-weight:800;
+
   text-transform:uppercase;
+
+  letter-spacing:.8px;
 }
 
-.hero-description{
-  color:#8997ac;
-  font-size:12px;
-  margin-top:9px;
-  max-width:700px;
+.status-badge{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:6px;
+
+  min-height:25px;
+
+  padding:0 9px;
+
+  border-radius:999px;
+
+  background:
+    rgba(34,201,131,.1);
+
+  border:
+    1px solid
+    rgba(34,201,131,.2);
+
+  color:#63dfa5;
+
+  font-size:9px;
+
+  font-weight:900;
+}
+
+.status-badge.inactive{
+  color:#ff8997;
+
+  background:
+    rgba(255,102,120,.1);
+
+  border-color:
+    rgba(255,102,120,.2);
+}
+
+.business-description{
+  margin-top:13px;
+
+  max-width:850px;
+
+  color:var(--muted);
+
+  font-size:13px;
+
   line-height:1.6;
 }
 
 .hero-actions{
   display:flex;
-  gap:9px;
+
+  gap:8px;
+
   flex-wrap:wrap;
+
+  position:relative;
 }
 
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
 .btn{
-  padding:11px 14px;
-  border-radius:10px;
-  background:#101925;
+  min-height:42px;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:8px;
+
+  padding:0 15px;
+
   border:1px solid var(--line);
-  color:#dce5f0;
-  font-size:11px;
-  font-weight:700;
+
+  border-radius:11px;
+
+  background:var(--panel2);
+
+  color:#e9eef7;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  transition:.2s ease;
 }
 
 .btn:hover{
-  border-color:#3c4f6b;
+  transform:translateY(-1px);
+  border-color:#3c506e;
 }
 
 .btn-primary{
-  background:linear-gradient(135deg,#4f8cff,#6d5dfc);
-  border:none;
-  color:white;
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      #3974e8
+    );
+
+  border-color:transparent;
+
+  box-shadow:
+    0 10px 25px
+    rgba(79,140,255,.2);
 }
 
-.status{
-  display:inline-flex;
-  margin-top:17px;
-  padding:6px 10px;
-  border-radius:30px;
-  font-size:10px;
-  font-weight:800;
+.btn-ghost{
+  background:transparent;
 }
 
-.status-active{
-  background:rgba(34,197,94,.09);
-  color:#4ade80;
+.btn-danger{
+  color:#ff9aa6;
 }
 
-.status-inactive{
-  background:rgba(239,68,68,.09);
-  color:#f87171;
-}
 
-/* ================= STATS ================= */
+/* =========================================================
+   KPI
+========================================================= */
 
-.stats{
+.kpi-grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
+
+  grid-template-columns:
+    repeat(6,minmax(0,1fr));
+
+  gap:12px;
+
   margin-bottom:20px;
 }
 
-.stat{
-  background:var(--panel);
+.kpi{
+  padding:17px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
   border:1px solid var(--line);
-  border-radius:17px;
-  padding:18px;
-}
 
-.stat-label{
-  color:#7f8ca1;
-  font-size:11px;
-}
+  position:relative;
 
-.stat-value{
-  font-size:24px;
-  font-weight:850;
-  margin-top:12px;
-}
-
-.stat-sub{
-  color:#68768c;
-  font-size:10px;
-  margin-top:5px;
-}
-
-/* ================= GRID ================= */
-
-.grid{
-  display:grid;
-  grid-template-columns:1.55fr .75fr;
-  gap:18px;
-}
-
-.card{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:18px;
   overflow:hidden;
 }
 
-.card-head{
+.kpi::after{
+  content:"";
+
+  position:absolute;
+
+  right:-30px;
+  top:-30px;
+
+  width:90px;
+  height:90px;
+
+  border-radius:50%;
+
+  background:
+    rgba(79,140,255,.05);
+}
+
+.kpi-icon{
+  width:34px;
+  height:34px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:10px;
+
+  background:#172337;
+
+  margin-bottom:11px;
+}
+
+.kpi-label{
+  color:var(--muted);
+
+  font-size:10px;
+
+  font-weight:700;
+}
+
+.kpi-value{
+  margin-top:5px;
+
+  font-size:21px;
+
+  font-weight:900;
+
+  letter-spacing:-.5px;
+}
+
+.kpi-note{
+  margin-top:5px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.dashboard-grid{
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1.7fr)
+    minmax(320px,.9fr);
+
+  gap:18px;
+
+  margin-bottom:18px;
+}
+
+.panel{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:1px solid var(--line);
+
+  border-radius:18px;
+
+  box-shadow:var(--shadow);
+
+  overflow:hidden;
+}
+
+.panel-header{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
-  padding:17px 18px;
+
+  gap:15px;
+
+  padding:18px 20px;
+
   border-bottom:1px solid var(--line);
 }
 
-.card-head strong{
-  font-size:13px;
+.panel-title{
+  font-size:14px;
+  font-weight:900;
 }
 
-.card-head span{
-  color:#76849a;
+.panel-subtitle{
+  margin-top:4px;
+
+  color:var(--muted);
+
   font-size:10px;
 }
 
-.card-body{
-  padding:18px;
+.panel-body{
+  padding:20px;
 }
 
-/* ================= CUSTOMER TABLE ================= */
+
+/* =========================================================
+   FINANCIAL CHART
+========================================================= */
+
+.chart-wrap{
+  min-height:280px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:flex-end;
+
+  gap:14px;
+}
+
+.chart-bars{
+  height:210px;
+
+  display:flex;
+
+  align-items:flex-end;
+
+  gap:14px;
+
+  padding:
+    15px 8px 0;
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+.month-column{
+  flex:1;
+
+  min-width:30px;
+
+  height:100%;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:flex-end;
+
+  align-items:center;
+
+  gap:6px;
+}
+
+.bar-area{
+  height:180px;
+
+  width:100%;
+
+  display:flex;
+
+  align-items:flex-end;
+
+  justify-content:center;
+
+  gap:4px;
+}
+
+.bar{
+  width:16px;
+
+  min-height:3px;
+
+  border-radius:
+    5px 5px 2px 2px;
+
+  transition:
+    height .5s ease;
+}
+
+.bar.revenue{
+  background:
+    linear-gradient(
+      180deg,
+      var(--blue),
+      #315fc2
+    );
+}
+
+.bar.expense{
+  background:
+    linear-gradient(
+      180deg,
+      var(--orange),
+      #b8612f
+    );
+}
+
+.month-label{
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+.chart-legend{
+  display:flex;
+
+  gap:18px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.legend{
+  display:flex;
+
+  align-items:center;
+
+  gap:6px;
+}
+
+.legend-dot{
+  width:8px;
+  height:8px;
+
+  border-radius:50%;
+}
+
+.legend-dot.revenue{
+  background:var(--blue);
+}
+
+.legend-dot.expense{
+  background:var(--orange);
+}
+
+
+/* =========================================================
+   FINANCIAL SUMMARY
+========================================================= */
+
+.summary-list{
+  display:grid;
+  gap:10px;
+}
+
+.summary-row{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  padding:13px;
+
+  border-radius:12px;
+
+  background:#0b131e;
+
+  border:1px solid var(--line);
+}
+
+.summary-left{
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+}
+
+.summary-icon{
+  width:32px;
+  height:32px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:9px;
+
+  background:#151f2e;
+}
+
+.summary-name{
+  font-size:11px;
+  font-weight:800;
+}
+
+.summary-desc{
+  margin-top:3px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+.summary-value{
+  font-size:12px;
+  font-weight:900;
+}
+
+
+/* =========================================================
+   MODULE GRID
+========================================================= */
+
+.module-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+
+  gap:12px;
+
+  margin-bottom:18px;
+}
+
+.module-card{
+  padding:17px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:1px solid var(--line);
+
+  transition:.2s ease;
+
+  cursor:pointer;
+}
+
+.module-card:hover{
+  transform:translateY(-2px);
+
+  border-color:#3a4e6b;
+
+  box-shadow:
+    0 15px 40px
+    rgba(0,0,0,.22);
+}
+
+.module-icon{
+  width:38px;
+  height:38px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:11px;
+
+  background:#172337;
+
+  font-size:17px;
+
+  margin-bottom:12px;
+}
+
+.module-title{
+  font-size:12px;
+  font-weight:900;
+}
+
+.module-value{
+  margin-top:7px;
+
+  font-size:18px;
+
+  font-weight:950;
+}
+
+.module-note{
+  margin-top:4px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+
+/* =========================================================
+   ACTIVITY TABLE
+========================================================= */
 
 .table-wrap{
+  width:100%;
   overflow-x:auto;
 }
 
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:620px;
 }
 
 th{
   text-align:left;
-  padding:11px 14px;
-  color:#6f7d93;
+
+  padding:
+    12px 14px;
+
+  color:#6f7c91;
+
+  background:#0c131e;
+
+  border-bottom:1px solid var(--line);
+
   font-size:9px;
+
   text-transform:uppercase;
-  letter-spacing:1px;
-  background:#0b121d;
+
+  letter-spacing:.7px;
+
+  white-space:nowrap;
 }
 
 td{
-  padding:13px 14px;
-  border-top:1px solid rgba(36,50,71,.55);
+  padding:
+    13px 14px;
+
+  border-bottom:
+    1px solid
+    rgba(37,50,71,.65);
+
   font-size:11px;
+
+  vertical-align:middle;
 }
 
-.customer{
-  display:flex;
-  gap:9px;
-  align-items:center;
+tr:last-child td{
+  border-bottom:0;
 }
 
-.customer-avatar{
-  width:34px;
-  height:34px;
-  border-radius:10px;
-  display:grid;
-  place-items:center;
-  background:#1b2c48;
-  font-size:10px;
+.activity-title{
+  color:#e8eef7;
+
+  font-size:11px;
+
   font-weight:800;
 }
 
-.customer-name{
-  font-weight:700;
-}
-
-.customer-service{
-  color:#748299;
-  font-size:9px;
+.activity-sub{
   margin-top:3px;
+
+  color:var(--muted2);
+
+  font-size:9px;
 }
 
-.money{
-  font-weight:700;
+.amount-positive{
+  color:#63dfa5;
+
+  font-weight:900;
 }
 
-.paid{
-  color:#4ade80;
-}
+.amount-negative{
+  color:#ff9b5b;
 
-.due{
-  color:#fbbf24;
+  font-weight:900;
 }
 
 .badge{
   display:inline-flex;
-  padding:5px 8px;
-  border-radius:20px;
+
+  align-items:center;
+
+  min-height:24px;
+
+  padding:0 8px;
+
+  border-radius:999px;
+
   font-size:9px;
-  font-weight:800;
+
+  font-weight:900;
 }
 
-.badge-paid{
-  background:rgba(34,197,94,.09);
-  color:#4ade80;
+.badge-green{
+  color:#63dfa5;
+
+  background:
+    rgba(34,201,131,.1);
+
+  border:
+    1px solid
+    rgba(34,201,131,.2);
 }
 
-.badge-partial{
-  background:rgba(96,165,250,.09);
-  color:#60a5fa;
+.badge-yellow{
+  color:#f3cb6a;
+
+  background:
+    rgba(244,189,79,.1);
+
+  border:
+    1px solid
+    rgba(244,189,79,.2);
 }
 
-.badge-pending{
-  background:rgba(245,158,11,.09);
-  color:#fbbf24;
+.badge-red{
+  color:#ff8997;
+
+  background:
+    rgba(255,102,120,.1);
+
+  border:
+    1px solid
+    rgba(255,102,120,.2);
 }
 
-.badge-overdue{
-  background:rgba(239,68,68,.09);
-  color:#f87171;
+.badge-blue{
+  color:#80adff;
+
+  background:
+    rgba(79,140,255,.1);
+
+  border:
+    1px solid
+    rgba(79,140,255,.2);
 }
 
-.badge-active{
-  background:rgba(139,92,246,.09);
-  color:#a78bfa;
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-wrap{
+  min-width:110px;
 }
 
-.empty{
-  padding:45px 15px;
-  text-align:center;
-  color:#728096;
-  font-size:11px;
-}
+.progress-top{
+  display:flex;
 
-.empty strong{
-  display:block;
-  color:#dce5ef;
+  justify-content:space-between;
+
+  color:var(--muted);
+
+  font-size:9px;
+
   margin-bottom:5px;
 }
 
-/* ================= QUICK ACTIONS ================= */
+.progress-bar{
+  height:6px;
 
-.quick-grid{
+  border-radius:99px;
+
+  background:#1d2939;
+
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+
+  border-radius:99px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--blue),
+      var(--cyan)
+    );
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+  padding:45px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+}
+
+.empty-icon{
+  width:52px;
+  height:52px;
+
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+  place-items:center;
+
+  margin:
+    0 auto 12px;
+
+  border-radius:16px;
+
+  background:#151f2f;
+
+  font-size:21px;
 }
 
-.quick{
-  padding:14px;
-  border:1px solid var(--line);
-  border-radius:13px;
-  background:#0b121d;
-  color:#d9e3ef;
-  text-align:left;
-  transition:.2s;
+.empty h3{
+  color:#e9eef6;
+
+  font-size:14px;
 }
 
-.quick:hover{
-  transform:translateY(-2px);
-  border-color:#405573;
-}
+.empty p{
+  margin-top:5px;
 
-.quick-icon{
-  font-size:18px;
-  margin-bottom:8px;
-}
-
-.quick strong{
-  display:block;
-  font-size:11px;
-}
-
-.quick span{
-  color:#718098;
-  font-size:9px;
-  display:block;
-  margin-top:4px;
-}
-
-/* ================= MODULES ================= */
-
-.modules{
-  display:grid;
-  gap:8px;
-}
-
-.module{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding:11px 12px;
-  border:1px solid var(--line);
-  background:#0b121d;
-  border-radius:11px;
-  color:#aebacd;
   font-size:10px;
 }
 
-.module:hover{
-  color:#fff;
-  border-color:#3b4f6d;
-}
 
-.module-left{
-  display:flex;
-  align-items:center;
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-actions{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
   gap:9px;
 }
 
-.module-icon{
-  width:28px;
-  height:28px;
-  border-radius:8px;
-  display:grid;
-  place-items:center;
-  background:#152238;
-}
+.quick-btn{
+  min-height:42px;
 
-/* ================= ACTIVITY ================= */
+  padding:0 11px;
 
-.activity{
-  display:grid;
-  gap:11px;
-}
+  border:1px solid var(--line);
 
-.activity-item{
-  display:flex;
-  gap:10px;
-  padding-bottom:11px;
-  border-bottom:1px solid rgba(36,50,71,.6);
-}
+  border-radius:10px;
 
-.activity-item:last-child{
-  border-bottom:0;
-  padding-bottom:0;
-}
+  background:#0d151f;
 
-.activity-dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#4f8cff;
-  margin-top:4px;
-}
+  color:#dbe4ef;
 
-.activity-text{
-  color:#b5c1d1;
   font-size:10px;
-  line-height:1.5;
+
+  font-weight:800;
+
+  transition:.2s ease;
 }
 
-.activity-time{
-  display:block;
-  color:#647289;
-  font-size:8px;
-  margin-top:3px;
+.quick-btn:hover{
+  border-color:#3b506f;
+  background:#172231;
 }
 
-/* ================= MODAL ================= */
 
-.overlay{
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-backdrop{
   position:fixed;
+
   inset:0;
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(7px);
+
+  z-index:3000;
+
   display:none;
+
   align-items:center;
+
   justify-content:center;
+
   padding:20px;
-  z-index:2000;
+
+  background:
+    rgba(0,0,0,.72);
+
+  backdrop-filter:blur(8px);
 }
 
-.overlay.show{
+.modal-backdrop.show{
   display:flex;
 }
 
 .modal{
-  width:min(650px,100%);
-  background:#101925;
-  border:1px solid var(--line);
-  border-radius:19px;
-  box-shadow:0 30px 100px rgba(0,0,0,.55);
+  width:min(850px,100%);
+
+  max-height:
+    calc(100vh - 40px);
+
+  overflow-y:auto;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #111a27,
+      #0c131d
+    );
+
+  border:1px solid #2c3b53;
+
+  box-shadow:
+    0 35px 100px
+    rgba(0,0,0,.6);
 }
 
-.modal-head{
+.modal-header{
   display:flex;
-  align-items:center;
+
   justify-content:space-between;
-  padding:18px 20px;
+
+  align-items:flex-start;
+
+  gap:15px;
+
+  padding:20px;
+
   border-bottom:1px solid var(--line);
 }
 
-.modal-head h3{
-  font-size:16px;
+.modal-title{
+  font-size:17px;
+  font-weight:900;
 }
 
-.close{
-  width:34px;
-  height:34px;
+.modal-subtitle{
+  margin-top:4px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.close-btn{
+  width:36px;
+  height:36px;
+
   border:1px solid var(--line);
-  background:#0b121d;
-  color:#9ba8bb;
-  border-radius:9px;
+
+  border-radius:10px;
+
+  background:#111b28;
+
+  color:#b7c2d2;
+
+  font-size:17px;
 }
 
 .modal-body{
@@ -704,13 +1456,18 @@ td{
 
 .form-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
   gap:13px;
 }
 
 .form-group{
   display:flex;
+
   flex-direction:column;
+
   gap:6px;
 }
 
@@ -719,79 +1476,161 @@ td{
 }
 
 .form-group label{
-  color:#8b99ad;
+  color:#8f9db0;
+
   font-size:10px;
-  font-weight:700;
+
+  font-weight:800;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea{
+.form-control{
   width:100%;
-  background:#0b121d;
-  border:1px solid var(--line);
+
+  min-height:43px;
+
+  padding:0 12px;
+
   border-radius:10px;
-  color:white;
-  padding:10px 11px;
+
+  border:1px solid var(--line);
+
+  background:#0a111a;
+
+  color:#edf2f8;
+
   outline:none;
 }
 
-.form-group textarea{
-  min-height:90px;
+textarea.form-control{
+  min-height:95px;
+
+  padding:11px;
+
   resize:vertical;
 }
 
-.modal-foot{
-  padding:15px 20px;
-  border-top:1px solid var(--line);
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
+.form-control:focus{
+  border-color:
+    rgba(79,140,255,.7);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(79,140,255,.08);
 }
 
-/* ================= TOAST ================= */
+.modal-footer{
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:8px;
+
+  padding:
+    16px 20px;
+
+  border-top:1px solid var(--line);
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
 
 .toast{
   position:fixed;
-  right:22px;
-  bottom:22px;
-  background:#111b29;
-  border:1px solid var(--line);
-  padding:13px 16px;
-  border-radius:11px;
-  color:#e9eef7;
-  font-size:11px;
-  opacity:0;
-  transform:translateY(20px);
-  pointer-events:none;
-  transition:.25s;
+
+  right:24px;
+
+  bottom:24px;
+
   z-index:5000;
+
+  min-width:280px;
+
+  padding:14px 16px;
+
+  border-radius:13px;
+
+  background:#121c2b;
+
+  border:1px solid #30415b;
+
+  box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.4);
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  transform:translateY(25px);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:.25s ease;
 }
 
 .toast.show{
-  opacity:1;
   transform:translateY(0);
+
+  opacity:1;
 }
 
-/* ================= RESPONSIVE ================= */
+.toast-dot{
+  width:9px;
+  height:9px;
 
-@media(max-width:1150px){
+  border-radius:50%;
 
-  .stats{
-    grid-template-columns:repeat(2,1fr);
+  background:var(--green);
+}
+
+.toast-text{
+  color:#e8eef7;
+  font-size:12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1400px){
+
+  .kpi-grid{
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
   }
 
-  .grid{
+  .module-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+}
+
+@media(max-width:1050px){
+
+  .dashboard-grid{
     grid-template-columns:1fr;
   }
 
 }
 
-@media(max-width:800px){
+@media(max-width:850px){
 
   .sidebar{
     transform:translateX(-100%);
-    transition:.25s;
+
+    transition:.25s ease;
+
+    box-shadow:
+      30px 0 70px
+      rgba(0,0,0,.4);
   }
 
   .sidebar.open{
@@ -802,16 +1641,16 @@ td{
     margin-left:0;
   }
 
-  .menu-btn{
+  .mobile-menu{
     display:block;
   }
 
   .topbar{
-    padding:0 15px;
+    padding:0 18px;
   }
 
   .content{
-    padding:20px 15px;
+    padding:22px 18px;
   }
 
   .hero-top{
@@ -824,615 +1663,1528 @@ td{
 
 }
 
-@media(max-width:560px){
+@media(max-width:650px){
 
-  .stats{
+  .kpi-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .module-grid{
     grid-template-columns:1fr;
   }
 
-  .hero-title h1{
+  .business-title{
     font-size:25px;
   }
 
-  .form-grid{
+  .business-icon{
+    width:50px;
+    height:50px;
+  }
+
+  .quick-actions{
     grid-template-columns:1fr;
   }
 
-  .form-group.full{
-    grid-column:auto;
+}
+
+@media(max-width:430px){
+
+  .kpi-grid{
+    grid-template-columns:1fr;
+  }
+
+  .top-actions .icon-btn{
+    display:none;
+  }
+
+}
+
+@media print{
+
+  body{
+    background:white;
+    color:#111;
+  }
+
+  .sidebar,
+  .topbar,
+  .hero-actions,
+  .toast{
+    display:none!important;
+  }
+
+  .main{
+    margin:0;
+  }
+
+  .content{
+    padding:0;
+  }
+
+  .panel,
+  .kpi,
+  .business-hero{
+    box-shadow:none;
+    border:1px solid #ddd;
   }
 
 }
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= SIDEBAR ================= -->
 
-<aside class="sidebar" id="sidebar">
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
 
-  <div class="logo">
+<aside
+  class="sidebar"
+  id="sidebar"
+>
 
-    <div class="logo-mark">SNK</div>
+  <div class="brand">
+
+    <div class="brand-logo">
+      SN
+    </div>
 
     <div>
-      <h2>SNK Business</h2>
-      <span>Business Management</span>
+
+      <div class="brand-title">
+        SNK Business
+      </div>
+
+      <div class="brand-subtitle">
+        Business Management
+      </div>
+
     </div>
 
   </div>
+
 
   <div class="nav-title">
     Workspace
   </div>
 
-  <nav class="nav" id="businessNav"></nav>
 
-  <div class="current-business">
+  <nav class="nav">
 
-    <small>Current Business</small>
+    <a href="index.html">
+      <span class="nav-icon">⌂</span>
+      <span class="nav-label">Dashboard</span>
+    </a>
 
-    <strong id="sideBusinessName">
-      Loading...
+    <a href="businesses.html">
+      <span class="nav-icon">▣</span>
+      <span class="nav-label">My Businesses</span>
+    </a>
+
+    <a href="customers.html" id="navCustomers">
+      <span class="nav-icon">♙</span>
+      <span class="nav-label">Customers</span>
+    </a>
+
+    <a href="payments.html" id="navPayments">
+      <span class="nav-icon">৳</span>
+      <span class="nav-label">Payments</span>
+    </a>
+
+    <a href="inventory.html">
+      <span class="nav-icon">▤</span>
+      <span class="nav-label">Inventory</span>
+    </a>
+
+    <a href="invoices.html" id="navInvoices">
+      <span class="nav-icon">▥</span>
+      <span class="nav-label">Invoices</span>
+    </a>
+
+    <a href="expenses.html" id="navExpenses">
+      <span class="nav-icon">−</span>
+      <span class="nav-label">Expenses</span>
+    </a>
+
+    <a href="projects.html" id="navProjects">
+      <span class="nav-icon">◫</span>
+      <span class="nav-label">Projects</span>
+    </a>
+
+    <a href="digital-marketing.html">
+      <span class="nav-icon">◉</span>
+      <span class="nav-label">Digital Marketing</span>
+    </a>
+
+    <a href="tasks.html" id="navTasks">
+      <span class="nav-icon">✓</span>
+      <span class="nav-label">Tasks</span>
+    </a>
+
+    <a href="employees.html" id="navEmployees">
+      <span class="nav-icon">♟</span>
+      <span class="nav-label">Staff / Team</span>
+    </a>
+
+    <a href="reports.html" id="navReports">
+      <span class="nav-icon">▥</span>
+      <span class="nav-label">Reports</span>
+    </a>
+
+  </nav>
+
+
+  <div class="admin-card">
+
+    <div class="mini">
+      Premium Business Suite
+    </div>
+
+    <strong>
+      Super Admin
     </strong>
 
-    <span id="sideBusinessStatus">
-      Active
+    <span>
+      Owner • Full Access
     </span>
 
   </div>
 
 </aside>
 
-<!-- ================= MAIN ================= -->
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
 
 <main class="main">
 
-  <header class="topbar">
 
-    <div class="top-left">
+<header class="topbar">
 
-      <button
-        class="menu-btn"
-        onclick="toggleSidebar()"
-      >
-        ☰
-      </button>
+  <div class="top-left">
 
-      <div class="breadcrumb">
-        My Businesses /
-        <strong id="topBusinessName">
-          Loading...
-        </strong>
-      </div>
+    <button
+      class="mobile-menu"
+      id="mobileMenu"
+      type="button"
+    >
+      ☰
+    </button>
 
+    <div class="page-location">
+      SNK Business
+      <strong>/ Business Workspace</strong>
     </div>
 
-    <div class="top-actions">
+  </div>
 
-      <button
-        class="top-btn"
-        onclick="goBusinesses()"
-      >
-        ←
-      </button>
 
-      <button
-        class="top-btn"
-        onclick="location.reload()"
-      >
-        ↻
-      </button>
+  <div class="top-actions">
 
-      <div class="avatar">
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="window.print()"
+      title="Print"
+    >
+      🖨
+    </button>
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="refreshDashboard()"
+      title="Refresh"
+    >
+      ↻
+    </button>
+
+    <button
+      class="avatar-btn"
+      type="button"
+    >
+      <span class="avatar">
         SA
-      </div>
+      </span>
+      Admin
+    </button>
 
-    </div>
+  </div>
 
-  </header>
+</header>
 
-  <section class="content">
 
-    <!-- HERO -->
+<section class="content">
 
-    <section class="business-hero">
 
-      <div class="hero-top">
+<!-- =====================================================
+     BUSINESS HERO
+====================================================== -->
+
+<section class="business-hero">
+
+  <div class="hero-top">
+
+    <div>
+
+      <div class="business-title-row">
+
+        <div
+          class="business-icon"
+          id="businessIcon"
+        >
+          🏢
+        </div>
 
         <div>
 
-          <div class="eyebrow">
-            Business Workspace
+          <div
+            class="business-title"
+            id="businessName"
+          >
+            Business
           </div>
 
-          <div class="hero-title">
-
-            <h1 id="businessName">
-              Loading...
-            </h1>
+          <div class="business-meta">
 
             <span
-              class="category-badge"
+              class="business-category"
               id="businessCategory"
             >
-              —
+              Business
+            </span>
+
+            <span
+              class="status-badge"
+              id="businessStatus"
+            >
+              ● Active
             </span>
 
           </div>
 
-          <p
-            class="hero-description"
-            id="businessDescription"
-          >
-            Loading business information...
-          </p>
-
-          <span
-            class="status status-active"
-            id="businessStatus"
-          >
-            Active
-          </span>
-
-        </div>
-
-        <div class="hero-actions">
-
-          <button
-            class="btn"
-            onclick="editBusiness()"
-          >
-            ✎ Edit Business
-          </button>
-
-          <button
-            class="btn btn-primary"
-            onclick="openModule('customers')"
-          >
-            + New Customer
-          </button>
-
         </div>
 
       </div>
 
-    </section>
 
-    <!-- STATS -->
-
-    <section class="stats">
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Revenue
-        </div>
-
-        <div
-          class="stat-value"
-          id="statRevenue"
-        >
-          ৳0
-        </div>
-
-        <div class="stat-sub">
-          Paid customer revenue
-        </div>
-
+      <div
+        class="business-description"
+        id="businessDescription"
+      >
+        Business workspace overview.
       </div>
 
-      <div class="stat">
+    </div>
 
-        <div class="stat-label">
-          Customers
-        </div>
 
-        <div
-          class="stat-value"
-          id="statCustomers"
-        >
-          0
-        </div>
-
-        <div class="stat-sub">
-          Linked customers
-        </div>
-
-      </div>
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Projects
-        </div>
-
-        <div
-          class="stat-value"
-          id="statProjects"
-        >
-          0
-        </div>
-
-        <div class="stat-sub">
-          Business projects
-        </div>
-
-      </div>
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Pending Payment
-        </div>
-
-        <div
-          class="stat-value"
-          id="statPending"
-        >
-          ৳0
-        </div>
-
-        <div class="stat-sub">
-          Customer outstanding
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- MAIN GRID -->
-
-    <section class="grid">
-
-      <!-- CUSTOMERS -->
-
-      <div class="card">
-
-        <div class="card-head">
-
-          <div>
-            <strong>
-              Recent Customers
-            </strong>
-
-            <span id="customerCountText">
-              0 customers
-            </span>
-          </div>
-
-          <button
-            class="btn"
-            onclick="openAllCustomers()"
-          >
-            View All →
-          </button>
-
-        </div>
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-                <th>Customer</th>
-                <th>Service</th>
-                <th>Total</th>
-                <th>Paid</th>
-                <th>Due</th>
-                <th>Status</th>
-              </tr>
-
-            </thead>
-
-            <tbody id="customerBody"></tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-      <!-- RIGHT -->
-
-      <div style="display:grid;gap:18px">
-
-        <!-- QUICK ACTIONS -->
-
-        <div class="card">
-
-          <div class="card-head">
-
-            <strong>
-              Quick Actions
-            </strong>
-
-            <span>
-              Manage
-            </span>
-
-          </div>
-
-          <div class="card-body">
-
-            <div class="quick-grid">
-
-              <button
-                class="quick"
-                onclick="openModule('customers')"
-              >
-                <div class="quick-icon">♙</div>
-                <strong>New Customer</strong>
-                <span>Add business customer</span>
-              </button>
-
-              <button
-                class="quick"
-                onclick="openModule('payments')"
-              >
-                <div class="quick-icon">৳</div>
-                <strong>Add Payment</strong>
-                <span>Record received money</span>
-              </button>
-
-              <button
-                class="quick"
-                onclick="openModule('projects')"
-              >
-                <div class="quick-icon">◈</div>
-                <strong>New Project</strong>
-                <span>Create a project</span>
-              </button>
-
-              <button
-                class="quick"
-                onclick="openModule('invoices')"
-              >
-                <div class="quick-icon">▧</div>
-                <strong>New Invoice</strong>
-                <span>Create customer invoice</span>
-              </button>
-
-              <button
-                class="quick"
-                onclick="openModule('expenses')"
-              >
-                <div class="quick-icon">৳</div>
-                <strong>Add Expense</strong>
-                <span>Track business cost</span>
-              </button>
-
-              <button
-                class="quick"
-                onclick="openModule('reports')"
-              >
-                <div class="quick-icon">▥</div>
-                <strong>Reports</strong>
-                <span>Business analytics</span>
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <!-- MODULES -->
-
-        <div class="card">
-
-          <div class="card-head">
-
-            <strong>
-              Business Modules
-            </strong>
-
-            <span>
-              Open
-            </span>
-
-          </div>
-
-          <div class="card-body">
-
-            <div
-              class="modules"
-              id="moduleList"
-            ></div>
-
-          </div>
-
-        </div>
-
-        <!-- ACTIVITY -->
-
-        <div class="card">
-
-          <div class="card-head">
-
-            <strong>
-              Business Activity
-            </strong>
-
-            <span>
-              Live
-            </span>
-
-          </div>
-
-          <div class="card-body">
-
-            <div
-              class="activity"
-              id="activityList"
-            ></div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </section>
-
-</main>
-
-<!-- ================= EDIT MODAL ================= -->
-
-<div class="overlay" id="editOverlay">
-
-  <div class="modal">
-
-    <div class="modal-head">
-
-      <h3>
-        Edit Business
-      </h3>
+    <div class="hero-actions">
 
       <button
-        class="close"
-        onclick="closeEdit()"
+        class="btn btn-ghost"
+        type="button"
+        onclick="goBusinesses()"
       >
-        ×
+        ← Businesses
       </button>
 
-    </div>
-
-    <div class="modal-body">
-
-      <div class="form-grid">
-
-        <div class="form-group">
-
-          <label>
-            Business Name
-          </label>
-
-          <input
-            id="editName"
-            type="text"
-          >
-
-        </div>
-
-        <div class="form-group">
-
-          <label>
-            Category
-          </label>
-
-          <select id="editCategory">
-
-            <option value="agency">
-              Agency
-            </option>
-
-            <option value="website">
-              Website
-            </option>
-
-            <option value="marketing">
-              Marketing
-            </option>
-
-            <option value="other">
-              Other
-            </option>
-
-          </select>
-
-        </div>
-
-        <div class="form-group">
-
-          <label>
-            Status
-          </label>
-
-          <select id="editStatus">
-
-            <option value="active">
-              Active
-            </option>
-
-            <option value="inactive">
-              Inactive
-            </option>
-
-          </select>
-
-        </div>
-
-        <div class="form-group">
-
-          <label>
-            Target Revenue
-          </label>
-
-          <input
-            id="editTarget"
-            type="number"
-            min="0"
-          >
-
-        </div>
-
-        <div class="form-group full">
-
-          <label>
-            Description
-          </label>
-
-          <textarea
-            id="editDescription"
-          ></textarea>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="modal-foot">
-
       <button
-        class="btn"
-        onclick="closeEdit()"
+        class="btn btn-ghost"
+        type="button"
+        onclick="openEditBusiness()"
       >
-        Cancel
+        ✎ Edit Business
       </button>
 
       <button
         class="btn btn-primary"
-        onclick="saveBusiness()"
+        type="button"
+        onclick="openQuickCustomer()"
       >
-        Save Changes
+        + New Customer
       </button>
 
     </div>
 
   </div>
 
+</section>
+
+
+<!-- =====================================================
+     KPI
+====================================================== -->
+
+<section class="kpi-grid">
+
+
+  <div class="kpi">
+
+    <div class="kpi-icon">
+      💰
+    </div>
+
+    <div class="kpi-label">
+      Total Received
+    </div>
+
+    <div
+      class="kpi-value"
+      id="kpiRevenue"
+    >
+      ৳0
+    </div>
+
+    <div class="kpi-note">
+      Payment transactions
+    </div>
+
+  </div>
+
+
+  <div class="kpi">
+
+    <div class="kpi-icon">
+      ⏳
+    </div>
+
+    <div class="kpi-label">
+      Outstanding
+    </div>
+
+    <div
+      class="kpi-value"
+      id="kpiDue"
+    >
+      ৳0
+    </div>
+
+    <div class="kpi-note">
+      Customer balance due
+    </div>
+
+  </div>
+
+
+  <div class="kpi">
+
+    <div class="kpi-icon">
+      👥
+    </div>
+
+    <div class="kpi-label">
+      Customers
+    </div>
+
+    <div
+      class="kpi-value"
+      id="kpiCustomers"
+    >
+      0
+    </div>
+
+    <div class="kpi-note">
+      Linked customers
+    </div>
+
+  </div>
+
+
+  <div class="kpi">
+
+    <div class="kpi-icon">
+      📋
+    </div>
+
+    <div class="kpi-label">
+      Projects
+    </div>
+
+    <div
+      class="kpi-value"
+      id="kpiProjects"
+    >
+      0
+    </div>
+
+    <div class="kpi-note">
+      Business projects
+    </div>
+
+  </div>
+
+
+  <div class="kpi">
+
+    <div class="kpi-icon">
+      💸
+    </div>
+
+    <div class="kpi-label">
+      Expenses
+    </div>
+
+    <div
+      class="kpi-value"
+      id="kpiExpenses"
+    >
+      ৳0
+    </div>
+
+    <div class="kpi-note">
+      Recorded expenses
+    </div>
+
+  </div>
+
+
+  <div class="kpi">
+
+    <div class="kpi-icon">
+      📈
+    </div>
+
+    <div class="kpi-label">
+      Net Cash
+    </div>
+
+    <div
+      class="kpi-value"
+      id="kpiNet"
+    >
+      ৳0
+    </div>
+
+    <div class="kpi-note">
+      Received − Expenses
+    </div>
+
+  </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     FINANCE + SUMMARY
+====================================================== -->
+
+<section class="dashboard-grid">
+
+
+  <div class="panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <div class="panel-title">
+          Revenue vs Expense
+        </div>
+
+        <div class="panel-subtitle">
+          Last 6 months from recorded transactions
+        </div>
+
+      </div>
+
+      <span
+        class="badge badge-blue"
+      >
+        Live
+      </span>
+
+    </div>
+
+
+    <div class="panel-body">
+
+      <div class="chart-wrap">
+
+        <div
+          class="chart-bars"
+          id="chartBars"
+        ></div>
+
+        <div class="chart-legend">
+
+          <div class="legend">
+            <span class="legend-dot revenue"></span>
+            Revenue
+          </div>
+
+          <div class="legend">
+            <span class="legend-dot expense"></span>
+            Expenses
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <div class="panel-title">
+          Financial Summary
+        </div>
+
+        <div class="panel-subtitle">
+          Current business position
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel-body">
+
+      <div class="summary-list">
+
+
+        <div class="summary-row">
+
+          <div class="summary-left">
+
+            <div class="summary-icon">
+              💰
+            </div>
+
+            <div>
+
+              <div class="summary-name">
+                Total Received
+              </div>
+
+              <div class="summary-desc">
+                All recorded payments
+              </div>
+
+            </div>
+
+          </div>
+
+          <div
+            class="summary-value amount-positive"
+            id="summaryReceived"
+          >
+            ৳0
+          </div>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <div class="summary-left">
+
+            <div class="summary-icon">
+              ⏳
+            </div>
+
+            <div>
+
+              <div class="summary-name">
+                Customer Due
+              </div>
+
+              <div class="summary-desc">
+                Outstanding balance
+              </div>
+
+            </div>
+
+          </div>
+
+          <div
+            class="summary-value"
+            id="summaryDue"
+          >
+            ৳0
+          </div>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <div class="summary-left">
+
+            <div class="summary-icon">
+              💸
+            </div>
+
+            <div>
+
+              <div class="summary-name">
+                Expenses
+              </div>
+
+              <div class="summary-desc">
+                Recorded expenses
+              </div>
+
+            </div>
+
+          </div>
+
+          <div
+            class="summary-value amount-negative"
+            id="summaryExpenses"
+          >
+            ৳0
+          </div>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <div class="summary-left">
+
+            <div class="summary-icon">
+              📈
+            </div>
+
+            <div>
+
+              <div class="summary-name">
+                Net Cash
+              </div>
+
+              <div class="summary-desc">
+                Received minus expenses
+              </div>
+
+            </div>
+
+          </div>
+
+          <div
+            class="summary-value"
+            id="summaryNet"
+          >
+            ৳0
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     MODULE CARDS
+====================================================== -->
+
+<section class="module-grid">
+
+
+  <div
+    class="module-card"
+    onclick="go('customers.html')"
+  >
+
+    <div class="module-icon">
+      👥
+    </div>
+
+    <div class="module-title">
+      Customers
+    </div>
+
+    <div
+      class="module-value"
+      id="moduleCustomers"
+    >
+      0
+    </div>
+
+    <div class="module-note">
+      Manage business customers
+    </div>
+
+  </div>
+
+
+  <div
+    class="module-card"
+    onclick="go('projects.html')"
+  >
+
+    <div class="module-icon">
+      📋
+    </div>
+
+    <div class="module-title">
+      Projects
+    </div>
+
+    <div
+      class="module-value"
+      id="moduleProjects"
+    >
+      0
+    </div>
+
+    <div class="module-note">
+      Active and completed work
+    </div>
+
+  </div>
+
+
+  <div
+    class="module-card"
+    onclick="go('tasks.html')"
+  >
+
+    <div class="module-icon">
+      ✓
+    </div>
+
+    <div class="module-title">
+      Tasks
+    </div>
+
+    <div
+      class="module-value"
+      id="moduleTasks"
+    >
+      0
+    </div>
+
+    <div class="module-note">
+      Current business tasks
+    </div>
+
+  </div>
+
+
+  <div
+    class="module-card"
+    onclick="go('employees.html')"
+  >
+
+    <div class="module-icon">
+      ♟
+    </div>
+
+    <div class="module-title">
+      Staff / Team
+    </div>
+
+    <div
+      class="module-value"
+      id="moduleEmployees"
+    >
+      0
+    </div>
+
+    <div class="module-note">
+      Business team members
+    </div>
+
+  </div>
+
+
+  <div
+    class="module-card"
+    onclick="go('payments.html')"
+  >
+
+    <div class="module-icon">
+      ৳
+    </div>
+
+    <div class="module-title">
+      Payments
+    </div>
+
+    <div
+      class="module-value"
+      id="modulePayments"
+    >
+      0
+    </div>
+
+    <div class="module-note">
+      Payment transactions
+    </div>
+
+  </div>
+
+
+  <div
+    class="module-card"
+    onclick="go('invoices.html')"
+  >
+
+    <div class="module-icon">
+      🧾
+    </div>
+
+    <div class="module-title">
+      Invoices
+    </div>
+
+    <div
+      class="module-value"
+      id="moduleInvoices"
+    >
+      0
+    </div>
+
+    <div class="module-note">
+      Business invoices
+    </div>
+
+  </div>
+
+
+  <div
+    class="module-card"
+    onclick="go('expenses.html')"
+  >
+
+    <div class="module-icon">
+      💸
+    </div>
+
+    <div class="module-title">
+      Expenses
+    </div>
+
+    <div
+      class="module-value"
+      id="moduleExpenses"
+    >
+      ৳0
+    </div>
+
+    <div class="module-note">
+      Business expenses
+    </div>
+
+  </div>
+
+
+  <div
+    class="module-card"
+    onclick="go('reports.html')"
+  >
+
+    <div class="module-icon">
+      📊
+    </div>
+
+    <div class="module-title">
+      Reports
+    </div>
+
+    <div
+      class="module-value"
+    >
+      View
+    </div>
+
+    <div class="module-note">
+      Business analytics
+    </div>
+
+  </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     RECENT PAYMENTS
+====================================================== -->
+
+<section class="panel">
+
+  <div class="panel-header">
+
+    <div>
+
+      <div class="panel-title">
+        Recent Payments
+      </div>
+
+      <div class="panel-subtitle">
+        Latest payment activity for this business
+      </div>
+
+    </div>
+
+    <button
+      class="btn btn-ghost"
+      type="button"
+      onclick="go('payments.html')"
+    >
+      View All
+    </button>
+
+  </div>
+
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Payment
+          </th>
+
+          <th>
+            Customer
+          </th>
+
+          <th>
+            Amount
+          </th>
+
+          <th>
+            Method
+          </th>
+
+          <th>
+            Date
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody
+        id="paymentTable"
+      ></tbody>
+
+    </table>
+
+
+    <div
+      class="empty"
+      id="paymentEmpty"
+      style="display:none;"
+    >
+
+      <div class="empty-icon">
+        ৳
+      </div>
+
+      <h3>
+        No payments yet
+      </h3>
+
+      <p>
+        Payment transactions for this business will appear here.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROJECTS + TASKS
+====================================================== -->
+
+<section
+  class="dashboard-grid"
+  style="margin-top:18px;"
+>
+
+
+  <div class="panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <div class="panel-title">
+          Project Progress
+        </div>
+
+        <div class="panel-subtitle">
+          Latest projects for this business
+        </div>
+
+      </div>
+
+      <button
+        class="btn btn-ghost"
+        type="button"
+        onclick="go('projects.html')"
+      >
+        All Projects
+      </button>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Project
+            </th>
+
+            <th>
+              Progress
+            </th>
+
+            <th>
+              Deadline
+            </th>
+
+            <th>
+              Status
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody
+          id="projectTable"
+        ></tbody>
+
+      </table>
+
+
+      <div
+        class="empty"
+        id="projectEmpty"
+        style="display:none;"
+      >
+
+        <div class="empty-icon">
+          📋
+        </div>
+
+        <h3>
+          No projects
+        </h3>
+
+        <p>
+          Business projects will appear here.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <div class="panel-title">
+          Current Tasks
+        </div>
+
+        <div class="panel-subtitle">
+          Latest assigned tasks
+        </div>
+
+      </div>
+
+      <button
+        class="btn btn-ghost"
+        type="button"
+        onclick="go('tasks.html')"
+      >
+        All Tasks
+      </button>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Task
+            </th>
+
+            <th>
+              Assigned
+            </th>
+
+            <th>
+              Progress
+            </th>
+
+            <th>
+              Status
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody
+          id="taskTable"
+        ></tbody>
+
+      </table>
+
+
+      <div
+        class="empty"
+        id="taskEmpty"
+        style="display:none;"
+      >
+
+        <div class="empty-icon">
+          ✓
+        </div>
+
+        <h3>
+          No tasks
+        </h3>
+
+        <p>
+          Business tasks will appear here.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     QUICK ACTIONS
+====================================================== -->
+
+<section class="panel">
+
+  <div class="panel-header">
+
+    <div>
+
+      <div class="panel-title">
+        Quick Actions
+      </div>
+
+      <div class="panel-subtitle">
+        Common business operations
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="panel-body">
+
+    <div class="quick-actions">
+
+      <button
+        class="quick-btn"
+        onclick="go('customers.html&new=1')"
+      >
+        + New Customer
+      </button>
+
+      <button
+        class="quick-btn"
+        onclick="go('payments.html&new=1')"
+      >
+        ৳ Add Payment
+      </button>
+
+      <button
+        class="quick-btn"
+        onclick="go('projects.html&new=1')"
+      >
+        + New Project
+      </button>
+
+      <button
+        class="quick-btn"
+        onclick="go('tasks.html&new=1')"
+      >
+        ✓ New Task
+      </button>
+
+      <button
+        class="quick-btn"
+        onclick="go('invoices.html&new=1')"
+      >
+        🧾 Create Invoice
+      </button>
+
+      <button
+        class="quick-btn"
+        onclick="go('expenses.html&new=1')"
+      >
+        − Add Expense
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</section>
+
+</main>
+
+
+<!-- =====================================================
+     EDIT BUSINESS MODAL
+====================================================== -->
+
+<div
+  class="modal-backdrop"
+  id="editModal"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <div class="modal-title">
+          Edit Business
+        </div>
+
+        <div class="modal-subtitle">
+          Update this business profile.
+        </div>
+
+      </div>
+
+      <button
+        class="close-btn"
+        type="button"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <form id="businessForm">
+
+      <div class="modal-body">
+
+        <div class="form-grid">
+
+
+          <div class="form-group">
+
+            <label>
+              Business Name
+            </label>
+
+            <input
+              id="editName"
+              class="form-control"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Category
+            </label>
+
+            <select
+              id="editCategory"
+              class="form-control"
+            >
+
+              <option value="agency">
+                Agency
+              </option>
+
+              <option value="website">
+                Website Sale
+              </option>
+
+              <option value="marketing">
+                Digital Marketing
+              </option>
+
+              <option value="other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Status
+            </label>
+
+            <select
+              id="editStatus"
+              class="form-control"
+            >
+
+              <option value="active">
+                Active
+              </option>
+
+              <option value="inactive">
+                Inactive
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Target Revenue
+            </label>
+
+            <input
+              id="editTarget"
+              class="form-control"
+              type="number"
+              min="0"
+            >
+
+          </div>
+
+
+          <div class="form-group full">
+
+            <label>
+              Description
+            </label>
+
+            <textarea
+              id="editDescription"
+              class="form-control"
+            ></textarea>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-ghost"
+          onclick="closeModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+        >
+          Save Changes
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
 </div>
 
-<!-- ================= TOAST ================= -->
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
 
 <div
   class="toast"
   id="toast"
-></div>
+>
+
+  <span class="toast-dot"></span>
+
+  <span
+    class="toast-text"
+    id="toastText"
+  >
+    Done.
+  </span>
+
+</div>
+
 
 <script>
 
 /* =========================================================
    SNK BUSINESS
-   BUSINESS WORKSPACE — STEP 3.2
+   STEP 3.11 — LIVE BUSINESS WORKSPACE
 ========================================================= */
+
 
 const BUSINESS_KEY =
   "snkBusinesses";
@@ -1440,1009 +3192,138 @@ const BUSINESS_KEY =
 const CUSTOMER_KEY =
   "snkBusinessCustomers";
 
+const PAYMENT_KEY =
+  "snkBusinessPayments";
+
+const INVOICE_KEY =
+  "snkBusinessInvoices";
+
+const EXPENSE_KEY =
+  "snkBusinessExpenses";
+
+const PROJECT_KEY =
+  "snkBusinessProjects";
+
+const TASK_KEY =
+  "snkBusinessTasks";
+
+const EMPLOYEE_KEY =
+  "snkBusinessEmployees";
+
+
 let businesses = [];
 let customers = [];
+let payments = [];
+let invoices = [];
+let expenses = [];
+let projects = [];
+let tasks = [];
+let employees = [];
+
 let currentBusiness = null;
 
-/* =========================================================
-   INIT
-========================================================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  init
-);
-
-function init(){
-
-  loadBusinesses();
-
-  loadCustomers();
-
-  resolveBusiness();
-
-  if(!currentBusiness){
-
-    showToast(
-      "No business found."
-    );
-
-    setTimeout(
-      ()=>location.href="businesses.html",
-      1200
-    );
-
-    return;
-
-  }
-
-  syncCurrentBusinessMetrics();
-
-  renderBusiness();
-
-  renderCustomers();
-
-  renderModules();
-
-  renderActivity();
-
-}
 
 /* =========================================================
-   LOAD BUSINESSES
+   HELPERS
 ========================================================= */
 
-function loadBusinesses(){
+const $ = id =>
+  document.getElementById(id);
+
+
+function readStorage(key){
 
   try{
 
-    businesses =
+    const data =
       JSON.parse(
-        localStorage.getItem(
-          BUSINESS_KEY
-        )
-      ) || [];
-
-  }catch(error){
-
-    businesses = [];
-
-  }
-
-}
-
-/* =========================================================
-   LOAD CUSTOMERS
-========================================================= */
-
-function loadCustomers(){
-
-  try{
-
-    customers =
-      JSON.parse(
-        localStorage.getItem(
-          CUSTOMER_KEY
-        )
-      ) || [];
-
-  }catch(error){
-
-    customers = [];
-
-  }
-
-}
-
-/* =========================================================
-   RESOLVE BUSINESS
-========================================================= */
-
-function resolveBusiness(){
-
-  const params =
-    new URLSearchParams(
-      location.search
-    );
-
-  const key =
-    params.get("business");
-
-  if(!businesses.length){
-
-    return;
-
-  }
-
-  if(key){
-
-    currentBusiness =
-      businesses.find(
-        business=>
-          String(business.id) === String(key) ||
-          String(business.slug) === String(key) ||
-          String(business.name).toLowerCase() ===
-            String(key).toLowerCase()
+        localStorage.getItem(key)
       );
 
-  }
+    return Array.isArray(data)
+      ? data
+      : [];
 
-  if(!currentBusiness){
-
-    currentBusiness =
-      businesses[0];
-
-  }
-
-}
-
-/* =========================================================
-   LINKED CUSTOMERS
-========================================================= */
-
-function getLinkedCustomers(){
-
-  if(!currentBusiness){
+  }catch(error){
 
     return [];
 
   }
 
-  return customers.filter(
-    customer=>
-      customer.businessId === currentBusiness.id ||
-      customer.businessSlug === currentBusiness.slug
+}
+
+
+function saveStorage(
+  key,
+  data
+){
+
+  localStorage.setItem(
+    key,
+    JSON.stringify(data)
   );
 
 }
 
-/* =========================================================
-   SYNC CURRENT BUSINESS
-========================================================= */
-
-function syncCurrentBusinessMetrics(){
-
-  if(!currentBusiness) return;
-
-  const linked =
-    getLinkedCustomers();
-
-  currentBusiness.customers =
-    linked.length;
-
-  currentBusiness.revenue =
-    linked.reduce(
-      (sum,customer)=>
-        sum + Number(customer.paid || 0),
-      0
-    );
-
-  currentBusiness.pending =
-    linked.reduce(
-      (sum,customer)=>
-        sum +
-        Math.max(
-          Number(customer.total || 0) -
-          Number(customer.paid || 0),
-          0
-        ),
-      0
-    );
-
-  const index =
-    businesses.findIndex(
-      b=>b.id === currentBusiness.id
-    );
-
-  if(index !== -1){
-
-    businesses[index] =
-      currentBusiness;
-
-    localStorage.setItem(
-      BUSINESS_KEY,
-      JSON.stringify(businesses)
-    );
-
-  }
-
-}
-
-/* =========================================================
-   RENDER BUSINESS
-========================================================= */
-
-function renderBusiness(){
-
-  const business =
-    currentBusiness;
-
-  document.title =
-    `${business.name} | SNK Business`;
-
-  document.getElementById(
-    "businessName"
-  ).textContent =
-    business.name;
-
-  document.getElementById(
-    "topBusinessName"
-  ).textContent =
-    business.name;
-
-  document.getElementById(
-    "sideBusinessName"
-  ).textContent =
-    business.name;
-
-  document.getElementById(
-    "businessCategory"
-  ).textContent =
-    categoryLabel(
-      business.category
-    );
-
-  document.getElementById(
-    "businessDescription"
-  ).textContent =
-    business.description ||
-    "Business workspace and management.";
-
-  const status =
-    document.getElementById(
-      "businessStatus"
-    );
-
-  const sideStatus =
-    document.getElementById(
-      "sideBusinessStatus"
-    );
-
-  if(business.status === "inactive"){
-
-    status.textContent =
-      "Inactive";
-
-    status.className =
-      "status status-inactive";
-
-    sideStatus.textContent =
-      "Inactive";
-
-    sideStatus.style.color =
-      "#f87171";
-
-    sideStatus.style.background =
-      "rgba(239,68,68,.09)";
-
-  }else{
-
-    status.textContent =
-      "Active";
-
-    status.className =
-      "status status-active";
-
-    sideStatus.textContent =
-      "Active";
-
-    sideStatus.style.color =
-      "#4ade80";
-
-    sideStatus.style.background =
-      "rgba(34,197,94,.09)";
-
-  }
-
-  document.getElementById(
-    "statRevenue"
-  ).textContent =
-    money(business.revenue);
-
-  document.getElementById(
-    "statCustomers"
-  ).textContent =
-    business.customers || 0;
-
-  document.getElementById(
-    "statProjects"
-  ).textContent =
-    business.projects || 0;
-
-  document.getElementById(
-    "statPending"
-  ).textContent =
-    money(business.pending);
-
-}
-
-/* =========================================================
-   CUSTOMER RENDER
-========================================================= */
-
-function renderCustomers(){
-
-  const linked =
-    getLinkedCustomers();
-
-  document.getElementById(
-    "customerCountText"
-  ).textContent =
-    `${linked.length} customer${linked.length === 1 ? "" : "s"}`;
-
-  const body =
-    document.getElementById(
-      "customerBody"
-    );
-
-  if(!linked.length){
-
-    body.innerHTML = `
-      <tr>
-        <td colspan="6">
-          <div class="empty">
-            <strong>No customers yet</strong>
-            Add a customer to this business to see live customer data here.
-          </div>
-        </td>
-      </tr>
-    `;
-
-    return;
-
-  }
-
-  const recent =
-    linked
-      .slice()
-      .sort(
-        (a,b)=>
-          new Date(b.createdAt || 0) -
-          new Date(a.createdAt || 0)
-      )
-      .slice(0,8);
-
-  body.innerHTML =
-    recent
-      .map(customer=>{
-
-        const due =
-          Math.max(
-            Number(customer.total || 0) -
-            Number(customer.paid || 0),
-            0
-          );
-
-        return `
-
-          <tr>
-
-            <td>
-
-              <div class="customer">
-
-                <div class="customer-avatar">
-                  ${escapeHTML(
-                    initials(customer.name)
-                  )}
-                </div>
-
-                <div>
-
-                  <div class="customer-name">
-                    ${escapeHTML(
-                      customer.name
-                    )}
-                  </div>
-
-                  <div class="customer-service">
-                    ${escapeHTML(
-                      customer.phone || "No phone"
-                    )}
-                  </div>
-
-                </div>
-
-              </div>
-
-            </td>
-
-            <td>
-              ${escapeHTML(
-                customer.service || "General"
-              )}
-            </td>
-
-            <td>
-              <span class="money">
-                ${money(customer.total)}
-              </span>
-            </td>
-
-            <td>
-              <span class="money paid">
-                ${money(customer.paid)}
-              </span>
-            </td>
-
-            <td>
-              <span class="money due">
-                ${money(due)}
-              </span>
-            </td>
-
-            <td>
-              ${statusBadge(
-                customer.status
-              )}
-            </td>
-
-          </tr>
-
-        `;
-
-      })
-      .join("");
-
-}
-
-/* =========================================================
-   MODULES
-========================================================= */
-
-function renderModules(){
-
-  const category =
-    currentBusiness.category;
-
-  let modules = [];
-
-  if(category === "agency"){
-
-    modules = [
-
-      ["♙","Customers","customers"],
-      ["◈","Projects","projects"],
-      ["৳","Payments","payments"],
-      ["৳","Expenses","expenses"],
-      ["▧","Invoices","invoices"],
-      ["♙","Employees","employees"],
-      ["✓","Tasks","tasks"],
-      ["▥","Reports","reports"]
-
-    ];
-
-  }else if(category === "website"){
-
-    modules = [
-
-      ["♙","Customers","customers"],
-      ["▤","Website Inventory","inventory"],
-      ["◫","Available Websites","available"],
-      ["✓","Sold Websites","sold"],
-      ["৳","Payments","payments"],
-      ["◎","Hosting / Domain","hosting"],
-      ["◈","Delivery","delivery"],
-      ["▥","Sales History","sales"]
-
-    ];
-
-  }else if(category === "marketing"){
-
-    modules = [
-
-      ["♙","Clients","customers"],
-      ["◈","Campaigns","campaigns"],
-      ["f","Facebook Ads","facebook"],
-      ["G","Google Ads","google"],
-      ["▤","Packages","packages"],
-      ["৳","Payments","payments"],
-      ["!","Pending Payments","pending"],
-      ["৳","Expenses","expenses"],
-      ["▥","Reports","reports"]
-
-    ];
-
-  }else{
-
-    modules = [
-
-      ["♙","Customers","customers"],
-      ["৳","Payments","payments"],
-      ["৳","Expenses","expenses"],
-      ["▧","Invoices","invoices"],
-      ["▥","Reports","reports"]
-
-    ];
-
-  }
-
-  const container =
-    document.getElementById(
-      "moduleList"
-    );
-
-  container.innerHTML =
-    modules.map(
-      module=>`
-
-        <button
-          class="module"
-          onclick="openModule('${module[2]}')"
-        >
-
-          <span class="module-left">
-
-            <span class="module-icon">
-              ${module[0]}
-            </span>
-
-            ${module[1]}
-
-          </span>
-
-          <span>→</span>
-
-        </button>
-
-      `
-    ).join("");
-
-  const nav =
-    document.getElementById(
-      "businessNav"
-    );
-
-  nav.innerHTML = `
-
-    <a
-      href="index.html"
-    >
-      <span class="nav-icon">⌂</span>
-      Main Dashboard
-    </a>
-
-    <a
-      href="businesses.html"
-    >
-      <span class="nav-icon">▣</span>
-      My Businesses
-    </a>
-
-    <div class="nav-title">
-      Business Modules
-    </div>
-
-    ${modules.map(
-      module=>`
-
-        <a
-          href="#"
-          onclick="openModule('${module[2]}');return false;"
-        >
-
-          <span class="nav-icon">
-            ${module[0]}
-          </span>
-
-          ${module[1]}
-
-        </a>
-
-      `
-    ).join("")}
-
-  `;
-
-}
-
-/* =========================================================
-   ACTIVITY
-========================================================= */
-
-function renderActivity(){
-
-  const linked =
-    getLinkedCustomers();
-
-  const activity =
-    [];
-
-  linked
-    .slice()
-    .sort(
-      (a,b)=>
-        new Date(b.createdAt || 0) -
-        new Date(a.createdAt || 0)
-    )
-    .slice(0,5)
-    .forEach(customer=>{
-
-      activity.push({
-
-        text:
-          `Customer ${customer.name} is linked to this business.`,
-
-        date:
-          customer.createdAt
-
-      });
-
-    });
-
-  if(!activity.length){
-
-    document.getElementById(
-      "activityList"
-    ).innerHTML = `
-      <div class="empty">
-        <strong>No activity yet</strong>
-        Business activity will appear here.
-      </div>
-    `;
-
-    return;
-
-  }
-
-  document.getElementById(
-    "activityList"
-  ).innerHTML =
-    activity.map(
-      item=>`
-
-        <div class="activity-item">
-
-          <div class="activity-dot"></div>
-
-          <div class="activity-text">
-
-            ${escapeHTML(item.text)}
-
-            <span class="activity-time">
-              ${formatDate(item.date)}
-            </span>
-
-          </div>
-
-        </div>
-
-      `
-    ).join("");
-
-}
-
-/* =========================================================
-   OPEN MODULE
-========================================================= */
-
-function openModule(module){
-
-  const id =
-    encodeURIComponent(
-      currentBusiness.id
-    );
-
-  const routes = {
-
-    customers:`customers.html?business=${id}`,
-
-    clients:`customers.html?business=${id}`,
-
-    projects:`projects.html?business=${id}`,
-
-    payments:`payments.html?business=${id}`,
-
-    expenses:`expenses.html?business=${id}`,
-
-    invoices:`invoices.html?business=${id}`,
-
-    employees:`employees.html?business=${id}`,
-
-    tasks:`tasks.html?business=${id}`,
-
-    reports:`reports.html?business=${id}`,
-
-    inventory:`inventory.html?business=${id}`,
-
-    available:`websites.html?business=${id}`,
-
-    sold:`websites.html?business=${id}`,
-
-    hosting:`hosting.html?business=${id}`,
-
-    delivery:`delivery.html?business=${id}`,
-
-    sales:`sales.html?business=${id}`,
-
-    campaigns:`campaigns.html?business=${id}`,
-
-    facebook:`facebook-ads.html?business=${id}`,
-
-    google:`google-ads.html?business=${id}`,
-
-    packages:`packages.html?business=${id}`,
-
-    pending:`payments.html?business=${id}`
-
-  };
-
-  const target =
-    routes[module];
-
-  if(target){
-
-    location.href =
-      target;
-
-    return;
-
-  }
-
-  showToast(
-    `${module} module will be added next.`
-  );
-
-}
-
-/* =========================================================
-   VIEW ALL CUSTOMERS
-========================================================= */
-
-function openAllCustomers(){
-
-  location.href =
-    `customers.html?business=${
-      encodeURIComponent(
-        currentBusiness.id
-      )
-    }`;
-
-}
-
-/* =========================================================
-   EDIT BUSINESS
-========================================================= */
-
-function editBusiness(){
-
-  document.getElementById(
-    "editName"
-  ).value =
-    currentBusiness.name || "";
-
-  document.getElementById(
-    "editCategory"
-  ).value =
-    currentBusiness.category || "other";
-
-  document.getElementById(
-    "editStatus"
-  ).value =
-    currentBusiness.status || "active";
-
-  document.getElementById(
-    "editTarget"
-  ).value =
-    currentBusiness.target || 0;
-
-  document.getElementById(
-    "editDescription"
-  ).value =
-    currentBusiness.description || "";
-
-  document.getElementById(
-    "editOverlay"
-  ).classList.add("show");
-
-}
-
-/* =========================================================
-   SAVE BUSINESS
-========================================================= */
-
-function saveBusiness(){
-
-  const name =
-    document.getElementById(
-      "editName"
-    ).value.trim();
-
-  if(!name){
-
-    showToast(
-      "Business name is required."
-    );
-
-    return;
-
-  }
-
-  currentBusiness.name =
-    name;
-
-  currentBusiness.category =
-    document.getElementById(
-      "editCategory"
-    ).value;
-
-  currentBusiness.status =
-    document.getElementById(
-      "editStatus"
-    ).value;
-
-  currentBusiness.target =
-    Number(
-      document.getElementById(
-        "editTarget"
-      ).value
-    ) || 0;
-
-  currentBusiness.description =
-    document.getElementById(
-      "editDescription"
-    ).value.trim();
-
-  const index =
-    businesses.findIndex(
-      b=>b.id === currentBusiness.id
-    );
-
-  if(index !== -1){
-
-    businesses[index] =
-      currentBusiness;
-
-    localStorage.setItem(
-      BUSINESS_KEY,
-      JSON.stringify(
-        businesses
-      )
-    );
-
-  }
-
-  closeEdit();
-
-  renderBusiness();
-
-  renderModules();
-
-  showToast(
-    "Business updated successfully."
-  );
-
-}
-
-/* =========================================================
-   CLOSE EDIT
-========================================================= */
-
-function closeEdit(){
-
-  document.getElementById(
-    "editOverlay"
-  ).classList.remove("show");
-
-}
-
-/* =========================================================
-   BUSINESSES
-========================================================= */
-
-function goBusinesses(){
-
-  location.href =
-    "businesses.html";
-
-}
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
-
-function toggleSidebar(){
-
-  document
-    .getElementById("sidebar")
-    .classList.toggle("open");
-
-}
-
-/* =========================================================
-   MONEY
-========================================================= */
 
 function money(value){
 
   return "৳" +
-    Number(value || 0)
-      .toLocaleString("en-BD");
+    (
+      Number(value) || 0
+    ).toLocaleString(
+      "en-BD"
+    );
 
 }
 
-/* =========================================================
-   CATEGORY
-========================================================= */
 
-function categoryLabel(category){
-
-  const labels = {
-
-    agency:"Agency",
-    website:"Website Sale",
-    marketing:"Digital Marketing",
-    other:"Other"
-
-  };
+function number(value){
 
   return (
-    labels[category] ||
-    "Business"
+    Number(value) || 0
+  ).toLocaleString(
+    "en-BD"
   );
 
 }
 
-/* =========================================================
-   STATUS
-========================================================= */
 
-function statusBadge(status){
+function escapeHTML(value){
 
-  const labels = {
-
-    paid:"Paid",
-    partial:"Partial",
-    pending:"Pending",
-    overdue:"Overdue",
-    active:"Active"
-
-  };
-
-  const safe =
-    labels[status]
-      ? status
-      : "active";
-
-  return `
-    <span class="badge badge-${safe}">
-      ${labels[safe]}
-    </span>
-  `;
+  return String(
+    value ?? ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
 
-/* =========================================================
-   INITIALS
-========================================================= */
 
-function initials(name){
+function formatDate(value){
 
-  return String(name || "C")
-    .split(" ")
-    .filter(Boolean)
-    .slice(0,2)
-    .map(word=>word[0])
-    .join("")
-    .toUpperCase();
+  if(!value){
+    return "—";
+  }
 
-}
+  const d =
+    new Date(value);
 
-/* =========================================================
-   DATE
-========================================================= */
+  if(
+    Number.isNaN(
+      d.getTime()
+    )
+  ){
 
-function formatDate(date){
+    return value;
 
-  if(!date) return "—";
+  }
 
-  const parsed =
-    new Date(date);
-
-  if(isNaN(parsed)) return "—";
-
-  return parsed.toLocaleDateString(
-    "en-BD",
+  return d.toLocaleDateString(
+    "en-GB",
     {
       day:"2-digit",
       month:"short",
@@ -2452,20 +3333,1788 @@ function formatDate(date){
 
 }
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
 
-function escapeHTML(value){
+function todayISO(){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  const d =
+    new Date();
+
+  return [
+
+    d.getFullYear(),
+
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0"),
+
+    String(
+      d.getDate()
+    ).padStart(2,"0")
+
+  ].join("-");
 
 }
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+function loadAllData(){
+
+  businesses =
+    readStorage(
+      BUSINESS_KEY
+    );
+
+  customers =
+    readStorage(
+      CUSTOMER_KEY
+    );
+
+  payments =
+    readStorage(
+      PAYMENT_KEY
+    );
+
+  invoices =
+    readStorage(
+      INVOICE_KEY
+    );
+
+  expenses =
+    readStorage(
+      EXPENSE_KEY
+    );
+
+  projects =
+    readStorage(
+      PROJECT_KEY
+    );
+
+  tasks =
+    readStorage(
+      TASK_KEY
+    );
+
+  employees =
+    readStorage(
+      EMPLOYEE_KEY
+    );
+
+}
+
+
+/* =========================================================
+   BUSINESS FIND
+========================================================= */
+
+function findBusinessByAny(
+  value
+){
+
+  if(!value){
+    return null;
+  }
+
+  const needle =
+    String(value)
+      .toLowerCase()
+      .trim();
+
+
+  return businesses.find(
+    business =>
+
+      String(
+        business.id || ""
+      ).toLowerCase() ===
+        needle ||
+
+      String(
+        business.slug || ""
+      ).toLowerCase() ===
+        needle ||
+
+      String(
+        business.name || ""
+      ).toLowerCase() ===
+        needle
+
+  ) || null;
+
+}
+
+
+/* =========================================================
+   CURRENT BUSINESS
+========================================================= */
+
+function resolveBusiness(){
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const requested =
+    params.get(
+      "business"
+    );
+
+
+  if(requested){
+
+    currentBusiness =
+      findBusinessByAny(
+        requested
+      );
+
+  }
+
+
+  if(
+    !currentBusiness &&
+    businesses.length
+  ){
+
+    currentBusiness =
+      businesses[0];
+
+  }
+
+
+  return currentBusiness;
+
+}
+
+
+/* =========================================================
+   BUSINESS FILTER
+========================================================= */
+
+function belongsToBusiness(
+  item
+){
+
+  if(
+    !currentBusiness
+  ){
+
+    return false;
+
+  }
+
+
+  if(
+    item.businessId &&
+    item.businessId ===
+      currentBusiness.id
+  ){
+
+    return true;
+
+  }
+
+
+  if(
+    item.businessSlug &&
+    currentBusiness.slug &&
+    item.businessSlug ===
+      currentBusiness.slug
+  ){
+
+    return true;
+
+  }
+
+
+  if(
+    item.businessName &&
+    item.businessName
+      .toLowerCase() ===
+      String(
+        currentBusiness.name ||
+        ""
+      ).toLowerCase()
+  ){
+
+    return true;
+
+  }
+
+
+  return false;
+
+}
+
+
+/* =========================================================
+   BUSINESS ICON
+========================================================= */
+
+function businessIcon(
+  category
+){
+
+  const icons = {
+
+    agency:"📣",
+
+    website:"🌐",
+
+    marketing:"📢",
+
+    other:"🏢"
+
+  };
+
+
+  return (
+    icons[
+      category
+    ] ||
+    "🏢"
+  );
+
+}
+
+
+/* =========================================================
+   BUSINESS HERO
+========================================================= */
+
+function renderHero(){
+
+  if(!currentBusiness){
+    return;
+  }
+
+
+  $("businessIcon")
+    .textContent =
+      businessIcon(
+        currentBusiness.category
+      );
+
+
+  $("businessName")
+    .textContent =
+      currentBusiness.name ||
+      "Business";
+
+
+  $("businessCategory")
+    .textContent =
+      categoryLabel(
+        currentBusiness.category
+      );
+
+
+  const active =
+    currentBusiness.status !==
+    "inactive";
+
+
+  $("businessStatus")
+    .textContent =
+      active
+        ? "● Active"
+        : "● Inactive";
+
+
+  $("businessStatus")
+    .classList.toggle(
+      "inactive",
+      !active
+    );
+
+
+  $("businessDescription")
+    .textContent =
+      currentBusiness.description ||
+      "Manage customers, payments, projects, tasks, staff, expenses and reports from this business workspace.";
+
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+function categoryLabel(
+  category
+){
+
+  const labels = {
+
+    agency:
+      "Agency",
+
+    website:
+      "Website Sale",
+
+    marketing:
+      "Digital Marketing",
+
+    other:
+      "Other Business"
+
+  };
+
+
+  return (
+    labels[
+      category
+    ] ||
+    "Business"
+  );
+
+}
+
+
+/* =========================================================
+   BUSINESS RECORDS
+========================================================= */
+
+function getCustomers(){
+
+  return customers.filter(
+    belongsToBusiness
+  );
+
+}
+
+
+function getPayments(){
+
+  return payments.filter(
+    belongsToBusiness
+  );
+
+}
+
+
+function getInvoices(){
+
+  return invoices.filter(
+    belongsToBusiness
+  );
+
+}
+
+
+function getExpenses(){
+
+  return expenses.filter(
+    belongsToBusiness
+  );
+
+}
+
+
+function getProjects(){
+
+  return projects.filter(
+    belongsToBusiness
+  );
+
+}
+
+
+function getTasks(){
+
+  return tasks.filter(
+    belongsToBusiness
+  );
+
+}
+
+
+function getEmployees(){
+
+  return employees.filter(
+    belongsToBusiness
+  );
+
+}
+
+
+/* =========================================================
+   FINANCIAL DATA
+========================================================= */
+
+function calculateFinancials(){
+
+  const businessCustomers =
+    getCustomers();
+
+  const businessPayments =
+    getPayments();
+
+  const businessExpenses =
+    getExpenses();
+
+
+  const received =
+    businessPayments.reduce(
+      (
+        sum,
+        payment
+      ) =>
+        sum +
+        Number(
+          payment.amount ||
+          0
+        ),
+      0
+    );
+
+
+  const customerDue =
+    businessCustomers.reduce(
+      (
+        sum,
+        customer
+      ) => {
+
+        const total =
+          Number(
+            customer.total ||
+            customer.totalValue ||
+            0
+          );
+
+
+        const paid =
+          Number(
+            customer.paid ||
+            0
+          );
+
+
+        return sum +
+          Math.max(
+            total -
+            paid,
+            0
+          );
+
+      },
+      0
+    );
+
+
+  const totalExpenses =
+    businessExpenses.reduce(
+      (
+        sum,
+        expense
+      ) =>
+        sum +
+        Number(
+          expense.amount ||
+          0
+        ),
+      0
+    );
+
+
+  const net =
+    received -
+    totalExpenses;
+
+
+  return {
+
+    received,
+
+    customerDue,
+
+    totalExpenses,
+
+    net
+
+  };
+
+}
+
+
+/* =========================================================
+   KPI
+========================================================= */
+
+function renderKPIs(){
+
+  const financials =
+    calculateFinancials();
+
+
+  const businessCustomers =
+    getCustomers();
+
+
+  const businessProjects =
+    getProjects();
+
+
+  $("kpiRevenue")
+    .textContent =
+      money(
+        financials.received
+      );
+
+
+  $("kpiDue")
+    .textContent =
+      money(
+        financials.customerDue
+      );
+
+
+  $("kpiCustomers")
+    .textContent =
+      number(
+        businessCustomers.length
+      );
+
+
+  $("kpiProjects")
+    .textContent =
+      number(
+        businessProjects.length
+      );
+
+
+  $("kpiExpenses")
+    .textContent =
+      money(
+        financials.totalExpenses
+      );
+
+
+  $("kpiNet")
+    .textContent =
+      money(
+        financials.net
+      );
+
+
+  $("summaryReceived")
+    .textContent =
+      money(
+        financials.received
+      );
+
+
+  $("summaryDue")
+    .textContent =
+      money(
+        financials.customerDue
+      );
+
+
+  $("summaryExpenses")
+    .textContent =
+      money(
+        financials.totalExpenses
+      );
+
+
+  $("summaryNet")
+    .textContent =
+      money(
+        financials.net
+      );
+
+}
+
+
+/* =========================================================
+   MODULE COUNTS
+========================================================= */
+
+function renderModules(){
+
+  const businessCustomers =
+    getCustomers();
+
+  const businessPayments =
+    getPayments();
+
+  const businessProjects =
+    getProjects();
+
+  const businessTasks =
+    getTasks();
+
+  const businessEmployees =
+    getEmployees();
+
+  const businessInvoices =
+    getInvoices();
+
+  const businessExpenses =
+    getExpenses();
+
+
+  const expenseTotal =
+    businessExpenses.reduce(
+      (
+        sum,
+        item
+      ) =>
+        sum +
+        Number(
+          item.amount ||
+          0
+        ),
+      0
+    );
+
+
+  $("moduleCustomers")
+    .textContent =
+      number(
+        businessCustomers.length
+      );
+
+
+  $("moduleProjects")
+    .textContent =
+      number(
+        businessProjects.length
+      );
+
+
+  $("moduleTasks")
+    .textContent =
+      number(
+        businessTasks.length
+      );
+
+
+  $("moduleEmployees")
+    .textContent =
+      number(
+        businessEmployees.length
+      );
+
+
+  $("modulePayments")
+    .textContent =
+      number(
+        businessPayments.length
+      );
+
+
+  $("moduleInvoices")
+    .textContent =
+      number(
+        businessInvoices.length
+      );
+
+
+  $("moduleExpenses")
+    .textContent =
+      money(
+        expenseTotal
+      );
+
+}
+
+
+/* =========================================================
+   SIX MONTH CHART
+========================================================= */
+
+function monthKey(
+  date
+){
+
+  const d =
+    new Date(date);
+
+
+  if(
+    Number.isNaN(
+      d.getTime()
+    )
+  ){
+
+    return "";
+
+  }
+
+
+  return [
+    d.getFullYear(),
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0")
+  ].join("-");
+
+}
+
+
+function getLastMonths(){
+
+  const result = [];
+
+  const now =
+    new Date();
+
+
+  now.setDate(1);
+
+
+  for(
+    let i=5;
+    i>=0;
+    i--
+  ){
+
+    const d =
+      new Date(
+        now.getFullYear(),
+        now.getMonth()-i,
+        1
+      );
+
+
+    result.push({
+
+      key:
+        [
+          d.getFullYear(),
+          String(
+            d.getMonth()+1
+          ).padStart(2,"0")
+        ].join("-"),
+
+      label:
+        d.toLocaleDateString(
+          "en-US",
+          {
+            month:"short"
+          }
+        )
+
+    });
+
+  }
+
+
+  return result;
+
+}
+
+
+function renderChart(){
+
+  const chart =
+    $("chartBars");
+
+
+  const months =
+    getLastMonths();
+
+
+  const businessPayments =
+    getPayments();
+
+  const businessExpenses =
+    getExpenses();
+
+
+  const data =
+    months.map(
+      month => {
+
+        const revenue =
+          businessPayments
+            .filter(
+              payment =>
+                monthKey(
+                  payment.date ||
+                  payment.createdAt
+                ) ===
+                month.key
+            )
+            .reduce(
+              (
+                sum,
+                payment
+              ) =>
+                sum +
+                Number(
+                  payment.amount ||
+                  0
+                ),
+              0
+            );
+
+
+        const expense =
+          businessExpenses
+            .filter(
+              item =>
+                monthKey(
+                  item.date ||
+                  item.createdAt
+                ) ===
+                month.key
+            )
+            .reduce(
+              (
+                sum,
+                item
+              ) =>
+                sum +
+                Number(
+                  item.amount ||
+                  0
+                ),
+              0
+            );
+
+
+        return {
+
+          ...month,
+
+          revenue,
+
+          expense
+
+        };
+
+      }
+    );
+
+
+  const max =
+    Math.max(
+      1,
+      ...data.map(
+        item =>
+          Math.max(
+            item.revenue,
+            item.expense
+          )
+      )
+    );
+
+
+  chart.innerHTML =
+    "";
+
+
+  data.forEach(
+    item => {
+
+      const revenueHeight =
+        Math.max(
+          item.revenue
+            ? 4
+            : 1,
+          (
+            item.revenue /
+            max
+          ) * 160
+        );
+
+
+      const expenseHeight =
+        Math.max(
+          item.expense
+            ? 4
+            : 1,
+          (
+            item.expense /
+            max
+          ) * 160
+        );
+
+
+      const column =
+        document.createElement(
+          "div"
+        );
+
+
+      column.className =
+        "month-column";
+
+
+      column.innerHTML = `
+
+        <div class="bar-area">
+
+          <div
+            class="bar revenue"
+            style="height:${revenueHeight}px"
+            title="Revenue: ${money(
+              item.revenue
+            )}"
+          ></div>
+
+          <div
+            class="bar expense"
+            style="height:${expenseHeight}px"
+            title="Expense: ${money(
+              item.expense
+            )}"
+          ></div>
+
+        </div>
+
+        <div class="month-label">
+          ${escapeHTML(
+            item.label
+          )}
+        </div>
+
+      `;
+
+
+      chart.appendChild(
+        column
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   RECENT PAYMENTS
+========================================================= */
+
+function renderPayments(){
+
+  const tbody =
+    $("paymentTable");
+
+  const empty =
+    $("paymentEmpty");
+
+
+  const list =
+    getPayments()
+      .slice()
+      .sort(
+        (
+          a,
+          b
+        ) =>
+          String(
+            b.date ||
+            b.createdAt ||
+            ""
+          ).localeCompare(
+            String(
+              a.date ||
+              a.createdAt ||
+              ""
+            )
+          )
+      )
+      .slice(
+        0,
+        8
+      );
+
+
+  tbody.innerHTML =
+    "";
+
+
+  if(!list.length){
+
+    empty.style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  empty.style.display =
+    "none";
+
+
+  list.forEach(
+    payment => {
+
+      const row =
+        document.createElement(
+          "tr"
+        );
+
+
+      row.innerHTML = `
+
+        <td>
+
+          <div class="activity-title">
+            ${escapeHTML(
+              payment.id ||
+              "Payment"
+            )}
+          </div>
+
+          <div class="activity-sub">
+            ${escapeHTML(
+              payment.reference ||
+              "No reference"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div class="activity-title">
+            ${escapeHTML(
+              payment.customerName ||
+              "Customer"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <span class="amount-positive">
+            ${money(
+              payment.amount
+            )}
+          </span>
+
+        </td>
+
+
+        <td>
+
+          <span class="badge badge-blue">
+            ${escapeHTML(
+              payment.method ||
+              "Other"
+            )}
+          </span>
+
+        </td>
+
+
+        <td>
+          ${formatDate(
+            payment.date ||
+            payment.createdAt
+          )}
+        </td>
+
+      `;
+
+
+      tbody.appendChild(
+        row
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   PROJECTS
+========================================================= */
+
+function projectStatusBadge(
+  status
+){
+
+  const value =
+    String(
+      status ||
+      ""
+    );
+
+
+  if(
+    value ===
+    "Completed"
+  ){
+
+    return `
+      <span class="badge badge-green">
+        Completed
+      </span>
+    `;
+
+  }
+
+
+  if(
+    value ===
+    "On Hold" ||
+    value ===
+    "Cancelled"
+  ){
+
+    return `
+      <span class="badge badge-red">
+        ${escapeHTML(
+          value
+        )}
+      </span>
+    `;
+
+  }
+
+
+  return `
+    <span class="badge badge-blue">
+      ${escapeHTML(
+        value ||
+        "In Progress"
+      )}
+    </span>
+  `;
+
+}
+
+
+function renderProjects(){
+
+  const tbody =
+    $("projectTable");
+
+  const empty =
+    $("projectEmpty");
+
+
+  const list =
+    getProjects()
+      .slice()
+      .sort(
+        (
+          a,
+          b
+        ) =>
+          String(
+            b.createdAt ||
+            ""
+          ).localeCompare(
+            String(
+              a.createdAt ||
+              ""
+            )
+          )
+      )
+      .slice(
+        0,
+        6
+      );
+
+
+  tbody.innerHTML =
+    "";
+
+
+  if(!list.length){
+
+    empty.style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  empty.style.display =
+    "none";
+
+
+  list.forEach(
+    project => {
+
+      const progress =
+        Math.min(
+          100,
+          Math.max(
+            0,
+            Number(
+              project.progress ||
+              0
+            )
+          )
+        );
+
+
+      const row =
+        document.createElement(
+          "tr"
+        );
+
+
+      row.innerHTML = `
+
+        <td>
+
+          <div class="activity-title">
+            ${escapeHTML(
+              project.name ||
+              "Project"
+            )}
+          </div>
+
+          <div class="activity-sub">
+            ${escapeHTML(
+              project.customerName ||
+              "No customer"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div class="progress-wrap">
+
+            <div class="progress-top">
+
+              <span>
+                Progress
+              </span>
+
+              <strong>
+                ${progress}%
+              </strong>
+
+            </div>
+
+            <div class="progress-bar">
+
+              <div
+                class="progress-fill"
+                style="width:${progress}%"
+              ></div>
+
+            </div>
+
+          </div>
+
+        </td>
+
+
+        <td>
+          ${formatDate(
+            project.deadline
+          )}
+        </td>
+
+
+        <td>
+          ${projectStatusBadge(
+            project.status
+          )}
+        </td>
+
+      `;
+
+
+      tbody.appendChild(
+        row
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   TASKS
+========================================================= */
+
+function taskStatusBadge(
+  status
+){
+
+  if(
+    status ===
+    "Completed"
+  ){
+
+    return `
+      <span class="badge badge-green">
+        Completed
+      </span>
+    `;
+
+  }
+
+
+  if(
+    status ===
+    "On Hold" ||
+    status ===
+    "Cancelled"
+  ){
+
+    return `
+      <span class="badge badge-red">
+        ${escapeHTML(
+          status
+        )}
+      </span>
+    `;
+
+  }
+
+
+  if(
+    status ===
+    "Review"
+  ){
+
+    return `
+      <span class="badge badge-yellow">
+        Review
+      </span>
+    `;
+
+  }
+
+
+  return `
+    <span class="badge badge-blue">
+      ${escapeHTML(
+        status ||
+        "Todo"
+      )}
+    </span>
+  `;
+
+}
+
+
+function renderTasks(){
+
+  const tbody =
+    $("taskTable");
+
+  const empty =
+    $("taskEmpty");
+
+
+  const list =
+    getTasks()
+      .slice()
+      .sort(
+        (
+          a,
+          b
+        ) =>
+          String(
+            b.createdAt ||
+            ""
+          ).localeCompare(
+            String(
+              a.createdAt ||
+              ""
+            )
+          )
+      )
+      .slice(
+        0,
+        6
+      );
+
+
+  tbody.innerHTML =
+    "";
+
+
+  if(!list.length){
+
+    empty.style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  empty.style.display =
+    "none";
+
+
+  list.forEach(
+    task => {
+
+      const progress =
+        Math.min(
+          100,
+          Math.max(
+            0,
+            Number(
+              task.progress ||
+              0
+            )
+          )
+        );
+
+
+      const row =
+        document.createElement(
+          "tr"
+        );
+
+
+      row.innerHTML = `
+
+        <td>
+
+          <div class="activity-title">
+            ${escapeHTML(
+              task.name ||
+              "Task"
+            )}
+          </div>
+
+          <div class="activity-sub">
+            ${escapeHTML(
+              task.projectName ||
+              "No project"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+          ${escapeHTML(
+            task.assignedTo ||
+            "Unassigned"
+          )}
+        </td>
+
+
+        <td>
+
+          <div class="progress-wrap">
+
+            <div class="progress-top">
+
+              <span>
+                Progress
+              </span>
+
+              <strong>
+                ${progress}%
+              </strong>
+
+            </div>
+
+            <div class="progress-bar">
+
+              <div
+                class="progress-fill"
+                style="width:${progress}%"
+              ></div>
+
+            </div>
+
+          </div>
+
+        </td>
+
+
+        <td>
+          ${taskStatusBadge(
+            task.status
+          )}
+        </td>
+
+      `;
+
+
+      tbody.appendChild(
+        row
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   QUICK NAVIGATION
+========================================================= */
+
+function buildURL(
+  page,
+  extra = ""
+){
+
+  const separator =
+    page.includes("?")
+      ? "&"
+      : "?";
+
+
+  if(!currentBusiness){
+
+    return page;
+
+  }
+
+
+  return (
+    page +
+    separator +
+    "business=" +
+    encodeURIComponent(
+      currentBusiness.id
+    ) +
+    (
+      extra
+        ? "&" + extra
+        : ""
+    )
+  );
+
+}
+
+
+function go(
+  page
+){
+
+  if(
+    page.includes("&new=1")
+  ){
+
+    const base =
+      page.replace(
+        "&new=1",
+        ""
+      );
+
+
+    window.location.href =
+      buildURL(
+        base,
+        "new=1"
+      );
+
+    return;
+
+  }
+
+
+  window.location.href =
+    buildURL(
+      page
+    );
+
+}
+
+
+function goBusinesses(){
+
+  window.location.href =
+    "businesses.html";
+
+}
+
+
+/* =========================================================
+   EDIT BUSINESS
+========================================================= */
+
+function openEditBusiness(){
+
+  if(!currentBusiness){
+    return;
+  }
+
+
+  $("editName")
+    .value =
+      currentBusiness.name ||
+      "";
+
+
+  $("editCategory")
+    .value =
+      currentBusiness.category ||
+      "other";
+
+
+  $("editStatus")
+    .value =
+      currentBusiness.status ||
+      "active";
+
+
+  $("editTarget")
+    .value =
+      currentBusiness.target ||
+      0;
+
+
+  $("editDescription")
+    .value =
+      currentBusiness.description ||
+      "";
+
+
+  $("editModal")
+    .classList.add(
+      "show"
+    );
+
+}
+
+
+function closeModal(){
+
+  $("editModal")
+    .classList.remove(
+      "show"
+    );
+
+}
+
+
+/* =========================================================
+   SAVE BUSINESS
+========================================================= */
+
+$("businessForm")
+  .addEventListener(
+    "submit",
+    event => {
+
+      event.preventDefault();
+
+
+      if(!currentBusiness){
+        return;
+      }
+
+
+      const index =
+        businesses.findIndex(
+          business =>
+            business.id ===
+            currentBusiness.id
+        );
+
+
+      if(index === -1){
+        return;
+      }
+
+
+      businesses[index] = {
+
+        ...businesses[index],
+
+        name:
+          $("editName")
+            .value
+            .trim(),
+
+        category:
+          $("editCategory")
+            .value,
+
+        status:
+          $("editStatus")
+            .value,
+
+        target:
+          Number(
+            $("editTarget")
+              .value
+          ) || 0,
+
+        description:
+          $("editDescription")
+            .value
+            .trim(),
+
+        updatedAt:
+          new Date()
+            .toISOString()
+
+      };
+
+
+      currentBusiness =
+        businesses[index];
+
+
+      saveStorage(
+        BUSINESS_KEY,
+        businesses
+      );
+
+
+      closeModal();
+
+      renderAll();
+
+      showToast(
+        "Business updated successfully."
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   NEW CUSTOMER
+========================================================= */
+
+function openQuickCustomer(){
+
+  go(
+    "customers.html&new=1"
+  );
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshDashboard(){
+
+  loadAllData();
+
+  resolveBusiness();
+
+  renderAll();
+
+  showToast(
+    "Business dashboard refreshed."
+  );
+
+}
+
 
 /* =========================================================
    TOAST
@@ -2473,59 +5122,114 @@ function escapeHTML(value){
 
 let toastTimer;
 
-function showToast(message){
+
+function showToast(
+  message
+){
 
   const toast =
-    document.getElementById(
-      "toast"
-    );
+    $("toast");
 
-  toast.textContent =
-    message;
+
+  $("toastText")
+    .textContent =
+      message;
+
 
   toast.classList.add(
     "show"
   );
 
+
   clearTimeout(
     toastTimer
   );
 
+
   toastTimer =
     setTimeout(
-      ()=>{
+      () => {
+
         toast.classList.remove(
           "show"
         );
+
       },
-      2600
+      2800
     );
 
 }
 
+
 /* =========================================================
-   OUTSIDE CLICK
+   MOBILE
 ========================================================= */
+
+$("mobileMenu")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("sidebar")
+        .classList.toggle(
+          "open"
+        );
+
+    }
+  );
+
 
 document.addEventListener(
   "click",
-  event=>{
-
-    const overlay =
-      document.getElementById(
-        "editOverlay"
-      );
+  event => {
 
     if(
-      event.target === overlay
+      window.innerWidth <= 850 &&
+      $("sidebar")
+        .classList
+        .contains("open") &&
+      !$("sidebar")
+        .contains(
+          event.target
+        ) &&
+      !$("mobileMenu")
+        .contains(
+          event.target
+        )
     ){
 
-      closeEdit();
+      $("sidebar")
+        .classList.remove(
+          "open"
+        );
 
     }
 
   }
 );
+
+
+/* =========================================================
+   MODAL OUTSIDE CLICK
+========================================================= */
+
+$("editModal")
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target ===
+        $("editModal")
+      ){
+
+        closeModal();
+
+      }
+
+    }
+  );
+
 
 /* =========================================================
    ESC
@@ -2533,16 +5237,71 @@ document.addEventListener(
 
 document.addEventListener(
   "keydown",
-  event=>{
+  event => {
 
-    if(event.key === "Escape"){
+    if(
+      event.key ===
+      "Escape"
+    ){
 
-      closeEdit();
+      closeModal();
 
     }
 
   }
 );
+
+
+/* =========================================================
+   RENDER ALL
+========================================================= */
+
+function renderAll(){
+
+  if(!currentBusiness){
+
+    $("businessName")
+      .textContent =
+        "No Business Found";
+
+    return;
+
+  }
+
+
+  renderHero();
+
+  renderKPIs();
+
+  renderModules();
+
+  renderChart();
+
+  renderPayments();
+
+  renderProjects();
+
+  renderTasks();
+
+}
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+function init(){
+
+  loadAllData();
+
+  resolveBusiness();
+
+  renderAll();
+
+}
+
+
+init();
 
 </script>
 
