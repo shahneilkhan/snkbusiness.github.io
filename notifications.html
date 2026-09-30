@@ -1,0 +1,4073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Notifications | SNK Business</title>
+
+<meta
+  name="description"
+  content="SNK Business premium alerts and notification center."
+>
+
+<style>
+:root{
+  --bg:#070b12;
+  --panel:#101722;
+  --panel2:#151e2c;
+  --panel3:#1a2535;
+  --line:#253247;
+  --line2:#304057;
+
+  --text:#f5f7fb;
+  --muted:#8e9aae;
+  --muted2:#657187;
+
+  --blue:#4f8cff;
+  --cyan:#28d7ff;
+  --green:#22c983;
+  --yellow:#f4bd4f;
+  --red:#ff6678;
+  --purple:#9b7cff;
+  --orange:#ff9b5b;
+
+  --shadow:0 20px 60px rgba(0,0,0,.34);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color:var(--text);
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(79,140,255,.09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(40,215,255,.06),
+      transparent 28%
+    ),
+    var(--bg);
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+  position:fixed;
+
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:270px;
+
+  padding:22px 16px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16,23,34,.98),
+      rgba(8,13,21,.98)
+    );
+
+  border-right:1px solid var(--line);
+
+  z-index:1000;
+
+  overflow-y:auto;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:
+    6px 10px 24px;
+}
+
+.brand-logo{
+  width:42px;
+  height:42px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--cyan)
+    );
+
+  font-size:12px;
+  font-weight:950;
+
+  box-shadow:
+    0 10px 30px
+    rgba(79,140,255,.25);
+}
+
+.brand-title{
+  font-size:17px;
+  font-weight:900;
+}
+
+.brand-subtitle{
+  margin-top:2px;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+.nav-title{
+  padding:
+    12px 11px 8px;
+
+  color:var(--muted2);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.2px;
+}
+
+.nav{
+  display:grid;
+  gap:5px;
+}
+
+.nav a{
+  min-height:43px;
+
+  display:flex;
+  align-items:center;
+  gap:11px;
+
+  padding:0 12px;
+
+  color:#aeb8c8;
+
+  border:1px solid transparent;
+
+  border-radius:12px;
+
+  transition:.2s ease;
+}
+
+.nav a:hover{
+  color:#fff;
+
+  background:#131c2a;
+
+  border-color:#26354b;
+
+  transform:translateX(2px);
+}
+
+.nav a.active{
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.18),
+      rgba(40,215,255,.06)
+    );
+
+  border-color:
+    rgba(79,140,255,.28);
+
+  box-shadow:
+    inset 3px 0 0
+    var(--blue);
+}
+
+.nav-icon{
+  width:22px;
+
+  text-align:center;
+}
+
+.nav-label{
+  font-size:13px;
+  font-weight:750;
+}
+
+.notification-count{
+  margin-left:auto;
+
+  min-width:21px;
+  height:21px;
+
+  padding:0 6px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:999px;
+
+  color:#fff;
+
+  background:
+    var(--red);
+
+  font-size:9px;
+  font-weight:950;
+}
+
+.admin-card{
+  margin-top:22px;
+
+  padding:16px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.12),
+      rgba(155,124,255,.07)
+    );
+
+  border:1px solid #273752;
+}
+
+.admin-card .mini{
+  color:#6da5ff;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+}
+
+.admin-card strong{
+  display:block;
+
+  margin-top:7px;
+
+  font-size:14px;
+}
+
+.admin-card span{
+  display:block;
+
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+  min-height:100vh;
+
+  margin-left:270px;
+}
+
+.topbar{
+  height:76px;
+
+  position:sticky;
+
+  top:0;
+
+  z-index:500;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:20px;
+
+  padding:0 30px;
+
+  background:
+    rgba(7,11,18,.76);
+
+  border-bottom:1px solid var(--line);
+
+  backdrop-filter:blur(18px);
+}
+
+.top-left{
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+}
+
+.mobile-menu{
+  display:none;
+
+  width:40px;
+  height:40px;
+
+  border:1px solid var(--line);
+
+  border-radius:11px;
+
+  background:var(--panel);
+
+  color:#fff;
+}
+
+.page-location{
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+.page-location strong{
+  color:#fff;
+
+  font-size:13px;
+}
+
+.top-actions{
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+}
+
+.icon-btn,
+.avatar-btn{
+  min-width:40px;
+  height:40px;
+
+  border:1px solid var(--line);
+
+  border-radius:11px;
+
+  background:var(--panel);
+
+  color:#dce4f0;
+}
+
+.icon-btn{
+  position:relative;
+}
+
+.icon-btn:hover,
+.avatar-btn:hover{
+  background:var(--panel2);
+
+  border-color:#3a4c68;
+}
+
+.bell-count{
+  position:absolute;
+
+  right:-4px;
+  top:-5px;
+
+  min-width:18px;
+  height:18px;
+
+  padding:0 4px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:99px;
+
+  background:var(--red);
+
+  color:#fff;
+
+  font-size:8px;
+
+  font-weight:950;
+
+  border:2px solid var(--bg);
+}
+
+.avatar-btn{
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  padding:0 10px;
+
+  font-weight:800;
+}
+
+.avatar{
+  width:25px;
+  height:25px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--purple)
+    );
+
+  font-size:10px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+  width:100%;
+
+  max-width:1500px;
+
+  margin:auto;
+
+  padding:30px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+  padding:25px;
+
+  margin-bottom:20px;
+
+  border-radius:22px;
+
+  border:1px solid #2b3b55;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.14),
+      rgba(40,215,255,.04),
+      rgba(16,23,34,.98)
+    );
+
+  overflow:hidden;
+
+  position:relative;
+}
+
+.hero::after{
+  content:"";
+
+  position:absolute;
+
+  width:260px;
+  height:260px;
+
+  right:-100px;
+  top:-120px;
+
+  border-radius:50%;
+
+  background:
+    rgba(79,140,255,.08);
+}
+
+.hero-content{
+  position:relative;
+
+  z-index:2;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:20px;
+}
+
+.hero-icon{
+  width:58px;
+  height:58px;
+
+  display:grid;
+  place-items:center;
+
+  flex-shrink:0;
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--cyan)
+    );
+
+  font-size:26px;
+
+  box-shadow:
+    0 15px 35px
+    rgba(79,140,255,.22);
+}
+
+.hero-left{
+  display:flex;
+
+  align-items:center;
+
+  gap:15px;
+}
+
+.hero h1{
+  font-size:30px;
+
+  font-weight:950;
+
+  letter-spacing:-1px;
+}
+
+.hero p{
+  margin-top:5px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+.hero-actions{
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.btn{
+  min-height:41px;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:7px;
+
+  padding:0 14px;
+
+  border:1px solid var(--line);
+
+  border-radius:10px;
+
+  background:var(--panel2);
+
+  color:#e7edf6;
+
+  font-size:11px;
+
+  font-weight:850;
+
+  transition:.2s ease;
+}
+
+.btn:hover{
+  border-color:#40536f;
+
+  transform:translateY(-1px);
+}
+
+.btn-primary{
+  border-color:transparent;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      #3974e8
+    );
+
+  box-shadow:
+    0 10px 25px
+    rgba(79,140,255,.18);
+}
+
+.btn-danger{
+  color:#ff9aa6;
+}
+
+.btn-success{
+  color:#63dfa5;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+
+  gap:12px;
+
+  margin-bottom:20px;
+}
+
+.stat{
+  padding:18px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:1px solid var(--line);
+}
+
+.stat-top{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+}
+
+.stat-icon{
+  width:36px;
+  height:36px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:10px;
+
+  background:#172337;
+}
+
+.stat-label{
+  margin-top:12px;
+
+  color:var(--muted);
+
+  font-size:10px;
+
+  font-weight:750;
+}
+
+.stat-value{
+  margin-top:4px;
+
+  font-size:23px;
+
+  font-weight:950;
+}
+
+.stat-note{
+  margin-top:4px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.filter-panel{
+  margin-bottom:18px;
+
+  padding:15px;
+
+  border-radius:16px;
+
+  background:var(--panel);
+
+  border:1px solid var(--line);
+}
+
+.filters{
+  display:grid;
+
+  grid-template-columns:
+    1.2fr
+    1fr
+    1fr
+    auto
+    auto;
+
+  gap:9px;
+}
+
+.control{
+  width:100%;
+
+  min-height:42px;
+
+  padding:0 11px;
+
+  border-radius:10px;
+
+  border:1px solid var(--line);
+
+  outline:none;
+
+  background:#0b121b;
+
+  color:#e8eef7;
+
+  font-size:11px;
+}
+
+.control:focus{
+  border-color:
+    rgba(79,140,255,.7);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(79,140,255,.08);
+}
+
+
+/* =========================================================
+   ALERT LIST
+========================================================= */
+
+.alert-panel{
+  border-radius:18px;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:1px solid var(--line);
+
+  box-shadow:var(--shadow);
+}
+
+.panel-header{
+  min-height:68px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  padding:15px 20px;
+
+  border-bottom:1px solid var(--line);
+}
+
+.panel-title{
+  font-size:14px;
+
+  font-weight:950;
+}
+
+.panel-subtitle{
+  margin-top:4px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.header-actions{
+  display:flex;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+}
+
+.alert-list{
+  display:grid;
+}
+
+.alert-item{
+  display:grid;
+
+  grid-template-columns:
+    46px
+    minmax(0,1fr)
+    auto;
+
+  align-items:center;
+
+  gap:14px;
+
+  padding:17px 20px;
+
+  border-bottom:1px solid
+    rgba(37,50,71,.72);
+
+  transition:.2s ease;
+}
+
+.alert-item:last-child{
+  border-bottom:0;
+}
+
+.alert-item:hover{
+  background:
+    rgba(79,140,255,.025);
+}
+
+.alert-item.unread{
+  background:
+    linear-gradient(
+      90deg,
+      rgba(79,140,255,.07),
+      transparent
+    );
+}
+
+.alert-icon{
+  width:44px;
+  height:44px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:13px;
+
+  font-size:19px;
+
+  background:#172337;
+
+  border:1px solid #283851;
+}
+
+.alert-icon.danger{
+  background:
+    rgba(255,102,120,.1);
+
+  border-color:
+    rgba(255,102,120,.2);
+}
+
+.alert-icon.warning{
+  background:
+    rgba(244,189,79,.1);
+
+  border-color:
+    rgba(244,189,79,.2);
+}
+
+.alert-icon.info{
+  background:
+    rgba(79,140,255,.1);
+
+  border-color:
+    rgba(79,140,255,.2);
+}
+
+.alert-icon.success{
+  background:
+    rgba(34,201,131,.1);
+
+  border-color:
+    rgba(34,201,131,.2);
+}
+
+.alert-main{
+  min-width:0;
+}
+
+.alert-title{
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  flex-wrap:wrap;
+
+  color:#eef3fa;
+
+  font-size:12px;
+
+  font-weight:900;
+}
+
+.unread-dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:var(--blue);
+}
+
+.alert-description{
+  margin-top:5px;
+
+  color:var(--muted);
+
+  font-size:10px;
+
+  line-height:1.55;
+}
+
+.alert-meta{
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+
+  margin-top:7px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+.alert-actions{
+  display:flex;
+
+  align-items:center;
+
+  gap:6px;
+}
+
+.mini-btn{
+  width:34px;
+  height:34px;
+
+  display:grid;
+
+  place-items:center;
+
+  border:1px solid var(--line);
+
+  border-radius:9px;
+
+  background:#101a27;
+
+  color:#bdc8d8;
+
+  font-size:12px;
+}
+
+.mini-btn:hover{
+  border-color:#40536f;
+}
+
+.type-badge{
+  display:inline-flex;
+
+  align-items:center;
+
+  min-height:22px;
+
+  padding:0 8px;
+
+  border-radius:99px;
+
+  font-size:8px;
+
+  font-weight:950;
+
+  text-transform:uppercase;
+
+  letter-spacing:.6px;
+}
+
+.type-danger{
+  color:#ff8997;
+
+  background:
+    rgba(255,102,120,.1);
+
+  border:1px solid
+    rgba(255,102,120,.18);
+}
+
+.type-warning{
+  color:#f3cb6a;
+
+  background:
+    rgba(244,189,79,.1);
+
+  border:1px solid
+    rgba(244,189,79,.18);
+}
+
+.type-info{
+  color:#80adff;
+
+  background:
+    rgba(79,140,255,.1);
+
+  border:1px solid
+    rgba(79,140,255,.18);
+}
+
+.type-success{
+  color:#63dfa5;
+
+  background:
+    rgba(34,201,131,.1);
+
+  border:1px solid
+    rgba(34,201,131,.18);
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+  padding:65px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+}
+
+.empty-icon{
+  width:62px;
+  height:62px;
+
+  display:grid;
+  place-items:center;
+
+  margin:
+    0 auto 13px;
+
+  border-radius:18px;
+
+  background:#151f2f;
+
+  font-size:25px;
+}
+
+.empty h3{
+  color:#edf2f8;
+
+  font-size:15px;
+}
+
+.empty p{
+  max-width:430px;
+
+  margin:6px auto 0;
+
+  font-size:10px;
+
+  line-height:1.6;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+  position:fixed;
+
+  right:24px;
+  bottom:24px;
+
+  z-index:5000;
+
+  min-width:280px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:14px 16px;
+
+  border-radius:13px;
+
+  background:#121c2b;
+
+  border:1px solid #30415b;
+
+  box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.4);
+
+  transform:translateY(25px);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:.25s ease;
+}
+
+.toast.show{
+  transform:translateY(0);
+
+  opacity:1;
+}
+
+.toast-dot{
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:var(--green);
+}
+
+.toast-text{
+  color:#e8eef7;
+
+  font-size:12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px){
+
+  .stats{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .filters{
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+}
+
+@media(max-width:850px){
+
+  .sidebar{
+    transform:translateX(-100%);
+
+    transition:.25s ease;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .topbar{
+    padding:0 18px;
+  }
+
+  .content{
+    padding:22px 18px;
+  }
+
+  .hero-content{
+    align-items:flex-start;
+
+    flex-direction:column;
+  }
+
+  .alert-item{
+    grid-template-columns:
+      42px
+      minmax(0,1fr);
+  }
+
+  .alert-actions{
+    grid-column:2;
+
+    justify-content:flex-start;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .filters{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:25px;
+  }
+
+  .top-actions .icon-btn{
+    display:none;
+  }
+
+}
+
+@media print{
+
+  body{
+    background:white;
+    color:#111;
+  }
+
+  .sidebar,
+  .topbar,
+  .hero-actions,
+  .filter-panel,
+  .alert-actions,
+  .toast{
+    display:none!important;
+  }
+
+  .main{
+    margin:0;
+  }
+
+  .content{
+    padding:0;
+  }
+
+  .hero,
+  .alert-panel,
+  .stat{
+    box-shadow:none;
+
+    border:1px solid #ddd;
+  }
+
+}
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
+
+<aside
+  class="sidebar"
+  id="sidebar"
+>
+
+  <div class="brand">
+
+    <div class="brand-logo">
+      SN
+    </div>
+
+    <div>
+
+      <div class="brand-title">
+        SNK Business
+      </div>
+
+      <div class="brand-subtitle">
+        Business Management
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="nav-title">
+    Workspace
+  </div>
+
+
+  <nav class="nav">
+
+    <a href="index.html">
+      <span class="nav-icon">⌂</span>
+      <span class="nav-label">Dashboard</span>
+    </a>
+
+    <a href="businesses.html">
+      <span class="nav-icon">▣</span>
+      <span class="nav-label">My Businesses</span>
+    </a>
+
+    <a href="customers.html">
+      <span class="nav-icon">♙</span>
+      <span class="nav-label">Customers</span>
+    </a>
+
+    <a href="payments.html">
+      <span class="nav-icon">৳</span>
+      <span class="nav-label">Payments</span>
+    </a>
+
+    <a href="inventory.html">
+      <span class="nav-icon">▤</span>
+      <span class="nav-label">Inventory</span>
+    </a>
+
+    <a href="invoices.html">
+      <span class="nav-icon">▥</span>
+      <span class="nav-label">Invoices</span>
+    </a>
+
+    <a href="expenses.html">
+      <span class="nav-icon">−</span>
+      <span class="nav-label">Expenses</span>
+    </a>
+
+    <a href="projects.html">
+      <span class="nav-icon">◫</span>
+      <span class="nav-label">Projects</span>
+    </a>
+
+    <a href="digital-marketing.html">
+      <span class="nav-icon">◉</span>
+      <span class="nav-label">Digital Marketing</span>
+    </a>
+
+    <a href="tasks.html">
+      <span class="nav-icon">✓</span>
+      <span class="nav-label">Tasks</span>
+    </a>
+
+    <a href="employees.html">
+      <span class="nav-icon">♟</span>
+      <span class="nav-label">Staff / Team</span>
+    </a>
+
+    <a href="reports.html">
+      <span class="nav-icon">▥</span>
+      <span class="nav-label">Reports</span>
+    </a>
+
+    <a
+      href="notifications.html"
+      class="active"
+    >
+      <span class="nav-icon">🔔</span>
+      <span class="nav-label">
+        Notifications
+      </span>
+
+      <span
+        class="notification-count"
+        id="sidebarCount"
+      >
+        0
+      </span>
+
+    </a>
+
+  </nav>
+
+
+  <div class="admin-card">
+
+    <div class="mini">
+      Premium Business Suite
+    </div>
+
+    <strong>
+      Super Admin
+    </strong>
+
+    <span>
+      Owner • Full Access
+    </span>
+
+  </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="main">
+
+
+<header class="topbar">
+
+  <div class="top-left">
+
+    <button
+      class="mobile-menu"
+      id="mobileMenu"
+      type="button"
+    >
+      ☰
+    </button>
+
+    <div class="page-location">
+      SNK Business
+      <strong>/ Notifications</strong>
+    </div>
+
+  </div>
+
+
+  <div class="top-actions">
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="window.print()"
+      title="Print"
+    >
+      🖨
+    </button>
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="refreshAlerts()"
+      title="Refresh"
+    >
+      ↻
+    </button>
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="markAllRead()"
+      title="Mark all as read"
+    >
+
+      🔔
+
+      <span
+        class="bell-count"
+        id="topCount"
+      >
+        0
+      </span>
+
+    </button>
+
+    <button
+      class="avatar-btn"
+      type="button"
+    >
+
+      <span class="avatar">
+        SA
+      </span>
+
+      Admin
+
+    </button>
+
+  </div>
+
+</header>
+
+
+<section class="content">
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="hero-left">
+
+      <div class="hero-icon">
+        🔔
+      </div>
+
+      <div>
+
+        <h1>
+          Notification Center
+        </h1>
+
+        <p>
+          Monitor overdue payments, customer dues,
+          invoices, projects and tasks from one place.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="hero-actions">
+
+      <button
+        class="btn"
+        onclick="markAllRead()"
+      >
+        ✓ Mark All Read
+      </button>
+
+      <button
+        class="btn btn-danger"
+        onclick="clearReadAlerts()"
+      >
+        Clear Read
+      </button>
+
+      <button
+        class="btn btn-primary"
+        onclick="refreshAlerts()"
+      >
+        ↻ Refresh Alerts
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     STATS
+====================================================== -->
+
+<section class="stats">
+
+
+  <div class="stat">
+
+    <div class="stat-top">
+
+      <div class="stat-icon">
+        🔴
+      </div>
+
+    </div>
+
+    <div class="stat-label">
+      Critical Alerts
+    </div>
+
+    <div
+      class="stat-value"
+      id="criticalCount"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      Immediate attention
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-top">
+
+      <div class="stat-icon">
+        🟡
+      </div>
+
+    </div>
+
+    <div class="stat-label">
+      Warnings
+    </div>
+
+    <div
+      class="stat-value"
+      id="warningCount"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      Needs attention
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-top">
+
+      <div class="stat-icon">
+        🔵
+      </div>
+
+    </div>
+
+    <div class="stat-label">
+      Information
+    </div>
+
+    <div
+      class="stat-value"
+      id="infoCount"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      Business updates
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-top">
+
+      <div class="stat-icon">
+        👁
+      </div>
+
+    </div>
+
+    <div class="stat-label">
+      Unread
+    </div>
+
+    <div
+      class="stat-value"
+      id="unreadCount"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      Notifications not viewed
+    </div>
+
+  </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     FILTER
+====================================================== -->
+
+<section class="filter-panel">
+
+  <div class="filters">
+
+    <input
+      id="searchInput"
+      class="control"
+      type="search"
+      placeholder="Search alerts, customer, invoice, project..."
+    >
+
+
+    <select
+      id="businessFilter"
+      class="control"
+    >
+
+      <option value="">
+        All Businesses
+      </option>
+
+    </select>
+
+
+    <select
+      id="typeFilter"
+      class="control"
+    >
+
+      <option value="">
+        All Alert Types
+      </option>
+
+      <option value="danger">
+        Critical
+      </option>
+
+      <option value="warning">
+        Warning
+      </option>
+
+      <option value="info">
+        Information
+      </option>
+
+      <option value="success">
+        Success
+      </option>
+
+    </select>
+
+
+    <button
+      class="btn"
+      onclick="resetFilters()"
+    >
+      Reset
+    </button>
+
+
+    <button
+      class="btn btn-primary"
+      onclick="renderAlerts()"
+    >
+      Apply
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     ALERT PANEL
+====================================================== -->
+
+<section class="alert-panel">
+
+  <div class="panel-header">
+
+    <div>
+
+      <div class="panel-title">
+        Business Alerts
+      </div>
+
+      <div
+        class="panel-subtitle"
+        id="resultText"
+      >
+        0 notifications
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <button
+        class="btn btn-success"
+        onclick="markAllRead()"
+      >
+        ✓ Mark All Read
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="alert-list"
+    id="alertList"
+  ></div>
+
+
+  <div
+    class="empty"
+    id="emptyState"
+    style="display:none;"
+  >
+
+    <div class="empty-icon">
+      ✓
+    </div>
+
+    <h3>
+      Everything looks clear
+    </h3>
+
+    <p>
+      No alerts match your current filters.
+      New alerts will appear automatically when
+      business data requires attention.
+    </p>
+
+  </div>
+
+</section>
+
+
+</section>
+
+</main>
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+  class="toast"
+  id="toast"
+>
+
+  <span class="toast-dot"></span>
+
+  <span
+    class="toast-text"
+    id="toastText"
+  >
+    Done.
+  </span>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   SNK BUSINESS
+   STEP 3.12 — NOTIFICATION CENTER
+========================================================= */
+
+const BUSINESS_KEY =
+  "snkBusinesses";
+
+const CUSTOMER_KEY =
+  "snkBusinessCustomers";
+
+const PAYMENT_KEY =
+  "snkBusinessPayments";
+
+const INVOICE_KEY =
+  "snkBusinessInvoices";
+
+const EXPENSE_KEY =
+  "snkBusinessExpenses";
+
+const PROJECT_KEY =
+  "snkBusinessProjects";
+
+const TASK_KEY =
+  "snkBusinessTasks";
+
+const EMPLOYEE_KEY =
+  "snkBusinessEmployees";
+
+const NOTIFICATION_KEY =
+  "snkBusinessNotifications";
+
+
+let businesses = [];
+let customers = [];
+let payments = [];
+let invoices = [];
+let expenses = [];
+let projects = [];
+let tasks = [];
+let employees = [];
+let notifications = [];
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function $(id){
+  return document.getElementById(id);
+}
+
+
+function readStorage(key){
+
+  try{
+
+    const data =
+      JSON.parse(
+        localStorage.getItem(key)
+      );
+
+    return Array.isArray(data)
+      ? data
+      : [];
+
+  }catch(error){
+
+    return [];
+
+  }
+
+}
+
+
+function saveStorage(
+  key,
+  data
+){
+
+  localStorage.setItem(
+    key,
+    JSON.stringify(data)
+  );
+
+}
+
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
+
+}
+
+
+function money(value){
+
+  return "৳" +
+    (
+      Number(value) || 0
+    ).toLocaleString(
+      "en-BD"
+    );
+
+}
+
+
+function formatDate(value){
+
+  if(!value){
+    return "—";
+  }
+
+  const date =
+    new Date(value);
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+
+    return value;
+
+  }
+
+  return date.toLocaleDateString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+function dateTime(value){
+
+  if(!value){
+    return "";
+  }
+
+  const date =
+    new Date(value);
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+
+    return "";
+
+  }
+
+  return date.toLocaleString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+
+}
+
+
+function today(){
+
+  const d =
+    new Date();
+
+  d.setHours(
+    0,
+    0,
+    0,
+    0
+  );
+
+  return d;
+
+}
+
+
+function isPast(
+  value
+){
+
+  if(!value){
+    return false;
+  }
+
+  const date =
+    new Date(value);
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+
+    return false;
+
+  }
+
+  date.setHours(
+    23,
+    59,
+    59,
+    999
+  );
+
+  return date < new Date();
+
+}
+
+
+/* =========================================================
+   LOAD DATA
+========================================================= */
+
+function loadData(){
+
+  businesses =
+    readStorage(
+      BUSINESS_KEY
+    );
+
+  customers =
+    readStorage(
+      CUSTOMER_KEY
+    );
+
+  payments =
+    readStorage(
+      PAYMENT_KEY
+    );
+
+  invoices =
+    readStorage(
+      INVOICE_KEY
+    );
+
+  expenses =
+    readStorage(
+      EXPENSE_KEY
+    );
+
+  projects =
+    readStorage(
+      PROJECT_KEY
+    );
+
+  tasks =
+    readStorage(
+      TASK_KEY
+    );
+
+  employees =
+    readStorage(
+      EMPLOYEE_KEY
+    );
+
+  notifications =
+    readStorage(
+      NOTIFICATION_KEY
+    );
+
+}
+
+
+/* =========================================================
+   BUSINESS HELPERS
+========================================================= */
+
+function businessName(
+  item
+){
+
+  if(
+    item.businessName
+  ){
+
+    return item.businessName;
+
+  }
+
+
+  const business =
+    businesses.find(
+      b =>
+        (
+          item.businessId &&
+          b.id ===
+          item.businessId
+        ) ||
+        (
+          item.businessSlug &&
+          b.slug ===
+          item.businessSlug
+        )
+    );
+
+
+  return (
+    business?.name ||
+    "Unknown Business"
+  );
+
+}
+
+
+function businessId(
+  item
+){
+
+  if(
+    item.businessId
+  ){
+
+    return item.businessId;
+
+  }
+
+
+  const business =
+    businesses.find(
+      b =>
+        (
+          item.businessSlug &&
+          b.slug ===
+          item.businessSlug
+        ) ||
+        (
+          item.businessName &&
+          String(
+            b.name
+          ).toLowerCase() ===
+          String(
+            item.businessName
+          ).toLowerCase()
+        )
+    );
+
+
+  return (
+    business?.id ||
+    ""
+  );
+
+}
+
+
+/* =========================================================
+   CREATE ALERT
+========================================================= */
+
+function makeAlert({
+
+  id,
+
+  type,
+
+  title,
+
+  description,
+
+  businessIdValue,
+
+  businessNameValue,
+
+  sourceType,
+
+  sourceId,
+
+  amount,
+
+  date,
+
+  actionPage,
+
+  actionParams
+
+}){
+
+  return {
+
+    id,
+
+    type,
+
+    title,
+
+    description,
+
+    businessId:
+      businessIdValue || "",
+
+    businessName:
+      businessNameValue || "",
+
+    sourceType:
+      sourceType || "",
+
+    sourceId:
+      sourceId || "",
+
+    amount:
+      Number(amount || 0),
+
+    date:
+      date || "",
+
+    actionPage:
+      actionPage || "",
+
+    actionParams:
+      actionParams || "",
+
+    read:false,
+
+    createdAt:
+      new Date().toISOString()
+
+  };
+
+}
+
+
+/* =========================================================
+   ALERT GENERATION
+========================================================= */
+
+function generateAlerts(){
+
+  const generated = [];
+
+
+  /* -------------------------------------------------------
+     CUSTOMER DUES
+  ------------------------------------------------------- */
+
+  customers.forEach(
+    customer => {
+
+      const total =
+        Number(
+          customer.total ||
+          customer.totalValue ||
+          0
+        );
+
+      const paid =
+        Number(
+          customer.paid ||
+          0
+        );
+
+      const due =
+        Math.max(
+          total - paid,
+          0
+        );
+
+
+      if(
+        due <= 0
+      ){
+
+        return;
+
+      }
+
+
+      const bid =
+        businessId(
+          customer
+        );
+
+
+      const bname =
+        businessName(
+          customer
+        );
+
+
+      let type =
+        "warning";
+
+
+      if(
+        String(
+          customer.status ||
+          ""
+        ).toLowerCase() ===
+        "overdue"
+      ){
+
+        type =
+          "danger";
+
+      }
+
+
+      generated.push(
+        makeAlert({
+
+          id:
+            "CUSTOMER-DUE-" +
+            (
+              customer.id ||
+              Math.random()
+            ),
+
+          type,
+
+          title:
+            "Customer payment due",
+
+          description:
+            `${customer.name || "Customer"} has an outstanding balance of ${money(due)}.`,
+
+          businessIdValue:
+            bid,
+
+          businessNameValue:
+            bname,
+
+          sourceType:
+            "customer",
+
+          sourceId:
+            customer.id,
+
+          amount:
+            due,
+
+          date:
+            customer.updatedAt ||
+            customer.createdAt,
+
+          actionPage:
+            "customers.html",
+
+          actionParams:
+            "customer=" +
+            encodeURIComponent(
+              customer.id || ""
+            )
+
+        })
+      );
+
+    }
+  );
+
+
+  /* -------------------------------------------------------
+     INVOICES
+  ------------------------------------------------------- */
+
+  invoices.forEach(
+    invoice => {
+
+      const total =
+        Number(
+          invoice.total ||
+          0
+        );
+
+      const paid =
+        Number(
+          invoice.paid ||
+          0
+        );
+
+      const due =
+        Math.max(
+          total - paid,
+          0
+        );
+
+
+      if(
+        due <= 0
+      ){
+
+        return;
+
+      }
+
+
+      const overdue =
+        isPast(
+          invoice.dueDate
+        );
+
+
+      generated.push(
+        makeAlert({
+
+          id:
+            "INVOICE-DUE-" +
+            (
+              invoice.id ||
+              Math.random()
+            ),
+
+          type:
+            overdue
+              ? "danger"
+              : "warning",
+
+          title:
+            overdue
+              ? "Invoice overdue"
+              : "Invoice payment pending",
+
+          description:
+            `${invoice.id || "Invoice"} for ${invoice.customerName || "Customer"} has ${money(due)} remaining.`,
+
+          businessIdValue:
+            businessId(
+              invoice
+            ),
+
+          businessNameValue:
+            businessName(
+              invoice
+            ),
+
+          sourceType:
+            "invoice",
+
+          sourceId:
+            invoice.id,
+
+          amount:
+            due,
+
+          date:
+            invoice.dueDate ||
+            invoice.date,
+
+          actionPage:
+            "invoices.html",
+
+          actionParams:
+            "invoice=" +
+            encodeURIComponent(
+              invoice.id || ""
+            )
+
+        })
+      );
+
+    }
+  );
+
+
+  /* -------------------------------------------------------
+     PROJECT DEADLINES
+  ------------------------------------------------------- */
+
+  projects.forEach(
+    project => {
+
+      if(
+        !project.deadline
+      ){
+
+        return;
+
+      }
+
+
+      if(
+        project.status ===
+          "Completed" ||
+        project.status ===
+          "Cancelled"
+      ){
+
+        return;
+
+      }
+
+
+      if(
+        !isPast(
+          project.deadline
+        )
+      ){
+
+        return;
+
+      }
+
+
+      generated.push(
+        makeAlert({
+
+          id:
+            "PROJECT-OVERDUE-" +
+            (
+              project.id ||
+              Math.random()
+            ),
+
+          type:
+            "danger",
+
+          title:
+            "Project deadline overdue",
+
+          description:
+            `${project.name || "Project"} passed its deadline on ${formatDate(project.deadline)}.`,
+
+          businessIdValue:
+            businessId(
+              project
+            ),
+
+          businessNameValue:
+            businessName(
+              project
+            ),
+
+          sourceType:
+            "project",
+
+          sourceId:
+            project.id,
+
+          date:
+            project.deadline,
+
+          actionPage:
+            "projects.html",
+
+          actionParams:
+            "business=" +
+            encodeURIComponent(
+              businessId(
+                project
+              )
+            )
+
+        })
+      );
+
+    }
+  );
+
+
+  /* -------------------------------------------------------
+     TASK DEADLINES
+  ------------------------------------------------------- */
+
+  tasks.forEach(
+    task => {
+
+      if(
+        !task.deadline
+      ){
+
+        return;
+
+      }
+
+
+      if(
+        task.status ===
+          "Completed" ||
+        task.status ===
+          "Cancelled"
+      ){
+
+        return;
+
+      }
+
+
+      if(
+        !isPast(
+          task.deadline
+        )
+      ){
+
+        return;
+
+      }
+
+
+      generated.push(
+        makeAlert({
+
+          id:
+            "TASK-OVERDUE-" +
+            (
+              task.id ||
+              Math.random()
+            ),
+
+          type:
+            "danger",
+
+          title:
+            "Task deadline overdue",
+
+          description:
+            `${task.name || "Task"} assigned to ${task.assignedTo || "team member"} is overdue.`,
+
+          businessIdValue:
+            businessId(
+              task
+            ),
+
+          businessNameValue:
+            businessName(
+              task
+            ),
+
+          sourceType:
+            "task",
+
+          sourceId:
+            task.id,
+
+          date:
+            task.deadline,
+
+          actionPage:
+            "tasks.html",
+
+          actionParams:
+            "business=" +
+            encodeURIComponent(
+              businessId(
+                task
+              )
+            )
+
+        })
+      );
+
+    }
+  );
+
+
+  /* -------------------------------------------------------
+     LOW PROJECT PROGRESS
+  ------------------------------------------------------- */
+
+  projects.forEach(
+    project => {
+
+      if(
+        project.status ===
+        "Completed"
+      ){
+
+        return;
+
+      }
+
+
+      if(
+        !project.deadline
+      ){
+
+        return;
+
+      }
+
+
+      const deadline =
+        new Date(
+          project.deadline
+        );
+
+      const now =
+        new Date();
+
+
+      if(
+        Number.isNaN(
+          deadline.getTime()
+        )
+      ){
+
+        return;
+
+      }
+
+
+      const daysLeft =
+        Math.ceil(
+          (
+            deadline -
+            now
+          ) /
+          86400000
+        );
+
+
+      const progress =
+        Number(
+          project.progress ||
+          0
+        );
+
+
+      if(
+        daysLeft >= 0 &&
+        daysLeft <= 3 &&
+        progress < 70
+      ){
+
+        generated.push(
+          makeAlert({
+
+            id:
+              "PROJECT-RISK-" +
+              (
+                project.id ||
+                Math.random()
+              ),
+
+            type:
+              "warning",
+
+            title:
+              "Project deadline approaching",
+
+            description:
+              `${project.name || "Project"} is ${progress}% complete with ${daysLeft} day(s) remaining.`,
+
+            businessIdValue:
+              businessId(
+                project
+              ),
+
+            businessNameValue:
+              businessName(
+                project
+              ),
+
+            sourceType:
+              "project",
+
+            sourceId:
+              project.id,
+
+            date:
+              project.deadline,
+
+            actionPage:
+              "projects.html",
+
+            actionParams:
+              "business=" +
+              encodeURIComponent(
+                businessId(
+                  project
+                )
+              )
+
+          })
+        );
+
+      }
+
+    }
+  );
+
+
+  /* -------------------------------------------------------
+     UNASSIGNED TASKS
+  ------------------------------------------------------- */
+
+  tasks.forEach(
+    task => {
+
+      if(
+        task.status ===
+        "Completed"
+      ){
+
+        return;
+
+      }
+
+
+      if(
+        String(
+          task.assignedTo ||
+          ""
+        ).trim()
+      ){
+
+        return;
+
+      }
+
+
+      generated.push(
+        makeAlert({
+
+          id:
+            "TASK-UNASSIGNED-" +
+            (
+              task.id ||
+              Math.random()
+            ),
+
+          type:
+            "info",
+
+          title:
+            "Task needs assignment",
+
+          description:
+            `${task.name || "Task"} has no team member assigned.`,
+
+          businessIdValue:
+            businessId(
+              task
+            ),
+
+          businessNameValue:
+            businessName(
+              task
+            ),
+
+          sourceType:
+            "task",
+
+          sourceId:
+            task.id,
+
+          date:
+            task.createdAt,
+
+          actionPage:
+            "tasks.html",
+
+          actionParams:
+            "business=" +
+            encodeURIComponent(
+              businessId(
+                task
+              )
+            )
+
+        })
+      );
+
+    }
+  );
+
+
+  /* -------------------------------------------------------
+     ACTIVE BUSINESS WITHOUT CUSTOMERS
+  ------------------------------------------------------- */
+
+  businesses.forEach(
+    business => {
+
+      if(
+        business.status ===
+        "inactive"
+      ){
+
+        return;
+
+      }
+
+
+      const hasCustomers =
+        customers.some(
+          customer =>
+            businessId(
+              customer
+            ) ===
+            business.id
+        );
+
+
+      if(
+        hasCustomers
+      ){
+
+        return;
+
+      }
+
+
+      generated.push(
+        makeAlert({
+
+          id:
+            "BUSINESS-NO-CUSTOMER-" +
+            business.id,
+
+          type:
+            "info",
+
+          title:
+            "Business has no customers",
+
+          description:
+            `${business.name || "Business"} is active but has no linked customers yet.`,
+
+          businessIdValue:
+            business.id,
+
+          businessNameValue:
+            business.name,
+
+          sourceType:
+            "business",
+
+          sourceId:
+            business.id,
+
+          date:
+            business.createdAt,
+
+          actionPage:
+            "customers.html",
+
+          actionParams:
+            "business=" +
+            encodeURIComponent(
+              business.id
+            ) +
+            "&new=1"
+
+        })
+      );
+
+    }
+  );
+
+
+  return generated;
+
+}
+
+
+/* =========================================================
+   MERGE WITH STORED READ STATE
+========================================================= */
+
+function syncNotifications(){
+
+  const stored =
+    readStorage(
+      NOTIFICATION_KEY
+    );
+
+
+  const storedMap =
+    new Map(
+      stored.map(
+        item =>
+          [
+            item.id,
+            item
+          ]
+      )
+    );
+
+
+  const generated =
+    generateAlerts();
+
+
+  notifications =
+    generated.map(
+      alert => {
+
+        const previous =
+          storedMap.get(
+            alert.id
+          );
+
+
+        if(previous){
+
+          return {
+
+            ...alert,
+
+            read:
+              Boolean(
+                previous.read
+              ),
+
+            createdAt:
+              previous.createdAt ||
+              alert.createdAt
+
+          };
+
+        }
+
+
+        return alert;
+
+      }
+    );
+
+
+  saveStorage(
+    NOTIFICATION_KEY,
+    notifications
+  );
+
+}
+
+
+/* =========================================================
+   FILTER OPTIONS
+========================================================= */
+
+function renderBusinessFilter(){
+
+  const select =
+    $("businessFilter");
+
+
+  const current =
+    select.value;
+
+
+  select.innerHTML = `
+
+    <option value="">
+      All Businesses
+    </option>
+
+  `;
+
+
+  businesses.forEach(
+    business => {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+
+      option.value =
+        business.id;
+
+
+      option.textContent =
+        business.name;
+
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+
+  select.value =
+    current;
+
+}
+
+
+/* =========================================================
+   FILTERED ALERTS
+========================================================= */
+
+function filteredAlerts(){
+
+  const search =
+    String(
+      $("searchInput").value ||
+      ""
+    )
+    .toLowerCase()
+    .trim();
+
+
+  const business =
+    $("businessFilter")
+      .value;
+
+
+  const type =
+    $("typeFilter")
+      .value;
+
+
+  return notifications.filter(
+    alert => {
+
+      if(
+        business &&
+        alert.businessId !==
+        business
+      ){
+
+        return false;
+
+      }
+
+
+      if(
+        type &&
+        alert.type !==
+        type
+      ){
+
+        return false;
+
+      }
+
+
+      if(search){
+
+        const text =
+          [
+            alert.title,
+            alert.description,
+            alert.businessName,
+            alert.sourceType,
+            alert.sourceId
+          ]
+          .join(" ")
+          .toLowerCase();
+
+
+        if(
+          !text.includes(
+            search
+          )
+        ){
+
+          return false;
+
+        }
+
+      }
+
+
+      return true;
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   ALERT TYPE
+========================================================= */
+
+function typeLabel(
+  type
+){
+
+  const labels = {
+
+    danger:
+      "Critical",
+
+    warning:
+      "Warning",
+
+    info:
+      "Information",
+
+    success:
+      "Success"
+
+  };
+
+
+  return (
+    labels[type] ||
+    "Alert"
+  );
+
+}
+
+
+function typeIcon(
+  type
+){
+
+  const icons = {
+
+    danger:"🔴",
+
+    warning:"🟡",
+
+    info:"🔵",
+
+    success:"🟢"
+
+  };
+
+
+  return (
+    icons[type] ||
+    "🔔"
+  );
+
+}
+
+
+/* =========================================================
+   ACTION URL
+========================================================= */
+
+function actionURL(
+  alert
+){
+
+  if(
+    !alert.actionPage
+  ){
+
+    return "";
+
+  }
+
+
+  let url =
+    alert.actionPage;
+
+
+  const params =
+    alert.actionParams;
+
+
+  if(params){
+
+    url +=
+      "?" +
+      params;
+
+  }
+
+
+  return url;
+
+}
+
+
+/* =========================================================
+   RENDER ALERTS
+========================================================= */
+
+function renderAlerts(){
+
+  const list =
+    filteredAlerts();
+
+
+  const container =
+    $("alertList");
+
+
+  const empty =
+    $("emptyState");
+
+
+  container.innerHTML =
+    "";
+
+
+  $("resultText")
+    .textContent =
+      `${list.length} notification${list.length === 1 ? "" : "s"}`;
+
+
+  if(!list.length){
+
+    empty.style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  empty.style.display =
+    "none";
+
+
+  list.sort(
+    (
+      a,
+      b
+    ) => {
+
+      const priority = {
+
+        danger:4,
+
+        warning:3,
+
+        info:2,
+
+        success:1
+
+      };
+
+
+      const p =
+        (
+          priority[b.type] ||
+          0
+        ) -
+        (
+          priority[a.type] ||
+          0
+        );
+
+
+      if(p !== 0){
+
+        return p;
+
+      }
+
+
+      return String(
+        b.date ||
+        b.createdAt ||
+        ""
+      ).localeCompare(
+        String(
+          a.date ||
+          a.createdAt ||
+          ""
+        )
+      );
+
+    }
+  );
+
+
+  list.forEach(
+    alert => {
+
+      const item =
+        document.createElement(
+          "article"
+        );
+
+
+      item.className =
+        "alert-item" +
+        (
+          alert.read
+            ? ""
+            : " unread"
+        );
+
+
+      const amountText =
+        alert.amount > 0
+          ? `<span>Amount: ${money(alert.amount)}</span>`
+          : "";
+
+
+      const action =
+        actionURL(
+          alert
+        );
+
+
+      item.innerHTML = `
+
+        <div
+          class="alert-icon ${escapeHTML(
+            alert.type
+          )}"
+        >
+          ${typeIcon(
+            alert.type
+          )}
+        </div>
+
+
+        <div class="alert-main">
+
+          <div class="alert-title">
+
+            ${
+              alert.read
+                ? ""
+                : `<span class="unread-dot"></span>`
+            }
+
+            ${escapeHTML(
+              alert.title
+            )}
+
+            <span
+              class="type-badge type-${escapeHTML(
+                alert.type
+              )}"
+            >
+              ${typeLabel(
+                alert.type
+              )}
+            </span>
+
+          </div>
+
+
+          <div class="alert-description">
+            ${escapeHTML(
+              alert.description
+            )}
+          </div>
+
+
+          <div class="alert-meta">
+
+            <span>
+              ${escapeHTML(
+                alert.businessName ||
+                "Business"
+              )}
+            </span>
+
+            ${amountText}
+
+            <span>
+              ${formatDate(
+                alert.date ||
+                alert.createdAt
+              )}
+            </span>
+
+            ${
+              alert.sourceId
+                ? `
+                  <span>
+                    ${escapeHTML(
+                      alert.sourceId
+                    )}
+                  </span>
+                `
+                : ""
+            }
+
+          </div>
+
+        </div>
+
+
+        <div class="alert-actions">
+
+          ${
+            action
+              ? `
+                <button
+                  class="mini-btn"
+                  title="Open"
+                  onclick='openAlert(${JSON.stringify(
+                    alert.id
+                  )})'
+                >
+                  ↗
+                </button>
+              `
+              : ""
+          }
+
+
+          <button
+            class="mini-btn"
+            title="${
+              alert.read
+                ? "Mark unread"
+                : "Mark read"
+            }"
+            onclick='toggleRead(${JSON.stringify(
+              alert.id
+            )})'
+          >
+            ${
+              alert.read
+                ? "○"
+                : "✓"
+            }
+          </button>
+
+        </div>
+
+      `;
+
+
+      container.appendChild(
+        item
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+function renderStats(){
+
+  const critical =
+    notifications.filter(
+      item =>
+        item.type ===
+        "danger"
+    ).length;
+
+
+  const warnings =
+    notifications.filter(
+      item =>
+        item.type ===
+        "warning"
+    ).length;
+
+
+  const info =
+    notifications.filter(
+      item =>
+        item.type ===
+        "info"
+    ).length;
+
+
+  const unread =
+    notifications.filter(
+      item =>
+        !item.read
+    ).length;
+
+
+  $("criticalCount")
+    .textContent =
+      critical;
+
+
+  $("warningCount")
+    .textContent =
+      warnings;
+
+
+  $("infoCount")
+    .textContent =
+      info;
+
+
+  $("unreadCount")
+    .textContent =
+      unread;
+
+
+  $("sidebarCount")
+    .textContent =
+      unread;
+
+
+  $("topCount")
+    .textContent =
+      unread;
+
+
+  $("sidebarCount")
+    .style.display =
+      unread
+        ? "grid"
+        : "none";
+
+
+  $("topCount")
+    .style.display =
+      unread
+        ? "grid"
+        : "none";
+
+}
+
+
+/* =========================================================
+   OPEN ALERT
+========================================================= */
+
+function openAlert(
+  id
+){
+
+  const alert =
+    notifications.find(
+      item =>
+        item.id ===
+        id
+    );
+
+
+  if(!alert){
+    return;
+  }
+
+
+  alert.read =
+    true;
+
+
+  saveStorage(
+    NOTIFICATION_KEY,
+    notifications
+  );
+
+
+  renderStats();
+
+  renderAlerts();
+
+
+  const url =
+    actionURL(
+      alert
+    );
+
+
+  if(url){
+
+    window.location.href =
+      url;
+
+  }else{
+
+    showToast(
+      "Notification marked as read."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   TOGGLE READ
+========================================================= */
+
+function toggleRead(
+  id
+){
+
+  const alert =
+    notifications.find(
+      item =>
+        item.id ===
+        id
+    );
+
+
+  if(!alert){
+    return;
+  }
+
+
+  alert.read =
+    !alert.read;
+
+
+  saveStorage(
+    NOTIFICATION_KEY,
+    notifications
+  );
+
+
+  renderStats();
+
+  renderAlerts();
+
+}
+
+
+/* =========================================================
+   MARK ALL READ
+========================================================= */
+
+function markAllRead(){
+
+  notifications.forEach(
+    alert => {
+
+      alert.read =
+        true;
+
+    }
+  );
+
+
+  saveStorage(
+    NOTIFICATION_KEY,
+    notifications
+  );
+
+
+  renderStats();
+
+  renderAlerts();
+
+  showToast(
+    "All notifications marked as read."
+  );
+
+}
+
+
+/* =========================================================
+   CLEAR READ
+========================================================= */
+
+function clearReadAlerts(){
+
+  const before =
+    notifications.length;
+
+
+  notifications =
+    notifications.filter(
+      alert =>
+        !alert.read
+    );
+
+
+  saveStorage(
+    NOTIFICATION_KEY,
+    notifications
+  );
+
+
+  renderStats();
+
+  renderAlerts();
+
+
+  showToast(
+    `${before - notifications.length} read notification(s) cleared.`
+  );
+
+}
+
+
+/* =========================================================
+   RESET FILTERS
+========================================================= */
+
+function resetFilters(){
+
+  $("searchInput")
+    .value =
+      "";
+
+  $("businessFilter")
+    .value =
+      "";
+
+  $("typeFilter")
+    .value =
+      "";
+
+
+  renderAlerts();
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshAlerts(){
+
+  loadData();
+
+  syncNotifications();
+
+  renderBusinessFilter();
+
+  renderStats();
+
+  renderAlerts();
+
+  showToast(
+    "Alerts refreshed from business data."
+  );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function showToast(
+  message
+){
+
+  const toast =
+    $("toast");
+
+
+  $("toastText")
+    .textContent =
+      message;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2800
+    );
+
+}
+
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+$("searchInput")
+  .addEventListener(
+    "input",
+    renderAlerts
+  );
+
+
+$("businessFilter")
+  .addEventListener(
+    "change",
+    renderAlerts
+  );
+
+
+$("typeFilter")
+  .addEventListener(
+    "change",
+    renderAlerts
+  );
+
+
+$("mobileMenu")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("sidebar")
+        .classList.toggle(
+          "open"
+        );
+
+    }
+  );
+
+
+document.addEventListener(
+  "click",
+  event => {
+
+    if(
+      window.innerWidth <= 850 &&
+      $("sidebar")
+        .classList
+        .contains("open") &&
+      !$("sidebar")
+        .contains(
+          event.target
+        ) &&
+      !$("mobileMenu")
+        .contains(
+          event.target
+        )
+    ){
+
+      $("sidebar")
+        .classList.remove(
+          "open"
+        );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+function init(){
+
+  loadData();
+
+  syncNotifications();
+
+  renderBusinessFilter();
+
+  renderStats();
+
+  renderAlerts();
+
+}
+
+
+init();
+
+</script>
+
+</body>
+</html>
