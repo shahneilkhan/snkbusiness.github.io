@@ -1,3382 +1,2548 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Business Workspace | SNK Business</title>
-
-  <meta
-    name="description"
-    content="SNK Business — Individual Business Workspace"
-  >
-
-  <style>
-    :root{
-      --bg:#070b12;
-      --bg2:#0b111b;
-      --panel:#101722;
-      --panel2:#141d2a;
-      --panel3:#182333;
-
-      --line:rgba(255,255,255,.08);
-
-      --text:#f5f7fb;
-      --muted:#8d99aa;
-      --muted2:#657184;
-
-      --blue:#4f8cff;
-      --blue2:#2869e8;
-      --cyan:#27c8ff;
-      --green:#28d17c;
-      --yellow:#ffbd4a;
-      --red:#ff5f6d;
-      --purple:#9b72ff;
-
-      --shadow:0 20px 60px rgba(0,0,0,.35);
-      --radius:18px;
-    }
-
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      min-height:100vh;
-
-      font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-      color:var(--text);
-
-      background:
-        radial-gradient(
-          circle at 80% -10%,
-          rgba(79,140,255,.15),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 5% 25%,
-          rgba(39,200,255,.06),
-          transparent 25%
-        ),
-        var(--bg);
-    }
-
-    button,
-    input,
-    select,
-    textarea{
-      font:inherit;
-    }
-
-    button{
-      cursor:pointer;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    /* =====================================================
-       APP
-    ===================================================== */
-
-    .app{
-      min-height:100vh;
-      display:flex;
-    }
-
-    /* =====================================================
-       SIDEBAR
-    ===================================================== */
-
-    .sidebar{
-      width:270px;
-
-      position:fixed;
-      top:0;
-      left:0;
-      bottom:0;
-
-      z-index:100;
-
-      display:flex;
-      flex-direction:column;
-
-      padding:22px 16px;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(17,24,36,.98),
-          rgba(8,12,19,.98)
-        );
-
-      border-right:1px solid var(--line);
-
-      transition:.25s;
-
-      overflow-y:auto;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-
-      padding:5px 8px 24px;
-    }
-
-    .brand-logo{
-      width:44px;
-      height:44px;
-
-      display:grid;
-      place-items:center;
-
-      border-radius:13px;
-
-      font-size:17px;
-      font-weight:900;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--blue),
-          var(--cyan)
-        );
-
-      color:#fff;
-
-      box-shadow:
-        0 10px 30px rgba(79,140,255,.28);
-    }
-
-    .brand-text strong{
-      display:block;
-      font-size:16px;
-    }
-
-    .brand-text span{
-      display:block;
-      margin-top:2px;
-
-      color:var(--muted);
-      font-size:11px;
-    }
-
-    .section-label{
-      padding:15px 12px 8px;
-
-      color:#647084;
-
-      font-size:10px;
-      font-weight:800;
-
-      text-transform:uppercase;
-      letter-spacing:1.4px;
-    }
-
-    .nav{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-
-    .nav-item{
-      width:100%;
-
-      display:flex;
-      align-items:center;
-      gap:12px;
-
-      padding:11px 12px;
-
-      border:1px solid transparent;
-      border-radius:11px;
-
-      background:transparent;
-      color:#aeb8c8;
-
-      text-align:left;
-
-      transition:.2s;
-    }
-
-    .nav-item:hover{
-      color:#fff;
-      background:rgba(255,255,255,.045);
-    }
-
-    .nav-item.active{
-      color:#fff;
-
-      background:
-        linear-gradient(
-          90deg,
-          rgba(79,140,255,.18),
-          rgba(79,140,255,.04)
-        );
-
-      border-color:rgba(79,140,255,.18);
-    }
-
-    .nav-icon{
-      width:21px;
-      text-align:center;
-      font-size:16px;
-    }
-
-    .nav-text{
-      font-size:12px;
-      font-weight:650;
-    }
-
-    .nav-badge{
-      margin-left:auto;
-
-      padding:3px 7px;
-
-      border-radius:20px;
-
-      background:rgba(255,255,255,.07);
-
-      color:#9da9bb;
-
-      font-size:9px;
-    }
-
-    .business-mini{
-      margin:14px 4px 5px;
-
-      padding:13px;
-
-      border:1px solid rgba(79,140,255,.16);
-      border-radius:14px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(79,140,255,.10),
-          rgba(39,200,255,.025)
-        );
-    }
-
-    .business-mini-top{
-      display:flex;
-      align-items:center;
-      gap:9px;
-    }
-
-    .mini-icon{
-      width:34px;
-      height:34px;
-
-      display:grid;
-      place-items:center;
-
-      border-radius:10px;
-
-      font-size:11px;
-      font-weight:800;
-
-      background:rgba(79,140,255,.12);
-      color:#86adff;
-    }
-
-    .business-mini strong{
-      display:block;
-      font-size:10px;
-    }
-
-    .business-mini span{
-      display:block;
-      margin-top:2px;
-      color:#697688;
-      font-size:8px;
-    }
-
-    .sidebar-bottom{
-      margin-top:auto;
-    }
-
-    .admin-mini{
-      display:flex;
-      align-items:center;
-      gap:10px;
-
-      padding:14px 8px 4px;
-
-      border-top:1px solid var(--line);
-    }
-
-    .avatar{
-      width:37px;
-      height:37px;
-
-      display:grid;
-      place-items:center;
-
-      border-radius:11px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #24395e,
-          #162338
-        );
-
-      border:1px solid rgba(255,255,255,.08);
-
-      font-size:12px;
-      font-weight:800;
-    }
-
-    .admin-info{
-      min-width:0;
-      flex:1;
-    }
-
-    .admin-info strong{
-      display:block;
-      font-size:11px;
-    }
-
-    .admin-info span{
-      display:block;
-      margin-top:2px;
-      color:var(--muted);
-      font-size:9px;
-    }
-
-    /* =====================================================
-       MAIN
-    ===================================================== */
-
-    .main{
-      width:calc(100% - 270px);
-      margin-left:270px;
-      min-height:100vh;
-    }
-
-    .topbar{
-      height:76px;
-
-      position:sticky;
-      top:0;
-
-      z-index:50;
-
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      padding:0 30px;
-
-      background:rgba(7,11,18,.72);
-      backdrop-filter:blur(20px);
-
-      border-bottom:1px solid var(--line);
-    }
-
-    .top-left{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-
-    .mobile-menu{
-      display:none;
-
-      width:38px;
-      height:38px;
-
-      place-items:center;
-
-      border:1px solid var(--line);
-      border-radius:10px;
-
-      background:#0d141f;
-      color:#fff;
-    }
-
-    .back-btn{
-      width:38px;
-      height:38px;
-
-      display:grid;
-      place-items:center;
-
-      border:1px solid var(--line);
-      border-radius:10px;
-
-      background:#0d141f;
-      color:#aeb8c7;
-    }
-
-    .page-title h1{
-      font-size:17px;
-      font-weight:750;
-    }
-
-    .page-title p{
-      margin-top:3px;
-
-      color:var(--muted);
-      font-size:10px;
-    }
-
-    .top-actions{
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .top-btn{
-      padding:9px 12px;
-
-      border:1px solid var(--line);
-      border-radius:10px;
-
-      background:#0d141f;
-      color:#c6cfdb;
-
-      font-size:9px;
-      font-weight:700;
-    }
-
-    .icon-btn{
-      width:39px;
-      height:39px;
-
-      display:grid;
-      place-items:center;
-
-      position:relative;
-
-      border:1px solid var(--line);
-      border-radius:11px;
-
-      background:#0d141f;
-      color:#aeb8c7;
-    }
-
-    .notification-dot{
-      width:7px;
-      height:7px;
-
-      position:absolute;
-
-      top:7px;
-      right:8px;
-
-      border-radius:50%;
-
-      background:var(--red);
-
-      box-shadow:
-        0 0 0 3px #0d141f;
-    }
-
-    /* =====================================================
-       CONTENT
-    ===================================================== */
-
-    .content{
-      max-width:1600px;
-      margin:auto;
-
-      padding:28px 30px 60px;
-    }
-
-    /* =====================================================
-       BUSINESS HERO
-    ===================================================== */
-
-    .business-hero{
-      position:relative;
-
-      padding:26px;
-
-      overflow:hidden;
-
-      border:1px solid var(--line);
-      border-radius:22px;
-
-      background:
-        radial-gradient(
-          circle at 90% 15%,
-          rgba(79,140,255,.20),
-          transparent 28%
-        ),
-        linear-gradient(
-          135deg,
-          #111b2a,
-          #0d141f
-        );
-
-      box-shadow:var(--shadow);
-    }
-
-    .business-hero::after{
-      content:"";
-
-      width:300px;
-      height:300px;
-
-      position:absolute;
-
-      right:-150px;
-      bottom:-180px;
-
-      border:1px solid rgba(79,140,255,.12);
-      border-radius:50%;
-
-      box-shadow:
-        0 0 0 45px rgba(79,140,255,.025),
-        0 0 0 90px rgba(79,140,255,.015);
-    }
-
-    .hero-main{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-
-      gap:20px;
-
-      position:relative;
-      z-index:2;
-    }
-
-    .hero-business-info{
-      display:flex;
-      align-items:flex-start;
-      gap:15px;
-    }
-
-    .hero-icon{
-      width:62px;
-      height:62px;
-
-      flex:0 0 62px;
-
-      display:grid;
-      place-items:center;
-
-      border-radius:17px;
-
-      font-size:20px;
-      font-weight:900;
-
-      background:rgba(79,140,255,.12);
-      border:1px solid rgba(79,140,255,.18);
-      color:#8bb2ff;
-    }
-
-    .hero-label{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-
-      padding:5px 9px;
-
-      border:1px solid rgba(40,209,124,.13);
-      border-radius:20px;
-
-      background:rgba(40,209,124,.08);
-
-      color:#4ade91;
-
-      font-size:8px;
-      font-weight:800;
-    }
-
-    .hero-dot{
-      width:5px;
-      height:5px;
-
-      border-radius:50%;
-
-      background:var(--green);
-      box-shadow:0 0 8px rgba(40,209,124,.7);
-    }
-
-    .hero-business-info h2{
-      margin-top:10px;
-
-      font-size:27px;
-      letter-spacing:-.5px;
-    }
-
-    .hero-category{
-      margin-top:4px;
-
-      color:#728096;
-
-      font-size:10px;
-    }
-
-    .hero-description{
-      max-width:650px;
-
-      margin-top:9px;
-
-      color:#8996a9;
-
-      font-size:10px;
-      line-height:1.7;
-    }
-
-    .hero-actions{
-      display:flex;
-      gap:8px;
-
-      flex-wrap:wrap;
-    }
-
-    .primary-btn,
-    .secondary-btn{
-      padding:10px 13px;
-
-      border-radius:10px;
-
-      font-size:9px;
-      font-weight:750;
-    }
-
-    .primary-btn{
-      border:0;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--blue),
-          var(--blue2)
-        );
-
-      color:#fff;
-
-      box-shadow:
-        0 8px 25px rgba(79,140,255,.2);
-    }
-
-    .secondary-btn{
-      border:1px solid var(--line);
-
-      background:rgba(255,255,255,.035);
-
-      color:#d5dce7;
-    }
-
-    .hero-bottom{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-
-      gap:9px;
-
-      margin-top:24px;
-
-      position:relative;
-      z-index:2;
-    }
-
-    .hero-stat{
-      padding:12px;
-
-      border:1px solid rgba(255,255,255,.055);
-      border-radius:11px;
-
-      background:rgba(255,255,255,.025);
-    }
-
-    .hero-stat span{
-      display:block;
-
-      color:#687588;
-
-      font-size:8px;
-    }
-
-    .hero-stat strong{
-      display:block;
-
-      margin-top:5px;
-
-      font-size:14px;
-    }
-
-    /* =====================================================
-       MODULE NAV
-    ===================================================== */
-
-    .module-bar{
-      margin-top:18px;
-
-      padding:8px;
-
-      display:flex;
-      align-items:center;
-
-      gap:5px;
-
-      overflow-x:auto;
-
-      border:1px solid var(--line);
-      border-radius:14px;
-
-      background:rgba(16,23,34,.75);
-
-      scrollbar-width:none;
-    }
-
-    .module-bar::-webkit-scrollbar{
-      display:none;
-    }
-
-    .module-btn{
-      flex:0 0 auto;
-
-      display:flex;
-      align-items:center;
-      gap:7px;
-
-      padding:9px 11px;
-
-      border:1px solid transparent;
-      border-radius:9px;
-
-      background:transparent;
-
-      color:#7f8c9f;
-
-      font-size:9px;
-      font-weight:700;
-
-      transition:.2s;
-    }
-
-    .module-btn:hover{
-      color:#fff;
-      background:rgba(255,255,255,.04);
-    }
-
-    .module-btn.active{
-      color:#fff;
-
-      background:rgba(79,140,255,.11);
-
-      border-color:rgba(79,140,255,.16);
-    }
-
-    .module-icon{
-      font-size:12px;
-    }
-
-    /* =====================================================
-       SECTION
-    ===================================================== */
-
-    .section-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      margin:25px 0 13px;
-    }
-
-    .section-head h3{
-      font-size:13px;
-    }
-
-    .section-head span{
-      color:#657184;
-      font-size:8px;
-    }
-
-    /* =====================================================
-       STATS
-    ===================================================== */
-
-    .stats{
-      display:grid;
-
-      grid-template-columns:repeat(4,1fr);
-
-      gap:12px;
-    }
-
-    .stat-card{
-      padding:17px;
-
-      border:1px solid var(--line);
-      border-radius:15px;
-
-      background:rgba(16,23,34,.78);
-
-      transition:.2s;
-    }
-
-    .stat-card:hover{
-      transform:translateY(-2px);
-      border-color:rgba(255,255,255,.12);
-    }
-
-    .stat-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-    }
-
-    .stat-label{
-      color:#7c889a;
-      font-size:9px;
-    }
-
-    .stat-icon{
-      width:30px;
-      height:30px;
-
-      display:grid;
-      place-items:center;
-
-      border-radius:9px;
-
-      background:rgba(79,140,255,.09);
-
-      color:#82aaff;
-
-      font-size:12px;
-    }
-
-    .stat-value{
-      margin-top:12px;
-
-      font-size:21px;
-      font-weight:800;
-    }
-
-    .stat-note{
-      margin-top:4px;
-
-      color:#657184;
-
-      font-size:8px;
-    }
-
-    /* =====================================================
-       GRID
-    ===================================================== */
-
-    .dashboard-grid{
-      display:grid;
-
-      grid-template-columns:1.5fr 1fr;
-
-      gap:15px;
-    }
-
-    .panel{
-      overflow:hidden;
-
-      border:1px solid var(--line);
-      border-radius:17px;
-
-      background:rgba(16,23,34,.76);
-    }
-
-    .panel-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      padding:15px 17px;
-
-      border-bottom:1px solid var(--line);
-    }
-
-    .panel-head h3{
-      font-size:11px;
-    }
-
-    .panel-head button{
-      border:0;
-      background:none;
-
-      color:#78a5ff;
-
-      font-size:8px;
-    }
-
-    /* =====================================================
-       CUSTOMER TABLE
-    ===================================================== */
-
-    .table-wrap{
-      overflow:auto;
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:600px;
-    }
-
-    th{
-      padding:11px 17px;
-
-      text-align:left;
-
-      color:#647184;
-
-      font-size:7px;
-      font-weight:750;
-
-      text-transform:uppercase;
-      letter-spacing:.8px;
-    }
-
-    td{
-      padding:11px 17px;
-
-      border-top:1px solid rgba(255,255,255,.045);
-
-      color:#bac3d0;
-
-      font-size:9px;
-    }
-
-    .customer{
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .customer-avatar{
-      width:27px;
-      height:27px;
-
-      display:grid;
-      place-items:center;
-
-      border-radius:8px;
-
-      background:#182438;
-
-      color:#91b7ff;
-
-      font-size:8px;
-      font-weight:800;
-    }
-
-    .customer-name strong{
-      display:block;
-
-      color:#e5eaf2;
-
-      font-size:9px;
-    }
-
-    .customer-name span{
-      display:block;
-
-      margin-top:2px;
-
-      color:#647184;
-
-      font-size:7px;
-    }
-
-    .status{
-      display:inline-block;
-
-      padding:4px 7px;
-
-      border-radius:20px;
-
-      font-size:7px;
-    }
-
-    .paid{
-      color:#45d98b;
-      background:rgba(40,209,124,.08);
-    }
-
-    .partial{
-      color:#79a6ff;
-      background:rgba(79,140,255,.09);
-    }
-
-    .pending{
-      color:#ffca67;
-      background:rgba(255,189,74,.09);
-    }
-
-    /* =====================================================
-       QUICK ACTIONS
-    ===================================================== */
-
-    .quick-actions{
-      padding:13px;
-
-      display:grid;
-
-      grid-template-columns:1fr 1fr;
-
-      gap:8px;
-    }
-
-    .quick-btn{
-      padding:13px;
-
-      border:1px solid rgba(255,255,255,.055);
-      border-radius:11px;
-
-      background:rgba(255,255,255,.025);
-
-      text-align:left;
-
-      color:#dce3ed;
-
-      transition:.2s;
-    }
-
-    .quick-btn:hover{
-      background:rgba(79,140,255,.07);
-      border-color:rgba(79,140,255,.16);
-    }
-
-    .quick-icon{
-      font-size:15px;
-    }
-
-    .quick-btn strong{
-      display:block;
-
-      margin-top:7px;
-
-      font-size:9px;
-    }
-
-    .quick-btn span{
-      display:block;
-
-      margin-top:3px;
-
-      color:#687588;
-
-      font-size:7px;
-
-      line-height:1.4;
-    }
-
-    /* =====================================================
-       PROGRESS
-    ===================================================== */
-
-    .progress-panel{
-      margin-top:15px;
-    }
-
-    .project-list{
-      padding:4px 17px;
-    }
-
-    .project-item{
-      padding:13px 0;
-
-      border-bottom:1px solid rgba(255,255,255,.045);
-    }
-
-    .project-item:last-child{
-      border-bottom:0;
-    }
-
-    .project-top{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-    }
-
-    .project-top strong{
-      font-size:9px;
-    }
-
-    .project-top span{
-      color:#657184;
-      font-size:8px;
-    }
-
-    .project-bar{
-      height:5px;
-
-      margin-top:8px;
-
-      overflow:hidden;
-
-      border-radius:20px;
-
-      background:#1b2635;
-    }
-
-    .project-bar span{
-      display:block;
-
-      height:100%;
-
-      border-radius:20px;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--blue),
-          var(--cyan)
-        );
-    }
-
-    /* =====================================================
-       ACTIVITY
-    ===================================================== */
-
-    .activity{
-      padding:4px 17px;
-    }
-
-    .activity-item{
-      display:flex;
-      align-items:flex-start;
-
-      gap:10px;
-
-      padding:12px 0;
-
-      border-bottom:1px solid rgba(255,255,255,.045);
-    }
-
-    .activity-item:last-child{
-      border-bottom:0;
-    }
-
-    .activity-icon{
-      width:28px;
-      height:28px;
-
-      flex:0 0 28px;
-
-      display:grid;
-      place-items:center;
-
-      border-radius:8px;
-
-      background:rgba(79,140,255,.09);
-
-      font-size:11px;
-    }
-
-    .activity-text{
-      flex:1;
-    }
-
-    .activity-text strong{
-      display:block;
-
-      color:#dce3ec;
-
-      font-size:8px;
-    }
-
-    .activity-text span{
-      display:block;
-
-      margin-top:3px;
-
-      color:#657184;
-
-      font-size:7px;
-    }
-
-    .activity-time{
-      color:#596678;
-      font-size:7px;
-    }
-
-    /* =====================================================
-       EMPTY / CATEGORY
-    ===================================================== */
-
-    .category-section{
-      display:none;
-    }
-
-    /* =====================================================
-       TOAST
-    ===================================================== */
-
-    .toast{
-      position:fixed;
-
-      right:20px;
-      bottom:20px;
-
-      z-index:1000;
-
-      max-width:320px;
-
-      padding:12px 15px;
-
-      border:1px solid rgba(79,140,255,.18);
-      border-radius:11px;
-
-      background:#101a28;
-
-      color:#e7edf5;
-
-      box-shadow:
-        0 20px 50px rgba(0,0,0,.4);
-
-      font-size:9px;
-
-      transform:translateY(20px);
-      opacity:0;
-      pointer-events:none;
-
-      transition:.25s;
-    }
-
-    .toast.show{
-      transform:translateY(0);
-      opacity:1;
-    }
-
-    /* =====================================================
-       RESPONSIVE
-    ===================================================== */
-
-    @media(max-width:1150px){
-
-      .stats{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .dashboard-grid{
-        grid-template-columns:1fr;
-      }
-
-    }
-
-    @media(max-width:850px){
-
-      .sidebar{
-        transform:translateX(-100%);
-      }
-
-      .sidebar.open{
-        transform:translateX(0);
-      }
-
-      .main{
-        width:100%;
-        margin-left:0;
-      }
-
-      .mobile-menu{
-        display:grid;
-      }
-
-      .topbar{
-        padding:0 17px;
-      }
-
-      .top-btn{
-        display:none;
-      }
-
-      .content{
-        padding:22px 16px 50px;
-      }
-
-      .hero-main{
-        display:block;
-      }
-
-      .hero-actions{
-        margin-top:18px;
-      }
-
-    }
-
-    @media(max-width:650px){
-
-      .stats{
-        grid-template-columns:1fr 1fr;
-        gap:9px;
-      }
-
-      .hero-bottom{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .business-hero{
-        padding:20px;
-      }
-
-      .hero-business-info h2{
-        font-size:23px;
-      }
-
-      .hero-icon{
-        width:54px;
-        height:54px;
-        flex-basis:54px;
-      }
-
-    }
-
-    @media(max-width:430px){
-
-      .stats{
-        grid-template-columns:1fr;
-      }
-
-      .hero-bottom{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .back-btn{
-        display:none;
-      }
-
-      .page-title h1{
-        font-size:14px;
-      }
-
-      .page-title p{
-        display:none;
-      }
-
-      .hero-business-info{
-        gap:11px;
-      }
-
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Business Workspace | SNK Business</title>
+
+<style>
+:root{
+  --bg:#070b12;
+  --panel:#0f1623;
+  --panel2:#121c2b;
+  --panel3:#182437;
+  --line:#243247;
+  --text:#f5f7fb;
+  --muted:#8d9ab0;
+  --blue:#4f8cff;
+  --purple:#8b5cf6;
+  --green:#22c55e;
+  --yellow:#f59e0b;
+  --red:#ef4444;
+  --cyan:#06b6d4;
+  --radius:18px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:
+    radial-gradient(circle at top right,rgba(79,140,255,.10),transparent 30%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+button{
+  font:inherit;
+  cursor:pointer;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  width:270px;
+  background:rgba(9,14,22,.98);
+  border-right:1px solid var(--line);
+  padding:22px 16px;
+  overflow-y:auto;
+  z-index:1000;
+}
+
+.logo{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:4px 10px 24px;
+}
+
+.logo-mark{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  font-size:17px;
+  font-weight:900;
+  background:linear-gradient(135deg,#4f8cff,#7c3aed);
+}
+
+.logo h2{
+  font-size:18px;
+}
+
+.logo span{
+  color:#77859b;
+  font-size:11px;
+  display:block;
+  margin-top:3px;
+}
+
+.nav-title{
+  color:#65738a;
+  text-transform:uppercase;
+  font-size:10px;
+  letter-spacing:1.5px;
+  padding:13px 12px 8px;
+}
+
+.nav a{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:11px 12px;
+  color:#aab6c9;
+  border-radius:11px;
+  font-size:12px;
+  margin-bottom:4px;
+}
+
+.nav a:hover{
+  background:#141f30;
+  color:white;
+}
+
+.nav a.active{
+  background:rgba(79,140,255,.13);
+  color:#fff;
+  border:1px solid rgba(79,140,255,.18);
+}
+
+.nav-icon{
+  width:22px;
+  text-align:center;
+}
+
+.current-business{
+  margin:17px 4px 0;
+  padding:15px;
+  border-radius:15px;
+  background:linear-gradient(
+    135deg,
+    rgba(79,140,255,.14),
+    rgba(139,92,246,.10)
+  );
+  border:1px solid rgba(79,140,255,.17);
+}
+
+.current-business small{
+  color:#74839a;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.current-business strong{
+  display:block;
+  font-size:13px;
+  margin-top:6px;
+}
+
+.current-business span{
+  display:inline-block;
+  margin-top:8px;
+  padding:4px 8px;
+  border-radius:20px;
+  background:rgba(34,197,94,.1);
+  color:#4ade80;
+  font-size:9px;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+  margin-left:270px;
+  min-height:100vh;
+}
+
+.topbar{
+  height:72px;
+  position:sticky;
+  top:0;
+  z-index:500;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 30px;
+  background:rgba(7,11,18,.75);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.menu-btn{
+  display:none;
+  width:40px;
+  height:40px;
+  background:var(--panel);
+  color:white;
+  border:1px solid var(--line);
+  border-radius:10px;
+}
+
+.breadcrumb{
+  color:#7f8ca2;
+  font-size:12px;
+}
+
+.breadcrumb strong{
+  color:white;
+}
+
+.top-actions{
+  display:flex;
+  gap:9px;
+  align-items:center;
+}
+
+.top-btn{
+  width:40px;
+  height:40px;
+  background:var(--panel);
+  color:#b8c3d4;
+  border:1px solid var(--line);
+  border-radius:10px;
+}
+
+.avatar{
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  font-size:12px;
+  font-weight:800;
+  background:linear-gradient(135deg,#4f8cff,#7c3aed);
+}
+
+/* ================= CONTENT ================= */
+
+.content{
+  max-width:1700px;
+  margin:auto;
+  padding:30px;
+}
+
+.business-hero{
+  padding:25px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.12),
+      rgba(139,92,246,.06)
+    ),
+    var(--panel);
+  margin-bottom:20px;
+}
+
+.hero-top{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:flex-start;
+}
+
+.eyebrow{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.6px;
+  color:#6ea8ff;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.hero-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.hero-title h1{
+  font-size:31px;
+  letter-spacing:-.9px;
+}
+
+.category-badge{
+  padding:6px 10px;
+  border-radius:30px;
+  background:rgba(79,140,255,.1);
+  border:1px solid rgba(79,140,255,.18);
+  color:#83b4ff;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.hero-description{
+  color:#8997ac;
+  font-size:12px;
+  margin-top:9px;
+  max-width:700px;
+  line-height:1.6;
+}
+
+.hero-actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:11px 14px;
+  border-radius:10px;
+  background:#101925;
+  border:1px solid var(--line);
+  color:#dce5f0;
+  font-size:11px;
+  font-weight:700;
+}
+
+.btn:hover{
+  border-color:#3c4f6b;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#4f8cff,#6d5dfc);
+  border:none;
+  color:white;
+}
+
+.status{
+  display:inline-flex;
+  margin-top:17px;
+  padding:6px 10px;
+  border-radius:30px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.status-active{
+  background:rgba(34,197,94,.09);
+  color:#4ade80;
+}
+
+.status-inactive{
+  background:rgba(239,68,68,.09);
+  color:#f87171;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.stat{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:18px;
+}
+
+.stat-label{
+  color:#7f8ca1;
+  font-size:11px;
+}
+
+.stat-value{
+  font-size:24px;
+  font-weight:850;
+  margin-top:12px;
+}
+
+.stat-sub{
+  color:#68768c;
+  font-size:10px;
+  margin-top:5px;
+}
+
+/* ================= GRID ================= */
+
+.grid{
+  display:grid;
+  grid-template-columns:1.55fr .75fr;
+  gap:18px;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.card-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:17px 18px;
+  border-bottom:1px solid var(--line);
+}
+
+.card-head strong{
+  font-size:13px;
+}
+
+.card-head span{
+  color:#76849a;
+  font-size:10px;
+}
+
+.card-body{
+  padding:18px;
+}
+
+/* ================= CUSTOMER TABLE ================= */
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:620px;
+}
+
+th{
+  text-align:left;
+  padding:11px 14px;
+  color:#6f7d93;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  background:#0b121d;
+}
+
+td{
+  padding:13px 14px;
+  border-top:1px solid rgba(36,50,71,.55);
+  font-size:11px;
+}
+
+.customer{
+  display:flex;
+  gap:9px;
+  align-items:center;
+}
+
+.customer-avatar{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  background:#1b2c48;
+  font-size:10px;
+  font-weight:800;
+}
+
+.customer-name{
+  font-weight:700;
+}
+
+.customer-service{
+  color:#748299;
+  font-size:9px;
+  margin-top:3px;
+}
+
+.money{
+  font-weight:700;
+}
+
+.paid{
+  color:#4ade80;
+}
+
+.due{
+  color:#fbbf24;
+}
+
+.badge{
+  display:inline-flex;
+  padding:5px 8px;
+  border-radius:20px;
+  font-size:9px;
+  font-weight:800;
+}
+
+.badge-paid{
+  background:rgba(34,197,94,.09);
+  color:#4ade80;
+}
+
+.badge-partial{
+  background:rgba(96,165,250,.09);
+  color:#60a5fa;
+}
+
+.badge-pending{
+  background:rgba(245,158,11,.09);
+  color:#fbbf24;
+}
+
+.badge-overdue{
+  background:rgba(239,68,68,.09);
+  color:#f87171;
+}
+
+.badge-active{
+  background:rgba(139,92,246,.09);
+  color:#a78bfa;
+}
+
+.empty{
+  padding:45px 15px;
+  text-align:center;
+  color:#728096;
+  font-size:11px;
+}
+
+.empty strong{
+  display:block;
+  color:#dce5ef;
+  margin-bottom:5px;
+}
+
+/* ================= QUICK ACTIONS ================= */
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.quick{
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#0b121d;
+  color:#d9e3ef;
+  text-align:left;
+  transition:.2s;
+}
+
+.quick:hover{
+  transform:translateY(-2px);
+  border-color:#405573;
+}
+
+.quick-icon{
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+.quick strong{
+  display:block;
+  font-size:11px;
+}
+
+.quick span{
+  color:#718098;
+  font-size:9px;
+  display:block;
+  margin-top:4px;
+}
+
+/* ================= MODULES ================= */
+
+.modules{
+  display:grid;
+  gap:8px;
+}
+
+.module{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  background:#0b121d;
+  border-radius:11px;
+  color:#aebacd;
+  font-size:10px;
+}
+
+.module:hover{
+  color:#fff;
+  border-color:#3b4f6d;
+}
+
+.module-left{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.module-icon{
+  width:28px;
+  height:28px;
+  border-radius:8px;
+  display:grid;
+  place-items:center;
+  background:#152238;
+}
+
+/* ================= ACTIVITY ================= */
+
+.activity{
+  display:grid;
+  gap:11px;
+}
+
+.activity-item{
+  display:flex;
+  gap:10px;
+  padding-bottom:11px;
+  border-bottom:1px solid rgba(36,50,71,.6);
+}
+
+.activity-item:last-child{
+  border-bottom:0;
+  padding-bottom:0;
+}
+
+.activity-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#4f8cff;
+  margin-top:4px;
+}
+
+.activity-text{
+  color:#b5c1d1;
+  font-size:10px;
+  line-height:1.5;
+}
+
+.activity-time{
+  display:block;
+  color:#647289;
+  font-size:8px;
+  margin-top:3px;
+}
+
+/* ================= MODAL ================= */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(7px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:2000;
+}
+
+.overlay.show{
+  display:flex;
+}
+
+.modal{
+  width:min(650px,100%);
+  background:#101925;
+  border:1px solid var(--line);
+  border-radius:19px;
+  box-shadow:0 30px 100px rgba(0,0,0,.55);
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 20px;
+  border-bottom:1px solid var(--line);
+}
+
+.modal-head h3{
+  font-size:16px;
+}
+
+.close{
+  width:34px;
+  height:34px;
+  border:1px solid var(--line);
+  background:#0b121d;
+  color:#9ba8bb;
+  border-radius:9px;
+}
+
+.modal-body{
+  padding:20px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:13px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+.form-group label{
+  color:#8b99ad;
+  font-size:10px;
+  font-weight:700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  background:#0b121d;
+  border:1px solid var(--line);
+  border-radius:10px;
+  color:white;
+  padding:10px 11px;
+  outline:none;
+}
+
+.form-group textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.modal-foot{
+  padding:15px 20px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  background:#111b29;
+  border:1px solid var(--line);
+  padding:13px 16px;
+  border-radius:11px;
+  color:#e9eef7;
+  font-size:11px;
+  opacity:0;
+  transform:translateY(20px);
+  pointer-events:none;
+  transition:.25s;
+  z-index:5000;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1150px){
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:800px){
+
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.25s;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .topbar{
+    padding:0 15px;
+  }
+
+  .content{
+    padding:20px 15px;
+  }
+
+  .hero-top{
+    flex-direction:column;
+  }
+
+  .hero-actions{
+    width:100%;
+  }
+
+}
+
+@media(max-width:560px){
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .hero-title h1{
+    font-size:25px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+}
+</style>
 </head>
 
 <body>
 
-<div class="app">
+<!-- ================= SIDEBAR ================= -->
 
-  <!-- =====================================================
-       SIDEBAR
-  ====================================================== -->
+<aside class="sidebar" id="sidebar">
 
-  <aside class="sidebar" id="sidebar">
+  <div class="logo">
 
-    <div class="brand">
+    <div class="logo-mark">SNK</div>
 
-      <div class="brand-logo">
-        SNK
-      </div>
-
-      <div class="brand-text">
-        <strong>SNK Business</strong>
-        <span>Business Command Center</span>
-      </div>
-
+    <div>
+      <h2>SNK Business</h2>
+      <span>Business Management</span>
     </div>
 
+  </div>
 
-    <div class="section-label">
-      Workspace
-    </div>
+  <div class="nav-title">
+    Workspace
+  </div>
 
+  <nav class="nav" id="businessNav"></nav>
 
-    <nav class="nav">
+  <div class="current-business">
+
+    <small>Current Business</small>
+
+    <strong id="sideBusinessName">
+      Loading...
+    </strong>
+
+    <span id="sideBusinessStatus">
+      Active
+    </span>
+
+  </div>
+
+</aside>
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+  <header class="topbar">
+
+    <div class="top-left">
 
       <button
-        class="nav-item"
-        onclick="goDashboard()"
+        class="menu-btn"
+        onclick="toggleSidebar()"
       >
-        <span class="nav-icon">⌂</span>
-        <span class="nav-text">Dashboard</span>
+        ☰
       </button>
 
+      <div class="breadcrumb">
+        My Businesses /
+        <strong id="topBusinessName">
+          Loading...
+        </strong>
+      </div>
+
+    </div>
+
+    <div class="top-actions">
 
       <button
-        class="nav-item"
+        class="top-btn"
         onclick="goBusinesses()"
       >
-        <span class="nav-icon">▦</span>
-        <span class="nav-text">My Businesses</span>
-        <span class="nav-badge">3</span>
+        ←
       </button>
-
 
       <button
-        class="nav-item"
-        onclick="openModule('customers')"
+        class="top-btn"
+        onclick="location.reload()"
       >
-        <span class="nav-icon">◉</span>
-        <span class="nav-text">Customers</span>
+        ↻
       </button>
 
+      <div class="avatar">
+        SA
+      </div>
 
-      <button
-        class="nav-item"
-        onclick="openModule('payments')"
-      >
-        <span class="nav-icon">৳</span>
-        <span class="nav-text">Payments</span>
-        <span class="nav-badge">8</span>
-      </button>
-
-
-      <button
-        class="nav-item"
-        onclick="openModule('inventory')"
-      >
-        <span class="nav-icon">▣</span>
-        <span class="nav-text">Inventory</span>
-      </button>
-
-
-      <button
-        class="nav-item"
-        onclick="openModule('invoices')"
-      >
-        <span class="nav-icon">▤</span>
-        <span class="nav-text">Invoices</span>
-      </button>
-
-    </nav>
-
-
-    <div class="section-label">
-      Business Management
     </div>
 
+  </header>
 
-    <div
-      class="business-mini"
-      id="businessMini"
-    >
+  <section class="content">
 
-      <div class="business-mini-top">
+    <!-- HERO -->
 
-        <div
-          class="mini-icon"
-          id="miniIcon"
-        >
-          SA
-        </div>
+    <section class="business-hero">
+
+      <div class="hero-top">
 
         <div>
 
-          <strong id="miniName">
-            Sarakat Agency
-          </strong>
-
-          <span id="miniCategory">
-            Digital Agency
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <nav class="nav" id="businessNav">
-      <!-- Dynamic business menu -->
-    </nav>
-
-
-    <div class="sidebar-bottom">
-
-      <div class="admin-mini">
-
-        <div class="avatar">
-          SU
-        </div>
-
-        <div class="admin-info">
-
-          <strong>
-            Super Admin
-          </strong>
-
-          <span>
-            Owner • Full Access
-          </span>
-
-        </div>
-
-        <span style="color:#657184;">
-          ⋮
-        </span>
-
-      </div>
-
-    </div>
-
-  </aside>
-
-
-  <!-- =====================================================
-       MAIN
-  ====================================================== -->
-
-  <main class="main">
-
-    <header class="topbar">
-
-      <div class="top-left">
-
-        <button
-          class="mobile-menu"
-          onclick="toggleSidebar()"
-          aria-label="Open menu"
-        >
-          ☰
-        </button>
-
-
-        <button
-          class="back-btn"
-          onclick="goBusinesses()"
-          title="Back to Businesses"
-        >
-          ←
-        </button>
-
-
-        <div class="page-title">
-
-          <h1 id="topBusinessName">
+          <div class="eyebrow">
             Business Workspace
-          </h1>
+          </div>
 
-          <p id="topBusinessSubtitle">
-            Manage your business operations
+          <div class="hero-title">
+
+            <h1 id="businessName">
+              Loading...
+            </h1>
+
+            <span
+              class="category-badge"
+              id="businessCategory"
+            >
+              —
+            </span>
+
+          </div>
+
+          <p
+            class="hero-description"
+            id="businessDescription"
+          >
+            Loading business information...
           </p>
 
-        </div>
-
-      </div>
-
-
-      <div class="top-actions">
-
-        <button
-          class="top-btn"
-          onclick="editBusiness()"
-        >
-          ✎ Edit Business
-        </button>
-
-        <button
-          class="icon-btn"
-          onclick="showToast('Notifications are coming soon.')"
-        >
-          🔔
-          <span class="notification-dot"></span>
-        </button>
-
-      </div>
-
-    </header>
-
-
-    <section class="content">
-
-
-      <!-- =================================================
-           BUSINESS HERO
-      ================================================== -->
-
-      <section class="business-hero">
-
-        <div class="hero-main">
-
-          <div class="hero-business-info">
-
-            <div
-              class="hero-icon"
-              id="heroIcon"
-            >
-              SA
-            </div>
-
-
-            <div>
-
-              <span class="hero-label">
-                <span class="hero-dot"></span>
-                Active Business
-              </span>
-
-
-              <h2 id="heroBusinessName">
-                Sarakat Agency
-              </h2>
-
-
-              <div
-                class="hero-category"
-                id="heroCategory"
-              >
-                Digital Agency
-              </div>
-
-
-              <p
-                class="hero-description"
-                id="heroDescription"
-              >
-                Advertising, design, social media management,
-                client projects and business services.
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <div class="hero-actions">
-
-            <button
-              class="primary-btn"
-              onclick="quickCustomer()"
-            >
-              + New Customer
-            </button>
-
-            <button
-              class="secondary-btn"
-              onclick="quickPayment()"
-            >
-              ৳ Add Payment
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <div class="hero-bottom">
-
-          <div class="hero-stat">
-
-            <span>
-              Revenue
-            </span>
-
-            <strong id="heroRevenue">
-              ৳85,000
-            </strong>
-
-          </div>
-
-
-          <div class="hero-stat">
-
-            <span>
-              Customers
-            </span>
-
-            <strong id="heroCustomers">
-              18
-            </strong>
-
-          </div>
-
-
-          <div class="hero-stat">
-
-            <span>
-              Projects
-            </span>
-
-            <strong id="heroProjects">
-              12
-            </strong>
-
-          </div>
-
-
-          <div class="hero-stat">
-
-            <span>
-              Pending
-            </span>
-
-            <strong id="heroPending">
-              ৳25,000
-            </strong>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =================================================
-           MODULE BAR
-      ================================================== -->
-
-      <div
-        class="module-bar"
-        id="moduleBar"
-      >
-        <!-- Dynamic -->
-      </div>
-
-
-      <!-- =================================================
-           OVERVIEW
-      ================================================== -->
-
-      <div class="section-head">
-
-        <h3>
-          Business Overview
-        </h3>
-
-        <span>
-          Current business performance
-        </span>
-
-      </div>
-
-
-      <div class="stats">
-
-        <div class="stat-card">
-
-          <div class="stat-top">
-
-            <span class="stat-label">
-              Total Revenue
-            </span>
-
-            <div class="stat-icon">
-              ৳
-            </div>
-
-          </div>
-
-          <div
-            class="stat-value"
-            id="statRevenue"
+          <span
+            class="status status-active"
+            id="businessStatus"
           >
-            ৳85,000
-          </div>
-
-          <div class="stat-note">
-            Current month
-          </div>
+            Active
+          </span>
 
         </div>
 
+        <div class="hero-actions">
 
-        <div class="stat-card">
-
-          <div class="stat-top">
-
-            <span class="stat-label">
-              Customers
-            </span>
-
-            <div
-              class="stat-icon"
-              style="
-                color:#b99cff;
-                background:rgba(155,114,255,.09);
-              "
-            >
-              ◉
-            </div>
-
-          </div>
-
-          <div
-            class="stat-value"
-            id="statCustomers"
+          <button
+            class="btn"
+            onclick="editBusiness()"
           >
-            18
-          </div>
+            ✎ Edit Business
+          </button>
 
-          <div class="stat-note">
-            Active customers
-          </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-          <div class="stat-top">
-
-            <span class="stat-label">
-              Projects
-            </span>
-
-            <div
-              class="stat-icon"
-              style="
-                color:#55d7ff;
-                background:rgba(39,200,255,.09);
-              "
-            >
-              ◫
-            </div>
-
-          </div>
-
-          <div
-            class="stat-value"
-            id="statProjects"
+          <button
+            class="btn btn-primary"
+            onclick="openModule('customers')"
           >
-            12
-          </div>
-
-          <div class="stat-note">
-            Active / completed
-          </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-          <div class="stat-top">
-
-            <span class="stat-label">
-              Pending Payment
-            </span>
-
-            <div
-              class="stat-icon"
-              style="
-                color:#ffca67;
-                background:rgba(255,189,74,.09);
-              "
-            >
-              !
-            </div>
-
-          </div>
-
-          <div
-            class="stat-value"
-            id="statPending"
-          >
-            ৳25,000
-          </div>
-
-          <div class="stat-note">
-            Needs attention
-          </div>
+            + New Customer
+          </button>
 
         </div>
 
       </div>
-
-
-      <!-- =================================================
-           MAIN DASHBOARD GRID
-      ================================================== -->
-
-      <div class="section-head">
-
-        <h3>
-          Operations
-        </h3>
-
-        <span>
-          Business activity
-        </span>
-
-      </div>
-
-
-      <div class="dashboard-grid">
-
-
-        <!-- LEFT -->
-
-        <div>
-
-
-          <!-- CUSTOMERS -->
-
-          <div class="panel">
-
-            <div class="panel-head">
-
-              <h3>
-                Recent Customers
-              </h3>
-
-              <button
-                onclick="openModule('customers')"
-              >
-                View all →
-              </button>
-
-            </div>
-
-
-            <div class="table-wrap">
-
-              <table>
-
-                <thead>
-
-                  <tr>
-                    <th>Customer</th>
-                    <th>Service</th>
-                    <th>Value</th>
-                    <th>Status</th>
-                  </tr>
-
-                </thead>
-
-
-                <tbody id="customerTable">
-
-                  <tr>
-
-                    <td>
-
-                      <div class="customer">
-
-                        <div class="customer-avatar">
-                          AR
-                        </div>
-
-                        <div class="customer-name">
-
-                          <strong>
-                            Arif Rahman
-                          </strong>
-
-                          <span>
-                            CUS-1001
-                          </span>
-
-                        </div>
-
-                      </div>
-
-                    </td>
-
-                    <td>
-                      Facebook Marketing
-                    </td>
-
-                    <td>
-                      ৳15,000
-                    </td>
-
-                    <td>
-                      <span class="status paid">
-                        Paid
-                      </span>
-                    </td>
-
-                  </tr>
-
-
-                  <tr>
-
-                    <td>
-
-                      <div class="customer">
-
-                        <div class="customer-avatar">
-                          SK
-                        </div>
-
-                        <div class="customer-name">
-
-                          <strong>
-                            SK Fashion
-                          </strong>
-
-                          <span>
-                            CUS-1002
-                          </span>
-
-                        </div>
-
-                      </div>
-
-                    </td>
-
-                    <td>
-                      Social Media
-                    </td>
-
-                    <td>
-                      ৳22,000
-                    </td>
-
-                    <td>
-                      <span class="status partial">
-                        Partial
-                      </span>
-                    </td>
-
-                  </tr>
-
-
-                  <tr>
-
-                    <td>
-
-                      <div class="customer">
-
-                        <div class="customer-avatar">
-                          RN
-                        </div>
-
-                        <div class="customer-name">
-
-                          <strong>
-                            Rahman Enterprise
-                          </strong>
-
-                          <span>
-                            CUS-1003
-                          </span>
-
-                        </div>
-
-                      </div>
-
-                    </td>
-
-                    <td>
-                      Facebook Ads
-                    </td>
-
-                    <td>
-                      ৳18,000
-                    </td>
-
-                    <td>
-                      <span class="status pending">
-                        Pending
-                      </span>
-                    </td>
-
-                  </tr>
-
-                </tbody>
-
-              </table>
-
-            </div>
-
-          </div>
-
-
-          <!-- PROJECTS -->
-
-          <div class="panel progress-panel">
-
-            <div class="panel-head">
-
-              <h3>
-                Active Projects
-              </h3>
-
-              <button
-                onclick="openModule('projects')"
-              >
-                Manage →
-              </button>
-
-            </div>
-
-
-            <div class="project-list">
-
-              <div class="project-item">
-
-                <div class="project-top">
-
-                  <strong>
-                    Facebook Marketing Campaign
-                  </strong>
-
-                  <span>
-                    82%
-                  </span>
-
-                </div>
-
-                <div class="project-bar">
-                  <span style="width:82%;"></span>
-                </div>
-
-              </div>
-
-
-              <div class="project-item">
-
-                <div class="project-top">
-
-                  <strong>
-                    Local Food House Website
-                  </strong>
-
-                  <span>
-                    65%
-                  </span>
-
-                </div>
-
-                <div class="project-bar">
-                  <span
-                    style="
-                      width:65%;
-                      background:
-                        linear-gradient(
-                          90deg,
-                          #9b72ff,
-                          #4f8cff
-                        );
-                    "
-                  ></span>
-                </div>
-
-              </div>
-
-
-              <div class="project-item">
-
-                <div class="project-top">
-
-                  <strong>
-                    SK Fashion Branding
-                  </strong>
-
-                  <span>
-                    43%
-                  </span>
-
-                </div>
-
-                <div class="project-bar">
-                  <span
-                    style="
-                      width:43%;
-                      background:
-                        linear-gradient(
-                          90deg,
-                          #ffbd4a,
-                          #ff7b5c
-                        );
-                    "
-                  ></span>
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- RIGHT -->
-
-        <div>
-
-
-          <!-- QUICK ACTIONS -->
-
-          <div class="panel">
-
-            <div class="panel-head">
-
-              <h3>
-                Quick Actions
-              </h3>
-
-              <span
-                style="
-                  color:#657184;
-                  font-size:8px;
-                "
-              >
-                Shortcuts
-              </span>
-
-            </div>
-
-
-            <div class="quick-actions">
-
-
-              <button
-                class="quick-btn"
-                onclick="quickCustomer()"
-              >
-
-                <div class="quick-icon">
-                  👤
-                </div>
-
-                <strong>
-                  New Customer
-                </strong>
-
-                <span>
-                  Add customer to this business
-                </span>
-
-              </button>
-
-
-              <button
-                class="quick-btn"
-                onclick="quickPayment()"
-              >
-
-                <div class="quick-icon">
-                  ৳
-                </div>
-
-                <strong>
-                  Add Payment
-                </strong>
-
-                <span>
-                  Record business payment
-                </span>
-
-              </button>
-
-
-              <button
-                class="quick-btn"
-                onclick="quickProject()"
-              >
-
-                <div class="quick-icon">
-                  📋
-                </div>
-
-                <strong>
-                  New Project
-                </strong>
-
-                <span>
-                  Create business project
-                </span>
-
-              </button>
-
-
-              <button
-                class="quick-btn"
-                onclick="quickInvoice()"
-              >
-
-                <div class="quick-icon">
-                  🧾
-                </div>
-
-                <strong>
-                  New Invoice
-                </strong>
-
-                <span>
-                  Create customer invoice
-                </span>
-
-              </button>
-
-
-              <button
-                class="quick-btn"
-                onclick="quickExpense()"
-              >
-
-                <div class="quick-icon">
-                  💸
-                </div>
-
-                <strong>
-                  Add Expense
-                </strong>
-
-                <span>
-                  Record business expense
-                </span>
-
-              </button>
-
-
-              <button
-                class="quick-btn"
-                onclick="openModule('reports')"
-              >
-
-                <div class="quick-icon">
-                  📊
-                </div>
-
-                <strong>
-                  Reports
-                </strong>
-
-                <span>
-                  View business reports
-                </span>
-
-              </button>
-
-
-            </div>
-
-          </div>
-
-
-          <!-- ACTIVITY -->
-
-          <div
-            class="panel"
-            style="margin-top:15px;"
-          >
-
-            <div class="panel-head">
-
-              <h3>
-                Recent Activity
-              </h3>
-
-              <span
-                style="
-                  color:#657184;
-                  font-size:8px;
-                "
-              >
-                Latest
-              </span>
-
-            </div>
-
-
-            <div class="activity">
-
-
-              <div class="activity-item">
-
-                <div class="activity-icon">
-                  ৳
-                </div>
-
-                <div class="activity-text">
-
-                  <strong>
-                    Payment received ৳15,000
-                  </strong>
-
-                  <span>
-                    Customer payment recorded
-                  </span>
-
-                </div>
-
-                <div class="activity-time">
-                  2h
-                </div>
-
-              </div>
-
-
-              <div class="activity-item">
-
-                <div
-                  class="activity-icon"
-                  style="
-                    color:#45df91;
-                    background:rgba(40,209,124,.08);
-                  "
-                >
-                  👤
-                </div>
-
-                <div class="activity-text">
-
-                  <strong>
-                    New customer added
-                  </strong>
-
-                  <span>
-                    Arif Rahman joined
-                  </span>
-
-                </div>
-
-                <div class="activity-time">
-                  5h
-                </div>
-
-              </div>
-
-
-              <div class="activity-item">
-
-                <div
-                  class="activity-icon"
-                  style="
-                    color:#b99cff;
-                    background:rgba(155,114,255,.08);
-                  "
-                >
-                  📋
-                </div>
-
-                <div class="activity-text">
-
-                  <strong>
-                    Project updated
-                  </strong>
-
-                  <span>
-                    Campaign moved to active
-                  </span>
-
-                </div>
-
-                <div class="activity-time">
-                  1d
-                </div>
-
-              </div>
-
-
-              <div class="activity-item">
-
-                <div
-                  class="activity-icon"
-                  style="
-                    color:#ffca67;
-                    background:rgba(255,189,74,.08);
-                  "
-                >
-                  🧾
-                </div>
-
-                <div class="activity-text">
-
-                  <strong>
-                    Invoice created
-                  </strong>
-
-                  <span>
-                    Invoice #INV-1007
-                  </span>
-
-                </div>
-
-                <div class="activity-time">
-                  2d
-                </div>
-
-              </div>
-
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
 
     </section>
 
-  </main>
+    <!-- STATS -->
+
+    <section class="stats">
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Revenue
+        </div>
+
+        <div
+          class="stat-value"
+          id="statRevenue"
+        >
+          ৳0
+        </div>
+
+        <div class="stat-sub">
+          Paid customer revenue
+        </div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Customers
+        </div>
+
+        <div
+          class="stat-value"
+          id="statCustomers"
+        >
+          0
+        </div>
+
+        <div class="stat-sub">
+          Linked customers
+        </div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Projects
+        </div>
+
+        <div
+          class="stat-value"
+          id="statProjects"
+        >
+          0
+        </div>
+
+        <div class="stat-sub">
+          Business projects
+        </div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Pending Payment
+        </div>
+
+        <div
+          class="stat-value"
+          id="statPending"
+        >
+          ৳0
+        </div>
+
+        <div class="stat-sub">
+          Customer outstanding
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- MAIN GRID -->
+
+    <section class="grid">
+
+      <!-- CUSTOMERS -->
+
+      <div class="card">
+
+        <div class="card-head">
+
+          <div>
+            <strong>
+              Recent Customers
+            </strong>
+
+            <span id="customerCountText">
+              0 customers
+            </span>
+          </div>
+
+          <button
+            class="btn"
+            onclick="openAllCustomers()"
+          >
+            View All →
+          </button>
+
+        </div>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Customer</th>
+                <th>Service</th>
+                <th>Total</th>
+                <th>Paid</th>
+                <th>Due</th>
+                <th>Status</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="customerBody"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <div style="display:grid;gap:18px">
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="card">
+
+          <div class="card-head">
+
+            <strong>
+              Quick Actions
+            </strong>
+
+            <span>
+              Manage
+            </span>
+
+          </div>
+
+          <div class="card-body">
+
+            <div class="quick-grid">
+
+              <button
+                class="quick"
+                onclick="openModule('customers')"
+              >
+                <div class="quick-icon">♙</div>
+                <strong>New Customer</strong>
+                <span>Add business customer</span>
+              </button>
+
+              <button
+                class="quick"
+                onclick="openModule('payments')"
+              >
+                <div class="quick-icon">৳</div>
+                <strong>Add Payment</strong>
+                <span>Record received money</span>
+              </button>
+
+              <button
+                class="quick"
+                onclick="openModule('projects')"
+              >
+                <div class="quick-icon">◈</div>
+                <strong>New Project</strong>
+                <span>Create a project</span>
+              </button>
+
+              <button
+                class="quick"
+                onclick="openModule('invoices')"
+              >
+                <div class="quick-icon">▧</div>
+                <strong>New Invoice</strong>
+                <span>Create customer invoice</span>
+              </button>
+
+              <button
+                class="quick"
+                onclick="openModule('expenses')"
+              >
+                <div class="quick-icon">৳</div>
+                <strong>Add Expense</strong>
+                <span>Track business cost</span>
+              </button>
+
+              <button
+                class="quick"
+                onclick="openModule('reports')"
+              >
+                <div class="quick-icon">▥</div>
+                <strong>Reports</strong>
+                <span>Business analytics</span>
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- MODULES -->
+
+        <div class="card">
+
+          <div class="card-head">
+
+            <strong>
+              Business Modules
+            </strong>
+
+            <span>
+              Open
+            </span>
+
+          </div>
+
+          <div class="card-body">
+
+            <div
+              class="modules"
+              id="moduleList"
+            ></div>
+
+          </div>
+
+        </div>
+
+        <!-- ACTIVITY -->
+
+        <div class="card">
+
+          <div class="card-head">
+
+            <strong>
+              Business Activity
+            </strong>
+
+            <span>
+              Live
+            </span>
+
+          </div>
+
+          <div class="card-body">
+
+            <div
+              class="activity"
+              id="activityList"
+            ></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </section>
+
+</main>
+
+<!-- ================= EDIT MODAL ================= -->
+
+<div class="overlay" id="editOverlay">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3>
+        Edit Business
+      </h3>
+
+      <button
+        class="close"
+        onclick="closeEdit()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>
+            Business Name
+          </label>
+
+          <input
+            id="editName"
+            type="text"
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label>
+            Category
+          </label>
+
+          <select id="editCategory">
+
+            <option value="agency">
+              Agency
+            </option>
+
+            <option value="website">
+              Website
+            </option>
+
+            <option value="marketing">
+              Marketing
+            </option>
+
+            <option value="other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label>
+            Status
+          </label>
+
+          <select id="editStatus">
+
+            <option value="active">
+              Active
+            </option>
+
+            <option value="inactive">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label>
+            Target Revenue
+          </label>
+
+          <input
+            id="editTarget"
+            type="number"
+            min="0"
+          >
+
+        </div>
+
+        <div class="form-group full">
+
+          <label>
+            Description
+          </label>
+
+          <textarea
+            id="editDescription"
+          ></textarea>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-foot">
+
+      <button
+        class="btn"
+        onclick="closeEdit()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        onclick="saveBusiness()"
+      >
+        Save Changes
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
 
-
-<!-- =====================================================
-     TOAST
-====================================================== -->
+<!-- ================= TOAST ================= -->
 
 <div
   class="toast"
   id="toast"
->
-  Action completed.
-</div>
-
+></div>
 
 <script>
 
-  /* =====================================================
-     SNK BUSINESS — INDIVIDUAL BUSINESS WORKSPACE
-     Step 3
-  ===================================================== */
+/* =========================================================
+   SNK BUSINESS
+   BUSINESS WORKSPACE — STEP 3.2
+========================================================= */
 
+const BUSINESS_KEY =
+  "snkBusinesses";
 
-  /* =====================================================
-     BUSINESS DATA
-  ===================================================== */
+const CUSTOMER_KEY =
+  "snkBusinessCustomers";
 
-  const businessData = {
+let businesses = [];
+let customers = [];
+let currentBusiness = null;
 
-    sarakat: {
+/* =========================================================
+   INIT
+========================================================= */
 
-      name:"Sarakat Agency",
+document.addEventListener(
+  "DOMContentLoaded",
+  init
+);
 
-      category:"Digital Agency",
+function init(){
 
-      icon:"SA",
+  loadBusinesses();
 
-      description:
-        "Advertising, design, social media management, client projects and business services.",
+  loadCustomers();
 
-      revenue:85000,
+  resolveBusiness();
 
-      customers:18,
+  if(!currentBusiness){
 
-      projects:12,
+    showToast(
+      "No business found."
+    );
 
-      pending:25000,
+    setTimeout(
+      ()=>location.href="businesses.html",
+      1200
+    );
 
-      modules:[
-        {
-          id:"overview",
-          icon:"⌂",
-          label:"Overview"
-        },
-        {
-          id:"customers",
-          icon:"◉",
-          label:"Customers"
-        },
-        {
-          id:"projects",
-          icon:"◫",
-          label:"Projects"
-        },
-        {
-          id:"payments",
-          icon:"৳",
-          label:"Payments"
-        },
-        {
-          id:"expenses",
-          icon:"💸",
-          label:"Expenses"
-        },
-        {
-          id:"invoices",
-          icon:"▤",
-          label:"Invoices"
-        },
-        {
-          id:"employees",
-          icon:"👨‍💼",
-          label:"Employees"
-        },
-        {
-          id:"tasks",
-          icon:"◴",
-          label:"Tasks"
-        },
-        {
-          id:"reports",
-          icon:"◌",
-          label:"Reports"
-        }
-      ]
+    return;
 
-    },
+  }
 
+  syncCurrentBusinessMetrics();
 
-    website: {
+  renderBusiness();
 
-      name:"Website Sale",
+  renderCustomers();
 
-      category:"Website & Digital Products",
+  renderModules();
 
-      icon:"🌐",
+  renderActivity();
 
-      description:
-        "Ready-made websites, custom websites, domains, hosting packages and website delivery.",
+}
 
-      revenue:125000,
+/* =========================================================
+   LOAD BUSINESSES
+========================================================= */
 
-      customers:22,
+function loadBusinesses(){
 
-      projects:8,
+  try{
 
-      pending:30000,
+    businesses =
+      JSON.parse(
+        localStorage.getItem(
+          BUSINESS_KEY
+        )
+      ) || [];
 
-      modules:[
-        {
-          id:"overview",
-          icon:"⌂",
-          label:"Overview"
-        },
-        {
-          id:"inventory",
-          icon:"▣",
-          label:"Website Inventory"
-        },
-        {
-          id:"available",
-          icon:"◫",
-          label:"Available Websites"
-        },
-        {
-          id:"sold",
-          icon:"✓",
-          label:"Sold Websites"
-        },
-        {
-          id:"customers",
-          icon:"◉",
-          label:"New Customer"
-        },
-        {
-          id:"payments",
-          icon:"৳",
-          label:"Payments"
-        },
-        {
-          id:"hosting",
-          icon:"☁",
-          label:"Hosting / Domain"
-        },
-        {
-          id:"delivery",
-          icon:"🚚",
-          label:"Delivery"
-        },
-        {
-          id:"sales",
-          icon:"▤",
-          label:"Sales History"
-        }
-      ]
+  }catch(error){
 
-    },
+    businesses = [];
 
+  }
 
-    marketing: {
+}
 
-      name:"Digital Marketing",
+/* =========================================================
+   LOAD CUSTOMERS
+========================================================= */
 
-      category:"Marketing Services",
+function loadCustomers(){
 
-      icon:"📢",
+  try{
 
-      description:
-        "Facebook Ads, Google Ads, campaigns, content creation and marketing management.",
+    customers =
+      JSON.parse(
+        localStorage.getItem(
+          CUSTOMER_KEY
+        )
+      ) || [];
 
-      revenue:180000,
+  }catch(error){
 
-      customers:11,
+    customers = [];
 
-      projects:17,
+  }
 
-      pending:35000,
+}
 
-      modules:[
-        {
-          id:"overview",
-          icon:"⌂",
-          label:"Overview"
-        },
-        {
-          id:"clients",
-          icon:"◉",
-          label:"Clients"
-        },
-        {
-          id:"campaigns",
-          icon:"◫",
-          label:"Campaigns"
-        },
-        {
-          id:"facebook",
-          icon:"f",
-          label:"Facebook Ads"
-        },
-        {
-          id:"google",
-          icon:"G",
-          label:"Google Ads"
-        },
-        {
-          id:"packages",
-          icon:"▦",
-          label:"Packages"
-        },
-        {
-          id:"payments",
-          icon:"৳",
-          label:"Payments"
-        },
-        {
-          id:"pending",
-          icon:"!",
-          label:"Pending Payments"
-        },
-        {
-          id:"expenses",
-          icon:"💸",
-          label:"Expenses"
-        },
-        {
-          id:"reports",
-          icon:"◌",
-          label:"Reports"
-        }
-      ]
+/* =========================================================
+   RESOLVE BUSINESS
+========================================================= */
 
-    }
-
-  };
-
-
-  /* =====================================================
-     GET BUSINESS
-  ===================================================== */
+function resolveBusiness(){
 
   const params =
     new URLSearchParams(
-      window.location.search
+      location.search
     );
 
+  const key =
+    params.get("business");
 
-  const businessKey =
-    params.get("business") || "sarakat";
+  if(!businesses.length){
 
+    return;
 
-  let currentBusiness =
-    businessData[businessKey];
+  }
 
+  if(key){
+
+    currentBusiness =
+      businesses.find(
+        business=>
+          String(business.id) === String(key) ||
+          String(business.slug) === String(key) ||
+          String(business.name).toLowerCase() ===
+            String(key).toLowerCase()
+      );
+
+  }
 
   if(!currentBusiness){
 
     currentBusiness =
-      businessData.sarakat;
+      businesses[0];
 
   }
 
+}
 
-  /* =====================================================
-     FORMAT MONEY
-  ===================================================== */
+/* =========================================================
+   LINKED CUSTOMERS
+========================================================= */
 
-  function money(value){
+function getLinkedCustomers(){
 
-    return "৳" +
-      Number(value || 0)
-        .toLocaleString("en-BD");
+  if(!currentBusiness){
 
-  }
-
-
-  /* =====================================================
-     INITIALIZE
-  ===================================================== */
-
-  function initializeBusiness(){
-
-    document.title =
-      currentBusiness.name +
-      " | SNK Business";
-
-
-    document.getElementById(
-      "topBusinessName"
-    ).textContent =
-      currentBusiness.name;
-
-
-    document.getElementById(
-      "topBusinessSubtitle"
-    ).textContent =
-      currentBusiness.category +
-      " • Business Workspace";
-
-
-    document.getElementById(
-      "heroIcon"
-    ).textContent =
-      currentBusiness.icon;
-
-
-    document.getElementById(
-      "heroBusinessName"
-    ).textContent =
-      currentBusiness.name;
-
-
-    document.getElementById(
-      "heroCategory"
-    ).textContent =
-      currentBusiness.category;
-
-
-    document.getElementById(
-      "heroDescription"
-    ).textContent =
-      currentBusiness.description;
-
-
-    document.getElementById(
-      "miniIcon"
-    ).textContent =
-      currentBusiness.icon;
-
-
-    document.getElementById(
-      "miniName"
-    ).textContent =
-      currentBusiness.name;
-
-
-    document.getElementById(
-      "miniCategory"
-    ).textContent =
-      currentBusiness.category;
-
-
-    document.getElementById(
-      "heroRevenue"
-    ).textContent =
-      money(currentBusiness.revenue);
-
-
-    document.getElementById(
-      "heroCustomers"
-    ).textContent =
-      currentBusiness.customers;
-
-
-    document.getElementById(
-      "heroProjects"
-    ).textContent =
-      currentBusiness.projects;
-
-
-    document.getElementById(
-      "heroPending"
-    ).textContent =
-      money(currentBusiness.pending);
-
-
-    document.getElementById(
-      "statRevenue"
-    ).textContent =
-      money(currentBusiness.revenue);
-
-
-    document.getElementById(
-      "statCustomers"
-    ).textContent =
-      currentBusiness.customers;
-
-
-    document.getElementById(
-      "statProjects"
-    ).textContent =
-      currentBusiness.projects;
-
-
-    document.getElementById(
-      "statPending"
-    ).textContent =
-      money(currentBusiness.pending);
-
-
-    buildModuleNavigation();
+    return [];
 
   }
 
+  return customers.filter(
+    customer=>
+      customer.businessId === currentBusiness.id ||
+      customer.businessSlug === currentBusiness.slug
+  );
 
-  /* =====================================================
-     BUILD MODULE NAVIGATION
-  ===================================================== */
+}
 
-  function buildModuleNavigation(){
+/* =========================================================
+   SYNC CURRENT BUSINESS
+========================================================= */
 
-    const moduleBar =
-      document.getElementById(
-        "moduleBar"
-      );
+function syncCurrentBusinessMetrics(){
 
+  if(!currentBusiness) return;
 
-    const businessNav =
-      document.getElementById(
-        "businessNav"
-      );
+  const linked =
+    getLinkedCustomers();
 
+  currentBusiness.customers =
+    linked.length;
 
-    moduleBar.innerHTML = "";
-    businessNav.innerHTML = "";
+  currentBusiness.revenue =
+    linked.reduce(
+      (sum,customer)=>
+        sum + Number(customer.paid || 0),
+      0
+    );
 
+  currentBusiness.pending =
+    linked.reduce(
+      (sum,customer)=>
+        sum +
+        Math.max(
+          Number(customer.total || 0) -
+          Number(customer.paid || 0),
+          0
+        ),
+      0
+    );
 
-    currentBusiness.modules
-      .forEach(
-        (module,index) => {
+  const index =
+    businesses.findIndex(
+      b=>b.id === currentBusiness.id
+    );
 
-          /* Main horizontal module bar */
+  if(index !== -1){
 
-          const button =
-            document.createElement(
-              "button"
-            );
+    businesses[index] =
+      currentBusiness;
 
+    localStorage.setItem(
+      BUSINESS_KEY,
+      JSON.stringify(businesses)
+    );
 
-          button.className =
-            "module-btn" +
-            (
-              index === 0
-                ? " active"
-                : ""
-            );
+  }
 
+}
 
-          button.innerHTML =
-            `
-              <span class="module-icon">
-                ${module.icon}
-              </span>
+/* =========================================================
+   RENDER BUSINESS
+========================================================= */
 
-              <span>
-                ${module.label}
-              </span>
-            `;
+function renderBusiness(){
 
+  const business =
+    currentBusiness;
 
-          button.onclick =
-            () => openModule(
-              module.id
-            );
+  document.title =
+    `${business.name} | SNK Business`;
 
+  document.getElementById(
+    "businessName"
+  ).textContent =
+    business.name;
 
-          moduleBar.appendChild(
-            button
+  document.getElementById(
+    "topBusinessName"
+  ).textContent =
+    business.name;
+
+  document.getElementById(
+    "sideBusinessName"
+  ).textContent =
+    business.name;
+
+  document.getElementById(
+    "businessCategory"
+  ).textContent =
+    categoryLabel(
+      business.category
+    );
+
+  document.getElementById(
+    "businessDescription"
+  ).textContent =
+    business.description ||
+    "Business workspace and management.";
+
+  const status =
+    document.getElementById(
+      "businessStatus"
+    );
+
+  const sideStatus =
+    document.getElementById(
+      "sideBusinessStatus"
+    );
+
+  if(business.status === "inactive"){
+
+    status.textContent =
+      "Inactive";
+
+    status.className =
+      "status status-inactive";
+
+    sideStatus.textContent =
+      "Inactive";
+
+    sideStatus.style.color =
+      "#f87171";
+
+    sideStatus.style.background =
+      "rgba(239,68,68,.09)";
+
+  }else{
+
+    status.textContent =
+      "Active";
+
+    status.className =
+      "status status-active";
+
+    sideStatus.textContent =
+      "Active";
+
+    sideStatus.style.color =
+      "#4ade80";
+
+    sideStatus.style.background =
+      "rgba(34,197,94,.09)";
+
+  }
+
+  document.getElementById(
+    "statRevenue"
+  ).textContent =
+    money(business.revenue);
+
+  document.getElementById(
+    "statCustomers"
+  ).textContent =
+    business.customers || 0;
+
+  document.getElementById(
+    "statProjects"
+  ).textContent =
+    business.projects || 0;
+
+  document.getElementById(
+    "statPending"
+  ).textContent =
+    money(business.pending);
+
+}
+
+/* =========================================================
+   CUSTOMER RENDER
+========================================================= */
+
+function renderCustomers(){
+
+  const linked =
+    getLinkedCustomers();
+
+  document.getElementById(
+    "customerCountText"
+  ).textContent =
+    `${linked.length} customer${linked.length === 1 ? "" : "s"}`;
+
+  const body =
+    document.getElementById(
+      "customerBody"
+    );
+
+  if(!linked.length){
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="6">
+          <div class="empty">
+            <strong>No customers yet</strong>
+            Add a customer to this business to see live customer data here.
+          </div>
+        </td>
+      </tr>
+    `;
+
+    return;
+
+  }
+
+  const recent =
+    linked
+      .slice()
+      .sort(
+        (a,b)=>
+          new Date(b.createdAt || 0) -
+          new Date(a.createdAt || 0)
+      )
+      .slice(0,8);
+
+  body.innerHTML =
+    recent
+      .map(customer=>{
+
+        const due =
+          Math.max(
+            Number(customer.total || 0) -
+            Number(customer.paid || 0),
+            0
           );
 
+        return `
 
-          /* Sidebar */
+          <tr>
 
-          const sideButton =
-            document.createElement(
-              "button"
-            );
+            <td>
 
+              <div class="customer">
 
-          sideButton.className =
-            "nav-item" +
-            (
-              index === 0
-                ? " active"
-                : ""
-            );
+                <div class="customer-avatar">
+                  ${escapeHTML(
+                    initials(customer.name)
+                  )}
+                </div>
 
+                <div>
 
-          sideButton.innerHTML =
-            `
-              <span class="nav-icon">
-                ${module.icon}
+                  <div class="customer-name">
+                    ${escapeHTML(
+                      customer.name
+                    )}
+                  </div>
+
+                  <div class="customer-service">
+                    ${escapeHTML(
+                      customer.phone || "No phone"
+                    )}
+                  </div>
+
+                </div>
+
+              </div>
+
+            </td>
+
+            <td>
+              ${escapeHTML(
+                customer.service || "General"
+              )}
+            </td>
+
+            <td>
+              <span class="money">
+                ${money(customer.total)}
               </span>
+            </td>
 
-              <span class="nav-text">
-                ${module.label}
+            <td>
+              <span class="money paid">
+                ${money(customer.paid)}
               </span>
-            `;
+            </td>
 
+            <td>
+              <span class="money due">
+                ${money(due)}
+              </span>
+            </td>
 
-          sideButton.onclick =
-            () => openModule(
-              module.id
-            );
+            <td>
+              ${statusBadge(
+                customer.status
+              )}
+            </td>
 
+          </tr>
 
-          businessNav.appendChild(
-            sideButton
-          );
+        `;
 
-        }
-      );
+      })
+      .join("");
+
+}
+
+/* =========================================================
+   MODULES
+========================================================= */
+
+function renderModules(){
+
+  const category =
+    currentBusiness.category;
+
+  let modules = [];
+
+  if(category === "agency"){
+
+    modules = [
+
+      ["♙","Customers","customers"],
+      ["◈","Projects","projects"],
+      ["৳","Payments","payments"],
+      ["৳","Expenses","expenses"],
+      ["▧","Invoices","invoices"],
+      ["♙","Employees","employees"],
+      ["✓","Tasks","tasks"],
+      ["▥","Reports","reports"]
+
+    ];
+
+  }else if(category === "website"){
+
+    modules = [
+
+      ["♙","Customers","customers"],
+      ["▤","Website Inventory","inventory"],
+      ["◫","Available Websites","available"],
+      ["✓","Sold Websites","sold"],
+      ["৳","Payments","payments"],
+      ["◎","Hosting / Domain","hosting"],
+      ["◈","Delivery","delivery"],
+      ["▥","Sales History","sales"]
+
+    ];
+
+  }else if(category === "marketing"){
+
+    modules = [
+
+      ["♙","Clients","customers"],
+      ["◈","Campaigns","campaigns"],
+      ["f","Facebook Ads","facebook"],
+      ["G","Google Ads","google"],
+      ["▤","Packages","packages"],
+      ["৳","Payments","payments"],
+      ["!","Pending Payments","pending"],
+      ["৳","Expenses","expenses"],
+      ["▥","Reports","reports"]
+
+    ];
+
+  }else{
+
+    modules = [
+
+      ["♙","Customers","customers"],
+      ["৳","Payments","payments"],
+      ["৳","Expenses","expenses"],
+      ["▧","Invoices","invoices"],
+      ["▥","Reports","reports"]
+
+    ];
 
   }
 
+  const container =
+    document.getElementById(
+      "moduleList"
+    );
 
-  /* =====================================================
-     OPEN MODULE
-  ===================================================== */
+  container.innerHTML =
+    modules.map(
+      module=>`
 
-  function openModule(module){
+        <button
+          class="module"
+          onclick="openModule('${module[2]}')"
+        >
 
-    if(module === "overview"){
+          <span class="module-left">
 
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
+            <span class="module-icon">
+              ${module[0]}
+            </span>
+
+            ${module[1]}
+
+          </span>
+
+          <span>→</span>
+
+        </button>
+
+      `
+    ).join("");
+
+  const nav =
+    document.getElementById(
+      "businessNav"
+    );
+
+  nav.innerHTML = `
+
+    <a
+      href="index.html"
+    >
+      <span class="nav-icon">⌂</span>
+      Main Dashboard
+    </a>
+
+    <a
+      href="businesses.html"
+    >
+      <span class="nav-icon">▣</span>
+      My Businesses
+    </a>
+
+    <div class="nav-title">
+      Business Modules
+    </div>
+
+    ${modules.map(
+      module=>`
+
+        <a
+          href="#"
+          onclick="openModule('${module[2]}');return false;"
+        >
+
+          <span class="nav-icon">
+            ${module[0]}
+          </span>
+
+          ${module[1]}
+
+        </a>
+
+      `
+    ).join("")}
+
+  `;
+
+}
+
+/* =========================================================
+   ACTIVITY
+========================================================= */
+
+function renderActivity(){
+
+  const linked =
+    getLinkedCustomers();
+
+  const activity =
+    [];
+
+  linked
+    .slice()
+    .sort(
+      (a,b)=>
+        new Date(b.createdAt || 0) -
+        new Date(a.createdAt || 0)
+    )
+    .slice(0,5)
+    .forEach(customer=>{
+
+      activity.push({
+
+        text:
+          `Customer ${customer.name} is linked to this business.`,
+
+        date:
+          customer.createdAt
+
       });
 
-      return;
+    });
 
-    }
+  if(!activity.length){
 
+    document.getElementById(
+      "activityList"
+    ).innerHTML = `
+      <div class="empty">
+        <strong>No activity yet</strong>
+        Business activity will appear here.
+      </div>
+    `;
 
-    /*
-      Future module pages.
+    return;
 
-      Examples:
+  }
 
-      customers.html?business=sarakat
-      payments.html?business=sarakat
-      projects.html?business=sarakat
+  document.getElementById(
+    "activityList"
+  ).innerHTML =
+    activity.map(
+      item=>`
 
-      Website:
+        <div class="activity-item">
 
-      inventory.html?business=website
-      available.html?business=website
-      sold.html?business=website
+          <div class="activity-dot"></div>
 
-      Marketing:
+          <div class="activity-text">
 
-      campaigns.html?business=marketing
-      facebook.html?business=marketing
-      google.html?business=marketing
-    */
+            ${escapeHTML(item.text)}
 
+            <span class="activity-time">
+              ${formatDate(item.date)}
+            </span>
 
-    const routes = {
+          </div>
 
-      customers:
-        "customers.html",
+        </div>
 
-      clients:
-        "customers.html",
+      `
+    ).join("");
 
-      projects:
-        "projects.html",
+}
 
-      payments:
-        "payments.html",
+/* =========================================================
+   OPEN MODULE
+========================================================= */
 
-      expenses:
-        "expenses.html",
+function openModule(module){
 
-      invoices:
-        "invoices.html",
+  const id =
+    encodeURIComponent(
+      currentBusiness.id
+    );
 
-      employees:
-        "employees.html",
+  const routes = {
 
-      tasks:
-        "tasks.html",
+    customers:`customers.html?business=${id}`,
 
-      reports:
-        "reports.html",
+    clients:`customers.html?business=${id}`,
 
-      inventory:
-        "inventory.html",
+    projects:`projects.html?business=${id}`,
 
-      available:
-        "websites.html",
+    payments:`payments.html?business=${id}`,
 
-      sold:
-        "websites.html",
+    expenses:`expenses.html?business=${id}`,
 
-      hosting:
-        "hosting.html",
+    invoices:`invoices.html?business=${id}`,
 
-      delivery:
-        "delivery.html",
+    employees:`employees.html?business=${id}`,
 
-      sales:
-        "sales.html",
+    tasks:`tasks.html?business=${id}`,
 
-      campaigns:
-        "campaigns.html",
+    reports:`reports.html?business=${id}`,
 
-      facebook:
-        "facebook-ads.html",
+    inventory:`inventory.html?business=${id}`,
 
-      google:
-        "google-ads.html",
+    available:`websites.html?business=${id}`,
 
-      packages:
-        "packages.html",
+    sold:`websites.html?business=${id}`,
 
-      pending:
-        "payments.html"
+    hosting:`hosting.html?business=${id}`,
 
-    };
+    delivery:`delivery.html?business=${id}`,
 
+    sales:`sales.html?business=${id}`,
 
-    const route =
-      routes[module];
+    campaigns:`campaigns.html?business=${id}`,
 
+    facebook:`facebook-ads.html?business=${id}`,
 
-    if(route){
+    google:`google-ads.html?business=${id}`,
 
-      window.location.href =
-        route +
-        "?business=" +
-        encodeURIComponent(
-          businessKey
-        );
+    packages:`packages.html?business=${id}`,
 
-      return;
+    pending:`payments.html?business=${id}`
 
-    }
+  };
 
+  const target =
+    routes[module];
+
+  if(target){
+
+    location.href =
+      target;
+
+    return;
+
+  }
+
+  showToast(
+    `${module} module will be added next.`
+  );
+
+}
+
+/* =========================================================
+   VIEW ALL CUSTOMERS
+========================================================= */
+
+function openAllCustomers(){
+
+  location.href =
+    `customers.html?business=${
+      encodeURIComponent(
+        currentBusiness.id
+      )
+    }`;
+
+}
+
+/* =========================================================
+   EDIT BUSINESS
+========================================================= */
+
+function editBusiness(){
+
+  document.getElementById(
+    "editName"
+  ).value =
+    currentBusiness.name || "";
+
+  document.getElementById(
+    "editCategory"
+  ).value =
+    currentBusiness.category || "other";
+
+  document.getElementById(
+    "editStatus"
+  ).value =
+    currentBusiness.status || "active";
+
+  document.getElementById(
+    "editTarget"
+  ).value =
+    currentBusiness.target || 0;
+
+  document.getElementById(
+    "editDescription"
+  ).value =
+    currentBusiness.description || "";
+
+  document.getElementById(
+    "editOverlay"
+  ).classList.add("show");
+
+}
+
+/* =========================================================
+   SAVE BUSINESS
+========================================================= */
+
+function saveBusiness(){
+
+  const name =
+    document.getElementById(
+      "editName"
+    ).value.trim();
+
+  if(!name){
 
     showToast(
-      "This module will be connected in the next step."
+      "Business name is required."
     );
 
-  }
-
-
-  /* =====================================================
-     NAVIGATION
-  ===================================================== */
-
-  function goDashboard(){
-
-    window.location.href =
-      "index.html";
+    return;
 
   }
 
+  currentBusiness.name =
+    name;
 
-  function goBusinesses(){
+  currentBusiness.category =
+    document.getElementById(
+      "editCategory"
+    ).value;
 
-    window.location.href =
-      "businesses.html";
+  currentBusiness.status =
+    document.getElementById(
+      "editStatus"
+    ).value;
 
-  }
-
-
-  /* =====================================================
-     QUICK ACTIONS
-  ===================================================== */
-
-  function quickCustomer(){
-
-    openModule(
-      currentBusiness.name === "Digital Marketing"
-        ? "clients"
-        : "customers"
-    );
-
-  }
-
-
-  function quickPayment(){
-
-    openModule(
-      "payments"
-    );
-
-  }
-
-
-  function quickProject(){
-
-    openModule(
-      "projects"
-    );
-
-  }
-
-
-  function quickInvoice(){
-
-    openModule(
-      "invoices"
-    );
-
-  }
-
-
-  function quickExpense(){
-
-    openModule(
-      "expenses"
-    );
-
-  }
-
-
-  /* =====================================================
-     EDIT BUSINESS
-  ===================================================== */
-
-  function editBusiness(){
-
-    showToast(
-      "Business editing will be connected in the next step."
-    );
-
-  }
-
-
-  /* =====================================================
-     TOAST
-  ===================================================== */
-
-  let toastTimer;
-
-
-  function showToast(message){
-
-    const toast =
+  currentBusiness.target =
+    Number(
       document.getElementById(
-        "toast"
-      );
+        "editTarget"
+      ).value
+    ) || 0;
 
+  currentBusiness.description =
+    document.getElementById(
+      "editDescription"
+    ).value.trim();
 
-    toast.textContent =
-      message;
-
-
-    toast.classList.add(
-      "show"
+  const index =
+    businesses.findIndex(
+      b=>b.id === currentBusiness.id
     );
 
+  if(index !== -1){
 
-    clearTimeout(
-      toastTimer
+    businesses[index] =
+      currentBusiness;
+
+    localStorage.setItem(
+      BUSINESS_KEY,
+      JSON.stringify(
+        businesses
+      )
     );
-
-
-    toastTimer =
-      setTimeout(
-        () => {
-
-          toast.classList.remove(
-            "show"
-          );
-
-        },
-        2600
-      );
 
   }
 
+  closeEdit();
 
-  /* =====================================================
-     MOBILE SIDEBAR
-  ===================================================== */
+  renderBusiness();
 
-  function toggleSidebar(){
+  renderModules();
 
-    document
-      .getElementById("sidebar")
-      .classList.toggle(
-        "open"
+  showToast(
+    "Business updated successfully."
+  );
+
+}
+
+/* =========================================================
+   CLOSE EDIT
+========================================================= */
+
+function closeEdit(){
+
+  document.getElementById(
+    "editOverlay"
+  ).classList.remove("show");
+
+}
+
+/* =========================================================
+   BUSINESSES
+========================================================= */
+
+function goBusinesses(){
+
+  location.href =
+    "businesses.html";
+
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+function toggleSidebar(){
+
+  document
+    .getElementById("sidebar")
+    .classList.toggle("open");
+
+}
+
+/* =========================================================
+   MONEY
+========================================================= */
+
+function money(value){
+
+  return "৳" +
+    Number(value || 0)
+      .toLocaleString("en-BD");
+
+}
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+function categoryLabel(category){
+
+  const labels = {
+
+    agency:"Agency",
+    website:"Website Sale",
+    marketing:"Digital Marketing",
+    other:"Other"
+
+  };
+
+  return (
+    labels[category] ||
+    "Business"
+  );
+
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function statusBadge(status){
+
+  const labels = {
+
+    paid:"Paid",
+    partial:"Partial",
+    pending:"Pending",
+    overdue:"Overdue",
+    active:"Active"
+
+  };
+
+  const safe =
+    labels[status]
+      ? status
+      : "active";
+
+  return `
+    <span class="badge badge-${safe}">
+      ${labels[safe]}
+    </span>
+  `;
+
+}
+
+/* =========================================================
+   INITIALS
+========================================================= */
+
+function initials(name){
+
+  return String(name || "C")
+    .split(" ")
+    .filter(Boolean)
+    .slice(0,2)
+    .map(word=>word[0])
+    .join("")
+    .toUpperCase();
+
+}
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function formatDate(date){
+
+  if(!date) return "—";
+
+  const parsed =
+    new Date(date);
+
+  if(isNaN(parsed)) return "—";
+
+  return parsed.toLocaleDateString(
+    "en-BD",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer =
+    setTimeout(
+      ()=>{
+        toast.classList.remove(
+          "show"
+        );
+      },
+      2600
+    );
+
+}
+
+/* =========================================================
+   OUTSIDE CLICK
+========================================================= */
+
+document.addEventListener(
+  "click",
+  event=>{
+
+    const overlay =
+      document.getElementById(
+        "editOverlay"
       );
 
+    if(
+      event.target === overlay
+    ){
+
+      closeEdit();
+
+    }
+
   }
+);
 
+/* =========================================================
+   ESC
+========================================================= */
 
-  document.addEventListener(
-    "click",
-    function(event){
+document.addEventListener(
+  "keydown",
+  event=>{
 
-      const sidebar =
-        document.getElementById(
-          "sidebar"
-        );
+    if(event.key === "Escape"){
 
-      const menu =
-        document.querySelector(
-          ".mobile-menu"
-        );
-
-
-      if(
-        window.innerWidth <= 850 &&
-        sidebar.classList.contains(
-          "open"
-        ) &&
-        !sidebar.contains(
-          event.target
-        ) &&
-        !menu.contains(
-          event.target
-        )
-      ){
-
-        sidebar.classList.remove(
-          "open"
-        );
-
-      }
+      closeEdit();
 
     }
-  );
 
-
-  /* =====================================================
-     ESCAPE
-  ===================================================== */
-
-  document.addEventListener(
-    "keydown",
-    function(event){
-
-      if(
-        event.key === "Escape"
-      ){
-
-        document
-          .getElementById("sidebar")
-          .classList.remove(
-            "open"
-          );
-
-      }
-
-    }
-  );
-
-
-  /* =====================================================
-     START
-  ===================================================== */
-
-  initializeBusiness();
+  }
+);
 
 </script>
 
