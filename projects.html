@@ -1,0 +1,5293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Projects | SNK Business</title>
+
+<meta
+  name="description"
+  content="Premium Project Management | SNK Business"
+/>
+
+<style>
+:root{
+  --bg:#070b12;
+  --bg2:#0b1019;
+  --panel:#101722;
+  --panel2:#151e2c;
+  --panel3:#1a2535;
+  --line:#253247;
+  --line2:#304057;
+
+  --text:#f5f7fb;
+  --muted:#8e9aae;
+  --muted2:#647086;
+
+  --blue:#4f8cff;
+  --blue2:#6da5ff;
+  --cyan:#28d7ff;
+  --green:#22c983;
+  --yellow:#f4bd4f;
+  --red:#ff6678;
+  --purple:#9b7cff;
+  --orange:#ff9b5b;
+
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+  --radius:18px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(79,140,255,.09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(40,215,255,.06),
+      transparent 28%
+    ),
+    var(--bg);
+
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:270px;
+
+  padding:22px 16px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16,23,34,.98),
+      rgba(9,14,22,.98)
+    );
+
+  border-right:1px solid var(--line);
+
+  z-index:1000;
+
+  overflow-y:auto;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:6px 10px 24px;
+}
+
+.brand-logo{
+  width:42px;
+  height:42px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--cyan)
+    );
+
+  color:#fff;
+
+  font-weight:900;
+
+  box-shadow:
+    0 10px 30px rgba(79,140,255,.28);
+}
+
+.brand-title{
+  font-size:17px;
+  font-weight:900;
+  letter-spacing:-.4px;
+}
+
+.brand-subtitle{
+  margin-top:2px;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+.nav-title{
+  padding:12px 11px 8px;
+
+  color:var(--muted2);
+
+  font-size:10px;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.2px;
+
+  font-weight:800;
+}
+
+.nav{
+  display:grid;
+  gap:5px;
+}
+
+.nav a{
+  display:flex;
+  align-items:center;
+  gap:11px;
+
+  min-height:43px;
+
+  padding:0 12px;
+
+  color:#aeb8c8;
+
+  border:1px solid transparent;
+
+  border-radius:12px;
+
+  transition:.2s ease;
+}
+
+.nav a:hover{
+  color:#fff;
+
+  background:#131c2a;
+
+  border-color:#26354b;
+
+  transform:translateX(2px);
+}
+
+.nav a.active{
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.18),
+      rgba(40,215,255,.07)
+    );
+
+  border-color:
+    rgba(79,140,255,.28);
+
+  box-shadow:
+    inset 3px 0 0 var(--blue);
+}
+
+.nav-icon{
+  width:22px;
+  text-align:center;
+  font-size:16px;
+}
+
+.nav-label{
+  font-size:13px;
+  font-weight:700;
+}
+
+.admin-card{
+  margin-top:22px;
+
+  padding:16px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.12),
+      rgba(155,124,255,.08)
+    );
+
+  border:1px solid #273752;
+}
+
+.admin-card .mini{
+  color:var(--blue2);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+}
+
+.admin-card strong{
+  display:block;
+
+  margin-top:7px;
+
+  font-size:14px;
+}
+
+.admin-card span{
+  display:block;
+
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+  margin-left:270px;
+  min-height:100vh;
+}
+
+.topbar{
+  height:76px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:20px;
+
+  padding:0 30px;
+
+  background:
+    rgba(7,11,18,.72);
+
+  border-bottom:1px solid var(--line);
+
+  backdrop-filter:blur(18px);
+
+  position:sticky;
+  top:0;
+
+  z-index:500;
+}
+
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  min-width:0;
+}
+
+.mobile-menu{
+  display:none;
+
+  width:40px;
+  height:40px;
+
+  border:1px solid var(--line);
+
+  border-radius:11px;
+
+  background:var(--panel);
+
+  color:white;
+}
+
+.page-location{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.page-location strong{
+  color:#fff;
+  font-size:13px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.icon-btn,
+.avatar-btn{
+  border:1px solid var(--line);
+
+  background:var(--panel);
+
+  color:#dce4f0;
+
+  border-radius:11px;
+
+  min-width:40px;
+  height:40px;
+
+  padding:0 12px;
+
+  transition:.2s ease;
+}
+
+.icon-btn:hover,
+.avatar-btn:hover{
+  border-color:#3a4c68;
+  background:var(--panel2);
+}
+
+.avatar-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  font-weight:800;
+}
+
+.avatar{
+  width:25px;
+  height:25px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--purple)
+    );
+
+  font-size:11px;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+  padding:30px;
+  max-width:1800px;
+  margin:auto;
+}
+
+.hero{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+
+  gap:25px;
+
+  margin-bottom:22px;
+}
+
+.hero-copy h1{
+  font-size:34px;
+  letter-spacing:-1.2px;
+  line-height:1.1;
+}
+
+.hero-copy p{
+  margin-top:9px;
+
+  color:var(--muted);
+
+  font-size:14px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+  min-height:42px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:8px;
+
+  padding:0 15px;
+
+  border-radius:11px;
+
+  border:1px solid var(--line);
+
+  background:var(--panel2);
+
+  color:#e9eef7;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  transition:.2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+  border-color:#3c506e;
+}
+
+.btn-primary{
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      #3974e8
+    );
+
+  border-color:transparent;
+
+  box-shadow:
+    0 10px 25px rgba(79,140,255,.2);
+}
+
+.btn-danger{
+  color:#ff9aa6;
+}
+
+.btn-success{
+  color:#6ce0af;
+}
+
+.btn-ghost{
+  background:transparent;
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+  display:grid;
+
+  grid-template-columns:
+    repeat(6,minmax(0,1fr));
+
+  gap:12px;
+
+  margin-bottom:20px;
+}
+
+.stat{
+  padding:17px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:1px solid var(--line);
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.stat::after{
+  content:"";
+
+  position:absolute;
+
+  right:-40px;
+  top:-40px;
+
+  width:90px;
+  height:90px;
+
+  border-radius:50%;
+
+  background:rgba(79,140,255,.06);
+}
+
+.stat-icon{
+  width:34px;
+  height:34px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:10px;
+
+  background:#172337;
+
+  margin-bottom:11px;
+}
+
+.stat-label{
+  color:var(--muted);
+
+  font-size:10px;
+
+  font-weight:700;
+}
+
+.stat-value{
+  margin-top:5px;
+
+  font-size:21px;
+
+  font-weight:900;
+
+  letter-spacing:-.5px;
+}
+
+.stat-note{
+  margin-top:5px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filter-panel{
+  padding:15px;
+
+  margin-bottom:20px;
+
+  border:1px solid var(--line);
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+}
+
+.filters{
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.filter-group{
+  display:flex;
+  flex-direction:column;
+
+  gap:5px;
+
+  min-width:160px;
+}
+
+.filter-group.search{
+  flex:1;
+  min-width:220px;
+}
+
+.filter-group label{
+  color:var(--muted2);
+
+  font-size:9px;
+
+  font-weight:800;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+}
+
+.filter{
+  height:41px;
+
+  padding:0 12px;
+
+  border:1px solid var(--line);
+
+  border-radius:10px;
+
+  background:#0b121c;
+
+  color:#dce4f0;
+
+  outline:none;
+}
+
+textarea.filter{
+  height:auto;
+  min-height:90px;
+  padding:11px;
+}
+
+.filter:focus{
+  border-color:
+    rgba(79,140,255,.65);
+}
+
+.filter-actions{
+  display:flex;
+  gap:8px;
+}
+
+/* =========================================================
+   TABLE PANEL
+========================================================= */
+
+.panel{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:1px solid var(--line);
+
+  border-radius:18px;
+
+  box-shadow:var(--shadow);
+
+  overflow:hidden;
+}
+
+.panel-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:15px;
+
+  padding:18px 20px;
+
+  border-bottom:1px solid var(--line);
+}
+
+.panel-title{
+  font-size:14px;
+  font-weight:900;
+}
+
+.panel-subtitle{
+  margin-top:4px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th{
+  text-align:left;
+
+  padding:13px 14px;
+
+  color:#6f7c91;
+
+  background:#0c131e;
+
+  border-bottom:1px solid var(--line);
+
+  font-size:9px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+
+  white-space:nowrap;
+}
+
+td{
+  padding:14px;
+
+  border-bottom:
+    1px solid
+    rgba(37,50,71,.65);
+
+  font-size:11px;
+
+  vertical-align:middle;
+}
+
+tr:last-child td{
+  border-bottom:0;
+}
+
+tr:hover td{
+  background:rgba(255,255,255,.012);
+}
+
+/* =========================================================
+   PROJECT
+========================================================= */
+
+.project-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.project-icon{
+  width:38px;
+  height:38px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.16),
+      rgba(40,215,255,.07)
+    );
+
+  border:1px solid
+    rgba(79,140,255,.18);
+}
+
+.project-name{
+  color:#f0f4fa;
+
+  font-size:12px;
+
+  font-weight:900;
+}
+
+.project-id{
+  margin-top:3px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+.business-name{
+  color:#e8eef7;
+
+  font-weight:800;
+}
+
+.customer-name{
+  color:#dce5f1;
+
+  font-weight:700;
+}
+
+.sub-text{
+  margin-top:3px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+.amount{
+  font-weight:900;
+}
+
+.paid{
+  color:#6bdfa9;
+}
+
+.due{
+  color:#f3c45e;
+}
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.badge{
+  display:inline-flex;
+
+  align-items:center;
+
+  min-height:25px;
+
+  padding:0 9px;
+
+  border-radius:999px;
+
+  border:1px solid transparent;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  white-space:nowrap;
+}
+
+.badge-planning{
+  color:#c7b7ff;
+
+  background:
+    rgba(155,124,255,.11);
+
+  border-color:
+    rgba(155,124,255,.2);
+}
+
+.badge-progress{
+  color:#76adff;
+
+  background:
+    rgba(79,140,255,.11);
+
+  border-color:
+    rgba(79,140,255,.2);
+}
+
+.badge-review{
+  color:#f3cb6a;
+
+  background:
+    rgba(244,189,79,.1);
+
+  border-color:
+    rgba(244,189,79,.2);
+}
+
+.badge-completed{
+  color:#63dfa5;
+
+  background:
+    rgba(34,201,131,.1);
+
+  border-color:
+    rgba(34,201,131,.2);
+}
+
+.badge-hold{
+  color:#ff9a78;
+
+  background:
+    rgba(255,155,91,.1);
+
+  border-color:
+    rgba(255,155,91,.2);
+}
+
+.badge-cancelled{
+  color:#ff8794;
+
+  background:
+    rgba(255,102,120,.1);
+
+  border-color:
+    rgba(255,102,120,.2);
+}
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-wrap{
+  min-width:130px;
+}
+
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+
+  margin-bottom:6px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+.progress{
+  width:100%;
+
+  height:6px;
+
+  background:#172131;
+
+  border-radius:999px;
+
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--blue),
+      var(--cyan)
+    );
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.actions{
+  display:flex;
+  gap:5px;
+}
+
+.action-btn{
+  width:32px;
+  height:32px;
+
+  display:grid;
+  place-items:center;
+
+  border:1px solid var(--line);
+
+  border-radius:9px;
+
+  background:#101925;
+
+  color:#c8d2e0;
+
+  transition:.2s ease;
+}
+
+.action-btn:hover{
+  border-color:#3d5271;
+
+  color:#fff;
+
+  background:#182333;
+}
+
+.action-btn.danger:hover{
+  color:#ff8997;
+
+  border-color:
+    rgba(255,102,120,.3);
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+  padding:60px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+}
+
+.empty-icon{
+  width:58px;
+  height:58px;
+
+  display:grid;
+  place-items:center;
+
+  margin:0 auto 13px;
+
+  border-radius:18px;
+
+  background:#151f2f;
+
+  font-size:24px;
+}
+
+.empty h3{
+  color:#e9eef6;
+
+  font-size:16px;
+}
+
+.empty p{
+  margin-top:5px;
+
+  font-size:11px;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-backdrop{
+  position:fixed;
+
+  inset:0;
+
+  z-index:3000;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+    rgba(0,0,0,.72);
+
+  backdrop-filter:blur(8px);
+}
+
+.modal-backdrop.show{
+  display:flex;
+}
+
+.modal{
+  width:min(850px,100%);
+
+  max-height:
+    calc(100vh - 40px);
+
+  overflow-y:auto;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #111a27,
+      #0c131d
+    );
+
+  border:1px solid #2c3b53;
+
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.6);
+}
+
+.modal.small{
+  width:min(560px,100%);
+}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+
+  gap:15px;
+
+  padding:20px;
+
+  border-bottom:1px solid var(--line);
+}
+
+.modal-title{
+  font-size:17px;
+  font-weight:900;
+}
+
+.modal-subtitle{
+  margin-top:4px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.close-btn{
+  width:36px;
+  height:36px;
+
+  border:1px solid var(--line);
+
+  border-radius:10px;
+
+  background:#111b28;
+
+  color:#b7c2d2;
+
+  font-size:17px;
+}
+
+.modal-body{
+  padding:20px;
+}
+
+.form-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:13px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+
+  gap:6px;
+}
+
+.form-group.full{
+  grid-column:1 / -1;
+}
+
+.form-group label{
+  color:#8f9db0;
+
+  font-size:10px;
+
+  font-weight:800;
+}
+
+.form-control{
+  width:100%;
+
+  min-height:43px;
+
+  padding:0 12px;
+
+  border-radius:10px;
+
+  border:1px solid var(--line);
+
+  background:#0a111a;
+
+  color:#edf2f8;
+
+  outline:none;
+}
+
+textarea.form-control{
+  min-height:100px;
+
+  padding:11px;
+
+  resize:vertical;
+}
+
+.form-control:focus{
+  border-color:
+    rgba(79,140,255,.7);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(79,140,255,.08);
+}
+
+.modal-footer{
+  display:flex;
+  justify-content:flex-end;
+
+  gap:8px;
+
+  padding:16px 20px;
+
+  border-top:1px solid var(--line);
+}
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.detail-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:10px;
+
+  margin-bottom:18px;
+}
+
+.detail-card{
+  padding:14px;
+
+  border-radius:13px;
+
+  background:#0b131e;
+
+  border:1px solid var(--line);
+}
+
+.detail-label{
+  color:var(--muted2);
+
+  font-size:9px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.6px;
+}
+
+.detail-value{
+  margin-top:6px;
+
+  color:#eef3f9;
+
+  font-size:13px;
+
+  font-weight:900;
+}
+
+.detail-section{
+  margin-top:17px;
+}
+
+.detail-section h3{
+  font-size:12px;
+
+  margin-bottom:8px;
+}
+
+.detail-note{
+  padding:13px;
+
+  border-radius:11px;
+
+  background:#0b131e;
+
+  border:1px solid var(--line);
+
+  color:#b9c4d3;
+
+  font-size:11px;
+
+  line-height:1.6;
+
+  white-space:pre-wrap;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+  position:fixed;
+
+  right:24px;
+  bottom:24px;
+
+  z-index:5000;
+
+  min-width:280px;
+
+  padding:14px 16px;
+
+  border-radius:13px;
+
+  background:#121c2b;
+
+  border:1px solid #30415b;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.4);
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  transform:
+    translateY(25px);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:.25s ease;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.toast-dot{
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:var(--green);
+}
+
+.toast-text{
+  color:#e8eef7;
+
+  font-size:12px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1350px){
+
+  .stats{
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+  }
+
+}
+
+@media(max-width:850px){
+
+  .sidebar{
+    transform:translateX(-100%);
+
+    transition:.25s ease;
+
+    box-shadow:
+      30px 0 70px rgba(0,0,0,.4);
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .topbar{
+    padding:0 18px;
+  }
+
+  .content{
+    padding:22px 18px;
+  }
+
+  .hero{
+    align-items:flex-start;
+
+    flex-direction:column;
+  }
+
+  .filter-group{
+    flex:1;
+    min-width:150px;
+  }
+
+}
+
+@media(max-width:650px){
+
+  .stats{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .hero-copy h1{
+    font-size:28px;
+  }
+
+  .hero-actions{
+    width:100%;
+  }
+
+  .hero-actions .btn{
+    flex:1;
+  }
+
+  .filter-group,
+  .filter-group.search{
+    width:100%;
+    min-width:100%;
+  }
+
+  .filter{
+    width:100%;
+  }
+
+  .filter-actions{
+    width:100%;
+  }
+
+  .filter-actions .btn{
+    flex:1;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .toast{
+    left:15px;
+    right:15px;
+
+    min-width:0;
+
+    bottom:15px;
+  }
+
+}
+
+@media(max-width:430px){
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .top-actions .icon-btn{
+    display:none;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+  body{
+    background:white;
+    color:#111;
+  }
+
+  .sidebar,
+  .topbar,
+  .hero-actions,
+  .filter-panel,
+  .actions,
+  .toast{
+    display:none !important;
+  }
+
+  .main{
+    margin:0;
+  }
+
+  .content{
+    padding:0;
+  }
+
+  .panel,
+  .stat{
+    box-shadow:none;
+    border:1px solid #ddd;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+  <div class="brand">
+
+    <div class="brand-logo">
+      SN
+    </div>
+
+    <div>
+
+      <div class="brand-title">
+        SNK Business
+      </div>
+
+      <div class="brand-subtitle">
+        Business Management
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="nav-title">
+    Main
+  </div>
+
+
+  <nav class="nav">
+
+    <a href="index.html">
+      <span class="nav-icon">⌂</span>
+      <span class="nav-label">Dashboard</span>
+    </a>
+
+    <a href="businesses.html">
+      <span class="nav-icon">▣</span>
+      <span class="nav-label">My Businesses</span>
+    </a>
+
+    <a href="customers.html">
+      <span class="nav-icon">♙</span>
+      <span class="nav-label">Customers</span>
+    </a>
+
+    <a href="payments.html">
+      <span class="nav-icon">৳</span>
+      <span class="nav-label">Payments</span>
+    </a>
+
+    <a href="inventory.html">
+      <span class="nav-icon">▤</span>
+      <span class="nav-label">Inventory</span>
+    </a>
+
+    <a href="invoices.html">
+      <span class="nav-icon">▥</span>
+      <span class="nav-label">Invoices</span>
+    </a>
+
+    <a href="expenses.html">
+      <span class="nav-icon">−</span>
+      <span class="nav-label">Expenses</span>
+    </a>
+
+    <a href="projects.html" class="active">
+      <span class="nav-icon">◫</span>
+      <span class="nav-label">Projects</span>
+    </a>
+
+    <a href="digital-marketing.html">
+      <span class="nav-icon">◉</span>
+      <span class="nav-label">Digital Marketing</span>
+    </a>
+
+    <a href="tasks.html">
+      <span class="nav-icon">✓</span>
+      <span class="nav-label">Tasks</span>
+    </a>
+
+    <a href="reports.html">
+      <span class="nav-icon">▥</span>
+      <span class="nav-label">Reports</span>
+    </a>
+
+  </nav>
+
+
+  <div class="admin-card">
+
+    <div class="mini">
+      Premium Business Suite
+    </div>
+
+    <strong>
+      Super Admin
+    </strong>
+
+    <span>
+      Owner • Full Access
+    </span>
+
+  </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="main">
+
+<header class="topbar">
+
+  <div class="top-left">
+
+    <button
+      class="mobile-menu"
+      id="mobileMenu"
+      type="button"
+    >
+      ☰
+    </button>
+
+    <div class="page-location">
+      SNK Business
+      <strong>/ Projects</strong>
+    </div>
+
+  </div>
+
+
+  <div class="top-actions">
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="window.print()"
+      title="Print"
+    >
+      🖨
+    </button>
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="exportProjects()"
+      title="Export"
+    >
+      ↓
+    </button>
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="refreshProjects()"
+      title="Refresh"
+    >
+      ↻
+    </button>
+
+    <button
+      class="avatar-btn"
+      type="button"
+    >
+      <span class="avatar">
+        SA
+      </span>
+      Admin
+    </button>
+
+  </div>
+
+</header>
+
+
+<section class="content">
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<div class="hero">
+
+  <div class="hero-copy">
+
+    <h1>
+      Project Management
+    </h1>
+
+    <p>
+      Manage projects, clients, budgets, deadlines and progress from one place.
+    </p>
+
+  </div>
+
+
+  <div class="hero-actions">
+
+    <button
+      class="btn btn-ghost"
+      type="button"
+      onclick="exportProjects()"
+    >
+      ↓ Export CSV
+    </button>
+
+    <button
+      class="btn btn-primary"
+      type="button"
+      onclick="openProjectModal()"
+    >
+      + New Project
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     STATS
+====================================================== -->
+
+<section class="stats">
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      📁
+    </div>
+
+    <div class="stat-label">
+      Total Projects
+    </div>
+
+    <div
+      class="stat-value"
+      id="statTotal"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      All project records
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      🔵
+    </div>
+
+    <div class="stat-label">
+      Active Projects
+    </div>
+
+    <div
+      class="stat-value"
+      id="statActive"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      Currently running
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      💰
+    </div>
+
+    <div class="stat-label">
+      Project Value
+    </div>
+
+    <div
+      class="stat-value"
+      id="statValue"
+    >
+      ৳0
+    </div>
+
+    <div class="stat-note">
+      Total project budget
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      💳
+    </div>
+
+    <div class="stat-label">
+      Paid
+    </div>
+
+    <div
+      class="stat-value"
+      id="statPaid"
+    >
+      ৳0
+    </div>
+
+    <div class="stat-note">
+      Project payments
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      ⏳
+    </div>
+
+    <div class="stat-label">
+      Due
+    </div>
+
+    <div
+      class="stat-value"
+      id="statDue"
+    >
+      ৳0
+    </div>
+
+    <div class="stat-note">
+      Remaining balance
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      ⚠
+    </div>
+
+    <div class="stat-label">
+      Overdue
+    </div>
+
+    <div
+      class="stat-value"
+      id="statOverdue"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      Past deadline
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     FILTER
+====================================================== -->
+
+<section class="filter-panel">
+
+  <div class="filters">
+
+    <div class="filter-group search">
+
+      <label>
+        Search
+      </label>
+
+      <input
+        id="searchInput"
+        class="filter"
+        type="search"
+        placeholder="Search project, customer, business, ID..."
+      >
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label>
+        Business
+      </label>
+
+      <select
+        id="businessFilter"
+        class="filter"
+      >
+
+        <option value="">
+          All Businesses
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label>
+        Status
+      </label>
+
+      <select
+        id="statusFilter"
+        class="filter"
+      >
+
+        <option value="">
+          All Status
+        </option>
+
+        <option value="Planning">
+          Planning
+        </option>
+
+        <option value="In Progress">
+          In Progress
+        </option>
+
+        <option value="Review">
+          Review
+        </option>
+
+        <option value="Completed">
+          Completed
+        </option>
+
+        <option value="On Hold">
+          On Hold
+        </option>
+
+        <option value="Cancelled">
+          Cancelled
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label>
+        Sort
+      </label>
+
+      <select
+        id="sortFilter"
+        class="filter"
+      >
+
+        <option value="newest">
+          Newest
+        </option>
+
+        <option value="oldest">
+          Oldest
+        </option>
+
+        <option value="deadline">
+          Deadline
+        </option>
+
+        <option value="budget">
+          Highest Budget
+        </option>
+
+        <option value="progress">
+          Highest Progress
+        </option>
+
+        <option value="name">
+          Project Name
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="filter-actions">
+
+      <button
+        class="btn btn-ghost"
+        type="button"
+        onclick="resetFilters()"
+      >
+        Reset
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROJECT TABLE
+====================================================== -->
+
+<section class="panel">
+
+  <div class="panel-header">
+
+    <div>
+
+      <div class="panel-title">
+        All Projects
+      </div>
+
+      <div
+        class="panel-subtitle"
+        id="resultText"
+      >
+        0 projects
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Project
+          </th>
+
+          <th>
+            Business
+          </th>
+
+          <th>
+            Customer
+          </th>
+
+          <th>
+            Budget
+          </th>
+
+          <th>
+            Paid
+          </th>
+
+          <th>
+            Due
+          </th>
+
+          <th>
+            Progress
+          </th>
+
+          <th>
+            Deadline
+          </th>
+
+          <th>
+            Status
+          </th>
+
+          <th>
+            Actions
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="projectTableBody"></tbody>
+
+    </table>
+
+
+    <div
+      class="empty"
+      id="emptyState"
+      style="display:none;"
+    >
+
+      <div class="empty-icon">
+        📁
+      </div>
+
+      <h3>
+        No projects found
+      </h3>
+
+      <p>
+        Create your first project to start managing business work.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+</section>
+
+</main>
+
+</div>
+
+
+<!-- =====================================================
+     PROJECT MODAL
+====================================================== -->
+
+<div
+  class="modal-backdrop"
+  id="projectModal"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <div
+          class="modal-title"
+          id="projectModalTitle"
+        >
+          New Project
+        </div>
+
+        <div class="modal-subtitle">
+          Create or update a business project.
+        </div>
+
+      </div>
+
+      <button
+        class="close-btn"
+        type="button"
+        onclick="closeModal('projectModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <form id="projectForm">
+
+      <div class="modal-body">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>
+              Business *
+            </label>
+
+            <select
+              id="projectBusiness"
+              class="form-control"
+              required
+            ></select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Customer
+            </label>
+
+            <select
+              id="projectCustomer"
+              class="form-control"
+            ></select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Project Name *
+            </label>
+
+            <input
+              id="projectName"
+              class="form-control"
+              type="text"
+              placeholder="e.g. Business Website"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Project Type
+            </label>
+
+            <select
+              id="projectType"
+              class="form-control"
+            >
+
+              <option value="Website">
+                Website
+              </option>
+
+              <option value="Digital Marketing">
+                Digital Marketing
+              </option>
+
+              <option value="Advertising">
+                Advertising
+              </option>
+
+              <option value="Social Media">
+                Social Media
+              </option>
+
+              <option value="Branding">
+                Branding
+              </option>
+
+              <option value="Design">
+                Design
+              </option>
+
+              <option value="Development">
+                Development
+              </option>
+
+              <option value="Other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Budget *
+            </label>
+
+            <input
+              id="projectBudget"
+              class="form-control"
+              type="number"
+              min="0"
+              step="0.01"
+              placeholder="0"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Paid Amount
+            </label>
+
+            <input
+              id="projectPaid"
+              class="form-control"
+              type="number"
+              min="0"
+              step="0.01"
+              value="0"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Start Date
+            </label>
+
+            <input
+              id="projectStartDate"
+              class="form-control"
+              type="date"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Deadline
+            </label>
+
+            <input
+              id="projectDeadline"
+              class="form-control"
+              type="date"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Status
+            </label>
+
+            <select
+              id="projectStatus"
+              class="form-control"
+            >
+
+              <option value="Planning">
+                Planning
+              </option>
+
+              <option value="In Progress">
+                In Progress
+              </option>
+
+              <option value="Review">
+                Review
+              </option>
+
+              <option value="Completed">
+                Completed
+              </option>
+
+              <option value="On Hold">
+                On Hold
+              </option>
+
+              <option value="Cancelled">
+                Cancelled
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Progress %
+            </label>
+
+            <input
+              id="projectProgress"
+              class="form-control"
+              type="number"
+              min="0"
+              max="100"
+              value="0"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Assigned To
+            </label>
+
+            <input
+              id="projectAssigned"
+              class="form-control"
+              type="text"
+              placeholder="e.g. Sakhi / Developer Team"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Priority
+            </label>
+
+            <select
+              id="projectPriority"
+              class="form-control"
+            >
+
+              <option value="Normal">
+                Normal
+              </option>
+
+              <option value="Low">
+                Low
+              </option>
+
+              <option value="High">
+                High
+              </option>
+
+              <option value="Urgent">
+                Urgent
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group full">
+
+            <label>
+              Project Description
+            </label>
+
+            <textarea
+              id="projectDescription"
+              class="form-control"
+              placeholder="Project scope, requirements, deliverables..."
+            ></textarea>
+
+          </div>
+
+
+          <div class="form-group full">
+
+            <label>
+              Internal Notes
+            </label>
+
+            <textarea
+              id="projectNotes"
+              class="form-control"
+              placeholder="Private notes for admin..."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-ghost"
+          onclick="closeModal('projectModal')"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+        >
+          Save Project
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     DETAILS MODAL
+====================================================== -->
+
+<div
+  class="modal-backdrop"
+  id="detailsModal"
+>
+
+  <div class="modal small">
+
+    <div class="modal-header">
+
+      <div>
+
+        <div
+          class="modal-title"
+          id="detailTitle"
+        >
+          Project Details
+        </div>
+
+        <div
+          class="modal-subtitle"
+          id="detailSubtitle"
+        >
+          Project information
+        </div>
+
+      </div>
+
+      <button
+        class="close-btn"
+        type="button"
+        onclick="closeModal('detailsModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div
+        class="detail-grid"
+        id="detailGrid"
+      ></div>
+
+
+      <div class="detail-section">
+
+        <h3>
+          Project Description
+        </h3>
+
+        <div
+          class="detail-note"
+          id="detailDescription"
+        ></div>
+
+      </div>
+
+
+      <div class="detail-section">
+
+        <h3>
+          Internal Notes
+        </h3>
+
+        <div
+          class="detail-note"
+          id="detailNotes"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="btn btn-ghost"
+        onclick="closeModal('detailsModal')"
+      >
+        Close
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        id="detailEditBtn"
+      >
+        Edit Project
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+  class="toast"
+  id="toast"
+>
+
+  <span class="toast-dot"></span>
+
+  <span
+    class="toast-text"
+    id="toastText"
+  >
+    Done.
+  </span>
+
+</div>
+
+
+<script>
+/* =========================================================
+   SNK BUSINESS
+   STEP 3.8 — PROJECT MANAGEMENT
+========================================================= */
+
+const BUSINESS_KEY =
+  "snkBusinesses";
+
+const CUSTOMER_KEY =
+  "snkBusinessCustomers";
+
+const PAYMENT_KEY =
+  "snkBusinessPayments";
+
+const PROJECT_KEY =
+  "snkBusinessProjects";
+
+
+let businesses = [];
+let customers = [];
+let payments = [];
+let projects = [];
+
+let editingProjectId = null;
+let selectedProjectId = null;
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ = id =>
+  document.getElementById(id);
+
+
+function money(value){
+
+  return "৳" +
+    (
+      Number(value) || 0
+    ).toLocaleString(
+      "en-BD",
+      {
+        minimumFractionDigits:0,
+        maximumFractionDigits:2
+      }
+    );
+
+}
+
+
+function number(value){
+
+  return (
+    Number(value) || 0
+  ).toLocaleString(
+    "en-BD"
+  );
+
+}
+
+
+function readStorage(key){
+
+  try{
+
+    const data =
+      JSON.parse(
+        localStorage.getItem(key)
+      );
+
+    return Array.isArray(data)
+      ? data
+      : [];
+
+  }catch(error){
+
+    console.error(
+      "Storage error:",
+      key,
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+function saveStorage(
+  key,
+  data
+){
+
+  localStorage.setItem(
+    key,
+    JSON.stringify(data)
+  );
+
+}
+
+
+function todayISO(){
+
+  const d =
+    new Date();
+
+  return [
+    d.getFullYear(),
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0"),
+    String(
+      d.getDate()
+    ).padStart(2,"0")
+  ].join("-");
+
+}
+
+
+function parseDate(value){
+
+  if(!value){
+    return null;
+  }
+
+  const d =
+    new Date(
+      value
+    );
+
+  if(
+    Number.isNaN(
+      d.getTime()
+    )
+  ){
+    return null;
+  }
+
+  return d;
+
+}
+
+
+function formatDate(value){
+
+  if(!value){
+    return "—";
+  }
+
+  const d =
+    parseDate(value);
+
+  if(!d){
+    return value;
+  }
+
+  return d.toLocaleDateString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+function loadData(){
+
+  businesses =
+    readStorage(
+      BUSINESS_KEY
+    );
+
+  customers =
+    readStorage(
+      CUSTOMER_KEY
+    );
+
+  payments =
+    readStorage(
+      PAYMENT_KEY
+    );
+
+  projects =
+    readStorage(
+      PROJECT_KEY
+    );
+
+}
+
+
+/* =========================================================
+   BUSINESS FINDER
+========================================================= */
+
+function findBusiness(
+  value
+){
+
+  if(!value){
+    return null;
+  }
+
+  const needle =
+    String(value)
+      .trim()
+      .toLowerCase();
+
+  return businesses.find(
+    business => {
+
+      return (
+
+        String(
+          business.id || ""
+        ).toLowerCase() ===
+          needle ||
+
+        String(
+          business.slug || ""
+        ).toLowerCase() ===
+          needle ||
+
+        String(
+          business.name || ""
+        ).toLowerCase() ===
+          needle
+
+      );
+
+    }
+  ) || null;
+
+}
+
+
+/* =========================================================
+   CUSTOMER FINDER
+========================================================= */
+
+function findCustomer(
+  id
+){
+
+  return customers.find(
+    customer =>
+      customer.id === id
+  ) || null;
+
+}
+
+
+/* =========================================================
+   BUSINESS SELECTS
+========================================================= */
+
+function populateBusinessSelects(){
+
+  const filters =
+    $("businessFilter");
+
+  const modalSelect =
+    $("projectBusiness");
+
+
+  filters.innerHTML = `
+    <option value="">
+      All Businesses
+    </option>
+  `;
+
+
+  modalSelect.innerHTML = `
+    <option value="">
+      Select Business
+    </option>
+  `;
+
+
+  businesses.forEach(
+    business => {
+
+      const option1 =
+        document.createElement(
+          "option"
+        );
+
+      option1.value =
+        business.id;
+
+      option1.textContent =
+        business.name;
+
+      filters.appendChild(
+        option1
+      );
+
+
+      const option2 =
+        document.createElement(
+          "option"
+        );
+
+      option2.value =
+        business.id;
+
+      option2.textContent =
+        business.name;
+
+      modalSelect.appendChild(
+        option2
+      );
+
+    }
+  );
+
+
+  applyURLBusiness();
+
+}
+
+
+/* =========================================================
+   URL BUSINESS
+========================================================= */
+
+function applyURLBusiness(){
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const businessParam =
+    params.get(
+      "business"
+    );
+
+
+  if(!businessParam){
+    return;
+  }
+
+
+  const business =
+    findBusiness(
+      businessParam
+    );
+
+
+  if(business){
+
+    $("businessFilter").value =
+      business.id;
+
+  }
+
+}
+
+
+/* =========================================================
+   CUSTOMER SELECT
+========================================================= */
+
+function populateCustomerSelect(
+  businessId,
+  selectedId = ""
+){
+
+  const select =
+    $("projectCustomer");
+
+
+  select.innerHTML = `
+    <option value="">
+      No Customer / General Project
+    </option>
+  `;
+
+
+  if(!businessId){
+    return;
+  }
+
+
+  const list =
+    customers.filter(
+      customer =>
+        customer.businessId ===
+        businessId
+    );
+
+
+  list.forEach(
+    customer => {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+      option.value =
+        customer.id;
+
+      option.textContent =
+        `${customer.name} ${
+          customer.phone
+            ? "• " + customer.phone
+            : ""
+        }`;
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+
+  if(selectedId){
+
+    select.value =
+      selectedId;
+
+  }
+
+}
+
+
+/* =========================================================
+   PROJECT ID
+========================================================= */
+
+function nextProjectId(){
+
+  let max =
+    1000;
+
+
+  projects.forEach(
+    project => {
+
+      const match =
+        String(
+          project.id || ""
+        ).match(
+          /(\d+)$/
+        );
+
+
+      if(match){
+
+        max =
+          Math.max(
+            max,
+            Number(
+              match[1]
+            )
+          );
+
+      }
+
+    }
+  );
+
+
+  return (
+    "PROJ-" +
+    (max + 1)
+  );
+
+}
+
+
+/* =========================================================
+   FILTERED PROJECTS
+========================================================= */
+
+function getFilteredProjects(){
+
+  const search =
+    $("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const businessId =
+    $("businessFilter")
+      .value;
+
+
+  const status =
+    $("statusFilter")
+      .value;
+
+
+  const sort =
+    $("sortFilter")
+      .value;
+
+
+  let list =
+    projects.filter(
+      project => {
+
+        if(
+          businessId &&
+          project.businessId !==
+            businessId
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          status &&
+          project.status !==
+            status
+        ){
+
+          return false;
+
+        }
+
+
+        if(search){
+
+          const customer =
+            findCustomer(
+              project.customerId
+            );
+
+
+          const haystack = [
+            project.id,
+            project.name,
+            project.type,
+            project.businessName,
+            project.customerName,
+            customer?.name,
+            project.assignedTo,
+            project.priority,
+            project.description
+          ]
+          .join(" ")
+          .toLowerCase();
+
+
+          if(
+            !haystack.includes(
+              search
+            )
+          ){
+
+            return false;
+
+          }
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  list.sort(
+    (a,b) => {
+
+      if(sort === "oldest"){
+
+        return String(
+          a.createdAt || ""
+        ).localeCompare(
+          String(
+            b.createdAt || ""
+          )
+        );
+
+      }
+
+
+      if(sort === "deadline"){
+
+        const da =
+          parseDate(
+            a.deadline
+          )?.getTime() ||
+          Infinity;
+
+        const db =
+          parseDate(
+            b.deadline
+          )?.getTime() ||
+          Infinity;
+
+        return da - db;
+
+      }
+
+
+      if(sort === "budget"){
+
+        return (
+          Number(
+            b.budget || 0
+          ) -
+          Number(
+            a.budget || 0
+          )
+        );
+
+      }
+
+
+      if(sort === "progress"){
+
+        return (
+          Number(
+            b.progress || 0
+          ) -
+          Number(
+            a.progress || 0
+          )
+        );
+
+      }
+
+
+      if(sort === "name"){
+
+        return String(
+          a.name || ""
+        ).localeCompare(
+          String(
+            b.name || ""
+          )
+        );
+
+      }
+
+
+      return String(
+        b.createdAt || ""
+      ).localeCompare(
+        String(
+          a.createdAt || ""
+        )
+      );
+
+    }
+  );
+
+
+  return list;
+
+}
+
+
+/* =========================================================
+   OVERDUE
+========================================================= */
+
+function isOverdue(
+  project
+){
+
+  if(
+    project.status ===
+      "Completed" ||
+    project.status ===
+      "Cancelled"
+  ){
+
+    return false;
+
+  }
+
+
+  if(!project.deadline){
+    return false;
+  }
+
+
+  const deadline =
+    parseDate(
+      project.deadline
+    );
+
+
+  if(!deadline){
+    return false;
+  }
+
+
+  const today =
+    new Date();
+
+  today.setHours(
+    23,59,59,999
+  );
+
+
+  return deadline < today;
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function renderStats(){
+
+  const list =
+    getFilteredProjects();
+
+
+  const total =
+    list.length;
+
+
+  const active =
+    list.filter(
+      project =>
+        [
+          "Planning",
+          "In Progress",
+          "Review"
+        ].includes(
+          project.status
+        )
+    ).length;
+
+
+  const value =
+    list.reduce(
+      (sum,project) =>
+        sum +
+        Number(
+          project.budget || 0
+        ),
+      0
+    );
+
+
+  const paid =
+    list.reduce(
+      (sum,project) =>
+        sum +
+        Number(
+          project.paid || 0
+        ),
+      0
+    );
+
+
+  const due =
+    list.reduce(
+      (sum,project) =>
+        sum +
+        Math.max(
+          Number(
+            project.budget || 0
+          ) -
+          Number(
+            project.paid || 0
+          ),
+          0
+        ),
+      0
+    );
+
+
+  const overdue =
+    list.filter(
+      isOverdue
+    ).length;
+
+
+  $("statTotal")
+    .textContent =
+      number(total);
+
+
+  $("statActive")
+    .textContent =
+      number(active);
+
+
+  $("statValue")
+    .textContent =
+      money(value);
+
+
+  $("statPaid")
+    .textContent =
+      money(paid);
+
+
+  $("statDue")
+    .textContent =
+      money(due);
+
+
+  $("statOverdue")
+    .textContent =
+      number(overdue);
+
+}
+
+
+/* =========================================================
+   STATUS BADGE
+========================================================= */
+
+function statusBadge(
+  status
+){
+
+  const map = {
+
+    "Planning":
+      "badge-planning",
+
+    "In Progress":
+      "badge-progress",
+
+    "Review":
+      "badge-review",
+
+    "Completed":
+      "badge-completed",
+
+    "On Hold":
+      "badge-hold",
+
+    "Cancelled":
+      "badge-cancelled"
+
+  };
+
+
+  const className =
+    map[status] ||
+    "badge-planning";
+
+
+  return `
+    <span class="badge ${className}">
+      ${escapeHTML(
+        status || "Planning"
+      )}
+    </span>
+  `;
+
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderProjects(){
+
+  const tbody =
+    $("projectTableBody");
+
+  const empty =
+    $("emptyState");
+
+
+  const list =
+    getFilteredProjects();
+
+
+  tbody.innerHTML =
+    "";
+
+
+  $("resultText")
+    .textContent =
+      `${number(
+        list.length
+      )} project${
+        list.length === 1
+          ? ""
+          : "s"
+      }`;
+
+
+  if(!list.length){
+
+    empty.style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  empty.style.display =
+    "none";
+
+
+  list.forEach(
+    project => {
+
+      const budget =
+        Number(
+          project.budget || 0
+        );
+
+
+      const paid =
+        Number(
+          project.paid || 0
+        );
+
+
+      const due =
+        Math.max(
+          budget - paid,
+          0
+        );
+
+
+      const progress =
+        Math.min(
+          100,
+          Math.max(
+            0,
+            Number(
+              project.progress || 0
+            )
+          )
+        );
+
+
+      const deadlineText =
+        project.deadline
+          ? formatDate(
+              project.deadline
+            )
+          : "No deadline";
+
+
+      const overdue =
+        isOverdue(
+          project
+        );
+
+
+      const tr =
+        document.createElement(
+          "tr"
+        );
+
+
+      tr.innerHTML = `
+
+        <td>
+
+          <div class="project-title">
+
+            <div class="project-icon">
+              📁
+            </div>
+
+            <div>
+
+              <div class="project-name">
+                ${escapeHTML(
+                  project.name ||
+                  "Untitled Project"
+                )}
+              </div>
+
+              <div class="project-id">
+                ${escapeHTML(
+                  project.id ||
+                  ""
+                )}
+                •
+                ${escapeHTML(
+                  project.type ||
+                  "Project"
+                )}
+              </div>
+
+            </div>
+
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div class="business-name">
+            ${escapeHTML(
+              project.businessName ||
+              "—"
+            )}
+          </div>
+
+          <div class="sub-text">
+            ${escapeHTML(
+              project.priority ||
+              "Normal"
+            )}
+            Priority
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div class="customer-name">
+            ${escapeHTML(
+              project.customerName ||
+              "General Project"
+            )}
+          </div>
+
+          <div class="sub-text">
+            ${escapeHTML(
+              project.assignedTo ||
+              "Unassigned"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <span class="amount">
+            ${money(
+              budget
+            )}
+          </span>
+
+        </td>
+
+
+        <td>
+
+          <span class="amount paid">
+            ${money(
+              paid
+            )}
+          </span>
+
+        </td>
+
+
+        <td>
+
+          <span class="amount due">
+            ${money(
+              due
+            )}
+          </span>
+
+        </td>
+
+
+        <td>
+
+          <div class="progress-wrap">
+
+            <div class="progress-top">
+
+              <span>
+                Progress
+              </span>
+
+              <strong>
+                ${progress}%
+              </strong>
+
+            </div>
+
+            <div class="progress">
+
+              <div
+                class="progress-bar"
+                style="
+                  width:${progress}%;
+                "
+              ></div>
+
+            </div>
+
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div style="
+            color:${
+              overdue
+                ? "var(--red)"
+                : "#dbe3ee"
+            };
+            font-weight:800;
+          ">
+            ${escapeHTML(
+              deadlineText
+            )}
+          </div>
+
+          ${
+            overdue
+              ? `
+                <div class="sub-text"
+                  style="
+                    color:var(--red);
+                  "
+                >
+                  Overdue
+                </div>
+              `
+              : ""
+          }
+
+        </td>
+
+
+        <td>
+          ${statusBadge(
+            project.status
+          )}
+        </td>
+
+
+        <td>
+
+          <div class="actions">
+
+            <button
+              class="action-btn"
+              type="button"
+              title="View"
+              onclick="viewProject('${project.id}')"
+            >
+              👁
+            </button>
+
+            <button
+              class="action-btn"
+              type="button"
+              title="Edit"
+              onclick="editProject('${project.id}')"
+            >
+              ✎
+            </button>
+
+            <button
+              class="action-btn danger"
+              type="button"
+              title="Delete"
+              onclick="deleteProject('${project.id}')"
+            >
+              ×
+            </button>
+
+          </div>
+
+        </td>
+
+      `;
+
+
+      tbody.appendChild(
+        tr
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   OPEN PROJECT MODAL
+========================================================= */
+
+function openProjectModal(
+  projectId = null
+){
+
+  editingProjectId =
+    projectId;
+
+
+  $("projectForm")
+    .reset();
+
+
+  populateBusinessSelects();
+
+
+  $("projectStatus").value =
+    "Planning";
+
+
+  $("projectType").value =
+    "Website";
+
+
+  $("projectPriority").value =
+    "Normal";
+
+
+  $("projectPaid").value =
+    "0";
+
+
+  $("projectProgress").value =
+    "0";
+
+
+  $("projectStartDate").value =
+    todayISO();
+
+
+  if(projectId){
+
+    const project =
+      projects.find(
+        item =>
+          item.id ===
+          projectId
+      );
+
+
+    if(!project){
+      return;
+    }
+
+
+    $("projectModalTitle")
+      .textContent =
+        "Edit Project";
+
+
+    $("projectBusiness").value =
+      project.businessId || "";
+
+
+    populateCustomerSelect(
+      project.businessId || "",
+      project.customerId || ""
+    );
+
+
+    $("projectName").value =
+      project.name || "";
+
+
+    $("projectType").value =
+      project.type ||
+      "Website";
+
+
+    $("projectBudget").value =
+      project.budget || 0;
+
+
+    $("projectPaid").value =
+      project.paid || 0;
+
+
+    $("projectStartDate").value =
+      project.startDate || "";
+
+
+    $("projectDeadline").value =
+      project.deadline || "";
+
+
+    $("projectStatus").value =
+      project.status ||
+      "Planning";
+
+
+    $("projectProgress").value =
+      project.progress || 0;
+
+
+    $("projectAssigned").value =
+      project.assignedTo || "";
+
+
+    $("projectPriority").value =
+      project.priority ||
+      "Normal";
+
+
+    $("projectDescription").value =
+      project.description || "";
+
+
+    $("projectNotes").value =
+      project.notes || "";
+
+  }else{
+
+    $("projectModalTitle")
+      .textContent =
+        "New Project";
+
+
+    $("projectCustomer").innerHTML = `
+      <option value="">
+        No Customer / General Project
+      </option>
+    `;
+
+
+    const urlBusiness =
+      new URLSearchParams(
+        window.location.search
+      ).get("business");
+
+
+    const business =
+      findBusiness(
+        urlBusiness
+      );
+
+
+    if(business){
+
+      $("projectBusiness").value =
+        business.id;
+
+
+      populateCustomerSelect(
+        business.id
+      );
+
+    }
+
+  }
+
+
+  $("projectModal")
+    .classList.add(
+      "show"
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeModal(
+  id
+){
+
+  $(id)
+    .classList.remove(
+      "show"
+    );
+
+}
+
+
+/* =========================================================
+   EDIT
+========================================================= */
+
+function editProject(
+  id
+){
+
+  openProjectModal(
+    id
+  );
+
+}
+
+
+/* =========================================================
+   VIEW
+========================================================= */
+
+function viewProject(
+  id
+){
+
+  const project =
+    projects.find(
+      item =>
+        item.id === id
+    );
+
+
+  if(!project){
+    return;
+  }
+
+
+  selectedProjectId =
+    id;
+
+
+  const budget =
+    Number(
+      project.budget || 0
+    );
+
+
+  const paid =
+    Number(
+      project.paid || 0
+    );
+
+
+  const due =
+    Math.max(
+      budget - paid,
+      0
+    );
+
+
+  $("detailTitle")
+    .textContent =
+      project.name ||
+      "Project Details";
+
+
+  $("detailSubtitle")
+    .textContent =
+      `${project.id || ""} • ${
+        project.businessName ||
+        "Business"
+      }`;
+
+
+  $("detailGrid").innerHTML = `
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Business
+      </div>
+
+      <div class="detail-value">
+        ${escapeHTML(
+          project.businessName ||
+          "—"
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Customer
+      </div>
+
+      <div class="detail-value">
+        ${escapeHTML(
+          project.customerName ||
+          "General Project"
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Type
+      </div>
+
+      <div class="detail-value">
+        ${escapeHTML(
+          project.type ||
+          "Project"
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Budget
+      </div>
+
+      <div class="detail-value">
+        ${money(budget)}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Paid
+      </div>
+
+      <div class="detail-value">
+        ${money(paid)}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Due
+      </div>
+
+      <div class="detail-value">
+        ${money(due)}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Progress
+      </div>
+
+      <div class="detail-value">
+        ${Number(
+          project.progress || 0
+        )}%
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Start Date
+      </div>
+
+      <div class="detail-value">
+        ${formatDate(
+          project.startDate
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Deadline
+      </div>
+
+      <div class="detail-value">
+        ${formatDate(
+          project.deadline
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Status
+      </div>
+
+      <div class="detail-value">
+        ${statusBadge(
+          project.status
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Priority
+      </div>
+
+      <div class="detail-value">
+        ${escapeHTML(
+          project.priority ||
+          "Normal"
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Assigned To
+      </div>
+
+      <div class="detail-value">
+        ${escapeHTML(
+          project.assignedTo ||
+          "Unassigned"
+        )}
+      </div>
+
+    </div>
+
+  `;
+
+
+  $("detailDescription")
+    .textContent =
+      project.description ||
+      "No project description added.";
+
+
+  $("detailNotes")
+    .textContent =
+      project.notes ||
+      "No internal notes added.";
+
+
+  $("detailEditBtn")
+    .onclick =
+      () => {
+
+        closeModal(
+          "detailsModal"
+        );
+
+        editProject(
+          selectedProjectId
+        );
+
+      };
+
+
+  $("detailsModal")
+    .classList.add(
+      "show"
+    );
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function deleteProject(
+  id
+){
+
+  const project =
+    projects.find(
+      item =>
+        item.id === id
+    );
+
+
+  if(!project){
+    return;
+  }
+
+
+  const confirmed =
+    confirm(
+      `Delete project "${project.name}"?\n\nThis action cannot be undone.`
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  projects =
+    projects.filter(
+      item =>
+        item.id !== id
+    );
+
+
+  saveStorage(
+    PROJECT_KEY,
+    projects
+  );
+
+
+  renderAll();
+
+
+  showToast(
+    "Project deleted successfully."
+  );
+
+}
+
+
+/* =========================================================
+   SAVE PROJECT
+========================================================= */
+
+$("projectForm")
+  .addEventListener(
+    "submit",
+    event => {
+
+      event.preventDefault();
+
+
+      const businessId =
+        $("projectBusiness").value;
+
+
+      if(!businessId){
+
+        showToast(
+          "Please select a business."
+        );
+
+        return;
+
+      }
+
+
+      const business =
+        findBusiness(
+          businessId
+        );
+
+
+      if(!business){
+
+        showToast(
+          "Selected business was not found."
+        );
+
+        return;
+
+      }
+
+
+      const customerId =
+        $("projectCustomer").value;
+
+
+      const customer =
+        findCustomer(
+          customerId
+        );
+
+
+      const budget =
+        Math.max(
+          0,
+          Number(
+            $("projectBudget").value
+          ) || 0
+        );
+
+
+      const paid =
+        Math.min(
+          budget,
+          Math.max(
+            0,
+            Number(
+              $("projectPaid").value
+            ) || 0
+          )
+        );
+
+
+      let progress =
+        Math.min(
+          100,
+          Math.max(
+            0,
+            Number(
+              $("projectProgress").value
+            ) || 0
+          )
+        );
+
+
+      const status =
+        $("projectStatus").value;
+
+
+      if(
+        status ===
+          "Completed"
+      ){
+
+        progress = 100;
+
+      }
+
+
+      const now =
+        new Date()
+          .toISOString();
+
+
+      if(editingProjectId){
+
+        const index =
+          projects.findIndex(
+            item =>
+              item.id ===
+              editingProjectId
+          );
+
+
+        if(index !== -1){
+
+          const old =
+            projects[index];
+
+
+          projects[index] = {
+
+            ...old,
+
+            businessId,
+
+            businessSlug:
+              business.slug ||
+              "",
+
+            businessName:
+              business.name ||
+              "",
+
+            customerId:
+              customer
+                ? customer.id
+                : "",
+
+            customerName:
+              customer
+                ? customer.name
+                : "",
+
+            name:
+              $("projectName")
+                .value
+                .trim(),
+
+            type:
+              $("projectType")
+                .value,
+
+            budget,
+
+            paid,
+
+            startDate:
+              $("projectStartDate")
+                .value,
+
+            deadline:
+              $("projectDeadline")
+                .value,
+
+            status,
+
+            progress,
+
+            assignedTo:
+              $("projectAssigned")
+                .value
+                .trim(),
+
+            priority:
+              $("projectPriority")
+                .value,
+
+            description:
+              $("projectDescription")
+                .value
+                .trim(),
+
+            notes:
+              $("projectNotes")
+                .value
+                .trim(),
+
+            updatedAt:
+              now
+
+          };
+
+        }
+
+
+        showToast(
+          "Project updated successfully."
+        );
+
+      }else{
+
+        const project = {
+
+          id:
+            nextProjectId(),
+
+          businessId,
+
+          businessSlug:
+            business.slug ||
+            "",
+
+          businessName:
+            business.name ||
+            "",
+
+          customerId:
+            customer
+              ? customer.id
+              : "",
+
+          customerName:
+            customer
+              ? customer.name
+              : "",
+
+          name:
+            $("projectName")
+              .value
+              .trim(),
+
+          type:
+            $("projectType")
+              .value,
+
+          budget,
+
+          paid,
+
+          startDate:
+            $("projectStartDate")
+              .value,
+
+          deadline:
+            $("projectDeadline")
+              .value,
+
+          status,
+
+          progress,
+
+          assignedTo:
+            $("projectAssigned")
+              .value
+              .trim(),
+
+          priority:
+            $("projectPriority")
+              .value,
+
+          description:
+            $("projectDescription")
+              .value
+              .trim(),
+
+          notes:
+            $("projectNotes")
+              .value
+              .trim(),
+
+          createdAt:
+            now,
+
+          updatedAt:
+            now
+
+        };
+
+
+        projects.unshift(
+          project
+        );
+
+
+        showToast(
+          "New project created successfully."
+        );
+
+      }
+
+
+      saveStorage(
+        PROJECT_KEY,
+        projects
+      );
+
+
+      closeModal(
+        "projectModal"
+      );
+
+
+      renderAll();
+
+    }
+  );
+
+
+/* =========================================================
+   BUSINESS CHANGE
+========================================================= */
+
+$("projectBusiness")
+  .addEventListener(
+    "change",
+    event => {
+
+      populateCustomerSelect(
+        event.target.value
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   SEARCH / FILTERS
+========================================================= */
+
+$("searchInput")
+  .addEventListener(
+    "input",
+    renderAll
+  );
+
+
+$("businessFilter")
+  .addEventListener(
+    "change",
+    renderAll
+  );
+
+
+$("statusFilter")
+  .addEventListener(
+    "change",
+    renderAll
+  );
+
+
+$("sortFilter")
+  .addEventListener(
+    "change",
+    renderAll
+  );
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetFilters(){
+
+  $("searchInput").value =
+    "";
+
+  $("businessFilter").value =
+    "";
+
+  $("statusFilter").value =
+    "";
+
+  $("sortFilter").value =
+    "newest";
+
+
+  renderAll();
+
+
+  showToast(
+    "Project filters reset."
+  );
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshProjects(){
+
+  loadData();
+
+  populateBusinessSelects();
+
+  renderAll();
+
+  showToast(
+    "Project data refreshed."
+  );
+
+}
+
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+function exportProjects(){
+
+  const list =
+    getFilteredProjects();
+
+
+  const rows = [];
+
+
+  rows.push([
+    "Project ID",
+    "Project Name",
+    "Business",
+    "Customer",
+    "Type",
+    "Budget",
+    "Paid",
+    "Due",
+    "Progress",
+    "Start Date",
+    "Deadline",
+    "Status",
+    "Priority",
+    "Assigned To"
+  ]);
+
+
+  list.forEach(
+    project => {
+
+      const budget =
+        Number(
+          project.budget || 0
+        );
+
+
+      const paid =
+        Number(
+          project.paid || 0
+        );
+
+
+      rows.push([
+
+        project.id || "",
+
+        project.name || "",
+
+        project.businessName || "",
+
+        project.customerName || "",
+
+        project.type || "",
+
+        budget,
+
+        paid,
+
+        Math.max(
+          budget - paid,
+          0
+        ),
+
+        Number(
+          project.progress || 0
+        ),
+
+        project.startDate || "",
+
+        project.deadline || "",
+
+        project.status || "",
+
+        project.priority || "",
+
+        project.assignedTo || ""
+
+      ]);
+
+    }
+  );
+
+
+  const csv =
+    rows
+      .map(
+        row =>
+          row
+            .map(
+              value =>
+                `"${String(
+                  value ?? ""
+                ).replace(
+                  /"/g,
+                  '""'
+                )}"`
+            )
+            .join(",")
+      )
+      .join("\n");
+
+
+  const blob =
+    new Blob(
+      [csv],
+      {
+        type:
+          "text/csv;charset=utf-8;"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const a =
+    document.createElement(
+      "a"
+    );
+
+
+  a.href =
+    url;
+
+
+  a.download =
+    `snk-business-projects-${todayISO()}.csv`;
+
+
+  document.body.appendChild(
+    a
+  );
+
+
+  a.click();
+
+  a.remove();
+
+
+  URL.revokeObjectURL(
+    url
+  );
+
+
+  showToast(
+    "Projects exported successfully."
+  );
+
+}
+
+
+/* =========================================================
+   RENDER ALL
+========================================================= */
+
+function renderAll(){
+
+  renderStats();
+
+  renderProjects();
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer = null;
+
+
+function showToast(
+  message
+){
+
+  const toast =
+    $("toast");
+
+
+  $("toastText")
+    .textContent =
+      message;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2800
+    );
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+$("mobileMenu")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("sidebar")
+        .classList.toggle(
+          "open"
+        );
+
+    }
+  );
+
+
+document.addEventListener(
+  "click",
+  event => {
+
+    const sidebar =
+      $("sidebar");
+
+    const menu =
+      $("mobileMenu");
+
+
+    if(
+      window.innerWidth <= 850 &&
+      sidebar.classList.contains(
+        "open"
+      ) &&
+      !sidebar.contains(
+        event.target
+      ) &&
+      !menu.contains(
+        event.target
+      )
+    ){
+
+      sidebar.classList.remove(
+        "open"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   MODAL CLICK OUTSIDE
+========================================================= */
+
+document
+  .querySelectorAll(
+    ".modal-backdrop"
+  )
+  .forEach(
+    backdrop => {
+
+      backdrop.addEventListener(
+        "click",
+        event => {
+
+          if(
+            event.target ===
+            backdrop
+          ){
+
+            backdrop.classList.remove(
+              "show"
+            );
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key ===
+      "Escape"
+    ){
+
+      document
+        .querySelectorAll(
+          ".modal-backdrop.show"
+        )
+        .forEach(
+          modal => {
+
+            modal.classList.remove(
+              "show"
+            );
+
+          }
+        );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   URL CUSTOMER SUPPORT
+========================================================= */
+
+function applyURLCustomer(){
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const customerId =
+    params.get(
+      "customer"
+    );
+
+
+  if(!customerId){
+    return;
+  }
+
+
+  const customer =
+    findCustomer(
+      customerId
+    );
+
+
+  if(!customer){
+    return;
+  }
+
+
+  openProjectModal();
+
+
+  $("projectBusiness").value =
+    customer.businessId;
+
+
+  populateCustomerSelect(
+    customer.businessId,
+    customer.id
+  );
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+function init(){
+
+  loadData();
+
+  populateBusinessSelects();
+
+  renderAll();
+
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  if(
+    params.get("new") ===
+    "1"
+  ){
+
+    openProjectModal();
+
+  }
+
+
+  if(
+    params.get("customer")
+  ){
+
+    setTimeout(
+      applyURLCustomer,
+      100
+    );
+
+  }
+
+}
+
+
+init();
+
+</script>
+
+</body>
+</html>
