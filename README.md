@@ -1,2 +1,2 @@
-# snkbusiness.github.io
-url:
+
+https://shahneilkhan.github.io/snkbusiness.github.io/
