@@ -1,0 +1,4601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Invoices | SNK Business</title>
+
+<meta
+  name="description"
+  content="Premium Invoice Management for SNK Business"
+/>
+
+<style>
+:root{
+  --bg:#070b12;
+  --bg2:#0b1019;
+  --panel:#101722;
+  --panel2:#151e2c;
+  --panel3:#1a2535;
+  --line:#253247;
+  --line2:#304057;
+
+  --text:#f5f7fb;
+  --muted:#8e9aae;
+  --muted2:#647086;
+
+  --blue:#4f8cff;
+  --blue2:#6da5ff;
+  --cyan:#28d7ff;
+
+  --green:#22c983;
+  --yellow:#f4bd4f;
+  --red:#ff6678;
+  --purple:#9b7cff;
+
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+  --radius:18px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(79,140,255,.09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(40,215,255,.06),
+      transparent 28%
+    ),
+    var(--bg);
+
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+.app{
+  min-height:100vh;
+}
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:270px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16,23,34,.98),
+      rgba(9,14,22,.98)
+    );
+
+  border-right:1px solid var(--line);
+
+  padding:22px 16px;
+
+  z-index:1000;
+
+  overflow-y:auto;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:6px 10px 24px;
+}
+
+.brand-logo{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+
+  display:grid;
+  place-items:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--cyan)
+    );
+
+  color:white;
+  font-weight:900;
+  box-shadow:
+    0 10px 30px rgba(79,140,255,.28);
+}
+
+.brand-text{
+  min-width:0;
+}
+
+.brand-title{
+  font-size:17px;
+  font-weight:900;
+  letter-spacing:-.4px;
+}
+
+.brand-subtitle{
+  margin-top:2px;
+  font-size:11px;
+  color:var(--muted);
+}
+
+.nav-title{
+  padding:12px 11px 8px;
+  color:var(--muted2);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.2px;
+  font-weight:800;
+}
+
+.nav{
+  display:grid;
+  gap:5px;
+}
+
+.nav a{
+  display:flex;
+  align-items:center;
+  gap:11px;
+
+  min-height:43px;
+  padding:0 12px;
+
+  color:#aeb8c8;
+
+  border:1px solid transparent;
+  border-radius:12px;
+
+  transition:.2s ease;
+}
+
+.nav a:hover{
+  color:#fff;
+  background:#131c2a;
+  border-color:#26354b;
+  transform:translateX(2px);
+}
+
+.nav a.active{
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.18),
+      rgba(40,215,255,.07)
+    );
+
+  border-color:rgba(79,140,255,.28);
+
+  box-shadow:
+    inset 3px 0 0 var(--blue);
+}
+
+.nav-icon{
+  width:22px;
+  text-align:center;
+  font-size:16px;
+}
+
+.nav-label{
+  font-size:13px;
+  font-weight:700;
+}
+
+.admin-card{
+  margin-top:22px;
+
+  padding:16px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.12),
+      rgba(155,124,255,.08)
+    );
+
+  border:1px solid #273752;
+}
+
+.admin-card .mini{
+  color:var(--blue2);
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.admin-card strong{
+  display:block;
+  margin-top:7px;
+  font-size:14px;
+}
+
+.admin-card span{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+  margin-left:270px;
+  min-height:100vh;
+}
+
+.topbar{
+  height:76px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+
+  padding:0 30px;
+
+  background:
+    rgba(7,11,18,.72);
+
+  border-bottom:1px solid var(--line);
+
+  backdrop-filter:blur(18px);
+
+  position:sticky;
+  top:0;
+  z-index:500;
+}
+
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+}
+
+.mobile-menu{
+  display:none;
+
+  width:40px;
+  height:40px;
+
+  border:1px solid var(--line);
+  border-radius:11px;
+
+  background:var(--panel);
+  color:white;
+}
+
+.page-location{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.page-location strong{
+  color:white;
+  font-size:13px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.icon-btn,
+.avatar-btn{
+  border:1px solid var(--line);
+
+  background:var(--panel);
+
+  color:#dce4f0;
+
+  border-radius:11px;
+
+  min-width:40px;
+  height:40px;
+
+  padding:0 12px;
+
+  transition:.2s ease;
+}
+
+.icon-btn:hover,
+.avatar-btn:hover{
+  border-color:#3a4c68;
+  background:var(--panel2);
+}
+
+.avatar-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:800;
+}
+
+.avatar{
+  width:25px;
+  height:25px;
+  display:grid;
+  place-items:center;
+
+  border-radius:8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--purple)
+    );
+
+  font-size:11px;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+  padding:30px;
+  max-width:1800px;
+  margin:auto;
+}
+
+.hero{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:25px;
+
+  margin-bottom:25px;
+}
+
+.hero-copy h1{
+  font-size:34px;
+  letter-spacing:-1.2px;
+  line-height:1.1;
+}
+
+.hero-copy p{
+  margin-top:9px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+  min-height:42px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  padding:0 15px;
+
+  border-radius:11px;
+
+  border:1px solid var(--line);
+
+  background:var(--panel2);
+
+  color:#e9eef7;
+
+  font-size:12px;
+  font-weight:800;
+
+  transition:.2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+  border-color:#3c506e;
+}
+
+.btn-primary{
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      #3974e8
+    );
+
+  border-color:transparent;
+
+  box-shadow:
+    0 10px 25px rgba(79,140,255,.2);
+}
+
+.btn-success{
+  background:
+    linear-gradient(
+      135deg,
+      #1bb879,
+      #16a66d
+    );
+
+  border-color:transparent;
+}
+
+.btn-danger{
+  background:rgba(255,102,120,.09);
+  color:#ff8594;
+  border-color:rgba(255,102,120,.22);
+}
+
+.btn-ghost{
+  background:transparent;
+}
+
+.btn-small{
+  min-height:34px;
+  padding:0 10px;
+  font-size:11px;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:
+    repeat(4, minmax(0,1fr));
+
+  gap:15px;
+
+  margin-bottom:22px;
+}
+
+.stat{
+  position:relative;
+
+  padding:20px;
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18,26,39,.98),
+      rgba(12,18,28,.98)
+    );
+
+  border:1px solid var(--line);
+
+  box-shadow:0 10px 35px rgba(0,0,0,.14);
+
+  overflow:hidden;
+}
+
+.stat::after{
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:100px;
+
+  right:-45px;
+  top:-45px;
+
+  border-radius:50%;
+
+  background:rgba(79,140,255,.08);
+}
+
+.stat-icon{
+  width:40px;
+  height:40px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:12px;
+
+  background:#172338;
+
+  margin-bottom:14px;
+
+  font-size:18px;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+}
+
+.stat-value{
+  margin-top:5px;
+
+  font-size:25px;
+  font-weight:900;
+
+  letter-spacing:-.7px;
+}
+
+.stat-foot{
+  margin-top:7px;
+  color:var(--muted2);
+  font-size:10px;
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.panel{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:1px solid var(--line);
+
+  border-radius:18px;
+
+  box-shadow:var(--shadow);
+}
+
+.toolbar{
+  padding:16px;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  flex-wrap:wrap;
+
+  border-bottom:1px solid var(--line);
+}
+
+.search-box{
+  flex:1;
+  min-width:230px;
+  position:relative;
+}
+
+.search-box input{
+  width:100%;
+  height:42px;
+
+  padding:0 14px 0 40px;
+
+  border:1px solid var(--line);
+
+  border-radius:11px;
+
+  background:#0c131e;
+
+  color:white;
+
+  outline:none;
+}
+
+.search-box input:focus{
+  border-color:rgba(79,140,255,.65);
+  box-shadow:0 0 0 3px rgba(79,140,255,.08);
+}
+
+.search-icon{
+  position:absolute;
+
+  left:14px;
+  top:50%;
+
+  transform:translateY(-50%);
+
+  color:var(--muted);
+}
+
+.filter{
+  height:42px;
+
+  min-width:150px;
+
+  padding:0 12px;
+
+  border:1px solid var(--line);
+
+  border-radius:11px;
+
+  background:#0c131e;
+
+  color:#dce4f0;
+
+  outline:none;
+}
+
+.filter:focus{
+  border-color:rgba(79,140,255,.65);
+}
+
+.toolbar-right{
+  display:flex;
+  gap:8px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+
+  min-width:1050px;
+}
+
+thead th{
+  padding:14px 16px;
+
+  text-align:left;
+
+  color:#6f7c91;
+
+  font-size:10px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.8px;
+
+  background:#0c131e;
+
+  border-bottom:1px solid var(--line);
+}
+
+tbody td{
+  padding:15px 16px;
+
+  border-bottom:1px solid rgba(37,50,71,.65);
+
+  font-size:12px;
+
+  vertical-align:middle;
+}
+
+tbody tr{
+  transition:.18s ease;
+}
+
+tbody tr:hover{
+  background:rgba(79,140,255,.035);
+}
+
+.invoice-main{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.invoice-icon{
+  width:38px;
+  height:38px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.17),
+      rgba(40,215,255,.07)
+    );
+
+  border:1px solid rgba(79,140,255,.18);
+
+  font-size:16px;
+}
+
+.invoice-title{
+  font-weight:900;
+  color:white;
+}
+
+.invoice-sub{
+  margin-top:3px;
+  color:var(--muted2);
+  font-size:10px;
+}
+
+.customer-name{
+  color:#e7edf7;
+  font-weight:800;
+}
+
+.business-name{
+  color:#9eb2cd;
+  font-size:11px;
+}
+
+.amount{
+  font-weight:900;
+  color:white;
+}
+
+.amount-small{
+  margin-top:3px;
+  color:var(--muted2);
+  font-size:10px;
+}
+
+.actions{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+
+  padding:6px 9px;
+
+  border-radius:999px;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  border:1px solid transparent;
+}
+
+.status::before{
+  content:"";
+
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+}
+
+.status.paid{
+  color:#55dfa7;
+  background:rgba(34,201,131,.08);
+  border-color:rgba(34,201,131,.18);
+}
+
+.status.paid::before{
+  background:var(--green);
+}
+
+.status.partial{
+  color:#f4ca6b;
+  background:rgba(244,189,79,.08);
+  border-color:rgba(244,189,79,.18);
+}
+
+.status.partial::before{
+  background:var(--yellow);
+}
+
+.status.pending{
+  color:#ff8997;
+  background:rgba(255,102,120,.08);
+  border-color:rgba(255,102,120,.18);
+}
+
+.status.pending::before{
+  background:var(--red);
+}
+
+.status.overdue{
+  color:#ff788a;
+  background:rgba(255,102,120,.12);
+  border-color:rgba(255,102,120,.25);
+}
+
+.status.overdue::before{
+  background:var(--red);
+}
+
+.status.draft{
+  color:#b4a7ff;
+  background:rgba(155,124,255,.08);
+  border-color:rgba(155,124,255,.18);
+}
+
+.status.draft::before{
+  background:var(--purple);
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+  padding:70px 25px;
+  text-align:center;
+}
+
+.empty-icon{
+  width:62px;
+  height:62px;
+
+  display:grid;
+  place-items:center;
+
+  margin:0 auto 14px;
+
+  border-radius:18px;
+
+  background:#151f2f;
+
+  font-size:25px;
+}
+
+.empty h3{
+  font-size:17px;
+}
+
+.empty p{
+  margin-top:6px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-layer{
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(0,0,0,.68);
+
+  backdrop-filter:blur(8px);
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
+  z-index:3000;
+}
+
+.modal-layer.show{
+  display:flex;
+}
+
+.modal{
+  width:min(850px,100%);
+
+  max-height:92vh;
+
+  overflow:auto;
+
+  border-radius:22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #121a27,
+      #0c131e
+    );
+
+  border:1px solid #2a3a53;
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.55);
+}
+
+.modal.small{
+  width:min(650px,100%);
+}
+
+.modal-header{
+  position:sticky;
+  top:0;
+  z-index:5;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:15px;
+
+  padding:20px 22px;
+
+  background:
+    rgba(15,23,35,.96);
+
+  border-bottom:1px solid var(--line);
+
+  backdrop-filter:blur(14px);
+}
+
+.modal-title{
+  font-size:18px;
+  font-weight:900;
+}
+
+.modal-subtitle{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.close-btn{
+  width:36px;
+  height:36px;
+
+  border:1px solid var(--line);
+
+  border-radius:10px;
+
+  background:#101925;
+
+  color:#cbd4e2;
+
+  font-size:18px;
+}
+
+.modal-body{
+  padding:22px;
+}
+
+.form-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0,1fr));
+
+  gap:15px;
+}
+
+.form-group{
+  display:grid;
+  gap:7px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+.form-group label{
+  color:#9aa8bc;
+  font-size:11px;
+  font-weight:800;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+
+  border:1px solid var(--line);
+
+  background:#0a111b;
+
+  color:#f1f5fb;
+
+  border-radius:11px;
+
+  outline:none;
+}
+
+.form-group input,
+.form-group select{
+  height:43px;
+  padding:0 12px;
+}
+
+.form-group textarea{
+  min-height:90px;
+  padding:12px;
+  resize:vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:rgba(79,140,255,.65);
+
+  box-shadow:
+    0 0 0 3px rgba(79,140,255,.08);
+}
+
+.form-help{
+  color:var(--muted2);
+  font-size:10px;
+}
+
+.modal-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:9px;
+
+  padding:16px 22px;
+
+  border-top:1px solid var(--line);
+
+  background:#0d141f;
+}
+
+/* =========================
+   ITEMS
+========================= */
+
+.items-box{
+  margin-top:18px;
+
+  border:1px solid var(--line);
+
+  border-radius:15px;
+
+  overflow:hidden;
+}
+
+.items-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:13px 14px;
+
+  background:#0c131e;
+
+  border-bottom:1px solid var(--line);
+}
+
+.items-head strong{
+  font-size:12px;
+}
+
+.item-row{
+  display:grid;
+
+  grid-template-columns:
+    2fr
+    90px
+    120px
+    120px
+    40px;
+
+  gap:8px;
+
+  padding:10px 12px;
+
+  border-bottom:1px solid rgba(37,50,71,.7);
+}
+
+.item-row:last-child{
+  border-bottom:0;
+}
+
+.item-row input{
+  width:100%;
+  height:38px;
+
+  padding:0 9px;
+
+  border:1px solid var(--line);
+
+  background:#09111b;
+
+  color:white;
+
+  border-radius:9px;
+
+  outline:none;
+}
+
+.item-row input:focus{
+  border-color:rgba(79,140,255,.6);
+}
+
+.item-total{
+  height:38px;
+
+  display:flex;
+  align-items:center;
+
+  padding:0 9px;
+
+  border:1px solid var(--line);
+
+  border-radius:9px;
+
+  background:#101925;
+
+  font-size:12px;
+
+  font-weight:800;
+}
+
+.remove-item{
+  width:38px;
+  height:38px;
+
+  border:1px solid rgba(255,102,120,.2);
+
+  border-radius:9px;
+
+  background:rgba(255,102,120,.07);
+
+  color:#ff8392;
+}
+
+/* =========================
+   SUMMARY
+========================= */
+
+.invoice-summary{
+  margin-top:18px;
+
+  display:flex;
+
+  justify-content:flex-end;
+}
+
+.summary-card{
+  width:min(360px,100%);
+
+  padding:16px;
+
+  border-radius:15px;
+
+  border:1px solid var(--line);
+
+  background:#0b121c;
+}
+
+.summary-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:20px;
+
+  padding:7px 0;
+
+  color:#9aa8bc;
+
+  font-size:12px;
+}
+
+.summary-row strong{
+  color:#edf2f8;
+}
+
+.summary-row.total{
+  margin-top:6px;
+  padding-top:13px;
+
+  border-top:1px solid var(--line);
+
+  color:white;
+
+  font-size:14px;
+}
+
+.summary-row.total strong{
+  font-size:18px;
+}
+
+.summary-row.due strong{
+  color:#ff8795;
+}
+
+/* =========================
+   VIEW MODAL
+========================= */
+
+.invoice-preview{
+  background:white;
+  color:#111827;
+
+  border-radius:14px;
+
+  overflow:hidden;
+}
+
+.preview-head{
+  padding:25px;
+
+  display:flex;
+  justify-content:space-between;
+  gap:25px;
+
+  border-bottom:1px solid #e5e7eb;
+}
+
+.preview-brand h2{
+  font-size:23px;
+}
+
+.preview-brand p{
+  margin-top:5px;
+  color:#64748b;
+  font-size:11px;
+}
+
+.preview-number{
+  text-align:right;
+}
+
+.preview-number strong{
+  display:block;
+  font-size:16px;
+}
+
+.preview-number span{
+  color:#64748b;
+  font-size:11px;
+}
+
+.preview-meta{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  gap:25px;
+
+  padding:22px 25px;
+}
+
+.preview-meta-box h4{
+  color:#64748b;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+}
+
+.preview-meta-box p{
+  margin-top:5px;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.preview-table{
+  width:100%;
+  min-width:0;
+  color:#111827;
+}
+
+.preview-table th{
+  padding:10px 14px;
+
+  background:#f8fafc;
+
+  color:#64748b;
+
+  font-size:9px;
+
+  text-transform:uppercase;
+}
+
+.preview-table td{
+  padding:11px 14px;
+
+  border-bottom:1px solid #e5e7eb;
+
+  font-size:11px;
+}
+
+.preview-summary{
+  margin-left:auto;
+
+  width:300px;
+
+  padding:18px 25px 25px;
+}
+
+.preview-summary-row{
+  display:flex;
+  justify-content:space-between;
+
+  padding:5px 0;
+
+  font-size:11px;
+}
+
+.preview-summary-row.total{
+  margin-top:7px;
+
+  padding-top:10px;
+
+  border-top:1px solid #dbe1e8;
+
+  font-size:15px;
+
+  font-weight:900;
+}
+
+.preview-summary-row.due{
+  color:#dc2626;
+  font-weight:800;
+}
+
+.preview-footer{
+  padding:16px 25px;
+
+  background:#f8fafc;
+
+  color:#64748b;
+
+  font-size:10px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+
+  right:24px;
+  bottom:24px;
+
+  z-index:5000;
+
+  min-width:280px;
+  max-width:380px;
+
+  padding:14px 16px;
+
+  border-radius:13px;
+
+  background:#121c2b;
+
+  border:1px solid #30415b;
+
+  box-shadow:0 20px 50px rgba(0,0,0,.4);
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  transform:
+    translateY(25px);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:.25s ease;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.toast-dot{
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:var(--green);
+
+  flex:0 0 auto;
+}
+
+.toast.error .toast-dot{
+  background:var(--red);
+}
+
+.toast-text{
+  font-size:12px;
+  color:#e8eef7;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+  .stats{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+}
+
+@media(max-width:850px){
+
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.25s ease;
+    box-shadow:30px 0 70px rgba(0,0,0,.4);
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .topbar{
+    padding:0 18px;
+  }
+
+  .content{
+    padding:22px 18px;
+  }
+
+  .hero{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+}
+
+@media(max-width:620px){
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .top-actions .icon-btn:nth-child(1){
+    display:none;
+  }
+
+  .page-location{
+    display:none;
+  }
+
+  .hero-copy h1{
+    font-size:28px;
+  }
+
+  .toolbar{
+    align-items:stretch;
+  }
+
+  .search-box{
+    min-width:100%;
+  }
+
+  .filter{
+    flex:1;
+    min-width:120px;
+  }
+
+  .hero-actions{
+    width:100%;
+  }
+
+  .hero-actions .btn{
+    flex:1;
+  }
+
+  .modal-layer{
+    padding:10px;
+  }
+
+  .modal-body{
+    padding:16px;
+  }
+
+  .modal-header{
+    padding:16px;
+  }
+
+  .modal-footer{
+    padding:14px 16px;
+  }
+
+  .item-row{
+    grid-template-columns:
+      1fr
+      1fr;
+  }
+
+  .item-row input:first-child{
+    grid-column:1/-1;
+  }
+
+  .item-total{
+    width:100%;
+  }
+
+  .remove-item{
+    width:100%;
+  }
+
+  .preview-head{
+    flex-direction:column;
+  }
+
+  .preview-number{
+    text-align:left;
+  }
+
+  .preview-meta{
+    grid-template-columns:1fr;
+  }
+
+  .preview-summary{
+    width:100%;
+  }
+
+  .toast{
+    left:15px;
+    right:15px;
+    bottom:15px;
+    min-width:0;
+  }
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print{
+
+  body{
+    background:white;
+  }
+
+  .sidebar,
+  .topbar,
+  .content > .hero,
+  .content > .stats,
+  .panel,
+  .modal-header,
+  .modal-footer,
+  .toast{
+    display:none !important;
+  }
+
+  .main{
+    margin:0;
+  }
+
+  .content{
+    padding:0;
+  }
+
+  .modal-layer{
+    position:static;
+    display:block;
+    background:white;
+    padding:0;
+  }
+
+  .modal{
+    width:100%;
+    max-height:none;
+    box-shadow:none;
+    border:0;
+  }
+
+  .invoice-preview{
+    border-radius:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- =========================
+       SIDEBAR
+  ========================== -->
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+      <div class="brand-logo">SN</div>
+
+      <div class="brand-text">
+        <div class="brand-title">SNK Business</div>
+        <div class="brand-subtitle">Business Management</div>
+      </div>
+    </div>
+
+    <div class="nav-title">Main</div>
+
+    <nav class="nav">
+
+      <a href="index.html">
+        <span class="nav-icon">⌂</span>
+        <span class="nav-label">Dashboard</span>
+      </a>
+
+      <a href="businesses.html">
+        <span class="nav-icon">▣</span>
+        <span class="nav-label">My Businesses</span>
+      </a>
+
+      <a href="customers.html">
+        <span class="nav-icon">♙</span>
+        <span class="nav-label">Customers</span>
+      </a>
+
+      <a href="payments.html">
+        <span class="nav-icon">৳</span>
+        <span class="nav-label">Payments</span>
+      </a>
+
+      <a href="inventory.html">
+        <span class="nav-icon">▤</span>
+        <span class="nav-label">Inventory</span>
+      </a>
+
+      <a href="invoices.html" class="active">
+        <span class="nav-icon">▥</span>
+        <span class="nav-label">Invoices</span>
+      </a>
+
+      <a href="projects.html">
+        <span class="nav-icon">◫</span>
+        <span class="nav-label">Projects</span>
+      </a>
+
+      <a href="digital-marketing.html">
+        <span class="nav-icon">◉</span>
+        <span class="nav-label">Digital Marketing</span>
+      </a>
+
+      <a href="tasks.html">
+        <span class="nav-icon">✓</span>
+        <span class="nav-label">Tasks</span>
+      </a>
+
+      <a href="reports.html">
+        <span class="nav-icon">▥</span>
+        <span class="nav-label">Reports</span>
+      </a>
+
+    </nav>
+
+    <div class="admin-card">
+      <div class="mini">Premium Business Suite</div>
+      <strong>Super Admin</strong>
+      <span>Owner • Full Access</span>
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="top-left">
+
+        <button
+          class="mobile-menu"
+          id="mobileMenu"
+          type="button"
+        >
+          ☰
+        </button>
+
+        <div class="page-location">
+          SNK Business
+          <strong> / Invoices</strong>
+        </div>
+
+      </div>
+
+      <div class="top-actions">
+
+        <button
+          class="icon-btn"
+          type="button"
+          onclick="exportInvoices()"
+          title="Export"
+        >
+          ↓
+        </button>
+
+        <button
+          class="icon-btn"
+          type="button"
+          onclick="refreshPage()"
+          title="Refresh"
+        >
+          ↻
+        </button>
+
+        <button
+          class="avatar-btn"
+          type="button"
+        >
+          <span class="avatar">SA</span>
+          Admin
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <section class="content">
+
+      <!-- HERO -->
+
+      <div class="hero">
+
+        <div class="hero-copy">
+          <h1>Invoices</h1>
+          <p>
+            Create, manage, track and print invoices for all your businesses.
+          </p>
+        </div>
+
+        <div class="hero-actions">
+
+          <button
+            class="btn btn-ghost"
+            type="button"
+            onclick="exportInvoices()"
+          >
+            ↓ Export CSV
+          </button>
+
+          <button
+            class="btn btn-primary"
+            type="button"
+            onclick="openInvoiceModal()"
+          >
+            + Create Invoice
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- STATS -->
+
+      <section class="stats">
+
+        <div class="stat">
+          <div class="stat-icon">🧾</div>
+          <div class="stat-label">Total Invoiced</div>
+          <div class="stat-value" id="statTotal">৳0</div>
+          <div class="stat-foot">All invoices</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">✓</div>
+          <div class="stat-label">Total Paid</div>
+          <div class="stat-value" id="statPaid">৳0</div>
+          <div class="stat-foot">Amount received</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">◷</div>
+          <div class="stat-label">Total Due</div>
+          <div class="stat-value" id="statDue">৳0</div>
+          <div class="stat-foot">Outstanding invoices</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-icon">#</div>
+          <div class="stat-label">Invoices</div>
+          <div class="stat-value" id="statCount">0</div>
+          <div class="stat-foot">Total records</div>
+        </div>
+
+      </section>
+
+
+      <!-- INVOICE PANEL -->
+
+      <section class="panel">
+
+        <div class="toolbar">
+
+          <div class="search-box">
+            <span class="search-icon">⌕</span>
+
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Search invoice, customer, reference..."
+            >
+          </div>
+
+          <select
+            id="businessFilter"
+            class="filter"
+          >
+            <option value="">All Businesses</option>
+          </select>
+
+          <select
+            id="statusFilter"
+            class="filter"
+          >
+            <option value="">All Status</option>
+            <option value="paid">Paid</option>
+            <option value="partial">Partial</option>
+            <option value="pending">Pending</option>
+            <option value="overdue">Overdue</option>
+            <option value="draft">Draft</option>
+          </select>
+
+          <button
+            class="btn btn-ghost"
+            type="button"
+            onclick="resetFilters()"
+          >
+            Reset
+          </button>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Invoice</th>
+                <th>Customer</th>
+                <th>Business</th>
+                <th>Total</th>
+                <th>Paid</th>
+                <th>Due</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="invoiceTableBody"></tbody>
+
+          </table>
+
+          <div
+            class="empty"
+            id="emptyState"
+            style="display:none;"
+          >
+            <div class="empty-icon">🧾</div>
+            <h3>No invoices found</h3>
+            <p>
+              Create your first invoice or change your filters.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<!-- =====================================================
+     CREATE / EDIT INVOICE MODAL
+====================================================== -->
+
+<div
+  class="modal-layer"
+  id="invoiceModal"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div>
+        <div
+          class="modal-title"
+          id="invoiceModalTitle"
+        >
+          Create Invoice
+        </div>
+
+        <div class="modal-subtitle">
+          Connect invoice with a business and customer.
+        </div>
+      </div>
+
+      <button
+        class="close-btn"
+        type="button"
+        onclick="closeModal('invoiceModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Business *</label>
+
+          <select id="invoiceBusiness">
+            <option value="">Select Business</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label>Customer *</label>
+
+          <select id="invoiceCustomer">
+            <option value="">Select Customer</option>
+          </select>
+
+          <div
+            class="form-help"
+            id="customerBalanceHelp"
+          >
+            Select a customer to see balance.
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label>Invoice Date *</label>
+
+          <input
+            id="invoiceDate"
+            type="date"
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label>Due Date</label>
+
+          <input
+            id="invoiceDueDate"
+            type="date"
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label>Invoice Reference</label>
+
+          <input
+            id="invoiceReference"
+            type="text"
+            placeholder="Optional reference"
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label>Status</label>
+
+          <select id="invoiceStatus">
+            <option value="pending">Pending</option>
+            <option value="paid">Paid</option>
+            <option value="partial">Partial</option>
+            <option value="overdue">Overdue</option>
+            <option value="draft">Draft</option>
+          </select>
+        </div>
+
+      </div>
+
+
+      <!-- ITEMS -->
+
+      <div class="items-box">
+
+        <div class="items-head">
+
+          <strong>Invoice Items</strong>
+
+          <button
+            class="btn btn-small"
+            type="button"
+            onclick="addItemRow()"
+          >
+            + Add Item
+          </button>
+
+        </div>
+
+        <div id="itemsContainer"></div>
+
+      </div>
+
+
+      <!-- SUMMARY -->
+
+      <div class="invoice-summary">
+
+        <div class="summary-card">
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <strong id="summarySubtotal">৳0</strong>
+          </div>
+
+          <div class="summary-row">
+
+            <span>Discount</span>
+
+            <input
+              id="invoiceDiscount"
+              type="number"
+              min="0"
+              step="0.01"
+              value="0"
+              style="
+                width:120px;
+                height:34px;
+                padding:0 9px;
+                border:1px solid var(--line);
+                border-radius:8px;
+                background:#09111b;
+                color:white;
+                outline:none;
+              "
+              oninput="updateSummary()"
+            >
+
+          </div>
+
+          <div class="summary-row total">
+            <span>Grand Total</span>
+            <strong id="summaryTotal">৳0</strong>
+          </div>
+
+          <div class="summary-row">
+
+            <span>Paid Amount</span>
+
+            <input
+              id="invoicePaid"
+              type="number"
+              min="0"
+              step="0.01"
+              value="0"
+              style="
+                width:120px;
+                height:34px;
+                padding:0 9px;
+                border:1px solid var(--line);
+                border-radius:8px;
+                background:#09111b;
+                color:white;
+                outline:none;
+              "
+              oninput="updateSummary()"
+            >
+
+          </div>
+
+          <div class="summary-row due">
+            <span>Due Amount</span>
+            <strong id="summaryDue">৳0</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-grid" style="margin-top:18px;">
+
+        <div class="form-group full">
+          <label>Notes</label>
+
+          <textarea
+            id="invoiceNotes"
+            placeholder="Invoice notes, payment terms, delivery notes..."
+          ></textarea>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-ghost"
+        type="button"
+        onclick="closeModal('invoiceModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        type="button"
+        onclick="saveInvoice()"
+      >
+        Save Invoice
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     VIEW INVOICE MODAL
+====================================================== -->
+
+<div
+  class="modal-layer"
+  id="viewModal"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div>
+        <div class="modal-title">Invoice Preview</div>
+        <div class="modal-subtitle">
+          Printable invoice document
+        </div>
+      </div>
+
+      <button
+        class="close-btn"
+        type="button"
+        onclick="closeModal('viewModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="modal-body"
+      id="invoicePreviewContainer"
+    ></div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-danger"
+        type="button"
+        id="deleteFromPreviewBtn"
+      >
+        Delete
+      </button>
+
+      <button
+        class="btn"
+        type="button"
+        id="editFromPreviewBtn"
+      >
+        Edit
+      </button>
+
+      <button
+        class="btn btn-primary"
+        type="button"
+        onclick="printInvoice()"
+      >
+        🖨 Print Invoice
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+  class="toast"
+  id="toast"
+>
+  <span class="toast-dot"></span>
+
+  <span
+    class="toast-text"
+    id="toastText"
+  >
+    Saved successfully.
+  </span>
+</div>
+
+
+<script>
+/* =========================================================
+   SNK BUSINESS
+   STEP 3.5 — INVOICE MANAGEMENT
+
+   LocalStorage:
+   - snkBusinesses
+   - snkBusinessCustomers
+   - snkBusinessPayments
+   - snkBusinessInvoices
+========================================================= */
+
+
+/* =========================================================
+   STORAGE KEYS
+========================================================= */
+
+const BUSINESS_KEY = "snkBusinesses";
+const CUSTOMER_KEY = "snkBusinessCustomers";
+const PAYMENT_KEY = "snkBusinessPayments";
+const INVOICE_KEY = "snkBusinessInvoices";
+
+
+/* =========================================================
+   GLOBAL STATE
+========================================================= */
+
+let businesses = [];
+let customers = [];
+let payments = [];
+let invoices = [];
+
+let editingInvoiceId = null;
+let viewingInvoiceId = null;
+
+let itemCounter = 0;
+
+
+/* =========================================================
+   DOM HELPERS
+========================================================= */
+
+const $ = (id) => document.getElementById(id);
+
+
+/* =========================================================
+   LOCAL STORAGE
+========================================================= */
+
+function loadData(){
+
+  try{
+    businesses =
+      JSON.parse(
+        localStorage.getItem(BUSINESS_KEY)
+      ) || [];
+
+    customers =
+      JSON.parse(
+        localStorage.getItem(CUSTOMER_KEY)
+      ) || [];
+
+    payments =
+      JSON.parse(
+        localStorage.getItem(PAYMENT_KEY)
+      ) || [];
+
+    invoices =
+      JSON.parse(
+        localStorage.getItem(INVOICE_KEY)
+      ) || [];
+
+  }catch(error){
+
+    console.error(error);
+
+    businesses = [];
+    customers = [];
+    payments = [];
+    invoices = [];
+
+  }
+
+}
+
+
+/* =========================================================
+   SAVE INVOICES
+========================================================= */
+
+function saveInvoices(){
+
+  localStorage.setItem(
+    INVOICE_KEY,
+    JSON.stringify(invoices)
+  );
+
+}
+
+
+/* =========================================================
+   MONEY
+========================================================= */
+
+function money(value){
+
+  const amount = Number(value) || 0;
+
+  return "৳" +
+    amount.toLocaleString(
+      "en-BD",
+      {
+        minimumFractionDigits:0,
+        maximumFractionDigits:2
+      }
+    );
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function formatDate(date){
+
+  if(!date){
+    return "—";
+  }
+
+  const d = new Date(date);
+
+  if(Number.isNaN(d.getTime())){
+    return date;
+  }
+
+  return d.toLocaleDateString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+function todayISO(){
+
+  const d = new Date();
+
+  const y = d.getFullYear();
+
+  const m =
+    String(d.getMonth()+1)
+      .padStart(2,"0");
+
+  const day =
+    String(d.getDate())
+      .padStart(2,"0");
+
+  return `${y}-${m}-${day}`;
+
+}
+
+
+/* =========================================================
+   URL PARAMETERS
+========================================================= */
+
+function getUrlParams(){
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  return {
+    business:
+      params.get("business") || "",
+
+    customer:
+      params.get("customer") || "",
+
+    invoice:
+      params.get("invoice") || ""
+  };
+
+}
+
+
+/* =========================================================
+   FIND BUSINESS
+========================================================= */
+
+function findBusiness(value){
+
+  if(!value){
+    return null;
+  }
+
+  const needle =
+    String(value)
+      .trim()
+      .toLowerCase();
+
+  return businesses.find(b => {
+
+    return (
+      String(b.id || "").toLowerCase() === needle ||
+      String(b.slug || "").toLowerCase() === needle ||
+      String(b.name || "").toLowerCase() === needle
+    );
+
+  }) || null;
+
+}
+
+
+/* =========================================================
+   FIND CUSTOMER
+========================================================= */
+
+function findCustomer(value){
+
+  if(!value){
+    return null;
+  }
+
+  const needle =
+    String(value)
+      .trim()
+      .toLowerCase();
+
+  return customers.find(c => {
+
+    return (
+      String(c.id || "").toLowerCase() === needle ||
+      String(c.name || "").toLowerCase() === needle
+    );
+
+  }) || null;
+
+}
+
+
+/* =========================================================
+   BUSINESS SELECT
+========================================================= */
+
+function populateBusinessSelects(){
+
+  const filter =
+    $("businessFilter");
+
+  const invoiceBusiness =
+    $("invoiceBusiness");
+
+  if(filter){
+
+    filter.innerHTML =
+      `<option value="">All Businesses</option>`;
+
+    businesses.forEach(b => {
+
+      const option =
+        document.createElement("option");
+
+      option.value = b.id;
+
+      option.textContent = b.name;
+
+      filter.appendChild(option);
+
+    });
+
+  }
+
+
+  if(invoiceBusiness){
+
+    invoiceBusiness.innerHTML =
+      `<option value="">Select Business</option>`;
+
+    businesses.forEach(b => {
+
+      const option =
+        document.createElement("option");
+
+      option.value = b.id;
+
+      option.textContent =
+        `${b.name} — ${b.category || "Business"}`;
+
+      invoiceBusiness.appendChild(option);
+
+    });
+
+  }
+
+}
+
+
+/* =========================================================
+   CUSTOMER SELECT
+========================================================= */
+
+function populateCustomerSelect(
+  selectedCustomerId = ""
+){
+
+  const businessId =
+    $("invoiceBusiness").value;
+
+  const select =
+    $("invoiceCustomer");
+
+  select.innerHTML =
+    `<option value="">Select Customer</option>`;
+
+  let list = customers;
+
+  if(businessId){
+
+    list =
+      customers.filter(c => {
+
+        return (
+          c.businessId === businessId ||
+          c.businessSlug ===
+            (
+              findBusiness(businessId)?.slug || ""
+            )
+        );
+
+      });
+
+  }
+
+  list.forEach(customer => {
+
+    const option =
+      document.createElement("option");
+
+    option.value =
+      customer.id;
+
+    option.textContent =
+      `${customer.name} • ${customer.id}`;
+
+    select.appendChild(option);
+
+  });
+
+  if(selectedCustomerId){
+
+    select.value =
+      selectedCustomerId;
+
+  }
+
+  updateCustomerBalance();
+
+}
+
+
+/* =========================================================
+   CUSTOMER BALANCE
+========================================================= */
+
+function updateCustomerBalance(){
+
+  const customerId =
+    $("invoiceCustomer").value;
+
+  const help =
+    $("customerBalanceHelp");
+
+  if(!customerId){
+
+    help.textContent =
+      "Select a customer to see balance.";
+
+    return;
+
+  }
+
+  const customer =
+    customers.find(
+      c => c.id === customerId
+    );
+
+  if(!customer){
+
+    help.textContent =
+      "Customer information not found.";
+
+    return;
+
+  }
+
+  const total =
+    Number(customer.total || customer.value || 0);
+
+  const paid =
+    Number(customer.paid || 0);
+
+  const due =
+    Math.max(total - paid,0);
+
+  help.textContent =
+    `Current customer balance: Total ${money(total)} • Paid ${money(paid)} • Due ${money(due)}`;
+
+}
+
+
+/* =========================================================
+   GENERATE INVOICE ID
+========================================================= */
+
+function generateInvoiceId(){
+
+  let max = 1000;
+
+  invoices.forEach(invoice => {
+
+    const match =
+      String(invoice.id || "")
+        .match(/(\d+)$/);
+
+    if(match){
+
+      max =
+        Math.max(
+          max,
+          Number(match[1])
+        );
+
+    }
+
+  });
+
+  return `INV-${max + 1}`;
+
+}
+
+
+/* =========================================================
+   ITEMS
+========================================================= */
+
+function addItemRow(item = {}){
+
+  itemCounter++;
+
+  const row =
+    document.createElement("div");
+
+  row.className = "item-row";
+
+  row.dataset.itemId =
+    itemCounter;
+
+  row.innerHTML = `
+
+    <input
+      type="text"
+      class="item-description"
+      placeholder="Service / Product"
+      value="${escapeAttribute(item.description || "")}"
+    >
+
+    <input
+      type="number"
+      class="item-qty"
+      min="0"
+      step="1"
+      value="${Number(item.qty ?? 1)}"
+      oninput="updateSummary()"
+      placeholder="Qty"
+    >
+
+    <input
+      type="number"
+      class="item-price"
+      min="0"
+      step="0.01"
+      value="${Number(item.price ?? 0)}"
+      oninput="updateSummary()"
+      placeholder="Price"
+    >
+
+    <div class="item-total">
+      ${money(
+        Number(item.qty ?? 1) *
+        Number(item.price ?? 0)
+      )}
+    </div>
+
+    <button
+      class="remove-item"
+      type="button"
+      onclick="removeItemRow(this)"
+    >
+      ×
+    </button>
+
+  `;
+
+  $("itemsContainer").appendChild(row);
+
+  updateSummary();
+
+}
+
+
+function removeItemRow(button){
+
+  const row =
+    button.closest(".item-row");
+
+  if(!row){
+    return;
+  }
+
+  row.remove();
+
+  updateSummary();
+
+}
+
+
+function getItems(){
+
+  const rows =
+    document.querySelectorAll(
+      "#itemsContainer .item-row"
+    );
+
+  const items = [];
+
+  rows.forEach(row => {
+
+    const description =
+      row.querySelector(
+        ".item-description"
+      ).value.trim();
+
+    const qty =
+      Number(
+        row.querySelector(".item-qty").value
+      ) || 0;
+
+    const price =
+      Number(
+        row.querySelector(".item-price").value
+      ) || 0;
+
+    if(
+      description ||
+      qty > 0 ||
+      price > 0
+    ){
+
+      items.push({
+        description,
+        qty,
+        price,
+        total:qty * price
+      });
+
+    }
+
+  });
+
+  return items;
+
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+function calculateSubtotal(){
+
+  return getItems()
+    .reduce(
+      (sum,item) =>
+        sum + Number(item.total || 0),
+      0
+    );
+
+}
+
+
+function updateSummary(){
+
+  const rows =
+    document.querySelectorAll(
+      "#itemsContainer .item-row"
+    );
+
+  let subtotal = 0;
+
+  rows.forEach(row => {
+
+    const qty =
+      Number(
+        row.querySelector(".item-qty")?.value
+      ) || 0;
+
+    const price =
+      Number(
+        row.querySelector(".item-price")?.value
+      ) || 0;
+
+    const total =
+      qty * price;
+
+    subtotal += total;
+
+    const totalBox =
+      row.querySelector(".item-total");
+
+    if(totalBox){
+      totalBox.textContent =
+        money(total);
+    }
+
+  });
+
+
+  const discount =
+    Math.max(
+      Number(
+        $("invoiceDiscount").value
+      ) || 0,
+      0
+    );
+
+  const total =
+    Math.max(
+      subtotal - discount,
+      0
+    );
+
+  const paid =
+    Math.max(
+      Number(
+        $("invoicePaid").value
+      ) || 0,
+      0
+    );
+
+  const due =
+    Math.max(
+      total - paid,
+      0
+    );
+
+
+  $("summarySubtotal")
+    .textContent =
+      money(subtotal);
+
+  $("summaryTotal")
+    .textContent =
+      money(total);
+
+  $("summaryDue")
+    .textContent =
+      money(due);
+
+
+  return {
+    subtotal,
+    discount,
+    total,
+    paid,
+    due
+  };
+
+}
+
+
+/* =========================================================
+   AUTO STATUS
+========================================================= */
+
+function getAutoStatus(total, paid){
+
+  if(total <= 0){
+    return "draft";
+  }
+
+  if(paid >= total){
+    return "paid";
+  }
+
+  if(paid > 0){
+    return "partial";
+  }
+
+  return "pending";
+
+}
+
+
+/* =========================================================
+   OPEN CREATE MODAL
+========================================================= */
+
+function openInvoiceModal(
+  businessId = "",
+  customerId = ""
+){
+
+  editingInvoiceId = null;
+
+  $("invoiceModalTitle")
+    .textContent =
+      "Create Invoice";
+
+  $("invoiceDate").value =
+    todayISO();
+
+  $("invoiceDueDate").value = "";
+
+  $("invoiceReference").value = "";
+
+  $("invoiceNotes").value = "";
+
+  $("invoiceDiscount").value = 0;
+
+  $("invoicePaid").value = 0;
+
+  $("invoiceStatus").value =
+    "pending";
+
+  $("itemsContainer").innerHTML = "";
+
+  itemCounter = 0;
+
+  populateBusinessSelects();
+
+  const params =
+    getUrlParams();
+
+  const urlBusiness =
+    findBusiness(params.business);
+
+  const selectedBusiness =
+    businessId ||
+    urlBusiness?.id ||
+    "";
+
+  $("invoiceBusiness").value =
+    selectedBusiness;
+
+  populateCustomerSelect(
+    customerId ||
+    params.customer ||
+    ""
+  );
+
+  addItemRow();
+
+  $("invoiceModal")
+    .classList.add("show");
+
+  updateSummary();
+
+}
+
+
+/* =========================================================
+   OPEN EDIT
+========================================================= */
+
+function editInvoice(id){
+
+  const invoice =
+    invoices.find(
+      item => item.id === id
+    );
+
+  if(!invoice){
+    showToast(
+      "Invoice not found.",
+      true
+    );
+    return;
+  }
+
+  editingInvoiceId = id;
+
+  $("invoiceModalTitle")
+    .textContent =
+      "Edit Invoice";
+
+  $("invoiceBusiness").value =
+    invoice.businessId || "";
+
+  populateCustomerSelect(
+    invoice.customerId || ""
+  );
+
+  $("invoiceCustomer").value =
+    invoice.customerId || "";
+
+  $("invoiceDate").value =
+    invoice.date || todayISO();
+
+  $("invoiceDueDate").value =
+    invoice.dueDate || "";
+
+  $("invoiceReference").value =
+    invoice.reference || "";
+
+  $("invoiceStatus").value =
+    invoice.status || "pending";
+
+  $("invoiceDiscount").value =
+    Number(invoice.discount || 0);
+
+  $("invoicePaid").value =
+    Number(invoice.paid || 0);
+
+  $("invoiceNotes").value =
+    invoice.notes || "";
+
+  $("itemsContainer").innerHTML = "";
+
+  itemCounter = 0;
+
+  const items =
+    Array.isArray(invoice.items)
+      ? invoice.items
+      : [];
+
+  if(items.length){
+
+    items.forEach(item =>
+      addItemRow(item)
+    );
+
+  }else{
+
+    addItemRow();
+
+  }
+
+  updateSummary();
+
+  $("invoiceModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================================================
+   SAVE INVOICE
+========================================================= */
+
+function saveInvoice(){
+
+  const businessId =
+    $("invoiceBusiness").value;
+
+  const customerId =
+    $("invoiceCustomer").value;
+
+  const date =
+    $("invoiceDate").value;
+
+  const dueDate =
+    $("invoiceDueDate").value;
+
+  const reference =
+    $("invoiceReference").value.trim();
+
+  const notes =
+    $("invoiceNotes").value.trim();
+
+  const items =
+    getItems();
+
+  const summary =
+    updateSummary();
+
+  if(!businessId){
+
+    showToast(
+      "Please select a business.",
+      true
+    );
+
+    return;
+
+  }
+
+  if(!customerId){
+
+    showToast(
+      "Please select a customer.",
+      true
+    );
+
+    return;
+
+  }
+
+  if(!date){
+
+    showToast(
+      "Please select invoice date.",
+      true
+    );
+
+    return;
+
+  }
+
+  if(!items.length){
+
+    showToast(
+      "Please add at least one invoice item.",
+      true
+    );
+
+    return;
+
+  }
+
+  const business =
+    businesses.find(
+      b => b.id === businessId
+    );
+
+  const customer =
+    customers.find(
+      c => c.id === customerId
+    );
+
+  if(!business || !customer){
+
+    showToast(
+      "Business or customer was not found.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const total =
+    summary.total;
+
+  let paid =
+    Math.max(
+      Number(summary.paid) || 0,
+      0
+    );
+
+  if(paid > total){
+    paid = total;
+  }
+
+  let status =
+    $("invoiceStatus").value;
+
+  if(status !== "draft"){
+
+    status =
+      getAutoStatus(
+        total,
+        paid
+      );
+
+  }
+
+
+  const now =
+    new Date().toISOString();
+
+
+  if(editingInvoiceId){
+
+    const index =
+      invoices.findIndex(
+        invoice =>
+          invoice.id === editingInvoiceId
+      );
+
+    if(index === -1){
+
+      showToast(
+        "Invoice not found.",
+        true
+      );
+
+      return;
+
+    }
+
+
+    const old =
+      invoices[index];
+
+
+    invoices[index] = {
+
+      ...old,
+
+      businessId,
+      businessSlug:
+        business.slug || "",
+
+      businessName:
+        business.name,
+
+      customerId,
+
+      customerName:
+        customer.name,
+
+      customerPhone:
+        customer.phone || "",
+
+      customerEmail:
+        customer.email || "",
+
+      date,
+
+      dueDate,
+
+      reference,
+
+      items,
+
+      subtotal:
+        summary.subtotal,
+
+      discount:
+        summary.discount,
+
+      total,
+
+      paid,
+
+      due:
+        Math.max(total - paid,0),
+
+      status,
+
+      notes,
+
+      updatedAt:now
+
+    };
+
+
+    saveInvoices();
+
+    closeModal("invoiceModal");
+
+    refreshAll();
+
+    showToast(
+      "Invoice updated successfully."
+    );
+
+  }else{
+
+
+    const invoice = {
+
+      id:
+        generateInvoiceId(),
+
+      businessId,
+
+      businessSlug:
+        business.slug || "",
+
+      businessName:
+        business.name,
+
+      customerId,
+
+      customerName:
+        customer.name,
+
+      customerPhone:
+        customer.phone || "",
+
+      customerEmail:
+        customer.email || "",
+
+      date,
+
+      dueDate,
+
+      reference,
+
+      items,
+
+      subtotal:
+        summary.subtotal,
+
+      discount:
+        summary.discount,
+
+      total,
+
+      paid,
+
+      due:
+        Math.max(total - paid,0),
+
+      status,
+
+      notes,
+
+      createdAt:now,
+
+      updatedAt:now
+
+    };
+
+
+    invoices.unshift(invoice);
+
+    saveInvoices();
+
+    closeModal("invoiceModal");
+
+    refreshAll();
+
+    showToast(
+      "Invoice created successfully."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   FILTERING
+========================================================= */
+
+function getFilteredInvoices(){
+
+  const search =
+    $("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const businessId =
+    $("businessFilter").value;
+
+  const status =
+    $("statusFilter").value;
+
+
+  return invoices.filter(invoice => {
+
+    const matchesSearch =
+      !search ||
+      [
+        invoice.id,
+        invoice.customerName,
+        invoice.businessName,
+        invoice.reference,
+        invoice.notes
+      ]
+      .join(" ")
+      .toLowerCase()
+      .includes(search);
+
+
+    const matchesBusiness =
+      !businessId ||
+      invoice.businessId === businessId;
+
+
+    const matchesStatus =
+      !status ||
+      invoice.status === status;
+
+
+    return (
+      matchesSearch &&
+      matchesBusiness &&
+      matchesStatus
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderInvoices(){
+
+  const list =
+    getFilteredInvoices();
+
+  const tbody =
+    $("invoiceTableBody");
+
+  tbody.innerHTML = "";
+
+
+  $("emptyState").style.display =
+    list.length
+      ? "none"
+      : "block";
+
+
+  list.forEach(invoice => {
+
+    const tr =
+      document.createElement("tr");
+
+    const status =
+      invoice.status || "pending";
+
+    tr.innerHTML = `
+
+      <td>
+
+        <div class="invoice-main">
+
+          <div class="invoice-icon">
+            🧾
+          </div>
+
+          <div>
+
+            <div class="invoice-title">
+              ${escapeHTML(invoice.id)}
+            </div>
+
+            <div class="invoice-sub">
+              ${escapeHTML(invoice.reference || "No reference")}
+            </div>
+
+          </div>
+
+        </div>
+
+      </td>
+
+
+      <td>
+
+        <div class="customer-name">
+          ${escapeHTML(invoice.customerName || "—")}
+        </div>
+
+        <div class="business-name">
+          ${escapeHTML(invoice.customerPhone || "")}
+        </div>
+
+      </td>
+
+
+      <td>
+
+        <div class="business-name">
+          ${escapeHTML(invoice.businessName || "—")}
+        </div>
+
+      </td>
+
+
+      <td>
+
+        <div class="amount">
+          ${money(invoice.total)}
+        </div>
+
+      </td>
+
+
+      <td>
+
+        <div class="amount">
+          ${money(invoice.paid)}
+        </div>
+
+      </td>
+
+
+      <td>
+
+        <div
+          class="amount"
+          style="color:${
+            Number(invoice.due) > 0
+              ? "#ff8795"
+              : "#55dfa7"
+          };"
+        >
+          ${money(invoice.due)}
+        </div>
+
+      </td>
+
+
+      <td>
+
+        <span class="status ${escapeAttribute(status)}">
+          ${capitalize(status)}
+        </span>
+
+      </td>
+
+
+      <td>
+
+        <div class="business-name">
+          ${formatDate(invoice.date)}
+        </div>
+
+      </td>
+
+
+      <td>
+
+        <div class="actions">
+
+          <button
+            class="btn btn-small"
+            type="button"
+            onclick="viewInvoice('${escapeAttribute(invoice.id)}')"
+          >
+            View
+          </button>
+
+          <button
+            class="btn btn-small"
+            type="button"
+            onclick="editInvoice('${escapeAttribute(invoice.id)}')"
+          >
+            Edit
+          </button>
+
+          <button
+            class="btn btn-small btn-danger"
+            type="button"
+            onclick="deleteInvoice('${escapeAttribute(invoice.id)}')"
+          >
+            Delete
+          </button>
+
+        </div>
+
+      </td>
+
+    `;
+
+    tbody.appendChild(tr);
+
+  });
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function renderStats(){
+
+  const total =
+    invoices.reduce(
+      (sum,invoice) =>
+        sum + Number(invoice.total || 0),
+      0
+    );
+
+  const paid =
+    invoices.reduce(
+      (sum,invoice) =>
+        sum + Number(invoice.paid || 0),
+      0
+    );
+
+  const due =
+    invoices.reduce(
+      (sum,invoice) =>
+        sum + Number(invoice.due || 0),
+      0
+    );
+
+
+  $("statTotal").textContent =
+    money(total);
+
+  $("statPaid").textContent =
+    money(paid);
+
+  $("statDue").textContent =
+    money(due);
+
+  $("statCount").textContent =
+    invoices.length.toLocaleString(
+      "en-BD"
+    );
+
+}
+
+
+/* =========================================================
+   VIEW INVOICE
+========================================================= */
+
+function viewInvoice(id){
+
+  const invoice =
+    invoices.find(
+      item => item.id === id
+    );
+
+  if(!invoice){
+
+    showToast(
+      "Invoice not found.",
+      true
+    );
+
+    return;
+
+  }
+
+  viewingInvoiceId = id;
+
+  const items =
+    Array.isArray(invoice.items)
+      ? invoice.items
+      : [];
+
+
+  const rows =
+    items.length
+      ? items.map(item => `
+
+          <tr>
+
+            <td>
+              ${escapeHTML(
+                item.description || "Service"
+              )}
+            </td>
+
+            <td>
+              ${Number(item.qty || 0)}
+            </td>
+
+            <td>
+              ${money(item.price)}
+            </td>
+
+            <td>
+              ${money(item.total)}
+            </td>
+
+          </tr>
+
+        `).join("")
+      : `
+
+          <tr>
+
+            <td colspan="4">
+              No items
+            </td>
+
+          </tr>
+
+        `;
+
+
+  $("invoicePreviewContainer")
+    .innerHTML = `
+
+      <div class="invoice-preview">
+
+        <div class="preview-head">
+
+          <div class="preview-brand">
+
+            <h2>
+              ${escapeHTML(
+                invoice.businessName ||
+                "SNK Business"
+              )}
+            </h2>
+
+            <p>
+              Business Invoice
+            </p>
+
+          </div>
+
+
+          <div class="preview-number">
+
+            <strong>
+              ${escapeHTML(invoice.id)}
+            </strong>
+
+            <span>
+              Date:
+              ${formatDate(invoice.date)}
+            </span>
+
+            ${
+              invoice.dueDate
+                ? `
+                  <br>
+                  <span>
+                    Due:
+                    ${formatDate(invoice.dueDate)}
+                  </span>
+                `
+                : ""
+            }
+
+          </div>
+
+        </div>
+
+
+        <div class="preview-meta">
+
+          <div class="preview-meta-box">
+
+            <h4>Bill To</h4>
+
+            <p>
+
+              <strong>
+                ${escapeHTML(
+                  invoice.customerName || "—"
+                )}
+              </strong>
+
+              <br>
+
+              ${
+                invoice.customerPhone
+                  ? escapeHTML(
+                      invoice.customerPhone
+                    )
+                  : ""
+              }
+
+              ${
+                invoice.customerEmail
+                  ? `
+                    <br>
+                    ${escapeHTML(
+                      invoice.customerEmail
+                    )}
+                  `
+                  : ""
+              }
+
+            </p>
+
+          </div>
+
+
+          <div class="preview-meta-box">
+
+            <h4>Invoice Information</h4>
+
+            <p>
+
+              Status:
+              <strong>
+                ${capitalize(
+                  invoice.status || "pending"
+                )}
+              </strong>
+
+              <br>
+
+              ${
+                invoice.reference
+                  ? `
+                    Reference:
+                    ${escapeHTML(
+                      invoice.reference
+                    )}
+                  `
+                  : ""
+              }
+
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <table class="preview-table">
+
+          <thead>
+
+            <tr>
+              <th>Description</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            ${rows}
+
+          </tbody>
+
+        </table>
+
+
+        <div class="preview-summary">
+
+          <div class="preview-summary-row">
+            <span>Subtotal</span>
+            <strong>
+              ${money(invoice.subtotal)}
+            </strong>
+          </div>
+
+          <div class="preview-summary-row">
+            <span>Discount</span>
+            <strong>
+              ${money(invoice.discount)}
+            </strong>
+          </div>
+
+          <div class="preview-summary-row total">
+            <span>Total</span>
+            <strong>
+              ${money(invoice.total)}
+            </strong>
+          </div>
+
+          <div class="preview-summary-row">
+            <span>Paid</span>
+            <strong>
+              ${money(invoice.paid)}
+            </strong>
+          </div>
+
+          <div class="preview-summary-row due">
+            <span>Due</span>
+            <strong>
+              ${money(invoice.due)}
+            </strong>
+          </div>
+
+        </div>
+
+
+        ${
+          invoice.notes
+            ? `
+              <div class="preview-footer">
+
+                <strong>Notes:</strong>
+                ${escapeHTML(
+                  invoice.notes
+                )}
+
+              </div>
+            `
+            : `
+              <div class="preview-footer">
+                Thank you for your business.
+              </div>
+            `
+        }
+
+      </div>
+
+    `;
+
+
+  $("deleteFromPreviewBtn")
+    .onclick = () => {
+
+      closeModal("viewModal");
+
+      deleteInvoice(id);
+
+    };
+
+
+  $("editFromPreviewBtn")
+    .onclick = () => {
+
+      closeModal("viewModal");
+
+      editInvoice(id);
+
+    };
+
+
+  $("viewModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================================================
+   DELETE INVOICE
+========================================================= */
+
+function deleteInvoice(id){
+
+  const invoice =
+    invoices.find(
+      item => item.id === id
+    );
+
+  if(!invoice){
+    return;
+  }
+
+  const confirmed =
+    confirm(
+      `Delete invoice ${invoice.id}? This action cannot be undone.`
+    );
+
+  if(!confirmed){
+    return;
+  }
+
+
+  invoices =
+    invoices.filter(
+      item => item.id !== id
+    );
+
+  saveInvoices();
+
+  refreshAll();
+
+  showToast(
+    "Invoice deleted."
+  );
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+function printInvoice(){
+
+  if(!viewingInvoiceId){
+    return;
+  }
+
+  window.print();
+
+}
+
+
+/* =========================================================
+   EXPORT CSV
+========================================================= */
+
+function exportInvoices(){
+
+  if(!invoices.length){
+
+    showToast(
+      "There are no invoices to export.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const headers = [
+    "Invoice ID",
+    "Business",
+    "Customer",
+    "Phone",
+    "Date",
+    "Due Date",
+    "Subtotal",
+    "Discount",
+    "Total",
+    "Paid",
+    "Due",
+    "Status",
+    "Reference",
+    "Notes"
+  ];
+
+
+  const rows =
+    invoices.map(invoice => [
+
+      invoice.id,
+      invoice.businessName,
+      invoice.customerName,
+      invoice.customerPhone,
+      invoice.date,
+      invoice.dueDate,
+      invoice.subtotal,
+      invoice.discount,
+      invoice.total,
+      invoice.paid,
+      invoice.due,
+      invoice.status,
+      invoice.reference,
+      invoice.notes
+
+    ]);
+
+
+  const csv = [
+    headers,
+    ...rows
+  ]
+  .map(row =>
+    row
+      .map(value =>
+        `"${String(value ?? "")
+          .replace(/"/g,'""')}"`
+      )
+      .join(",")
+  )
+  .join("\n");
+
+
+  const blob =
+    new Blob(
+      [csv],
+      {
+        type:"text/csv;charset=utf-8;"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(blob);
+
+
+  const a =
+    document.createElement("a");
+
+  a.href = url;
+
+  a.download =
+    `snk-business-invoices-${todayISO()}.csv`;
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+  URL.revokeObjectURL(url);
+
+
+  showToast(
+    "Invoice CSV exported."
+  );
+
+}
+
+
+/* =========================================================
+   RESET FILTERS
+========================================================= */
+
+function resetFilters(){
+
+  $("searchInput").value = "";
+
+  $("businessFilter").value = "";
+
+  $("statusFilter").value = "";
+
+  renderInvoices();
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshPage(){
+
+  loadData();
+
+  populateBusinessSelects();
+
+  renderStats();
+
+  renderInvoices();
+
+  showToast(
+    "Invoice data refreshed."
+  );
+
+}
+
+
+function refreshAll(){
+
+  loadData();
+
+  populateBusinessSelects();
+
+  renderStats();
+
+  renderInvoices();
+
+}
+
+
+/* =========================================================
+   MODAL CLOSE
+========================================================= */
+
+function closeModal(id){
+
+  const modal =
+    $(id);
+
+  if(modal){
+
+    modal.classList.remove("show");
+
+  }
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer = null;
+
+function showToast(
+  message,
+  error = false
+){
+
+  const toast =
+    $("toast");
+
+  const text =
+    $("toastText");
+
+  text.textContent =
+    message;
+
+  toast.classList.toggle(
+    "error",
+    error
+  );
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove("show");
+
+    },3000);
+
+}
+
+
+/* =========================================================
+   CAPITALIZE
+========================================================= */
+
+function capitalize(value){
+
+  if(!value){
+    return "";
+  }
+
+  return String(value)
+    .charAt(0)
+    .toUpperCase() +
+    String(value)
+      .slice(1);
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttribute(value){
+
+  return escapeHTML(value);
+
+}
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+$("mobileMenu")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("sidebar")
+        .classList.toggle("open");
+
+    }
+  );
+
+
+document.addEventListener(
+  "click",
+  event => {
+
+    const sidebar =
+      $("sidebar");
+
+    const menu =
+      $("mobileMenu");
+
+    if(
+      window.innerWidth <= 850 &&
+      sidebar.classList.contains("open") &&
+      !sidebar.contains(event.target) &&
+      !menu.contains(event.target)
+    ){
+
+      sidebar.classList.remove("open");
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   BUSINESS CHANGE
+========================================================= */
+
+$("invoiceBusiness")
+  .addEventListener(
+    "change",
+    () => {
+
+      populateCustomerSelect();
+
+    }
+  );
+
+
+/* =========================================================
+   CUSTOMER CHANGE
+========================================================= */
+
+$("invoiceCustomer")
+  .addEventListener(
+    "change",
+    () => {
+
+      updateCustomerBalance();
+
+    }
+  );
+
+
+/* =========================================================
+   FILTER EVENTS
+========================================================= */
+
+$("searchInput")
+  .addEventListener(
+    "input",
+    renderInvoices
+  );
+
+
+$("businessFilter")
+  .addEventListener(
+    "change",
+    renderInvoices
+  );
+
+
+$("statusFilter")
+  .addEventListener(
+    "change",
+    renderInvoices
+  );
+
+
+/* =========================================================
+   CLOSE MODAL OUTSIDE
+========================================================= */
+
+document.querySelectorAll(
+  ".modal-layer"
+)
+.forEach(layer => {
+
+  layer.addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target === layer
+      ){
+
+        layer.classList.remove(
+          "show"
+        );
+
+      }
+
+    }
+  );
+
+});
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Escape"){
+
+      document
+        .querySelectorAll(
+          ".modal-layer.show"
+        )
+        .forEach(modal => {
+
+          modal.classList.remove(
+            "show"
+          );
+
+        });
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   URL DEEP LINK
+========================================================= */
+
+function applyUrlFilters(){
+
+  const params =
+    getUrlParams();
+
+  const business =
+    findBusiness(
+      params.business
+    );
+
+  if(business){
+
+    $("businessFilter").value =
+      business.id;
+
+  }
+
+
+  if(params.invoice){
+
+    setTimeout(() => {
+
+      viewInvoice(
+        params.invoice
+      );
+
+    },150);
+
+  }
+
+}
+
+
+/* =========================================================
+   OPTIONAL CUSTOMER PAYMENT SYNC
+
+   This keeps invoice paid amount connected to
+   payment records when payments exist.
+
+   Invoice itself remains an independent document.
+========================================================= */
+
+function getCustomerPaymentsTotal(
+  customerId
+){
+
+  return payments
+    .filter(
+      payment =>
+        payment.customerId === customerId
+    )
+    .reduce(
+      (sum,payment) =>
+        sum + Number(payment.amount || 0),
+      0
+    );
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+function init(){
+
+  loadData();
+
+  populateBusinessSelects();
+
+  renderStats();
+
+  renderInvoices();
+
+  applyUrlFilters();
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+init();
+
+</script>
+
+</body>
+</html>
