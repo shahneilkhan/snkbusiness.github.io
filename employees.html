@@ -1,0 +1,5106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Staff & Team | SNK Business</title>
+
+<meta
+  name="description"
+  content="Premium Staff and Team Management | SNK Business"
+>
+
+<style>
+:root{
+  --bg:#070b12;
+  --panel:#101722;
+  --panel2:#151e2c;
+  --panel3:#1a2535;
+  --line:#253247;
+  --line2:#304057;
+
+  --text:#f5f7fb;
+  --muted:#8e9aae;
+  --muted2:#647086;
+
+  --blue:#4f8cff;
+  --cyan:#28d7ff;
+  --green:#22c983;
+  --yellow:#f4bd4f;
+  --red:#ff6678;
+  --purple:#9b7cff;
+  --orange:#ff9b5b;
+
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(79,140,255,.09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(40,215,255,.06),
+      transparent 28%
+    ),
+    var(--bg);
+
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:270px;
+
+  padding:22px 16px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16,23,34,.98),
+      rgba(9,14,22,.98)
+    );
+
+  border-right:1px solid var(--line);
+
+  z-index:1000;
+
+  overflow-y:auto;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:
+    6px 10px 24px;
+}
+
+.brand-logo{
+  width:42px;
+  height:42px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--cyan)
+    );
+
+  color:#fff;
+
+  font-weight:900;
+
+  box-shadow:
+    0 10px 30px
+    rgba(79,140,255,.28);
+}
+
+.brand-title{
+  font-size:17px;
+  font-weight:900;
+  letter-spacing:-.4px;
+}
+
+.brand-subtitle{
+  margin-top:2px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.nav-title{
+  padding:
+    12px 11px 8px;
+
+  color:var(--muted2);
+
+  font-size:10px;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.2px;
+
+  font-weight:800;
+}
+
+.nav{
+  display:grid;
+  gap:5px;
+}
+
+.nav a{
+  display:flex;
+  align-items:center;
+  gap:11px;
+
+  min-height:43px;
+
+  padding:0 12px;
+
+  color:#aeb8c8;
+
+  border:
+    1px solid
+    transparent;
+
+  border-radius:12px;
+
+  transition:.2s ease;
+}
+
+.nav a:hover{
+  color:#fff;
+
+  background:#131c2a;
+
+  border-color:#26354b;
+
+  transform:
+    translateX(2px);
+}
+
+.nav a.active{
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.18),
+      rgba(40,215,255,.07)
+    );
+
+  border-color:
+    rgba(79,140,255,.28);
+
+  box-shadow:
+    inset 3px 0 0
+    var(--blue);
+}
+
+.nav-icon{
+  width:22px;
+  text-align:center;
+  font-size:16px;
+}
+
+.nav-label{
+  font-size:13px;
+  font-weight:700;
+}
+
+.admin-card{
+  margin-top:22px;
+
+  padding:16px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.12),
+      rgba(155,124,255,.08)
+    );
+
+  border:1px solid #273752;
+}
+
+.admin-card .mini{
+  color:#6da5ff;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+}
+
+.admin-card strong{
+  display:block;
+
+  margin-top:7px;
+
+  font-size:14px;
+}
+
+.admin-card span{
+  display:block;
+
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+  margin-left:270px;
+  min-height:100vh;
+}
+
+.topbar{
+  height:76px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:20px;
+
+  padding:
+    0 30px;
+
+  background:
+    rgba(7,11,18,.72);
+
+  border-bottom:
+    1px solid var(--line);
+
+  backdrop-filter:blur(18px);
+
+  position:sticky;
+  top:0;
+
+  z-index:500;
+}
+
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.mobile-menu{
+  display:none;
+
+  width:40px;
+  height:40px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:11px;
+
+  background:var(--panel);
+
+  color:white;
+}
+
+.page-location{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.page-location strong{
+  color:#fff;
+  font-size:13px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.icon-btn,
+.avatar-btn{
+  border:
+    1px solid var(--line);
+
+  background:var(--panel);
+
+  color:#dce4f0;
+
+  border-radius:11px;
+
+  min-width:40px;
+
+  height:40px;
+
+  padding:
+    0 12px;
+
+  transition:.2s ease;
+}
+
+.icon-btn:hover,
+.avatar-btn:hover{
+  border-color:#3a4c68;
+  background:var(--panel2);
+}
+
+.avatar-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:800;
+}
+
+.avatar{
+  width:25px;
+  height:25px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--purple)
+    );
+
+  font-size:11px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+  padding:30px;
+
+  max-width:1800px;
+
+  margin:auto;
+}
+
+.hero{
+  display:flex;
+
+  align-items:flex-end;
+
+  justify-content:space-between;
+
+  gap:25px;
+
+  margin-bottom:22px;
+}
+
+.hero-copy h1{
+  font-size:34px;
+
+  letter-spacing:-1.2px;
+
+  line-height:1.1;
+}
+
+.hero-copy p{
+  margin-top:9px;
+
+  color:var(--muted);
+
+  font-size:14px;
+}
+
+.hero-actions{
+  display:flex;
+
+  gap:9px;
+
+  flex-wrap:wrap;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+  min-height:42px;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:8px;
+
+  padding:
+    0 15px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:11px;
+
+  background:var(--panel2);
+
+  color:#e9eef7;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  transition:.2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+
+  border-color:#3c506e;
+}
+
+.btn-primary{
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      #3974e8
+    );
+
+  border-color:transparent;
+
+  box-shadow:
+    0 10px 25px
+    rgba(79,140,255,.2);
+}
+
+.btn-ghost{
+  background:transparent;
+}
+
+.btn-danger{
+  color:#ff9aa6;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+  display:grid;
+
+  grid-template-columns:
+    repeat(6,minmax(0,1fr));
+
+  gap:12px;
+
+  margin-bottom:20px;
+}
+
+.stat{
+  padding:17px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:
+    1px solid var(--line);
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.stat::after{
+  content:"";
+
+  position:absolute;
+
+  right:-40px;
+  top:-40px;
+
+  width:90px;
+  height:90px;
+
+  border-radius:50%;
+
+  background:
+    rgba(79,140,255,.06);
+}
+
+.stat-icon{
+  width:34px;
+  height:34px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:10px;
+
+  background:#172337;
+
+  margin-bottom:11px;
+}
+
+.stat-label{
+  color:var(--muted);
+
+  font-size:10px;
+
+  font-weight:700;
+}
+
+.stat-value{
+  margin-top:5px;
+
+  font-size:21px;
+
+  font-weight:900;
+
+  letter-spacing:-.5px;
+}
+
+.stat-note{
+  margin-top:5px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filter-panel{
+  padding:15px;
+
+  margin-bottom:20px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+}
+
+.filters{
+  display:flex;
+
+  align-items:flex-end;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+}
+
+.filter-group{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:5px;
+
+  min-width:150px;
+}
+
+.filter-group.search{
+  flex:1;
+
+  min-width:220px;
+}
+
+.filter-group label{
+  color:var(--muted2);
+
+  font-size:9px;
+
+  font-weight:800;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+}
+
+.filter{
+  height:41px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:10px;
+
+  background:#0b121c;
+
+  color:#dce4f0;
+
+  outline:none;
+}
+
+.filter:focus{
+  border-color:
+    rgba(79,140,255,.65);
+}
+
+.filter-actions{
+  display:flex;
+  gap:8px;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.panel{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:
+    1px solid var(--line);
+
+  border-radius:18px;
+
+  box-shadow:var(--shadow);
+
+  overflow:hidden;
+}
+
+.panel-header{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  padding:
+    18px 20px;
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+.panel-title{
+  font-size:14px;
+  font-weight:900;
+}
+
+.panel-subtitle{
+  margin-top:4px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th{
+  text-align:left;
+
+  padding:
+    13px 14px;
+
+  color:#6f7c91;
+
+  background:#0c131e;
+
+  border-bottom:
+    1px solid var(--line);
+
+  font-size:9px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+
+  white-space:nowrap;
+}
+
+td{
+  padding:
+    14px;
+
+  border-bottom:
+    1px solid
+    rgba(37,50,71,.65);
+
+  font-size:11px;
+
+  vertical-align:middle;
+}
+
+tr:last-child td{
+  border-bottom:0;
+}
+
+tr:hover td{
+  background:
+    rgba(255,255,255,.012);
+}
+
+
+/* =========================================================
+   EMPLOYEE
+========================================================= */
+
+.employee{
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+}
+
+.employee-avatar{
+  width:40px;
+  height:40px;
+
+  flex:none;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.22),
+      rgba(155,124,255,.18)
+    );
+
+  border:
+    1px solid
+    rgba(79,140,255,.2);
+
+  color:#dce7ff;
+
+  font-size:12px;
+
+  font-weight:900;
+}
+
+.employee-name{
+  color:#f0f4fa;
+
+  font-size:12px;
+
+  font-weight:900;
+}
+
+.employee-id{
+  margin-top:3px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+.business-name{
+  color:#e8eef7;
+  font-weight:800;
+}
+
+.position{
+  color:#dce5f1;
+  font-weight:700;
+}
+
+.sub-text{
+  margin-top:3px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.badge{
+  display:inline-flex;
+
+  align-items:center;
+
+  min-height:25px;
+
+  padding:
+    0 9px;
+
+  border-radius:999px;
+
+  border:
+    1px solid transparent;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  white-space:nowrap;
+}
+
+.badge-active{
+  color:#63dfa5;
+
+  background:
+    rgba(34,201,131,.1);
+
+  border-color:
+    rgba(34,201,131,.2);
+}
+
+.badge-inactive{
+  color:#ff8794;
+
+  background:
+    rgba(255,102,120,.1);
+
+  border-color:
+    rgba(255,102,120,.2);
+}
+
+.badge-leave{
+  color:#f3cb6a;
+
+  background:
+    rgba(244,189,79,.1);
+
+  border-color:
+    rgba(244,189,79,.2);
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.actions{
+  display:flex;
+  gap:5px;
+}
+
+.action-btn{
+  width:32px;
+  height:32px;
+
+  display:grid;
+
+  place-items:center;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:9px;
+
+  background:#101925;
+
+  color:#c8d2e0;
+
+  transition:.2s ease;
+}
+
+.action-btn:hover{
+  border-color:#3d5271;
+
+  color:#fff;
+
+  background:#182333;
+}
+
+.action-btn.danger:hover{
+  color:#ff8997;
+
+  border-color:
+    rgba(255,102,120,.3);
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+  padding:60px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+}
+
+.empty-icon{
+  width:58px;
+  height:58px;
+
+  display:grid;
+
+  place-items:center;
+
+  margin:
+    0 auto 13px;
+
+  border-radius:18px;
+
+  background:#151f2f;
+
+  font-size:24px;
+}
+
+.empty h3{
+  color:#e9eef6;
+
+  font-size:16px;
+}
+
+.empty p{
+  margin-top:5px;
+
+  font-size:11px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-backdrop{
+  position:fixed;
+
+  inset:0;
+
+  z-index:3000;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+    rgba(0,0,0,.72);
+
+  backdrop-filter:blur(8px);
+}
+
+.modal-backdrop.show{
+  display:flex;
+}
+
+.modal{
+  width:min(950px,100%);
+
+  max-height:
+    calc(100vh - 40px);
+
+  overflow-y:auto;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #111a27,
+      #0c131d
+    );
+
+  border:
+    1px solid #2c3b53;
+
+  box-shadow:
+    0 35px 100px
+    rgba(0,0,0,.6);
+}
+
+.modal.small{
+  width:min(650px,100%);
+}
+
+.modal-header{
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  gap:15px;
+
+  padding:20px;
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+.modal-title{
+  font-size:17px;
+  font-weight:900;
+}
+
+.modal-subtitle{
+  margin-top:4px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.close-btn{
+  width:36px;
+  height:36px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:10px;
+
+  background:#111b28;
+
+  color:#b7c2d2;
+
+  font-size:17px;
+}
+
+.modal-body{
+  padding:20px;
+}
+
+.form-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:13px;
+}
+
+.form-group{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:6px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+.form-group label{
+  color:#8f9db0;
+
+  font-size:10px;
+
+  font-weight:800;
+}
+
+.form-control{
+  width:100%;
+
+  min-height:43px;
+
+  padding:
+    0 12px;
+
+  border-radius:10px;
+
+  border:
+    1px solid var(--line);
+
+  background:#0a111a;
+
+  color:#edf2f8;
+
+  outline:none;
+}
+
+textarea.form-control{
+  min-height:100px;
+
+  padding:11px;
+
+  resize:vertical;
+}
+
+.form-control:focus{
+  border-color:
+    rgba(79,140,255,.7);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(79,140,255,.08);
+}
+
+.modal-footer{
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:8px;
+
+  padding:
+    16px 20px;
+
+  border-top:
+    1px solid var(--line);
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.detail-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:10px;
+}
+
+.detail-card{
+  padding:14px;
+
+  border-radius:13px;
+
+  background:#0b131e;
+
+  border:
+    1px solid var(--line);
+}
+
+.detail-label{
+  color:var(--muted2);
+
+  font-size:9px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.6px;
+}
+
+.detail-value{
+  margin-top:6px;
+
+  color:#eef3f9;
+
+  font-size:13px;
+
+  font-weight:900;
+}
+
+.detail-section{
+  margin-top:17px;
+}
+
+.detail-section h3{
+  font-size:12px;
+
+  margin-bottom:8px;
+}
+
+.detail-note{
+  padding:13px;
+
+  border-radius:11px;
+
+  background:#0b131e;
+
+  border:
+    1px solid var(--line);
+
+  color:#b9c4d3;
+
+  font-size:11px;
+
+  line-height:1.6;
+
+  white-space:pre-wrap;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+  position:fixed;
+
+  right:24px;
+
+  bottom:24px;
+
+  z-index:5000;
+
+  min-width:280px;
+
+  padding:
+    14px 16px;
+
+  border-radius:13px;
+
+  background:#121c2b;
+
+  border:
+    1px solid #30415b;
+
+  box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.4);
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  transform:
+    translateY(25px);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:.25s ease;
+}
+
+.toast.show{
+  transform:
+    translateY(0);
+
+  opacity:1;
+}
+
+.toast-dot{
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:
+    var(--green);
+}
+
+.toast-text{
+  color:#e8eef7;
+
+  font-size:12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1400px){
+
+  .stats{
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+  }
+
+}
+
+@media(max-width:850px){
+
+  .sidebar{
+    transform:
+      translateX(-100%);
+
+    transition:.25s ease;
+
+    box-shadow:
+      30px 0 70px
+      rgba(0,0,0,.4);
+  }
+
+  .sidebar.open{
+    transform:
+      translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .topbar{
+    padding:
+      0 18px;
+  }
+
+  .content{
+    padding:
+      22px 18px;
+  }
+
+  .hero{
+    align-items:flex-start;
+
+    flex-direction:column;
+  }
+
+  .filter-group{
+    flex:1;
+
+    min-width:150px;
+  }
+
+}
+
+@media(max-width:650px){
+
+  .stats{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .hero-copy h1{
+    font-size:28px;
+  }
+
+  .hero-actions{
+    width:100%;
+  }
+
+  .hero-actions .btn{
+    flex:1;
+  }
+
+  .filter-group,
+  .filter-group.search{
+    width:100%;
+    min-width:100%;
+  }
+
+  .filter{
+    width:100%;
+  }
+
+  .filter-actions{
+    width:100%;
+  }
+
+  .filter-actions .btn{
+    flex:1;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .detail-grid{
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .toast{
+    left:15px;
+    right:15px;
+    min-width:0;
+    bottom:15px;
+  }
+
+}
+
+@media(max-width:430px){
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .top-actions .icon-btn{
+    display:none;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media print{
+
+  body{
+    background:white;
+    color:#111;
+  }
+
+  .sidebar,
+  .topbar,
+  .hero-actions,
+  .filter-panel,
+  .actions,
+  .toast{
+    display:none!important;
+  }
+
+  .main{
+    margin:0;
+  }
+
+  .content{
+    padding:0;
+  }
+
+  .panel,
+  .stat{
+    box-shadow:none;
+    border:1px solid #ddd;
+  }
+
+}
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
+
+<aside
+  class="sidebar"
+  id="sidebar"
+>
+
+  <div class="brand">
+
+    <div class="brand-logo">
+      SN
+    </div>
+
+    <div>
+
+      <div class="brand-title">
+        SNK Business
+      </div>
+
+      <div class="brand-subtitle">
+        Business Management
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="nav-title">
+    Main
+  </div>
+
+
+  <nav class="nav">
+
+    <a href="index.html">
+      <span class="nav-icon">⌂</span>
+      <span class="nav-label">Dashboard</span>
+    </a>
+
+    <a href="businesses.html">
+      <span class="nav-icon">▣</span>
+      <span class="nav-label">My Businesses</span>
+    </a>
+
+    <a href="customers.html">
+      <span class="nav-icon">♙</span>
+      <span class="nav-label">Customers</span>
+    </a>
+
+    <a href="payments.html">
+      <span class="nav-icon">৳</span>
+      <span class="nav-label">Payments</span>
+    </a>
+
+    <a href="inventory.html">
+      <span class="nav-icon">▤</span>
+      <span class="nav-label">Inventory</span>
+    </a>
+
+    <a href="invoices.html">
+      <span class="nav-icon">▥</span>
+      <span class="nav-label">Invoices</span>
+    </a>
+
+    <a href="expenses.html">
+      <span class="nav-icon">−</span>
+      <span class="nav-label">Expenses</span>
+    </a>
+
+    <a href="projects.html">
+      <span class="nav-icon">◫</span>
+      <span class="nav-label">Projects</span>
+    </a>
+
+    <a href="digital-marketing.html">
+      <span class="nav-icon">◉</span>
+      <span class="nav-label">Digital Marketing</span>
+    </a>
+
+    <a href="tasks.html">
+      <span class="nav-icon">✓</span>
+      <span class="nav-label">Tasks</span>
+    </a>
+
+    <a
+      href="employees.html"
+      class="active"
+    >
+      <span class="nav-icon">♟</span>
+      <span class="nav-label">Staff / Team</span>
+    </a>
+
+    <a href="reports.html">
+      <span class="nav-icon">▥</span>
+      <span class="nav-label">Reports</span>
+    </a>
+
+  </nav>
+
+
+  <div class="admin-card">
+
+    <div class="mini">
+      Premium Business Suite
+    </div>
+
+    <strong>
+      Super Admin
+    </strong>
+
+    <span>
+      Owner • Full Access
+    </span>
+
+  </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="main">
+
+
+<header class="topbar">
+
+  <div class="top-left">
+
+    <button
+      class="mobile-menu"
+      id="mobileMenu"
+      type="button"
+    >
+      ☰
+    </button>
+
+    <div class="page-location">
+      SNK Business
+      <strong>/ Staff & Team</strong>
+    </div>
+
+  </div>
+
+
+  <div class="top-actions">
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="window.print()"
+      title="Print"
+    >
+      🖨
+    </button>
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="exportEmployees()"
+      title="Export"
+    >
+      ↓
+    </button>
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="refreshEmployees()"
+      title="Refresh"
+    >
+      ↻
+    </button>
+
+    <button
+      class="avatar-btn"
+      type="button"
+    >
+      <span class="avatar">
+        SA
+      </span>
+      Admin
+    </button>
+
+  </div>
+
+</header>
+
+
+<section class="content">
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<div class="hero">
+
+  <div class="hero-copy">
+
+    <h1>
+      Staff & Team
+    </h1>
+
+    <p>
+      Manage employees, roles, salaries, business assignments and team workload.
+    </p>
+
+  </div>
+
+
+  <div class="hero-actions">
+
+    <button
+      class="btn btn-ghost"
+      type="button"
+      onclick="exportEmployees()"
+    >
+      ↓ Export CSV
+    </button>
+
+    <button
+      class="btn btn-primary"
+      type="button"
+      onclick="openEmployeeModal()"
+    >
+      + Add Team Member
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     STATS
+====================================================== -->
+
+<section class="stats">
+
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      👥
+    </div>
+
+    <div class="stat-label">
+      Total Staff
+    </div>
+
+    <div
+      class="stat-value"
+      id="statTotal"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      All team members
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      🟢
+    </div>
+
+    <div class="stat-label">
+      Active
+    </div>
+
+    <div
+      class="stat-value"
+      id="statActive"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      Currently active
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      💼
+    </div>
+
+    <div class="stat-label">
+      On Leave
+    </div>
+
+    <div
+      class="stat-value"
+      id="statLeave"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      Staff on leave
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      💰
+    </div>
+
+    <div class="stat-label">
+      Monthly Salary
+    </div>
+
+    <div
+      class="stat-value"
+      id="statSalary"
+    >
+      ৳0
+    </div>
+
+    <div class="stat-note">
+      Active staff salary
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      📋
+    </div>
+
+    <div class="stat-label">
+      Assigned Tasks
+    </div>
+
+    <div
+      class="stat-value"
+      id="statTasks"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      Team workload
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-icon">
+      🏢
+    </div>
+
+    <div class="stat-label">
+      Businesses
+    </div>
+
+    <div
+      class="stat-value"
+      id="statBusinesses"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      Businesses with staff
+    </div>
+
+  </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     FILTER
+====================================================== -->
+
+<section class="filter-panel">
+
+  <div class="filters">
+
+
+    <div class="filter-group search">
+
+      <label>
+        Search
+      </label>
+
+      <input
+        id="searchInput"
+        class="filter"
+        type="search"
+        placeholder="Search name, phone, email, role..."
+      >
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label>
+        Business
+      </label>
+
+      <select
+        id="businessFilter"
+        class="filter"
+      >
+
+        <option value="">
+          All Businesses
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label>
+        Status
+      </label>
+
+      <select
+        id="statusFilter"
+        class="filter"
+      >
+
+        <option value="">
+          All Status
+        </option>
+
+        <option value="Active">
+          Active
+        </option>
+
+        <option value="On Leave">
+          On Leave
+        </option>
+
+        <option value="Inactive">
+          Inactive
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label>
+        Department
+      </label>
+
+      <select
+        id="departmentFilter"
+        class="filter"
+      >
+
+        <option value="">
+          All Departments
+        </option>
+
+        <option value="Management">
+          Management
+        </option>
+
+        <option value="Sales">
+          Sales
+        </option>
+
+        <option value="Marketing">
+          Marketing
+        </option>
+
+        <option value="Development">
+          Development
+        </option>
+
+        <option value="Design">
+          Design
+        </option>
+
+        <option value="Accounts">
+          Accounts
+        </option>
+
+        <option value="Support">
+          Support
+        </option>
+
+        <option value="Operations">
+          Operations
+        </option>
+
+        <option value="Other">
+          Other
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label>
+        Sort
+      </label>
+
+      <select
+        id="sortFilter"
+        class="filter"
+      >
+
+        <option value="newest">
+          Newest
+        </option>
+
+        <option value="oldest">
+          Oldest
+        </option>
+
+        <option value="name">
+          Name
+        </option>
+
+        <option value="salaryHigh">
+          Salary High
+        </option>
+
+        <option value="salaryLow">
+          Salary Low
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="filter-actions">
+
+      <button
+        class="btn btn-ghost"
+        type="button"
+        onclick="resetFilters()"
+      >
+        Reset
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     EMPLOYEE TABLE
+====================================================== -->
+
+<section class="panel">
+
+
+  <div class="panel-header">
+
+    <div>
+
+      <div class="panel-title">
+        Team Members
+      </div>
+
+      <div
+        class="panel-subtitle"
+        id="resultText"
+      >
+        0 team members
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Employee
+          </th>
+
+          <th>
+            Business
+          </th>
+
+          <th>
+            Position
+          </th>
+
+          <th>
+            Contact
+          </th>
+
+          <th>
+            Salary
+          </th>
+
+          <th>
+            Tasks
+          </th>
+
+          <th>
+            Joining Date
+          </th>
+
+          <th>
+            Status
+          </th>
+
+          <th>
+            Actions
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody
+        id="employeeTableBody"
+      ></tbody>
+
+    </table>
+
+
+    <div
+      class="empty"
+      id="emptyState"
+      style="display:none;"
+    >
+
+      <div class="empty-icon">
+        ♟
+      </div>
+
+      <h3>
+        No team members found
+      </h3>
+
+      <p>
+        Add your first employee to start managing your team.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</section>
+
+</main>
+
+
+<!-- =====================================================
+     EMPLOYEE MODAL
+====================================================== -->
+
+<div
+  class="modal-backdrop"
+  id="employeeModal"
+>
+
+  <div class="modal">
+
+
+    <div class="modal-header">
+
+      <div>
+
+        <div
+          class="modal-title"
+          id="employeeModalTitle"
+        >
+          Add Team Member
+        </div>
+
+        <div class="modal-subtitle">
+          Add or update staff information.
+        </div>
+
+      </div>
+
+
+      <button
+        class="close-btn"
+        type="button"
+        onclick="closeModal('employeeModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <form id="employeeForm">
+
+
+      <div class="modal-body">
+
+
+        <div class="form-grid">
+
+
+          <div class="form-group">
+
+            <label>
+              Business *
+            </label>
+
+            <select
+              id="employeeBusiness"
+              class="form-control"
+              required
+            ></select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Employee Name *
+            </label>
+
+            <input
+              id="employeeName"
+              class="form-control"
+              type="text"
+              placeholder="e.g. Rahim Ahmed"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Position / Role *
+            </label>
+
+            <input
+              id="employeePosition"
+              class="form-control"
+              type="text"
+              placeholder="e.g. Graphic Designer"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Department
+            </label>
+
+            <select
+              id="employeeDepartment"
+              class="form-control"
+            >
+
+              <option value="Management">
+                Management
+              </option>
+
+              <option value="Sales">
+                Sales
+              </option>
+
+              <option value="Marketing">
+                Marketing
+              </option>
+
+              <option value="Development">
+                Development
+              </option>
+
+              <option value="Design">
+                Design
+              </option>
+
+              <option value="Accounts">
+                Accounts
+              </option>
+
+              <option value="Support">
+                Support
+              </option>
+
+              <option value="Operations">
+                Operations
+              </option>
+
+              <option value="Other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Phone
+            </label>
+
+            <input
+              id="employeePhone"
+              class="form-control"
+              type="tel"
+              placeholder="01XXXXXXXXX"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Email
+            </label>
+
+            <input
+              id="employeeEmail"
+              class="form-control"
+              type="email"
+              placeholder="employee@example.com"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Monthly Salary
+            </label>
+
+            <input
+              id="employeeSalary"
+              class="form-control"
+              type="number"
+              min="0"
+              step="1"
+              value="0"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Joining Date
+            </label>
+
+            <input
+              id="employeeJoining"
+              class="form-control"
+              type="date"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Employment Status
+            </label>
+
+            <select
+              id="employeeStatus"
+              class="form-control"
+            >
+
+              <option value="Active">
+                Active
+              </option>
+
+              <option value="On Leave">
+                On Leave
+              </option>
+
+              <option value="Inactive">
+                Inactive
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Employment Type
+            </label>
+
+            <select
+              id="employeeType"
+              class="form-control"
+            >
+
+              <option value="Full Time">
+                Full Time
+              </option>
+
+              <option value="Part Time">
+                Part Time
+              </option>
+
+              <option value="Contract">
+                Contract
+              </option>
+
+              <option value="Freelance">
+                Freelance
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group full">
+
+            <label>
+              Address
+            </label>
+
+            <input
+              id="employeeAddress"
+              class="form-control"
+              type="text"
+              placeholder="Employee address"
+            >
+
+          </div>
+
+
+          <div class="form-group full">
+
+            <label>
+              Skills
+            </label>
+
+            <input
+              id="employeeSkills"
+              class="form-control"
+              type="text"
+              placeholder="e.g. Photoshop, Facebook Ads, WordPress"
+            >
+
+          </div>
+
+
+          <div class="form-group full">
+
+            <label>
+              Notes
+            </label>
+
+            <textarea
+              id="employeeNotes"
+              class="form-control"
+              placeholder="Internal staff notes..."
+            ></textarea>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-ghost"
+          onclick="closeModal('employeeModal')"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+        >
+          Save Team Member
+        </button>
+
+      </div>
+
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     DETAILS MODAL
+====================================================== -->
+
+<div
+  class="modal-backdrop"
+  id="detailsModal"
+>
+
+  <div class="modal small">
+
+
+    <div class="modal-header">
+
+      <div>
+
+        <div
+          class="modal-title"
+          id="detailTitle"
+        >
+          Employee Details
+        </div>
+
+        <div
+          class="modal-subtitle"
+          id="detailSubtitle"
+        >
+          Team member information
+        </div>
+
+      </div>
+
+
+      <button
+        class="close-btn"
+        type="button"
+        onclick="closeModal('detailsModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+
+      <div
+        class="detail-grid"
+        id="detailGrid"
+      ></div>
+
+
+      <div class="detail-section">
+
+        <h3>
+          Skills
+        </h3>
+
+        <div
+          class="detail-note"
+          id="detailSkills"
+        ></div>
+
+      </div>
+
+
+      <div class="detail-section">
+
+        <h3>
+          Address
+        </h3>
+
+        <div
+          class="detail-note"
+          id="detailAddress"
+        ></div>
+
+      </div>
+
+
+      <div class="detail-section">
+
+        <h3>
+          Notes
+        </h3>
+
+        <div
+          class="detail-note"
+          id="detailNotes"
+        ></div>
+
+      </div>
+
+
+      <div class="detail-section">
+
+        <h3>
+          Assigned Tasks
+        </h3>
+
+        <div
+          class="detail-note"
+          id="detailTasks"
+        ></div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        class="btn btn-ghost"
+        onclick="closeModal('detailsModal')"
+      >
+        Close
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        id="detailEditBtn"
+      >
+        Edit Team Member
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+  class="toast"
+  id="toast"
+>
+
+  <span class="toast-dot"></span>
+
+  <span
+    class="toast-text"
+    id="toastText"
+  >
+    Done.
+  </span>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   SNK BUSINESS
+   STEP 3.10 — STAFF / TEAM MANAGEMENT
+========================================================= */
+
+
+const BUSINESS_KEY =
+  "snkBusinesses";
+
+const EMPLOYEE_KEY =
+  "snkBusinessEmployees";
+
+const TASK_KEY =
+  "snkBusinessTasks";
+
+const PROJECT_KEY =
+  "snkBusinessProjects";
+
+
+let businesses = [];
+let employees = [];
+let tasks = [];
+let projects = [];
+
+let editingEmployeeId = null;
+let selectedEmployeeId = null;
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ = id =>
+  document.getElementById(id);
+
+
+function readStorage(key){
+
+  try{
+
+    const data =
+      JSON.parse(
+        localStorage.getItem(key)
+      );
+
+    return Array.isArray(data)
+      ? data
+      : [];
+
+  }catch(error){
+
+    console.error(
+      "Storage error:",
+      key,
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+function saveStorage(
+  key,
+  data
+){
+
+  localStorage.setItem(
+    key,
+    JSON.stringify(data)
+  );
+
+}
+
+
+function todayISO(){
+
+  const d =
+    new Date();
+
+  return [
+
+    d.getFullYear(),
+
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0"),
+
+    String(
+      d.getDate()
+    ).padStart(2,"0")
+
+  ].join("-");
+
+}
+
+
+function money(value){
+
+  return "৳" +
+    (
+      Number(value) || 0
+    ).toLocaleString(
+      "en-BD"
+    );
+
+}
+
+
+function number(value){
+
+  return (
+    Number(value) || 0
+  ).toLocaleString(
+    "en-BD"
+  );
+
+}
+
+
+function formatDate(value){
+
+  if(!value){
+    return "—";
+  }
+
+  const d =
+    new Date(value);
+
+  if(
+    Number.isNaN(
+      d.getTime()
+    )
+  ){
+
+    return value;
+
+  }
+
+  return d.toLocaleDateString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
+
+}
+
+
+function initials(name){
+
+  const words =
+    String(
+      name || "Team"
+    )
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+
+
+  if(!words.length){
+    return "TM";
+  }
+
+
+  return words
+    .slice(0,2)
+    .map(
+      word =>
+        word
+          .charAt(0)
+          .toUpperCase()
+    )
+    .join("");
+
+}
+
+
+/* =========================================================
+   LOAD DATA
+========================================================= */
+
+function loadData(){
+
+  businesses =
+    readStorage(
+      BUSINESS_KEY
+    );
+
+  employees =
+    readStorage(
+      EMPLOYEE_KEY
+    );
+
+  tasks =
+    readStorage(
+      TASK_KEY
+    );
+
+  projects =
+    readStorage(
+      PROJECT_KEY
+    );
+
+}
+
+
+/* =========================================================
+   FIND BUSINESS
+========================================================= */
+
+function findBusiness(id){
+
+  return businesses.find(
+    business =>
+      business.id === id
+  ) || null;
+
+}
+
+
+function findBusinessByAny(
+  value
+){
+
+  if(!value){
+    return null;
+  }
+
+  const needle =
+    String(value)
+      .toLowerCase()
+      .trim();
+
+
+  return businesses.find(
+    business =>
+
+      String(
+        business.id || ""
+      ).toLowerCase() ===
+        needle ||
+
+      String(
+        business.slug || ""
+      ).toLowerCase() ===
+        needle ||
+
+      String(
+        business.name || ""
+      ).toLowerCase() ===
+        needle
+
+  ) || null;
+
+}
+
+
+/* =========================================================
+   BUSINESS SELECTS
+========================================================= */
+
+function populateBusinessSelects(){
+
+  const filter =
+    $("businessFilter");
+
+  const form =
+    $("employeeBusiness");
+
+
+  filter.innerHTML = `
+    <option value="">
+      All Businesses
+    </option>
+  `;
+
+
+  form.innerHTML = `
+    <option value="">
+      Select Business
+    </option>
+  `;
+
+
+  businesses.forEach(
+    business => {
+
+      filter.insertAdjacentHTML(
+        "beforeend",
+        `
+          <option value="${escapeHTML(
+            business.id
+          )}">
+            ${escapeHTML(
+              business.name
+            )}
+          </option>
+        `
+      );
+
+
+      form.insertAdjacentHTML(
+        "beforeend",
+        `
+          <option value="${escapeHTML(
+            business.id
+          )}">
+            ${escapeHTML(
+              business.name
+            )}
+          </option>
+        `
+      );
+
+    }
+  );
+
+
+  applyURLBusiness();
+
+}
+
+
+/* =========================================================
+   URL BUSINESS
+========================================================= */
+
+function applyURLBusiness(){
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const value =
+    params.get(
+      "business"
+    );
+
+
+  if(!value){
+    return;
+  }
+
+
+  const business =
+    findBusinessByAny(
+      value
+    );
+
+
+  if(business){
+
+    $("businessFilter")
+      .value =
+        business.id;
+
+  }
+
+}
+
+
+/* =========================================================
+   EMPLOYEE ID
+========================================================= */
+
+function nextEmployeeId(){
+
+  let max =
+    1000;
+
+
+  employees.forEach(
+    employee => {
+
+      const match =
+        String(
+          employee.id || ""
+        ).match(
+          /(\d+)$/
+        );
+
+
+      if(match){
+
+        max =
+          Math.max(
+            max,
+            Number(
+              match[1]
+            )
+          );
+
+      }
+
+    }
+  );
+
+
+  return (
+    "EMP-" +
+    (max + 1)
+  );
+
+}
+
+
+/* =========================================================
+   TASK COUNT
+========================================================= */
+
+function getEmployeeTaskCount(
+  employee
+){
+
+  if(!employee){
+    return 0;
+  }
+
+
+  const employeeName =
+    String(
+      employee.name ||
+      ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+  return tasks.filter(
+    task => {
+
+      if(
+        task.employeeId &&
+        task.employeeId ===
+          employee.id
+      ){
+
+        return true;
+
+      }
+
+
+      return (
+        String(
+          task.assignedTo ||
+          ""
+        )
+        .trim()
+        .toLowerCase() ===
+        employeeName
+      );
+
+    }
+  ).length;
+
+}
+
+
+/* =========================================================
+   STATUS BADGE
+========================================================= */
+
+function statusBadge(
+  status
+){
+
+  const classes = {
+
+    Active:
+      "badge-active",
+
+    "On Leave":
+      "badge-leave",
+
+    Inactive:
+      "badge-inactive"
+
+  };
+
+
+  return `
+    <span class="badge ${
+      classes[status] ||
+      "badge-inactive"
+    }">
+      ${escapeHTML(
+        status ||
+        "Inactive"
+      )}
+    </span>
+  `;
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function getFilteredEmployees(){
+
+  const search =
+    $("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const businessId =
+    $("businessFilter")
+      .value;
+
+
+  const status =
+    $("statusFilter")
+      .value;
+
+
+  const department =
+    $("departmentFilter")
+      .value;
+
+
+  const sort =
+    $("sortFilter")
+      .value;
+
+
+  let list =
+    employees.filter(
+      employee => {
+
+        if(
+          businessId &&
+          employee.businessId !==
+            businessId
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          status &&
+          employee.status !==
+            status
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          department &&
+          employee.department !==
+            department
+        ){
+
+          return false;
+
+        }
+
+
+        if(search){
+
+          const text = [
+
+            employee.id,
+
+            employee.name,
+
+            employee.phone,
+
+            employee.email,
+
+            employee.position,
+
+            employee.department,
+
+            employee.businessName,
+
+            employee.skills,
+
+            employee.type
+
+          ]
+          .join(" ")
+          .toLowerCase();
+
+
+          if(
+            !text.includes(
+              search
+            )
+          ){
+
+            return false;
+
+          }
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  list.sort(
+    (a,b) => {
+
+      if(
+        sort ===
+        "oldest"
+      ){
+
+        return String(
+          a.createdAt || ""
+        ).localeCompare(
+          String(
+            b.createdAt || ""
+          )
+        );
+
+      }
+
+
+      if(
+        sort ===
+        "name"
+      ){
+
+        return String(
+          a.name || ""
+        ).localeCompare(
+          String(
+            b.name || ""
+          )
+        );
+
+      }
+
+
+      if(
+        sort ===
+        "salaryHigh"
+      ){
+
+        return (
+          Number(
+            b.salary || 0
+          )
+          -
+          Number(
+            a.salary || 0
+          )
+        );
+
+      }
+
+
+      if(
+        sort ===
+        "salaryLow"
+      ){
+
+        return (
+          Number(
+            a.salary || 0
+          )
+          -
+          Number(
+            b.salary || 0
+          )
+        );
+
+      }
+
+
+      return String(
+        b.createdAt || ""
+      ).localeCompare(
+        String(
+          a.createdAt || ""
+        )
+      );
+
+    }
+  );
+
+
+  return list;
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function renderStats(){
+
+  const list =
+    getFilteredEmployees();
+
+
+  const total =
+    list.length;
+
+
+  const active =
+    list.filter(
+      employee =>
+        employee.status ===
+        "Active"
+    ).length;
+
+
+  const leave =
+    list.filter(
+      employee =>
+        employee.status ===
+        "On Leave"
+    ).length;
+
+
+  const salary =
+    list
+      .filter(
+        employee =>
+          employee.status ===
+          "Active"
+      )
+      .reduce(
+        (
+          sum,
+          employee
+        ) =>
+          sum +
+          Number(
+            employee.salary ||
+            0
+          ),
+        0
+      );
+
+
+  const taskCount =
+    list.reduce(
+      (
+        sum,
+        employee
+      ) =>
+        sum +
+        getEmployeeTaskCount(
+          employee
+        ),
+      0
+    );
+
+
+  const businessIds =
+    new Set(
+      list
+        .map(
+          employee =>
+            employee.businessId
+        )
+        .filter(Boolean)
+    );
+
+
+  $("statTotal")
+    .textContent =
+      number(total);
+
+
+  $("statActive")
+    .textContent =
+      number(active);
+
+
+  $("statLeave")
+    .textContent =
+      number(leave);
+
+
+  $("statSalary")
+    .textContent =
+      money(salary);
+
+
+  $("statTasks")
+    .textContent =
+      number(taskCount);
+
+
+  $("statBusinesses")
+    .textContent =
+      number(
+        businessIds.size
+      );
+
+}
+
+
+/* =========================================================
+   RENDER EMPLOYEES
+========================================================= */
+
+function renderEmployees(){
+
+  const tbody =
+    $("employeeTableBody");
+
+  const empty =
+    $("emptyState");
+
+
+  const list =
+    getFilteredEmployees();
+
+
+  tbody.innerHTML =
+    "";
+
+
+  $("resultText")
+    .textContent =
+      `${number(
+        list.length
+      )} team member${
+        list.length === 1
+          ? ""
+          : "s"
+      }`;
+
+
+  if(!list.length){
+
+    empty.style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  empty.style.display =
+    "none";
+
+
+  list.forEach(
+    employee => {
+
+      const taskCount =
+        getEmployeeTaskCount(
+          employee
+        );
+
+
+      const business =
+        findBusiness(
+          employee.businessId
+        );
+
+
+      const tr =
+        document.createElement(
+          "tr"
+        );
+
+
+      tr.innerHTML = `
+
+        <td>
+
+          <div class="employee">
+
+            <div class="employee-avatar">
+              ${escapeHTML(
+                initials(
+                  employee.name
+                )
+              )}
+            </div>
+
+            <div>
+
+              <div class="employee-name">
+                ${escapeHTML(
+                  employee.name ||
+                  "Unnamed"
+                )}
+              </div>
+
+              <div class="employee-id">
+                ${escapeHTML(
+                  employee.id ||
+                  ""
+                )}
+              </div>
+
+            </div>
+
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div class="business-name">
+            ${escapeHTML(
+              employee.businessName ||
+              business?.name ||
+              "—"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div class="position">
+            ${escapeHTML(
+              employee.position ||
+              "—"
+            )}
+          </div>
+
+          <div class="sub-text">
+            ${escapeHTML(
+              employee.department ||
+              "Other"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div>
+            ${escapeHTML(
+              employee.phone ||
+              "No phone"
+            )}
+          </div>
+
+          <div class="sub-text">
+            ${escapeHTML(
+              employee.email ||
+              "No email"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <strong>
+            ${money(
+              employee.salary
+            )}
+          </strong>
+
+          <div class="sub-text">
+            ${escapeHTML(
+              employee.type ||
+              "Full Time"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <strong>
+            ${number(
+              taskCount
+            )}
+          </strong>
+
+          <div class="sub-text">
+            assigned
+          </div>
+
+        </td>
+
+
+        <td>
+
+          ${formatDate(
+            employee.joiningDate
+          )}
+
+        </td>
+
+
+        <td>
+
+          ${statusBadge(
+            employee.status
+          )}
+
+        </td>
+
+
+        <td>
+
+          <div class="actions">
+
+            <button
+              class="action-btn"
+              type="button"
+              title="View"
+              onclick="viewEmployee('${employee.id}')"
+            >
+              👁
+            </button>
+
+            <button
+              class="action-btn"
+              type="button"
+              title="Edit"
+              onclick="editEmployee('${employee.id}')"
+            >
+              ✎
+            </button>
+
+            <button
+              class="action-btn danger"
+              type="button"
+              title="Delete"
+              onclick="deleteEmployee('${employee.id}')"
+            >
+              ×
+            </button>
+
+          </div>
+
+        </td>
+
+      `;
+
+
+      tbody.appendChild(
+        tr
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   OPEN EMPLOYEE MODAL
+========================================================= */
+
+function openEmployeeModal(
+  employeeId = null
+){
+
+  editingEmployeeId =
+    employeeId;
+
+
+  $("employeeForm")
+    .reset();
+
+
+  populateBusinessSelects();
+
+
+  $("employeeJoining")
+    .value =
+      todayISO();
+
+
+  $("employeeSalary")
+    .value =
+      "0";
+
+
+  $("employeeStatus")
+    .value =
+      "Active";
+
+
+  $("employeeType")
+    .value =
+      "Full Time";
+
+
+  $("employeeDepartment")
+    .value =
+      "Management";
+
+
+  if(employeeId){
+
+    const employee =
+      employees.find(
+        item =>
+          item.id ===
+          employeeId
+      );
+
+
+    if(!employee){
+      return;
+    }
+
+
+    $("employeeModalTitle")
+      .textContent =
+        "Edit Team Member";
+
+
+    $("employeeBusiness")
+      .value =
+        employee.businessId ||
+        "";
+
+
+    $("employeeName")
+      .value =
+        employee.name ||
+        "";
+
+
+    $("employeePosition")
+      .value =
+        employee.position ||
+        "";
+
+
+    $("employeeDepartment")
+      .value =
+        employee.department ||
+        "Other";
+
+
+    $("employeePhone")
+      .value =
+        employee.phone ||
+        "";
+
+
+    $("employeeEmail")
+      .value =
+        employee.email ||
+        "";
+
+
+    $("employeeSalary")
+      .value =
+        employee.salary ||
+        0;
+
+
+    $("employeeJoining")
+      .value =
+        employee.joiningDate ||
+        "";
+
+
+    $("employeeStatus")
+      .value =
+        employee.status ||
+        "Active";
+
+
+    $("employeeType")
+      .value =
+        employee.type ||
+        "Full Time";
+
+
+    $("employeeAddress")
+      .value =
+        employee.address ||
+        "";
+
+
+    $("employeeSkills")
+      .value =
+        employee.skills ||
+        "";
+
+
+    $("employeeNotes")
+      .value =
+        employee.notes ||
+        "";
+
+  }else{
+
+    $("employeeModalTitle")
+      .textContent =
+        "Add Team Member";
+
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const businessParam =
+      params.get(
+        "business"
+      );
+
+
+    const business =
+      findBusinessByAny(
+        businessParam
+      );
+
+
+    if(business){
+
+      $("employeeBusiness")
+        .value =
+          business.id;
+
+    }
+
+  }
+
+
+  $("employeeModal")
+    .classList.add(
+      "show"
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeModal(
+  id
+){
+
+  $(id)
+    .classList.remove(
+      "show"
+    );
+
+}
+
+
+/* =========================================================
+   SAVE EMPLOYEE
+========================================================= */
+
+$("employeeForm")
+  .addEventListener(
+    "submit",
+    event => {
+
+      event.preventDefault();
+
+
+      const businessId =
+        $("employeeBusiness")
+          .value;
+
+
+      if(!businessId){
+
+        showToast(
+          "Please select a business."
+        );
+
+        return;
+
+      }
+
+
+      const business =
+        findBusiness(
+          businessId
+        );
+
+
+      if(!business){
+
+        showToast(
+          "Business not found."
+        );
+
+        return;
+
+      }
+
+
+      const now =
+        new Date()
+          .toISOString();
+
+
+      const data = {
+
+        businessId,
+
+        businessSlug:
+          business.slug ||
+          "",
+
+        businessName:
+          business.name ||
+          "",
+
+        name:
+          $("employeeName")
+            .value
+            .trim(),
+
+        position:
+          $("employeePosition")
+            .value
+            .trim(),
+
+        department:
+          $("employeeDepartment")
+            .value,
+
+        phone:
+          $("employeePhone")
+            .value
+            .trim(),
+
+        email:
+          $("employeeEmail")
+            .value
+            .trim(),
+
+        salary:
+          Math.max(
+            0,
+            Number(
+              $("employeeSalary")
+                .value
+            ) || 0
+          ),
+
+        joiningDate:
+          $("employeeJoining")
+            .value,
+
+        status:
+          $("employeeStatus")
+            .value,
+
+        type:
+          $("employeeType")
+            .value,
+
+        address:
+          $("employeeAddress")
+            .value
+            .trim(),
+
+        skills:
+          $("employeeSkills")
+            .value
+            .trim(),
+
+        notes:
+          $("employeeNotes")
+            .value
+            .trim(),
+
+        updatedAt:
+          now
+
+      };
+
+
+      if(editingEmployeeId){
+
+        const index =
+          employees.findIndex(
+            employee =>
+              employee.id ===
+              editingEmployeeId
+          );
+
+
+        if(index !== -1){
+
+          const old =
+            employees[index];
+
+
+          employees[index] = {
+
+            ...old,
+
+            ...data
+
+          };
+
+        }
+
+
+        showToast(
+          "Team member updated successfully."
+        );
+
+      }else{
+
+        employees.unshift({
+
+          id:
+            nextEmployeeId(),
+
+          ...data,
+
+          createdAt:
+            now
+
+        });
+
+
+        showToast(
+          "New team member added successfully."
+        );
+
+      }
+
+
+      saveStorage(
+        EMPLOYEE_KEY,
+        employees
+      );
+
+
+      closeModal(
+        "employeeModal"
+      );
+
+
+      renderAll();
+
+    }
+  );
+
+
+/* =========================================================
+   EDIT
+========================================================= */
+
+function editEmployee(
+  id
+){
+
+  openEmployeeModal(
+    id
+  );
+
+}
+
+
+/* =========================================================
+   VIEW
+========================================================= */
+
+function viewEmployee(
+  id
+){
+
+  const employee =
+    employees.find(
+      item =>
+        item.id === id
+    );
+
+
+  if(!employee){
+    return;
+  }
+
+
+  selectedEmployeeId =
+    id;
+
+
+  const business =
+    findBusiness(
+      employee.businessId
+    );
+
+
+  const taskCount =
+    getEmployeeTaskCount(
+      employee
+    );
+
+
+  $("detailTitle")
+    .textContent =
+      employee.name ||
+      "Employee Details";
+
+
+  $("detailSubtitle")
+    .textContent =
+      `${employee.id || ""} • ${
+        employee.position ||
+        "Team Member"
+      }`;
+
+
+  $("detailGrid").innerHTML = `
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Business
+      </div>
+
+      <div class="detail-value">
+        ${escapeHTML(
+          employee.businessName ||
+          business?.name ||
+          "—"
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Position
+      </div>
+
+      <div class="detail-value">
+        ${escapeHTML(
+          employee.position ||
+          "—"
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Department
+      </div>
+
+      <div class="detail-value">
+        ${escapeHTML(
+          employee.department ||
+          "Other"
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Phone
+      </div>
+
+      <div class="detail-value">
+        ${escapeHTML(
+          employee.phone ||
+          "—"
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Email
+      </div>
+
+      <div class="detail-value">
+        ${escapeHTML(
+          employee.email ||
+          "—"
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Monthly Salary
+      </div>
+
+      <div class="detail-value">
+        ${money(
+          employee.salary
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Employment Type
+      </div>
+
+      <div class="detail-value">
+        ${escapeHTML(
+          employee.type ||
+          "Full Time"
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Joining Date
+      </div>
+
+      <div class="detail-value">
+        ${formatDate(
+          employee.joiningDate
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Status
+      </div>
+
+      <div class="detail-value">
+        ${statusBadge(
+          employee.status
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Assigned Tasks
+      </div>
+
+      <div class="detail-value">
+        ${number(
+          taskCount
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Employee ID
+      </div>
+
+      <div class="detail-value">
+        ${escapeHTML(
+          employee.id ||
+          "—"
+        )}
+      </div>
+
+    </div>
+
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        Created
+      </div>
+
+      <div class="detail-value">
+        ${formatDate(
+          employee.createdAt
+        )}
+      </div>
+
+    </div>
+
+  `;
+
+
+  $("detailSkills")
+    .textContent =
+      employee.skills ||
+      "No skills added.";
+
+
+  $("detailAddress")
+    .textContent =
+      employee.address ||
+      "No address added.";
+
+
+  $("detailNotes")
+    .textContent =
+      employee.notes ||
+      "No internal notes added.";
+
+
+  const assignedTasks =
+    tasks.filter(
+      task => {
+
+        if(
+          task.employeeId ===
+          employee.id
+        ){
+
+          return true;
+
+        }
+
+
+        return (
+          String(
+            task.assignedTo ||
+            ""
+          )
+          .trim()
+          .toLowerCase() ===
+          String(
+            employee.name ||
+            ""
+          )
+          .trim()
+          .toLowerCase()
+        );
+
+      }
+    );
+
+
+  if(
+    assignedTasks.length
+  ){
+
+    $("detailTasks")
+      .textContent =
+        assignedTasks
+          .map(
+            task =>
+              `${task.id} — ${task.name} (${task.status})`
+          )
+          .join("\n");
+
+  }else{
+
+    $("detailTasks")
+      .textContent =
+        "No tasks currently assigned.";
+
+  }
+
+
+  $("detailEditBtn")
+    .onclick =
+      () => {
+
+        closeModal(
+          "detailsModal"
+        );
+
+        editEmployee(
+          selectedEmployeeId
+        );
+
+      };
+
+
+  $("detailsModal")
+    .classList.add(
+      "show"
+    );
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function deleteEmployee(
+  id
+){
+
+  const employee =
+    employees.find(
+      item =>
+        item.id === id
+    );
+
+
+  if(!employee){
+    return;
+  }
+
+
+  const taskCount =
+    getEmployeeTaskCount(
+      employee
+    );
+
+
+  let message =
+    `Delete team member "${employee.name}"?`;
+
+
+  if(taskCount){
+
+    message +=
+      `\n\nThis member currently has ${taskCount} assigned task(s).`;
+
+  }
+
+
+  message +=
+    "\n\nThis action cannot be undone.";
+
+
+  if(
+    !confirm(
+      message
+    )
+  ){
+
+    return;
+
+  }
+
+
+  employees =
+    employees.filter(
+      item =>
+        item.id !== id
+    );
+
+
+  saveStorage(
+    EMPLOYEE_KEY,
+    employees
+  );
+
+
+  renderAll();
+
+
+  showToast(
+    "Team member deleted successfully."
+  );
+
+}
+
+
+/* =========================================================
+   FILTER EVENTS
+========================================================= */
+
+$("searchInput")
+  .addEventListener(
+    "input",
+    renderAll
+  );
+
+
+$("businessFilter")
+  .addEventListener(
+    "change",
+    renderAll
+  );
+
+
+$("statusFilter")
+  .addEventListener(
+    "change",
+    renderAll
+  );
+
+
+$("departmentFilter")
+  .addEventListener(
+    "change",
+    renderAll
+  );
+
+
+$("sortFilter")
+  .addEventListener(
+    "change",
+    renderAll
+  );
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetFilters(){
+
+  $("searchInput")
+    .value =
+      "";
+
+  $("businessFilter")
+    .value =
+      "";
+
+  $("statusFilter")
+    .value =
+      "";
+
+  $("departmentFilter")
+    .value =
+      "";
+
+  $("sortFilter")
+    .value =
+      "newest";
+
+
+  renderAll();
+
+
+  showToast(
+    "Staff filters reset."
+  );
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshEmployees(){
+
+  loadData();
+
+  populateBusinessSelects();
+
+  renderAll();
+
+  showToast(
+    "Staff data refreshed."
+  );
+
+}
+
+
+/* =========================================================
+   EXPORT CSV
+========================================================= */
+
+function exportEmployees(){
+
+  const list =
+    getFilteredEmployees();
+
+
+  const rows = [
+
+    [
+      "Employee ID",
+      "Name",
+      "Business",
+      "Position",
+      "Department",
+      "Phone",
+      "Email",
+      "Salary",
+      "Employment Type",
+      "Joining Date",
+      "Status",
+      "Skills"
+    ]
+
+  ];
+
+
+  list.forEach(
+    employee => {
+
+      rows.push([
+
+        employee.id || "",
+
+        employee.name || "",
+
+        employee.businessName || "",
+
+        employee.position || "",
+
+        employee.department || "",
+
+        employee.phone || "",
+
+        employee.email || "",
+
+        Number(
+          employee.salary ||
+          0
+        ),
+
+        employee.type || "",
+
+        employee.joiningDate || "",
+
+        employee.status || "",
+
+        employee.skills || ""
+
+      ]);
+
+    }
+  );
+
+
+  const csv =
+    rows
+      .map(
+        row =>
+          row
+            .map(
+              value =>
+                `"${String(
+                  value ?? ""
+                ).replace(
+                  /"/g,
+                  '""'
+                )}"`
+            )
+            .join(",")
+      )
+      .join("\n");
+
+
+  const blob =
+    new Blob(
+      [csv],
+      {
+        type:
+          "text/csv;charset=utf-8;"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const a =
+    document.createElement(
+      "a"
+    );
+
+
+  a.href =
+    url;
+
+
+  a.download =
+    `snk-business-staff-${todayISO()}.csv`;
+
+
+  document.body.appendChild(
+    a
+  );
+
+
+  a.click();
+
+
+  a.remove();
+
+
+  URL.revokeObjectURL(
+    url
+  );
+
+
+  showToast(
+    "Staff list exported successfully."
+  );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function showToast(
+  message
+){
+
+  const toast =
+    $("toast");
+
+
+  $("toastText")
+    .textContent =
+      message;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2800
+    );
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+$("mobileMenu")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("sidebar")
+        .classList.toggle(
+          "open"
+        );
+
+    }
+  );
+
+
+document.addEventListener(
+  "click",
+  event => {
+
+    if(
+      window.innerWidth <= 850 &&
+      $("sidebar")
+        .classList
+        .contains("open") &&
+      !$("sidebar")
+        .contains(
+          event.target
+        ) &&
+      !$("mobileMenu")
+        .contains(
+          event.target
+        )
+    ){
+
+      $("sidebar")
+        .classList.remove(
+          "open"
+        );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   MODAL OUTSIDE CLICK
+========================================================= */
+
+document
+  .querySelectorAll(
+    ".modal-backdrop"
+  )
+  .forEach(
+    modal => {
+
+      modal.addEventListener(
+        "click",
+        event => {
+
+          if(
+            event.target ===
+            modal
+          ){
+
+            modal.classList.remove(
+              "show"
+            );
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   ESC
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key ===
+      "Escape"
+    ){
+
+      document
+        .querySelectorAll(
+          ".modal-backdrop.show"
+        )
+        .forEach(
+          modal => {
+
+            modal.classList.remove(
+              "show"
+            );
+
+          }
+        );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+function renderAll(){
+
+  renderStats();
+
+  renderEmployees();
+
+}
+
+
+function init(){
+
+  loadData();
+
+  populateBusinessSelects();
+
+  renderAll();
+
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  if(
+    params.get("new") ===
+    "1"
+  ){
+
+    setTimeout(
+      () => openEmployeeModal(),
+      100
+    );
+
+  }
+
+}
+
+
+init();
+
+</script>
+
+</body>
+</html>
