@@ -1,0 +1,4551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Expenses | SNK Business</title>
+
+<meta
+  name="description"
+  content="Premium Expense Management for SNK Business"
+/>
+
+<style>
+:root{
+  --bg:#070b12;
+  --bg2:#0b1019;
+  --panel:#101722;
+  --panel2:#151e2c;
+  --panel3:#1a2535;
+  --line:#253247;
+  --line2:#304057;
+
+  --text:#f5f7fb;
+  --muted:#8e9aae;
+  --muted2:#647086;
+
+  --blue:#4f8cff;
+  --blue2:#6da5ff;
+  --cyan:#28d7ff;
+
+  --green:#22c983;
+  --yellow:#f4bd4f;
+  --red:#ff6678;
+  --purple:#9b7cff;
+
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+  --radius:18px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(79,140,255,.09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(40,215,255,.06),
+      transparent 28%
+    ),
+    var(--bg);
+
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app{
+  min-height:100vh;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:270px;
+
+  padding:22px 16px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16,23,34,.98),
+      rgba(9,14,22,.98)
+    );
+
+  border-right:1px solid var(--line);
+
+  z-index:1000;
+
+  overflow-y:auto;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:6px 10px 24px;
+}
+
+.brand-logo{
+  width:42px;
+  height:42px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--cyan)
+    );
+
+  color:white;
+
+  font-weight:900;
+
+  box-shadow:
+    0 10px 30px rgba(79,140,255,.28);
+}
+
+.brand-title{
+  font-size:17px;
+  font-weight:900;
+  letter-spacing:-.4px;
+}
+
+.brand-subtitle{
+  margin-top:2px;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+.nav-title{
+  padding:12px 11px 8px;
+
+  color:var(--muted2);
+
+  font-size:10px;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.2px;
+
+  font-weight:800;
+}
+
+.nav{
+  display:grid;
+  gap:5px;
+}
+
+.nav a{
+  display:flex;
+  align-items:center;
+  gap:11px;
+
+  min-height:43px;
+
+  padding:0 12px;
+
+  color:#aeb8c8;
+
+  border:1px solid transparent;
+
+  border-radius:12px;
+
+  transition:.2s ease;
+}
+
+.nav a:hover{
+  color:#fff;
+
+  background:#131c2a;
+
+  border-color:#26354b;
+
+  transform:translateX(2px);
+}
+
+.nav a.active{
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.18),
+      rgba(40,215,255,.07)
+    );
+
+  border-color:rgba(79,140,255,.28);
+
+  box-shadow:
+    inset 3px 0 0 var(--blue);
+}
+
+.nav-icon{
+  width:22px;
+  text-align:center;
+
+  font-size:16px;
+}
+
+.nav-label{
+  font-size:13px;
+  font-weight:700;
+}
+
+.admin-card{
+  margin-top:22px;
+
+  padding:16px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.12),
+      rgba(155,124,255,.08)
+    );
+
+  border:1px solid #273752;
+}
+
+.admin-card .mini{
+  color:var(--blue2);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+}
+
+.admin-card strong{
+  display:block;
+
+  margin-top:7px;
+
+  font-size:14px;
+}
+
+.admin-card span{
+  display:block;
+
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+  margin-left:270px;
+
+  min-height:100vh;
+}
+
+.topbar{
+  height:76px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:20px;
+
+  padding:0 30px;
+
+  background:
+    rgba(7,11,18,.72);
+
+  border-bottom:1px solid var(--line);
+
+  backdrop-filter:blur(18px);
+
+  position:sticky;
+  top:0;
+
+  z-index:500;
+}
+
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  min-width:0;
+}
+
+.mobile-menu{
+  display:none;
+
+  width:40px;
+  height:40px;
+
+  border:1px solid var(--line);
+
+  border-radius:11px;
+
+  background:var(--panel);
+
+  color:white;
+}
+
+.page-location{
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+.page-location strong{
+  color:white;
+
+  font-size:13px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.icon-btn,
+.avatar-btn{
+  border:1px solid var(--line);
+
+  background:var(--panel);
+
+  color:#dce4f0;
+
+  border-radius:11px;
+
+  min-width:40px;
+  height:40px;
+
+  padding:0 12px;
+
+  transition:.2s ease;
+}
+
+.icon-btn:hover,
+.avatar-btn:hover{
+  border-color:#3a4c68;
+  background:var(--panel2);
+}
+
+.avatar-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  font-weight:800;
+}
+
+.avatar{
+  width:25px;
+  height:25px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--purple)
+    );
+
+  font-size:11px;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+  padding:30px;
+
+  max-width:1800px;
+
+  margin:auto;
+}
+
+.hero{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+
+  gap:25px;
+
+  margin-bottom:25px;
+}
+
+.hero-copy h1{
+  font-size:34px;
+
+  letter-spacing:-1.2px;
+
+  line-height:1.1;
+}
+
+.hero-copy p{
+  margin-top:9px;
+
+  color:var(--muted);
+
+  font-size:14px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+  min-height:42px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:8px;
+
+  padding:0 15px;
+
+  border-radius:11px;
+
+  border:1px solid var(--line);
+
+  background:var(--panel2);
+
+  color:#e9eef7;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  transition:.2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+
+  border-color:#3c506e;
+}
+
+.btn-primary{
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      #3974e8
+    );
+
+  border-color:transparent;
+
+  box-shadow:
+    0 10px 25px rgba(79,140,255,.2);
+}
+
+.btn-danger{
+  background:rgba(255,102,120,.09);
+
+  color:#ff8594;
+
+  border-color:rgba(255,102,120,.22);
+}
+
+.btn-success{
+  background:rgba(34,201,131,.09);
+
+  color:#55dfa7;
+
+  border-color:rgba(34,201,131,.2);
+}
+
+.btn-ghost{
+  background:transparent;
+}
+
+.btn-small{
+  min-height:34px;
+
+  padding:0 10px;
+
+  font-size:11px;
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+
+  gap:15px;
+
+  margin-bottom:22px;
+}
+
+.stat{
+  position:relative;
+
+  padding:20px;
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18,26,39,.98),
+      rgba(12,18,28,.98)
+    );
+
+  border:1px solid var(--line);
+
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.14);
+
+  overflow:hidden;
+}
+
+.stat::after{
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:100px;
+
+  right:-45px;
+  top:-45px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,102,120,.07);
+}
+
+.stat-icon{
+  width:40px;
+  height:40px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:12px;
+
+  background:#172338;
+
+  margin-bottom:14px;
+
+  font-size:18px;
+}
+
+.stat-label{
+  color:var(--muted);
+
+  font-size:11px;
+
+  font-weight:700;
+}
+
+.stat-value{
+  margin-top:5px;
+
+  font-size:25px;
+
+  font-weight:900;
+
+  letter-spacing:-.7px;
+}
+
+.stat-foot{
+  margin-top:7px;
+
+  color:var(--muted2);
+
+  font-size:10px;
+}
+
+/* =========================================================
+   CATEGORY MINI CARDS
+========================================================= */
+
+.category-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+
+  gap:12px;
+
+  margin-bottom:22px;
+}
+
+.category-card{
+  padding:15px;
+
+  border-radius:15px;
+
+  border:1px solid var(--line);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.95),
+      rgba(11,17,26,.95)
+    );
+}
+
+.category-card-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:10px;
+}
+
+.category-name{
+  color:#dce5f1;
+
+  font-size:11px;
+
+  font-weight:800;
+}
+
+.category-icon{
+  width:30px;
+  height:30px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:9px;
+
+  background:#172236;
+
+  font-size:14px;
+}
+
+.category-value{
+  margin-top:10px;
+
+  font-size:17px;
+
+  font-weight:900;
+}
+
+.category-count{
+  margin-top:3px;
+
+  color:var(--muted2);
+
+  font-size:10px;
+}
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.panel{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:1px solid var(--line);
+
+  border-radius:18px;
+
+  box-shadow:var(--shadow);
+}
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.toolbar{
+  padding:16px;
+
+  display:flex;
+  align-items:center;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+
+  border-bottom:1px solid var(--line);
+}
+
+.search-box{
+  flex:1;
+
+  min-width:230px;
+
+  position:relative;
+}
+
+.search-box input{
+  width:100%;
+
+  height:42px;
+
+  padding:
+    0 14px 0 40px;
+
+  border:1px solid var(--line);
+
+  border-radius:11px;
+
+  background:#0c131e;
+
+  color:white;
+
+  outline:none;
+}
+
+.search-box input:focus{
+  border-color:
+    rgba(79,140,255,.65);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(79,140,255,.08);
+}
+
+.search-icon{
+  position:absolute;
+
+  left:14px;
+  top:50%;
+
+  transform:translateY(-50%);
+
+  color:var(--muted);
+}
+
+.filter{
+  height:42px;
+
+  min-width:150px;
+
+  padding:0 12px;
+
+  border:1px solid var(--line);
+
+  border-radius:11px;
+
+  background:#0c131e;
+
+  color:#dce4f0;
+
+  outline:none;
+}
+
+.filter:focus{
+  border-color:
+    rgba(79,140,255,.65);
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrap{
+  width:100%;
+
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+
+  border-collapse:collapse;
+
+  min-width:1150px;
+}
+
+thead th{
+  padding:14px 16px;
+
+  text-align:left;
+
+  color:#6f7c91;
+
+  font-size:10px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.8px;
+
+  background:#0c131e;
+
+  border-bottom:1px solid var(--line);
+}
+
+tbody td{
+  padding:15px 16px;
+
+  border-bottom:
+    1px solid rgba(37,50,71,.65);
+
+  font-size:12px;
+
+  vertical-align:middle;
+}
+
+tbody tr{
+  transition:.18s ease;
+}
+
+tbody tr:hover{
+  background:
+    rgba(79,140,255,.035);
+}
+
+.expense-main{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.expense-icon{
+  width:38px;
+  height:38px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,102,120,.13),
+      rgba(155,124,255,.07)
+    );
+
+  border:
+    1px solid
+    rgba(255,102,120,.16);
+
+  font-size:16px;
+}
+
+.expense-title{
+  color:white;
+
+  font-weight:900;
+}
+
+.expense-sub{
+  margin-top:3px;
+
+  color:var(--muted2);
+
+  font-size:10px;
+}
+
+.customer-name{
+  color:#e7edf7;
+
+  font-weight:800;
+}
+
+.business-name{
+  color:#9eb2cd;
+
+  font-size:11px;
+}
+
+.amount{
+  color:#ff8795;
+
+  font-weight:900;
+}
+
+.amount-small{
+  margin-top:3px;
+
+  color:var(--muted2);
+
+  font-size:10px;
+}
+
+.method{
+  display:inline-flex;
+
+  align-items:center;
+
+  padding:6px 9px;
+
+  border-radius:999px;
+
+  background:#151f2e;
+
+  border:1px solid #28364b;
+
+  color:#bdc9da;
+
+  font-size:10px;
+
+  font-weight:800;
+}
+
+.actions{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+  padding:70px 25px;
+
+  text-align:center;
+}
+
+.empty-icon{
+  width:62px;
+  height:62px;
+
+  display:grid;
+  place-items:center;
+
+  margin:0 auto 14px;
+
+  border-radius:18px;
+
+  background:#151f2f;
+
+  font-size:25px;
+}
+
+.empty h3{
+  font-size:17px;
+}
+
+.empty p{
+  margin-top:6px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-layer{
+  position:fixed;
+
+  inset:0;
+
+  background:
+    rgba(0,0,0,.68);
+
+  backdrop-filter:blur(8px);
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
+  z-index:3000;
+}
+
+.modal-layer.show{
+  display:flex;
+}
+
+.modal{
+  width:min(780px,100%);
+
+  max-height:92vh;
+
+  overflow:auto;
+
+  border-radius:22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #121a27,
+      #0c131e
+    );
+
+  border:1px solid #2a3a53;
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.55);
+}
+
+.modal.small{
+  width:min(650px,100%);
+}
+
+.modal-header{
+  position:sticky;
+
+  top:0;
+
+  z-index:5;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  padding:20px 22px;
+
+  background:
+    rgba(15,23,35,.96);
+
+  border-bottom:1px solid var(--line);
+
+  backdrop-filter:blur(14px);
+}
+
+.modal-title{
+  font-size:18px;
+
+  font-weight:900;
+}
+
+.modal-subtitle{
+  margin-top:4px;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+.close-btn{
+  width:36px;
+  height:36px;
+
+  border:1px solid var(--line);
+
+  border-radius:10px;
+
+  background:#101925;
+
+  color:#cbd4e2;
+
+  font-size:18px;
+}
+
+.modal-body{
+  padding:22px;
+}
+
+.form-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:15px;
+}
+
+.form-group{
+  display:grid;
+
+  gap:7px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+.form-group label{
+  color:#9aa8bc;
+
+  font-size:11px;
+
+  font-weight:800;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+
+  border:1px solid var(--line);
+
+  background:#0a111b;
+
+  color:#f1f5fb;
+
+  border-radius:11px;
+
+  outline:none;
+}
+
+.form-group input,
+.form-group select{
+  height:43px;
+
+  padding:0 12px;
+}
+
+.form-group textarea{
+  min-height:95px;
+
+  padding:12px;
+
+  resize:vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:
+    rgba(79,140,255,.65);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(79,140,255,.08);
+}
+
+.form-help{
+  color:var(--muted2);
+
+  font-size:10px;
+}
+
+.modal-footer{
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:9px;
+
+  padding:16px 22px;
+
+  border-top:1px solid var(--line);
+
+  background:#0d141f;
+}
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.details-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:12px;
+}
+
+.detail-card{
+  padding:15px;
+
+  border-radius:14px;
+
+  background:#0b121c;
+
+  border:1px solid var(--line);
+}
+
+.detail-label{
+  color:var(--muted2);
+
+  font-size:10px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.6px;
+}
+
+.detail-value{
+  margin-top:5px;
+
+  color:#f2f6fb;
+
+  font-size:13px;
+
+  font-weight:800;
+}
+
+.detail-value.expense{
+  color:#ff8795;
+
+  font-size:18px;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+  position:fixed;
+
+  right:24px;
+  bottom:24px;
+
+  z-index:5000;
+
+  min-width:280px;
+  max-width:380px;
+
+  padding:14px 16px;
+
+  border-radius:13px;
+
+  background:#121c2b;
+
+  border:1px solid #30415b;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.4);
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  transform:
+    translateY(25px);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:.25s ease;
+}
+
+.toast.show{
+  transform:translateY(0);
+
+  opacity:1;
+}
+
+.toast-dot{
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:var(--green);
+
+  flex:0 0 auto;
+}
+
+.toast.error .toast-dot{
+  background:var(--red);
+}
+
+.toast-text{
+  font-size:12px;
+
+  color:#e8eef7;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px){
+
+  .stats{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .category-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+}
+
+@media(max-width:850px){
+
+  .sidebar{
+    transform:translateX(-100%);
+
+    transition:.25s ease;
+
+    box-shadow:
+      30px 0 70px rgba(0,0,0,.4);
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .topbar{
+    padding:0 18px;
+  }
+
+  .content{
+    padding:22px 18px;
+  }
+
+  .hero{
+    align-items:flex-start;
+
+    flex-direction:column;
+  }
+
+}
+
+@media(max-width:620px){
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .category-grid{
+    grid-template-columns:1fr;
+  }
+
+  .top-actions .icon-btn:nth-child(1){
+    display:none;
+  }
+
+  .page-location{
+    display:none;
+  }
+
+  .hero-copy h1{
+    font-size:28px;
+  }
+
+  .toolbar{
+    align-items:stretch;
+  }
+
+  .search-box{
+    min-width:100%;
+  }
+
+  .filter{
+    flex:1;
+
+    min-width:120px;
+  }
+
+  .hero-actions{
+    width:100%;
+  }
+
+  .hero-actions .btn{
+    flex:1;
+  }
+
+  .modal-layer{
+    padding:10px;
+  }
+
+  .modal-body{
+    padding:16px;
+  }
+
+  .modal-header{
+    padding:16px;
+  }
+
+  .modal-footer{
+    padding:14px 16px;
+  }
+
+  .details-grid{
+    grid-template-columns:1fr;
+  }
+
+  .toast{
+    left:15px;
+    right:15px;
+    bottom:15px;
+
+    min-width:0;
+  }
+
+}
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+  body{
+    background:white;
+  }
+
+  .sidebar,
+  .topbar,
+  .hero,
+  .stats,
+  .category-grid,
+  .panel,
+  .toast{
+    display:none !important;
+  }
+
+  .main{
+    margin:0;
+  }
+
+  .content{
+    padding:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-logo">
+        SN
+      </div>
+
+      <div>
+        <div class="brand-title">
+          SNK Business
+        </div>
+
+        <div class="brand-subtitle">
+          Business Management
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="nav-title">
+      Main
+    </div>
+
+
+    <nav class="nav">
+
+      <a href="index.html">
+        <span class="nav-icon">⌂</span>
+        <span class="nav-label">Dashboard</span>
+      </a>
+
+      <a href="businesses.html">
+        <span class="nav-icon">▣</span>
+        <span class="nav-label">My Businesses</span>
+      </a>
+
+      <a href="customers.html">
+        <span class="nav-icon">♙</span>
+        <span class="nav-label">Customers</span>
+      </a>
+
+      <a href="payments.html">
+        <span class="nav-icon">৳</span>
+        <span class="nav-label">Payments</span>
+      </a>
+
+      <a href="inventory.html">
+        <span class="nav-icon">▤</span>
+        <span class="nav-label">Inventory</span>
+      </a>
+
+      <a href="invoices.html">
+        <span class="nav-icon">▥</span>
+        <span class="nav-label">Invoices</span>
+      </a>
+
+      <a href="expenses.html" class="active">
+        <span class="nav-icon">−</span>
+        <span class="nav-label">Expenses</span>
+      </a>
+
+      <a href="projects.html">
+        <span class="nav-icon">◫</span>
+        <span class="nav-label">Projects</span>
+      </a>
+
+      <a href="digital-marketing.html">
+        <span class="nav-icon">◉</span>
+        <span class="nav-label">Digital Marketing</span>
+      </a>
+
+      <a href="tasks.html">
+        <span class="nav-icon">✓</span>
+        <span class="nav-label">Tasks</span>
+      </a>
+
+      <a href="reports.html">
+        <span class="nav-icon">▥</span>
+        <span class="nav-label">Reports</span>
+      </a>
+
+    </nav>
+
+
+    <div class="admin-card">
+
+      <div class="mini">
+        Premium Business Suite
+      </div>
+
+      <strong>
+        Super Admin
+      </strong>
+
+      <span>
+        Owner • Full Access
+      </span>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="top-left">
+
+        <button
+          class="mobile-menu"
+          id="mobileMenu"
+          type="button"
+        >
+          ☰
+        </button>
+
+        <div class="page-location">
+          SNK Business
+          <strong>/ Expenses</strong>
+        </div>
+
+      </div>
+
+
+      <div class="top-actions">
+
+        <button
+          class="icon-btn"
+          type="button"
+          onclick="exportExpenses()"
+          title="Export"
+        >
+          ↓
+        </button>
+
+        <button
+          class="icon-btn"
+          type="button"
+          onclick="refreshAll()"
+          title="Refresh"
+        >
+          ↻
+        </button>
+
+        <button
+          class="avatar-btn"
+          type="button"
+        >
+          <span class="avatar">
+            SA
+          </span>
+
+          Admin
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <section class="content">
+
+      <!-- HERO -->
+
+      <div class="hero">
+
+        <div class="hero-copy">
+
+          <h1>
+            Expenses
+          </h1>
+
+          <p>
+            Track business spending, vendors, categories and operating costs.
+          </p>
+
+        </div>
+
+
+        <div class="hero-actions">
+
+          <button
+            class="btn btn-ghost"
+            type="button"
+            onclick="exportExpenses()"
+          >
+            ↓ Export CSV
+          </button>
+
+          <button
+            class="btn btn-primary"
+            type="button"
+            onclick="openExpenseModal()"
+          >
+            + Add Expense
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- STATS -->
+
+      <section class="stats">
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            💸
+          </div>
+
+          <div class="stat-label">
+            Total Expenses
+          </div>
+
+          <div
+            class="stat-value"
+            id="statTotal"
+          >
+            ৳0
+          </div>
+
+          <div class="stat-foot">
+            All recorded expenses
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            📅
+          </div>
+
+          <div class="stat-label">
+            This Month
+          </div>
+
+          <div
+            class="stat-value"
+            id="statMonth"
+          >
+            ৳0
+          </div>
+
+          <div class="stat-foot">
+            Current calendar month
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            🧾
+          </div>
+
+          <div class="stat-label">
+            Transactions
+          </div>
+
+          <div
+            class="stat-value"
+            id="statCount"
+          >
+            0
+          </div>
+
+          <div class="stat-foot">
+            Expense records
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            📊
+          </div>
+
+          <div class="stat-label">
+            Average Expense
+          </div>
+
+          <div
+            class="stat-value"
+            id="statAverage"
+          >
+            ৳0
+          </div>
+
+          <div class="stat-foot">
+            Per transaction
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- CATEGORY SUMMARY -->
+
+      <section
+        class="category-grid"
+        id="categoryGrid"
+      ></section>
+
+
+      <!-- EXPENSE TABLE -->
+
+      <section class="panel">
+
+        <div class="toolbar">
+
+          <div class="search-box">
+
+            <span class="search-icon">
+              ⌕
+            </span>
+
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Search expense, vendor, category, reference..."
+            >
+
+          </div>
+
+
+          <select
+            id="businessFilter"
+            class="filter"
+          >
+            <option value="">
+              All Businesses
+            </option>
+          </select>
+
+
+          <select
+            id="categoryFilter"
+            class="filter"
+          >
+            <option value="">
+              All Categories
+            </option>
+          </select>
+
+
+          <select
+            id="methodFilter"
+            class="filter"
+          >
+            <option value="">
+              All Methods
+            </option>
+
+            <option value="Cash">
+              Cash
+            </option>
+
+            <option value="bKash">
+              bKash
+            </option>
+
+            <option value="Nagad">
+              Nagad
+            </option>
+
+            <option value="Bank">
+              Bank
+            </option>
+
+            <option value="Card">
+              Card
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
+          </select>
+
+
+          <button
+            class="btn btn-ghost"
+            type="button"
+            onclick="resetFilters()"
+          >
+            Reset
+          </button>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Expense
+                </th>
+
+                <th>
+                  Business
+                </th>
+
+                <th>
+                  Category
+                </th>
+
+                <th>
+                  Vendor / Payee
+                </th>
+
+                <th>
+                  Amount
+                </th>
+
+                <th>
+                  Method
+                </th>
+
+                <th>
+                  Date
+                </th>
+
+                <th>
+                  Actions
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody
+              id="expenseTableBody"
+            ></tbody>
+
+          </table>
+
+
+          <div
+            class="empty"
+            id="emptyState"
+            style="display:none;"
+          >
+
+            <div class="empty-icon">
+              💸
+            </div>
+
+            <h3>
+              No expenses found
+            </h3>
+
+            <p>
+              Add an expense or change your filters.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<!-- =====================================================
+     ADD / EDIT EXPENSE MODAL
+====================================================== -->
+
+<div
+  class="modal-layer"
+  id="expenseModal"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <div
+          class="modal-title"
+          id="expenseModalTitle"
+        >
+          Add Expense
+        </div>
+
+        <div class="modal-subtitle">
+          Record a business expense and connect it to a business.
+        </div>
+
+      </div>
+
+
+      <button
+        class="close-btn"
+        type="button"
+        onclick="closeModal('expenseModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>
+            Business *
+          </label>
+
+          <select
+            id="expenseBusiness"
+          >
+
+            <option value="">
+              Select Business
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Category *
+          </label>
+
+          <select
+            id="expenseCategory"
+          >
+
+            <option value="">
+              Select Category
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Amount *
+          </label>
+
+          <input
+            id="expenseAmount"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="0"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Payment Method
+          </label>
+
+          <select
+            id="expenseMethod"
+          >
+
+            <option value="Cash">
+              Cash
+            </option>
+
+            <option value="bKash">
+              bKash
+            </option>
+
+            <option value="Nagad">
+              Nagad
+            </option>
+
+            <option value="Bank">
+              Bank
+            </option>
+
+            <option value="Card">
+              Card
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Expense Date *
+          </label>
+
+          <input
+            id="expenseDate"
+            type="date"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Vendor / Payee
+          </label>
+
+          <input
+            id="expenseVendor"
+            type="text"
+            placeholder="Vendor or person paid"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Reference / Receipt No.
+          </label>
+
+          <input
+            id="expenseReference"
+            type="text"
+            placeholder="Receipt, transaction or invoice number"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Expense Type
+          </label>
+
+          <select
+            id="expenseType"
+          >
+
+            <option value="Business Expense">
+              Business Expense
+            </option>
+
+            <option value="Operational">
+              Operational
+            </option>
+
+            <option value="Marketing">
+              Marketing
+            </option>
+
+            <option value="Asset">
+              Asset
+            </option>
+
+            <option value="Personal">
+              Personal
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group full">
+
+          <label>
+            Description / Note
+          </label>
+
+          <textarea
+            id="expenseNote"
+            placeholder="Write expense details..."
+          ></textarea>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-ghost"
+        type="button"
+        onclick="closeModal('expenseModal')"
+      >
+        Cancel
+      </button>
+
+
+      <button
+        class="btn btn-primary"
+        type="button"
+        onclick="saveExpense()"
+      >
+        Save Expense
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     DETAILS MODAL
+====================================================== -->
+
+<div
+  class="modal-layer"
+  id="detailsModal"
+>
+
+  <div class="modal small">
+
+    <div class="modal-header">
+
+      <div>
+
+        <div class="modal-title">
+          Expense Details
+        </div>
+
+        <div
+          class="modal-subtitle"
+          id="detailsSubtitle"
+        >
+          Expense information
+        </div>
+
+      </div>
+
+
+      <button
+        class="close-btn"
+        type="button"
+        onclick="closeModal('detailsModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="modal-body"
+      id="detailsBody"
+    ></div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-danger"
+        id="detailsDeleteBtn"
+        type="button"
+      >
+        Delete
+      </button>
+
+      <button
+        class="btn btn-primary"
+        id="detailsEditBtn"
+        type="button"
+      >
+        Edit Expense
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+  class="toast"
+  id="toast"
+>
+
+  <span class="toast-dot"></span>
+
+  <span
+    class="toast-text"
+    id="toastText"
+  >
+    Saved successfully.
+  </span>
+
+</div>
+
+
+<script>
+/* =========================================================
+   SNK BUSINESS
+   STEP 3.6 — EXPENSE MANAGEMENT
+
+   LocalStorage:
+   - snkBusinesses
+   - snkBusinessExpenses
+========================================================= */
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+const BUSINESS_KEY =
+  "snkBusinesses";
+
+const EXPENSE_KEY =
+  "snkBusinessExpenses";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let businesses = [];
+let expenses = [];
+
+let editingExpenseId = null;
+let viewingExpenseId = null;
+
+
+/* =========================================================
+   DEFAULT CATEGORIES
+========================================================= */
+
+const DEFAULT_CATEGORIES = [
+  "Office",
+  "Marketing",
+  "Advertising",
+  "Transport",
+  "Internet",
+  "Software",
+  "Hosting / Domain",
+  "Salary",
+  "Rent",
+  "Utilities",
+  "Equipment",
+  "Food",
+  "Travel",
+  "Printing",
+  "Maintenance",
+  "Other"
+];
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ = id =>
+  document.getElementById(id);
+
+
+/* =========================================================
+   LOAD DATA
+========================================================= */
+
+function loadData(){
+
+  try{
+
+    businesses =
+      JSON.parse(
+        localStorage.getItem(
+          BUSINESS_KEY
+        )
+      ) || [];
+
+
+    expenses =
+      JSON.parse(
+        localStorage.getItem(
+          EXPENSE_KEY
+        )
+      ) || [];
+
+  }catch(error){
+
+    console.error(error);
+
+    businesses = [];
+    expenses = [];
+
+  }
+
+}
+
+
+/* =========================================================
+   SAVE EXPENSES
+========================================================= */
+
+function saveExpenses(){
+
+  localStorage.setItem(
+    EXPENSE_KEY,
+    JSON.stringify(expenses)
+  );
+
+}
+
+
+/* =========================================================
+   MONEY
+========================================================= */
+
+function money(value){
+
+  const amount =
+    Number(value) || 0;
+
+  return "৳" +
+    amount.toLocaleString(
+      "en-BD",
+      {
+        minimumFractionDigits:0,
+        maximumFractionDigits:2
+      }
+    );
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function todayISO(){
+
+  const d =
+    new Date();
+
+  const y =
+    d.getFullYear();
+
+  const m =
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0");
+
+  const day =
+    String(
+      d.getDate()
+    ).padStart(2,"0");
+
+  return `${y}-${m}-${day}`;
+
+}
+
+
+function formatDate(date){
+
+  if(!date){
+    return "—";
+  }
+
+  const d =
+    new Date(date);
+
+  if(
+    Number.isNaN(
+      d.getTime()
+    )
+  ){
+    return date;
+  }
+
+  return d.toLocaleDateString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   URL PARAMS
+========================================================= */
+
+function getUrlParams(){
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  return {
+
+    business:
+      params.get("business") || "",
+
+    expense:
+      params.get("expense") || ""
+
+  };
+
+}
+
+
+/* =========================================================
+   FIND BUSINESS
+========================================================= */
+
+function findBusiness(value){
+
+  if(!value){
+    return null;
+  }
+
+  const needle =
+    String(value)
+      .trim()
+      .toLowerCase();
+
+  return businesses.find(
+    business => {
+
+      return (
+        String(
+          business.id || ""
+        ).toLowerCase() === needle ||
+
+        String(
+          business.slug || ""
+        ).toLowerCase() === needle ||
+
+        String(
+          business.name || ""
+        ).toLowerCase() === needle
+      );
+
+    }
+  ) || null;
+
+}
+
+
+/* =========================================================
+   GENERATE ID
+========================================================= */
+
+function generateExpenseId(){
+
+  let max = 1000;
+
+  expenses.forEach(
+    expense => {
+
+      const match =
+        String(
+          expense.id || ""
+        )
+        .match(/(\d+)$/);
+
+      if(match){
+
+        max =
+          Math.max(
+            max,
+            Number(match[1])
+          );
+
+      }
+
+    }
+  );
+
+  return `EXP-${max + 1}`;
+
+}
+
+
+/* =========================================================
+   BUSINESS SELECTS
+========================================================= */
+
+function populateBusinessSelects(){
+
+  const filter =
+    $("businessFilter");
+
+  const formSelect =
+    $("expenseBusiness");
+
+
+  filter.innerHTML =
+    `<option value="">
+      All Businesses
+    </option>`;
+
+
+  formSelect.innerHTML =
+    `<option value="">
+      Select Business
+    </option>`;
+
+
+  businesses.forEach(
+    business => {
+
+      const filterOption =
+        document.createElement(
+          "option"
+        );
+
+      filterOption.value =
+        business.id;
+
+      filterOption.textContent =
+        business.name;
+
+      filter.appendChild(
+        filterOption
+      );
+
+
+      const formOption =
+        document.createElement(
+          "option"
+        );
+
+      formOption.value =
+        business.id;
+
+      formOption.textContent =
+        `${business.name} — ${
+          business.category || "Business"
+        }`;
+
+      formSelect.appendChild(
+        formOption
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CATEGORY SELECTS
+========================================================= */
+
+function getCategories(){
+
+  const set =
+    new Set(
+      DEFAULT_CATEGORIES
+    );
+
+  expenses.forEach(
+    expense => {
+
+      if(
+        expense.category
+      ){
+
+        set.add(
+          expense.category
+        );
+
+      }
+
+    }
+  );
+
+  return [
+    ...set
+  ];
+
+}
+
+
+function populateCategorySelects(){
+
+  const filter =
+    $("categoryFilter");
+
+  const formSelect =
+    $("expenseCategory");
+
+
+  const categories =
+    getCategories();
+
+
+  filter.innerHTML =
+    `<option value="">
+      All Categories
+    </option>`;
+
+
+  formSelect.innerHTML =
+    `<option value="">
+      Select Category
+    </option>`;
+
+
+  categories.forEach(
+    category => {
+
+      const filterOption =
+        document.createElement(
+          "option"
+        );
+
+      filterOption.value =
+        category;
+
+      filterOption.textContent =
+        category;
+
+      filter.appendChild(
+        filterOption
+      );
+
+
+      const formOption =
+        document.createElement(
+          "option"
+        );
+
+      formOption.value =
+        category;
+
+      formOption.textContent =
+        category;
+
+      formSelect.appendChild(
+        formOption
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   OPEN ADD EXPENSE
+========================================================= */
+
+function openExpenseModal(
+  businessId = ""
+){
+
+  editingExpenseId = null;
+
+  $("expenseModalTitle")
+    .textContent =
+      "Add Expense";
+
+
+  $("expenseBusiness").value =
+    "";
+
+  $("expenseCategory").value =
+    "";
+
+  $("expenseAmount").value =
+    "";
+
+  $("expenseMethod").value =
+    "Cash";
+
+  $("expenseDate").value =
+    todayISO();
+
+  $("expenseVendor").value =
+    "";
+
+  $("expenseReference").value =
+    "";
+
+  $("expenseType").value =
+    "Business Expense";
+
+  $("expenseNote").value =
+    "";
+
+
+  populateBusinessSelects();
+
+  populateCategorySelects();
+
+
+  const params =
+    getUrlParams();
+
+  const urlBusiness =
+    findBusiness(
+      params.business
+    );
+
+
+  $("expenseBusiness").value =
+    businessId ||
+    urlBusiness?.id ||
+    "";
+
+
+  $("expenseModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================================================
+   EDIT EXPENSE
+========================================================= */
+
+function editExpense(id){
+
+  const expense =
+    expenses.find(
+      item =>
+        item.id === id
+    );
+
+  if(!expense){
+
+    showToast(
+      "Expense not found.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  editingExpenseId =
+    id;
+
+
+  $("expenseModalTitle")
+    .textContent =
+      "Edit Expense";
+
+
+  populateBusinessSelects();
+
+  populateCategorySelects();
+
+
+  $("expenseBusiness").value =
+    expense.businessId || "";
+
+  $("expenseCategory").value =
+    expense.category || "";
+
+  $("expenseAmount").value =
+    Number(
+      expense.amount || 0
+    );
+
+  $("expenseMethod").value =
+    expense.method || "Cash";
+
+  $("expenseDate").value =
+    expense.date ||
+    todayISO();
+
+  $("expenseVendor").value =
+    expense.vendor || "";
+
+  $("expenseReference").value =
+    expense.reference || "";
+
+  $("expenseType").value =
+    expense.type ||
+    "Business Expense";
+
+  $("expenseNote").value =
+    expense.note || "";
+
+
+  $("expenseModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================================================
+   SAVE EXPENSE
+========================================================= */
+
+function saveExpense(){
+
+  const businessId =
+    $("expenseBusiness").value;
+
+  const category =
+    $("expenseCategory").value;
+
+  const amount =
+    Number(
+      $("expenseAmount").value
+    ) || 0;
+
+  const method =
+    $("expenseMethod").value;
+
+  const date =
+    $("expenseDate").value;
+
+  const vendor =
+    $("expenseVendor")
+      .value
+      .trim();
+
+  const reference =
+    $("expenseReference")
+      .value
+      .trim();
+
+  const type =
+    $("expenseType").value;
+
+  const note =
+    $("expenseNote")
+      .value
+      .trim();
+
+
+  if(!businessId){
+
+    showToast(
+      "Please select a business.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if(!category){
+
+    showToast(
+      "Please select an expense category.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if(amount <= 0){
+
+    showToast(
+      "Please enter a valid expense amount.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if(!date){
+
+    showToast(
+      "Please select an expense date.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const business =
+    businesses.find(
+      b =>
+        b.id === businessId
+    );
+
+
+  if(!business){
+
+    showToast(
+      "Business not found.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const now =
+    new Date().toISOString();
+
+
+  if(editingExpenseId){
+
+    const index =
+      expenses.findIndex(
+        expense =>
+          expense.id ===
+          editingExpenseId
+      );
+
+
+    if(index === -1){
+
+      showToast(
+        "Expense not found.",
+        true
+      );
+
+      return;
+
+    }
+
+
+    expenses[index] = {
+
+      ...expenses[index],
+
+      businessId,
+
+      businessSlug:
+        business.slug || "",
+
+      businessName:
+        business.name,
+
+      category,
+
+      amount,
+
+      method,
+
+      date,
+
+      vendor,
+
+      reference,
+
+      type,
+
+      note,
+
+      updatedAt:now
+
+    };
+
+
+    saveExpenses();
+
+    closeModal(
+      "expenseModal"
+    );
+
+    refreshAll();
+
+    showToast(
+      "Expense updated successfully."
+    );
+
+
+  }else{
+
+    const expense = {
+
+      id:
+        generateExpenseId(),
+
+      businessId,
+
+      businessSlug:
+        business.slug || "",
+
+      businessName:
+        business.name,
+
+      category,
+
+      amount,
+
+      method,
+
+      date,
+
+      vendor,
+
+      reference,
+
+      type,
+
+      note,
+
+      createdAt:now,
+
+      updatedAt:now
+
+    };
+
+
+    expenses.unshift(
+      expense
+    );
+
+
+    saveExpenses();
+
+    closeModal(
+      "expenseModal"
+    );
+
+    refreshAll();
+
+    showToast(
+      "Expense added successfully."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function getFilteredExpenses(){
+
+  const search =
+    $("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const businessId =
+    $("businessFilter").value;
+
+
+  const category =
+    $("categoryFilter").value;
+
+
+  const method =
+    $("methodFilter").value;
+
+
+  return expenses.filter(
+    expense => {
+
+      const searchable = [
+
+        expense.id,
+
+        expense.businessName,
+
+        expense.category,
+
+        expense.vendor,
+
+        expense.reference,
+
+        expense.type,
+
+        expense.note,
+
+        expense.method
+
+      ]
+      .join(" ")
+      .toLowerCase();
+
+
+      const matchesSearch =
+        !search ||
+        searchable.includes(
+          search
+        );
+
+
+      const matchesBusiness =
+        !businessId ||
+        expense.businessId ===
+          businessId;
+
+
+      const matchesCategory =
+        !category ||
+        expense.category ===
+          category;
+
+
+      const matchesMethod =
+        !method ||
+        expense.method ===
+          method;
+
+
+      return (
+        matchesSearch &&
+        matchesBusiness &&
+        matchesCategory &&
+        matchesMethod
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderExpenses(){
+
+  const list =
+    getFilteredExpenses();
+
+
+  const tbody =
+    $("expenseTableBody");
+
+
+  tbody.innerHTML =
+    "";
+
+
+  $("emptyState")
+    .style.display =
+      list.length
+        ? "none"
+        : "block";
+
+
+  list.forEach(
+    expense => {
+
+      const tr =
+        document.createElement(
+          "tr"
+        );
+
+
+      tr.innerHTML = `
+
+        <td>
+
+          <div class="expense-main">
+
+            <div class="expense-icon">
+              💸
+            </div>
+
+            <div>
+
+              <div class="expense-title">
+                ${escapeHTML(
+                  expense.id
+                )}
+              </div>
+
+              <div class="expense-sub">
+                ${escapeHTML(
+                  expense.reference ||
+                  expense.type ||
+                  "Business Expense"
+                )}
+              </div>
+
+            </div>
+
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div class="business-name">
+            ${escapeHTML(
+              expense.businessName ||
+              "—"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div class="customer-name">
+            ${escapeHTML(
+              expense.category ||
+              "—"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div class="customer-name">
+            ${escapeHTML(
+              expense.vendor ||
+              "—"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div class="amount">
+            ${money(
+              expense.amount
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <span class="method">
+            ${escapeHTML(
+              expense.method ||
+              "Other"
+            )}
+          </span>
+
+        </td>
+
+
+        <td>
+
+          <div class="business-name">
+            ${formatDate(
+              expense.date
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div class="actions">
+
+            <button
+              class="btn btn-small"
+              type="button"
+              onclick="viewExpense('${escapeAttribute(
+                expense.id
+              )}')"
+            >
+              View
+            </button>
+
+
+            <button
+              class="btn btn-small"
+              type="button"
+              onclick="editExpense('${escapeAttribute(
+                expense.id
+              )}')"
+            >
+              Edit
+            </button>
+
+
+            <button
+              class="btn btn-small btn-danger"
+              type="button"
+              onclick="deleteExpense('${escapeAttribute(
+                expense.id
+              )}')"
+            >
+              Delete
+            </button>
+
+          </div>
+
+        </td>
+
+      `;
+
+
+      tbody.appendChild(
+        tr
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CURRENT MONTH
+========================================================= */
+
+function isCurrentMonth(date){
+
+  if(!date){
+    return false;
+  }
+
+  const d =
+    new Date(date);
+
+  const now =
+    new Date();
+
+  return (
+    d.getFullYear() ===
+      now.getFullYear() &&
+
+    d.getMonth() ===
+      now.getMonth()
+  );
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function renderStats(){
+
+  const total =
+    expenses.reduce(
+      (sum,expense) =>
+        sum +
+        Number(
+          expense.amount || 0
+        ),
+      0
+    );
+
+
+  const month =
+    expenses
+      .filter(
+        expense =>
+          isCurrentMonth(
+            expense.date
+          )
+      )
+      .reduce(
+        (sum,expense) =>
+          sum +
+          Number(
+            expense.amount || 0
+          ),
+        0
+      );
+
+
+  const count =
+    expenses.length;
+
+
+  const average =
+    count
+      ? total / count
+      : 0;
+
+
+  $("statTotal")
+    .textContent =
+      money(total);
+
+
+  $("statMonth")
+    .textContent =
+      money(month);
+
+
+  $("statCount")
+    .textContent =
+      count.toLocaleString(
+        "en-BD"
+      );
+
+
+  $("statAverage")
+    .textContent =
+      money(average);
+
+}
+
+
+/* =========================================================
+   CATEGORY SUMMARY
+========================================================= */
+
+function renderCategorySummary(){
+
+  const grid =
+    $("categoryGrid");
+
+
+  const categoryMap =
+    {};
+
+
+  expenses.forEach(
+    expense => {
+
+      const category =
+        expense.category ||
+        "Other";
+
+
+      if(
+        !categoryMap[category]
+      ){
+
+        categoryMap[category] = {
+          total:0,
+          count:0
+        };
+
+      }
+
+
+      categoryMap[category].total +=
+        Number(
+          expense.amount || 0
+        );
+
+
+      categoryMap[category].count++;
+
+    }
+  );
+
+
+  const entries =
+    Object.entries(
+      categoryMap
+    )
+    .sort(
+      (a,b) =>
+        b[1].total -
+        a[1].total
+    )
+    .slice(0,4);
+
+
+  if(!entries.length){
+
+    grid.innerHTML = "";
+
+    return;
+
+  }
+
+
+  const icons = [
+    "◈",
+    "◉",
+    "▣",
+    "◆"
+  ];
+
+
+  grid.innerHTML =
+    entries.map(
+      ([category,data],index) => `
+
+        <div class="category-card">
+
+          <div class="category-card-top">
+
+            <div class="category-name">
+              ${escapeHTML(
+                category
+              )}
+            </div>
+
+            <div class="category-icon">
+              ${icons[index % icons.length]}
+            </div>
+
+          </div>
+
+          <div class="category-value">
+            ${money(
+              data.total
+            )}
+          </div>
+
+          <div class="category-count">
+            ${data.count}
+            transaction${
+              data.count === 1
+                ? ""
+                : "s"
+            }
+          </div>
+
+        </div>
+
+      `
+    )
+    .join("");
+
+}
+
+
+/* =========================================================
+   VIEW EXPENSE
+========================================================= */
+
+function viewExpense(id){
+
+  const expense =
+    expenses.find(
+      item =>
+        item.id === id
+    );
+
+
+  if(!expense){
+
+    showToast(
+      "Expense not found.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  viewingExpenseId =
+    id;
+
+
+  $("detailsSubtitle")
+    .textContent =
+      `${expense.id} • ${formatDate(
+        expense.date
+      )}`;
+
+
+  $("detailsBody")
+    .innerHTML = `
+
+      <div class="details-grid">
+
+        <div class="detail-card">
+
+          <div class="detail-label">
+            Expense ID
+          </div>
+
+          <div class="detail-value">
+            ${escapeHTML(
+              expense.id
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <div class="detail-label">
+            Amount
+          </div>
+
+          <div class="detail-value expense">
+            ${money(
+              expense.amount
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <div class="detail-label">
+            Business
+          </div>
+
+          <div class="detail-value">
+            ${escapeHTML(
+              expense.businessName ||
+              "—"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <div class="detail-label">
+            Category
+          </div>
+
+          <div class="detail-value">
+            ${escapeHTML(
+              expense.category ||
+              "—"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <div class="detail-label">
+            Vendor / Payee
+          </div>
+
+          <div class="detail-value">
+            ${escapeHTML(
+              expense.vendor ||
+              "—"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <div class="detail-label">
+            Payment Method
+          </div>
+
+          <div class="detail-value">
+            ${escapeHTML(
+              expense.method ||
+              "—"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <div class="detail-label">
+            Expense Date
+          </div>
+
+          <div class="detail-value">
+            ${formatDate(
+              expense.date
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <div class="detail-label">
+            Expense Type
+          </div>
+
+          <div class="detail-value">
+            ${escapeHTML(
+              expense.type ||
+              "Business Expense"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <div class="detail-label">
+            Reference / Receipt
+          </div>
+
+          <div class="detail-value">
+            ${escapeHTML(
+              expense.reference ||
+              "—"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <div class="detail-label">
+            Created
+          </div>
+
+          <div class="detail-value">
+            ${formatDateTime(
+              expense.createdAt
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="detail-card"
+             style="grid-column:1/-1;">
+
+          <div class="detail-label">
+            Description / Note
+          </div>
+
+          <div
+            class="detail-value"
+            style="
+              font-weight:600;
+              line-height:1.7;
+            "
+          >
+            ${escapeHTML(
+              expense.note ||
+              "No additional note."
+            )}
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+
+  $("detailsEditBtn")
+    .onclick = () => {
+
+      closeModal(
+        "detailsModal"
+      );
+
+      editExpense(id);
+
+    };
+
+
+  $("detailsDeleteBtn")
+    .onclick = () => {
+
+      closeModal(
+        "detailsModal"
+      );
+
+      deleteExpense(id);
+
+    };
+
+
+  $("detailsModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function deleteExpense(id){
+
+  const expense =
+    expenses.find(
+      item =>
+        item.id === id
+    );
+
+
+  if(!expense){
+    return;
+  }
+
+
+  const confirmed =
+    confirm(
+      `Delete expense ${expense.id}? This action cannot be undone.`
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  expenses =
+    expenses.filter(
+      item =>
+        item.id !== id
+    );
+
+
+  saveExpenses();
+
+  refreshAll();
+
+  showToast(
+    "Expense deleted."
+  );
+
+}
+
+
+/* =========================================================
+   EXPORT CSV
+========================================================= */
+
+function exportExpenses(){
+
+  if(!expenses.length){
+
+    showToast(
+      "There are no expenses to export.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const headers = [
+
+    "Expense ID",
+    "Business",
+    "Category",
+    "Amount",
+    "Payment Method",
+    "Date",
+    "Vendor / Payee",
+    "Reference",
+    "Type",
+    "Note"
+
+  ];
+
+
+  const rows =
+    expenses.map(
+      expense => [
+
+        expense.id,
+
+        expense.businessName,
+
+        expense.category,
+
+        expense.amount,
+
+        expense.method,
+
+        expense.date,
+
+        expense.vendor,
+
+        expense.reference,
+
+        expense.type,
+
+        expense.note
+
+      ]
+    );
+
+
+  const csv = [
+
+    headers,
+
+    ...rows
+
+  ]
+  .map(
+    row =>
+      row
+        .map(
+          value =>
+            `"${String(
+              value ?? ""
+            )
+            .replace(
+              /"/g,
+              '""'
+            )}"`
+        )
+        .join(",")
+  )
+  .join("\n");
+
+
+  const blob =
+    new Blob(
+      [csv],
+      {
+        type:
+          "text/csv;charset=utf-8;"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const a =
+    document.createElement(
+      "a"
+    );
+
+
+  a.href = url;
+
+  a.download =
+    `snk-business-expenses-${todayISO()}.csv`;
+
+
+  document.body.appendChild(
+    a
+  );
+
+
+  a.click();
+
+  a.remove();
+
+
+  URL.revokeObjectURL(
+    url
+  );
+
+
+  showToast(
+    "Expense CSV exported."
+  );
+
+}
+
+
+/* =========================================================
+   RESET FILTERS
+========================================================= */
+
+function resetFilters(){
+
+  $("searchInput").value =
+    "";
+
+  $("businessFilter").value =
+    "";
+
+  $("categoryFilter").value =
+    "";
+
+  $("methodFilter").value =
+    "";
+
+  renderExpenses();
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshAll(){
+
+  loadData();
+
+  populateBusinessSelects();
+
+  populateCategorySelects();
+
+  renderStats();
+
+  renderCategorySummary();
+
+  renderExpenses();
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeModal(id){
+
+  const modal =
+    $(id);
+
+  if(modal){
+
+    modal.classList.remove(
+      "show"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer = null;
+
+
+function showToast(
+  message,
+  error = false
+){
+
+  const toast =
+    $("toast");
+
+  const text =
+    $("toastText");
+
+
+  text.textContent =
+    message;
+
+
+  toast.classList.toggle(
+    "error",
+    error
+  );
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      3000
+    );
+
+}
+
+
+/* =========================================================
+   FORMAT DATETIME
+========================================================= */
+
+function formatDateTime(value){
+
+  if(!value){
+    return "—";
+  }
+
+
+  const d =
+    new Date(value);
+
+
+  if(
+    Number.isNaN(
+      d.getTime()
+    )
+  ){
+    return value;
+  }
+
+
+  return d.toLocaleString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+function escapeAttribute(value){
+
+  return escapeHTML(
+    value
+  );
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+$("mobileMenu")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("sidebar")
+        .classList.toggle(
+          "open"
+        );
+
+    }
+  );
+
+
+document.addEventListener(
+  "click",
+  event => {
+
+    const sidebar =
+      $("sidebar");
+
+    const menu =
+      $("mobileMenu");
+
+
+    if(
+      window.innerWidth <= 850 &&
+      sidebar.classList.contains(
+        "open"
+      ) &&
+      !sidebar.contains(
+        event.target
+      ) &&
+      !menu.contains(
+        event.target
+      )
+    ){
+
+      sidebar.classList.remove(
+        "open"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   FILTER EVENTS
+========================================================= */
+
+$("searchInput")
+  .addEventListener(
+    "input",
+    renderExpenses
+  );
+
+
+$("businessFilter")
+  .addEventListener(
+    "change",
+    renderExpenses
+  );
+
+
+$("categoryFilter")
+  .addEventListener(
+    "change",
+    renderExpenses
+  );
+
+
+$("methodFilter")
+  .addEventListener(
+    "change",
+    renderExpenses
+  );
+
+
+/* =========================================================
+   MODAL OUTSIDE CLICK
+========================================================= */
+
+document
+  .querySelectorAll(
+    ".modal-layer"
+  )
+  .forEach(
+    layer => {
+
+      layer.addEventListener(
+        "click",
+        event => {
+
+          if(
+            event.target === layer
+          ){
+
+            layer.classList.remove(
+              "show"
+            );
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key === "Escape"
+    ){
+
+      document
+        .querySelectorAll(
+          ".modal-layer.show"
+        )
+        .forEach(
+          modal => {
+
+            modal.classList.remove(
+              "show"
+            );
+
+          }
+        );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   URL DEEP LINK
+========================================================= */
+
+function applyUrlFilters(){
+
+  const params =
+    getUrlParams();
+
+
+  const business =
+    findBusiness(
+      params.business
+    );
+
+
+  if(business){
+
+    $("businessFilter")
+      .value =
+        business.id;
+
+  }
+
+
+  if(params.expense){
+
+    setTimeout(
+      () => {
+
+        viewExpense(
+          params.expense
+        );
+
+      },
+      150
+    );
+
+  }
+
+
+  renderExpenses();
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+function init(){
+
+  loadData();
+
+  populateBusinessSelects();
+
+  populateCategorySelects();
+
+  renderStats();
+
+  renderCategorySummary();
+
+  renderExpenses();
+
+  applyUrlFilters();
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+init();
+
+</script>
+
+</body>
+</html>
