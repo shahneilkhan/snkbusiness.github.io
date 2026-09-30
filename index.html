@@ -1,2108 +1,5018 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>SNK Business | Business Management</title>
-
-  <meta
-    name="description"
-    content="SNK Business — Premium Multi-Business Management Dashboard"
-  >
-
-  <style>
-    :root{
-      --bg:#070b12;
-      --bg2:#0b111b;
-      --panel:#101722;
-      --panel2:#141d2a;
-      --panel3:#182333;
-      --line:rgba(255,255,255,.08);
-
-      --text:#f5f7fb;
-      --muted:#8d99aa;
-
-      --blue:#4f8cff;
-      --blue2:#2869e8;
-      --cyan:#27c8ff;
-      --green:#28d17c;
-      --yellow:#ffbd4a;
-      --red:#ff5f6d;
-      --purple:#9b72ff;
-
-      --shadow:0 20px 60px rgba(0,0,0,.35);
-      --radius:18px;
-    }
-
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    body{
-      font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-      background:
-        radial-gradient(
-          circle at 80% -10%,
-          rgba(79,140,255,.16),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 10% 20%,
-          rgba(39,200,255,.07),
-          transparent 25%
-        ),
-        var(--bg);
-
-      color:var(--text);
-      min-height:100vh;
-    }
-
-    button,
-    input{
-      font:inherit;
-    }
-
-    button{
-      cursor:pointer;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    /* =========================
-       APP
-    ========================= */
-
-    .app{
-      display:flex;
-      min-height:100vh;
-    }
-
-    /* =========================
-       SIDEBAR
-    ========================= */
-
-    .sidebar{
-      width:270px;
-      min-height:100vh;
-      position:fixed;
-      left:0;
-      top:0;
-      bottom:0;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(17,24,36,.98),
-          rgba(8,12,19,.98)
-        );
-
-      border-right:1px solid var(--line);
-      padding:22px 16px;
-      z-index:100;
-
-      display:flex;
-      flex-direction:column;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:5px 8px 24px;
-    }
-
-    .brand-logo{
-      width:44px;
-      height:44px;
-      border-radius:13px;
-
-      display:grid;
-      place-items:center;
-
-      font-weight:900;
-      font-size:17px;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--blue),
-          var(--cyan)
-        );
-
-      color:white;
-      box-shadow:
-        0 10px 30px rgba(79,140,255,.28);
-    }
-
-    .brand-text strong{
-      display:block;
-      font-size:16px;
-      letter-spacing:.2px;
-    }
-
-    .brand-text span{
-      display:block;
-      color:var(--muted);
-      font-size:11px;
-      margin-top:2px;
-    }
-
-    .section-label{
-      color:#647084;
-      font-size:10px;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:1.4px;
-      padding:15px 12px 8px;
-    }
-
-    .nav{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-    }
-
-    .nav-item{
-      width:100%;
-      border:1px solid transparent;
-      background:transparent;
-      color:#aeb8c8;
-
-      display:flex;
-      align-items:center;
-      gap:12px;
-
-      padding:11px 12px;
-      border-radius:11px;
-
-      text-align:left;
-      transition:.2s;
-    }
-
-    .nav-item:hover{
-      background:rgba(255,255,255,.045);
-      color:white;
-    }
-
-    .nav-item.active{
-      background:
-        linear-gradient(
-          90deg,
-          rgba(79,140,255,.17),
-          rgba(79,140,255,.05)
-        );
-
-      border-color:rgba(79,140,255,.18);
-      color:white;
-    }
-
-    .nav-icon{
-      width:21px;
-      text-align:center;
-      font-size:17px;
-    }
-
-    .nav-text{
-      font-size:13px;
-      font-weight:600;
-    }
-
-    .nav-badge{
-      margin-left:auto;
-      font-size:10px;
-      padding:3px 7px;
-      border-radius:20px;
-      background:rgba(255,255,255,.07);
-      color:#9da9bb;
-    }
-
-    .sidebar-bottom{
-      margin-top:auto;
-    }
-
-    .upgrade-box{
-      margin:15px 4px;
-      padding:15px;
-
-      border:1px solid rgba(79,140,255,.18);
-      border-radius:15px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(79,140,255,.12),
-          rgba(39,200,255,.04)
-        );
-    }
-
-    .upgrade-box strong{
-      font-size:12px;
-      display:block;
-      margin-bottom:5px;
-    }
-
-    .upgrade-box p{
-      color:#7f8ca0;
-      font-size:10px;
-      line-height:1.5;
-      margin-bottom:11px;
-    }
-
-    .upgrade-btn{
-      width:100%;
-      border:0;
-      border-radius:9px;
-      padding:8px;
-      background:var(--blue);
-      color:white;
-      font-size:11px;
-      font-weight:700;
-    }
-
-    .admin-mini{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:14px 8px 4px;
-      border-top:1px solid var(--line);
-    }
-
-    .avatar{
-      width:37px;
-      height:37px;
-      border-radius:11px;
-      display:grid;
-      place-items:center;
-
-      background:
-        linear-gradient(
-          135deg,
-          #24395e,
-          #162338
-        );
-
-      border:1px solid rgba(255,255,255,.08);
-      font-weight:800;
-      font-size:12px;
-    }
-
-    .admin-info{
-      min-width:0;
-      flex:1;
-    }
-
-    .admin-info strong{
-      display:block;
-      font-size:11px;
-    }
-
-    .admin-info span{
-      display:block;
-      color:var(--muted);
-      font-size:9px;
-      margin-top:2px;
-    }
-
-    /* =========================
-       MAIN
-    ========================= */
-
-    .main{
-      width:calc(100% - 270px);
-      margin-left:270px;
-      min-height:100vh;
-    }
-
-    .topbar{
-      height:76px;
-      border-bottom:1px solid var(--line);
-
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      padding:0 30px;
-
-      background:rgba(7,11,18,.72);
-      backdrop-filter:blur(20px);
-
-      position:sticky;
-      top:0;
-      z-index:50;
-    }
-
-    .page-title h1{
-      font-size:19px;
-      font-weight:750;
-    }
-
-    .page-title p{
-      color:var(--muted);
-      font-size:11px;
-      margin-top:4px;
-    }
-
-    .top-actions{
-      display:flex;
-      align-items:center;
-      gap:9px;
-    }
-
-    .icon-btn{
-      width:39px;
-      height:39px;
-      border-radius:11px;
-      border:1px solid var(--line);
-      background:#0d141f;
-      color:#aeb8c7;
-      display:grid;
-      place-items:center;
-      position:relative;
-    }
-
-    .notification-dot{
-      position:absolute;
-      width:7px;
-      height:7px;
-      background:var(--red);
-      border-radius:50%;
-      right:8px;
-      top:7px;
-      box-shadow:0 0 0 3px #0d141f;
-    }
-
-    .business-select{
-      border:1px solid var(--line);
-      background:#0d141f;
-      color:#dfe6f0;
-      border-radius:11px;
-      padding:10px 12px;
-      font-size:11px;
-      outline:none;
-    }
-
-    /* =========================
-       CONTENT
-    ========================= */
-
-    .content{
-      padding:28px 30px 50px;
-      max-width:1600px;
-      margin:auto;
-    }
-
-    /* HERO */
-
-    .hero{
-      border:1px solid var(--line);
-      border-radius:24px;
-
-      padding:28px;
-
-      background:
-        radial-gradient(
-          circle at 85% 20%,
-          rgba(79,140,255,.20),
-          transparent 28%
-        ),
-        linear-gradient(
-          135deg,
-          #101a29,
-          #0d141e
-        );
-
-      box-shadow:var(--shadow);
-
-      display:flex;
-      justify-content:space-between;
-      gap:25px;
-
-      overflow:hidden;
-      position:relative;
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      width:250px;
-      height:250px;
-      border-radius:50%;
-      right:-110px;
-      bottom:-130px;
-
-      border:1px solid rgba(79,140,255,.15);
-      box-shadow:
-        0 0 0 40px rgba(79,140,255,.025),
-        0 0 0 80px rgba(79,140,255,.015);
-    }
-
-    .hero-content{
-      position:relative;
-      z-index:2;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-
-      padding:5px 9px;
-      border-radius:30px;
-
-      background:rgba(79,140,255,.10);
-      border:1px solid rgba(79,140,255,.15);
-
-      color:#82adff;
-      font-size:9px;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:1px;
-    }
-
-    .live-dot{
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 10px rgba(40,209,124,.8);
-    }
-
-    .hero h2{
-      font-size:31px;
-      line-height:1.1;
-      margin:15px 0 8px;
-      letter-spacing:-.7px;
-    }
-
-    .hero p{
-      color:#8794a7;
-      font-size:12px;
-      max-width:570px;
-      line-height:1.7;
-    }
-
-    .hero-actions{
-      display:flex;
-      gap:9px;
-      margin-top:20px;
-    }
-
-    .primary-btn,
-    .secondary-btn{
-      border-radius:10px;
-      padding:11px 15px;
-      font-size:11px;
-      font-weight:750;
-      border:1px solid var(--line);
-    }
-
-    .primary-btn{
-      background:linear-gradient(135deg,var(--blue),var(--blue2));
-      color:white;
-      border-color:transparent;
-      box-shadow:0 8px 25px rgba(79,140,255,.2);
-    }
-
-    .secondary-btn{
-      background:rgba(255,255,255,.035);
-      color:#d4dbe6;
-    }
-
-    /* =========================
-       STAT GRID
-    ========================= */
-
-    .section-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin:28px 0 13px;
-    }
-
-    .section-head h3{
-      font-size:14px;
-      font-weight:750;
-    }
-
-    .section-head span{
-      color:#657184;
-      font-size:10px;
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-    }
-
-    .stat-card{
-      padding:18px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:rgba(16,23,34,.82);
-      transition:.2s;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .stat-card:hover{
-      transform:translateY(-2px);
-      border-color:rgba(255,255,255,.12);
-    }
-
-    .stat-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-
-    .stat-label{
-      color:#7f8b9e;
-      font-size:10px;
-      font-weight:600;
-    }
-
-    .stat-icon{
-      width:32px;
-      height:32px;
-      border-radius:9px;
-      display:grid;
-      place-items:center;
-      font-size:14px;
-      background:rgba(79,140,255,.10);
-    }
-
-    .stat-value{
-      font-size:24px;
-      font-weight:800;
-      margin-top:13px;
-      letter-spacing:-.5px;
-    }
-
-    .stat-bottom{
-      display:flex;
-      align-items:center;
-      gap:6px;
-      margin-top:7px;
-      font-size:9px;
-    }
-
-    .positive{
-      color:var(--green);
-    }
-
-    .negative{
-      color:var(--red);
-    }
-
-    .stat-note{
-      color:#657184;
-    }
-
-    /* =========================
-       BUSINESS GRID
-    ========================= */
-
-    .business-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:15px;
-    }
-
-    .business-card{
-      border:1px solid var(--line);
-      background:
-        linear-gradient(
-          145deg,
-          rgba(20,29,42,.96),
-          rgba(13,19,28,.96)
-        );
-
-      border-radius:19px;
-      padding:20px;
-      transition:.22s;
-      cursor:pointer;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .business-card:hover{
-      transform:translateY(-3px);
-      border-color:rgba(79,140,255,.27);
-      box-shadow:0 18px 40px rgba(0,0,0,.25);
-    }
-
-    .business-card::after{
-      content:"";
-      position:absolute;
-      width:100px;
-      height:100px;
-      border-radius:50%;
-      right:-45px;
-      top:-45px;
-      background:rgba(79,140,255,.07);
-    }
-
-    .business-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      position:relative;
-      z-index:2;
-    }
-
-    .business-icon{
-      width:45px;
-      height:45px;
-      border-radius:13px;
-      display:grid;
-      place-items:center;
-      font-size:19px;
-      font-weight:800;
-    }
-
-    .sarakat{
-      background:rgba(155,114,255,.13);
-      color:#b99cff;
-      border:1px solid rgba(155,114,255,.16);
-    }
-
-    .website{
-      background:rgba(39,200,255,.11);
-      color:#55d7ff;
-      border:1px solid rgba(39,200,255,.15);
-    }
-
-    .marketing{
-      background:rgba(40,209,124,.11);
-      color:#45df91;
-      border:1px solid rgba(40,209,124,.15);
-    }
-
-    .business-status{
-      font-size:9px;
-      padding:5px 8px;
-      border-radius:20px;
-      background:rgba(40,209,124,.09);
-      color:#48d88e;
-      border:1px solid rgba(40,209,124,.12);
-    }
-
-    .business-card h4{
-      font-size:15px;
-      margin-top:17px;
-    }
-
-    .business-desc{
-      color:#727f92;
-      font-size:10px;
-      line-height:1.6;
-      margin-top:5px;
-      min-height:32px;
-    }
-
-    .business-metrics{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:8px;
-      margin-top:17px;
-    }
-
-    .metric{
-      padding:9px;
-      background:rgba(255,255,255,.025);
-      border:1px solid rgba(255,255,255,.045);
-      border-radius:9px;
-    }
-
-    .metric span{
-      display:block;
-      color:#687588;
-      font-size:8px;
-    }
-
-    .metric strong{
-      display:block;
-      margin-top:4px;
-      font-size:11px;
-    }
-
-    .business-footer{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-top:17px;
-      padding-top:13px;
-      border-top:1px solid rgba(255,255,255,.05);
-    }
-
-    .business-revenue{
-      font-size:11px;
-      font-weight:800;
-    }
-
-    .open-link{
-      color:#76a7ff;
-      font-size:10px;
-      font-weight:750;
-    }
-
-    .add-business{
-      border:1px dashed rgba(255,255,255,.12);
-      background:rgba(255,255,255,.015);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:250px;
-    }
-
-    .add-inner{
-      text-align:center;
-    }
-
-    .add-circle{
-      width:48px;
-      height:48px;
-      border-radius:50%;
-      margin:auto;
-      display:grid;
-      place-items:center;
-      border:1px dashed #526075;
-      color:#8b98aa;
-      font-size:21px;
-    }
-
-    .add-inner strong{
-      display:block;
-      margin-top:12px;
-      font-size:12px;
-    }
-
-    .add-inner span{
-      display:block;
-      color:#667386;
-      font-size:9px;
-      margin-top:5px;
-    }
-
-    /* =========================
-       LOWER GRID
-    ========================= */
-
-    .lower-grid{
-      display:grid;
-      grid-template-columns:1.5fr 1fr;
-      gap:15px;
-    }
-
-    .panel{
-      border:1px solid var(--line);
-      border-radius:17px;
-      background:rgba(16,23,34,.78);
-      overflow:hidden;
-    }
-
-    .panel-head{
-      padding:16px 18px;
-      border-bottom:1px solid var(--line);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-    }
-
-    .panel-head h3{
-      font-size:12px;
-    }
-
-    .panel-head button{
-      border:0;
-      background:transparent;
-      color:#709eff;
-      font-size:9px;
-    }
-
-    /* table */
-
-    .table-wrap{
-      overflow:auto;
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:580px;
-    }
-
-    th{
-      text-align:left;
-      color:#667386;
-      font-size:8px;
-      text-transform:uppercase;
-      letter-spacing:.8px;
-      padding:12px 18px;
-      font-weight:750;
-    }
-
-    td{
-      padding:12px 18px;
-      border-top:1px solid rgba(255,255,255,.045);
-      font-size:10px;
-      color:#bac3d0;
-    }
-
-    .customer{
-      display:flex;
-      align-items:center;
-      gap:9px;
-    }
-
-    .customer-avatar{
-      width:28px;
-      height:28px;
-      border-radius:8px;
-      display:grid;
-      place-items:center;
-      background:#182438;
-      color:#91b7ff;
-      font-size:9px;
-      font-weight:800;
-    }
-
-    .customer-name strong{
-      display:block;
-      color:#e6ebf3;
-      font-size:10px;
-    }
-
-    .customer-name span{
-      display:block;
-      color:#647184;
-      font-size:8px;
-      margin-top:2px;
-    }
-
-    .payment-status{
-      display:inline-block;
-      padding:4px 7px;
-      border-radius:20px;
-      font-size:8px;
-    }
-
-    .paid{
-      background:rgba(40,209,124,.08);
-      color:#45d98b;
-    }
-
-    .pending{
-      background:rgba(255,189,74,.09);
-      color:#ffca67;
-    }
-
-    .partial{
-      background:rgba(79,140,255,.09);
-      color:#78a5ff;
-    }
-
-    /* quick actions */
-
-    .quick-actions{
-      padding:15px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:9px;
-    }
-
-    .quick-btn{
-      border:1px solid rgba(255,255,255,.06);
-      background:rgba(255,255,255,.025);
-      border-radius:12px;
-      padding:13px;
-      text-align:left;
-      color:#dce3ed;
-      transition:.2s;
-    }
-
-    .quick-btn:hover{
-      background:rgba(79,140,255,.07);
-      border-color:rgba(79,140,255,.16);
-    }
-
-    .quick-icon{
-      font-size:17px;
-    }
-
-    .quick-btn strong{
-      display:block;
-      margin-top:8px;
-      font-size:10px;
-    }
-
-    .quick-btn span{
-      display:block;
-      margin-top:3px;
-      color:#687588;
-      font-size:8px;
-      line-height:1.4;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    .mobile-menu{
-      display:none;
-    }
-
-    @media(max-width:1150px){
-      .stats{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .business-grid{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .lower-grid{
-        grid-template-columns:1fr;
-      }
-    }
-
-    @media(max-width:850px){
-      .sidebar{
-        transform:translateX(-100%);
-        transition:.25s;
-      }
-
-      .sidebar.open{
-        transform:translateX(0);
-      }
-
-      .main{
-        width:100%;
-        margin-left:0;
-      }
-
-      .mobile-menu{
-        display:grid;
-        place-items:center;
-        width:38px;
-        height:38px;
-        border-radius:10px;
-        border:1px solid var(--line);
-        background:#0d141f;
-        color:white;
-      }
-
-      .topbar{
-        padding:0 17px;
-      }
-
-      .business-select{
-        display:none;
-      }
-
-      .content{
-        padding:20px 16px 40px;
-      }
-
-      .hero{
-        padding:22px;
-      }
-
-      .hero h2{
-        font-size:25px;
-      }
-    }
-
-    @media(max-width:650px){
-      .stats{
-        grid-template-columns:1fr 1fr;
-        gap:9px;
-      }
-
-      .stat-card{
-        padding:14px;
-      }
-
-      .stat-value{
-        font-size:19px;
-      }
-
-      .business-grid{
-        grid-template-columns:1fr;
-      }
-
-      .hero{
-        display:block;
-      }
-
-      .hero-actions{
-        flex-wrap:wrap;
-      }
-
-      .page-title h1{
-        font-size:15px;
-      }
-
-      .page-title p{
-        display:none;
-      }
-
-      .top-actions .icon-btn{
-        display:none;
-      }
-    }
-
-    @media(max-width:430px){
-      .stats{
-        grid-template-columns:1fr;
-      }
-
-      .business-metrics{
-        grid-template-columns:repeat(3,1fr);
-      }
-
-      .hero h2{
-        font-size:22px;
-      }
-
-      .hero p{
-        font-size:10px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK Business | Business Management</title>
+
+<meta
+  name="description"
+  content="SNK Business premium business management dashboard."
+>
+
+<style>
+:root{
+  --bg:#070b12;
+  --panel:#101722;
+  --panel2:#151e2c;
+  --panel3:#1b2636;
+  --line:#253247;
+  --line2:#33435d;
+
+  --text:#f5f7fb;
+  --muted:#8d99ac;
+  --muted2:#667287;
+
+  --blue:#4f8cff;
+  --cyan:#28d7ff;
+  --green:#22c983;
+  --yellow:#f4bd4f;
+  --red:#ff6678;
+  --purple:#9b7cff;
+  --orange:#ff9b5b;
+
+  --shadow:
+    0 20px 60px rgba(0,0,0,.34);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color:var(--text);
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(79,140,255,.09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(40,215,255,.06),
+      transparent 28%
+    ),
+    var(--bg);
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+  position:fixed;
+
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:270px;
+
+  padding:22px 16px;
+
+  overflow-y:auto;
+
+  z-index:1000;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16,23,34,.98),
+      rgba(8,13,21,.98)
+    );
+
+  border-right:1px solid var(--line);
+
+  transition:.25s ease;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:
+    6px 10px 24px;
+}
+
+.brand-logo{
+  width:42px;
+  height:42px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:13px;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--cyan)
+    );
+
+  font-size:12px;
+  font-weight:950;
+
+  box-shadow:
+    0 10px 30px
+    rgba(79,140,255,.25);
+}
+
+.brand-title{
+  font-size:17px;
+  font-weight:900;
+}
+
+.brand-subtitle{
+  margin-top:2px;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+.nav-title{
+  padding:
+    12px 11px 8px;
+
+  color:var(--muted2);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.2px;
+}
+
+.nav{
+  display:grid;
+  gap:5px;
+}
+
+.nav a{
+  min-height:43px;
+
+  display:flex;
+  align-items:center;
+  gap:11px;
+
+  padding:0 12px;
+
+  color:#aeb8c8;
+
+  border:1px solid transparent;
+
+  border-radius:12px;
+
+  transition:.2s ease;
+}
+
+.nav a:hover{
+  color:#fff;
+
+  background:#131c2a;
+
+  border-color:#26354b;
+
+  transform:translateX(2px);
+}
+
+.nav a.active{
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.18),
+      rgba(40,215,255,.06)
+    );
+
+  border-color:
+    rgba(79,140,255,.28);
+
+  box-shadow:
+    inset 3px 0 0 var(--blue);
+}
+
+.nav-icon{
+  width:22px;
+
+  text-align:center;
+
+  flex-shrink:0;
+}
+
+.nav-label{
+  font-size:13px;
+  font-weight:750;
+}
+
+.nav-count{
+  margin-left:auto;
+
+  min-width:20px;
+  height:20px;
+
+  display:grid;
+  place-items:center;
+
+  padding:0 5px;
+
+  border-radius:999px;
+
+  color:#fff;
+
+  background:var(--red);
+
+  font-size:8px;
+
+  font-weight:950;
+}
+
+.admin-card{
+  margin-top:22px;
+
+  padding:16px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.12),
+      rgba(155,124,255,.07)
+    );
+
+  border:1px solid #273752;
+}
+
+.admin-card .mini{
+  color:#6da5ff;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+}
+
+.admin-card strong{
+  display:block;
+
+  margin-top:7px;
+
+  font-size:14px;
+}
+
+.admin-card span{
+  display:block;
+
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+  min-height:100vh;
+
+  margin-left:270px;
+}
+
+.topbar{
+  min-height:76px;
+
+  position:sticky;
+
+  top:0;
+
+  z-index:500;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:20px;
+
+  padding:14px 30px;
+
+  background:
+    rgba(7,11,18,.78);
+
+  border-bottom:1px solid var(--line);
+
+  backdrop-filter:blur(18px);
+}
+
+.top-left{
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+}
+
+.mobile-menu{
+  display:none;
+
+  width:40px;
+  height:40px;
+
+  border:1px solid var(--line);
+
+  border-radius:11px;
+
+  background:var(--panel);
+
+  color:#fff;
+}
+
+.page-location{
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+.page-location strong{
+  color:#fff;
+
+  font-size:13px;
+}
+
+.top-actions{
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+}
+
+.business-selector{
+  min-width:190px;
+
+  height:40px;
+
+  padding:0 12px;
+
+  border:1px solid var(--line);
+
+  border-radius:10px;
+
+  outline:none;
+
+  background:var(--panel);
+
+  color:#e7edf7;
+
+  font-size:11px;
+
+  font-weight:750;
+}
+
+.icon-btn,
+.avatar-btn{
+  min-width:40px;
+  height:40px;
+
+  border:1px solid var(--line);
+
+  border-radius:11px;
+
+  background:var(--panel);
+
+  color:#dce4f0;
+}
+
+.icon-btn{
+  position:relative;
+}
+
+.icon-btn:hover,
+.avatar-btn:hover,
+.business-selector:hover{
+  background:var(--panel2);
+
+  border-color:#3a4c68;
+}
+
+.bell-count{
+  position:absolute;
+
+  right:-4px;
+  top:-5px;
+
+  min-width:18px;
+  height:18px;
+
+  padding:0 4px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:99px;
+
+  background:var(--red);
+
+  color:#fff;
+
+  font-size:8px;
+
+  font-weight:950;
+
+  border:2px solid var(--bg);
+}
+
+.avatar-btn{
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  padding:0 10px;
+
+  font-weight:800;
+}
+
+.avatar{
+  width:25px;
+  height:25px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--purple)
+    );
+
+  font-size:10px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+  width:100%;
+
+  max-width:1600px;
+
+  margin:auto;
+
+  padding:30px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+  position:relative;
+
+  margin-bottom:20px;
+
+  padding:27px;
+
+  overflow:hidden;
+
+  border-radius:23px;
+
+  border:1px solid #2b3b55;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.15),
+      rgba(40,215,255,.04),
+      rgba(16,23,34,.98)
+    );
+
+  box-shadow:var(--shadow);
+}
+
+.hero::before{
+  content:"";
+
+  position:absolute;
+
+  width:330px;
+  height:330px;
+
+  right:-130px;
+  top:-160px;
+
+  border-radius:50%;
+
+  background:
+    rgba(79,140,255,.08);
+}
+
+.hero-content{
+  position:relative;
+
+  z-index:2;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:25px;
+}
+
+.hero-left{
+  display:flex;
+
+  align-items:center;
+
+  gap:17px;
+}
+
+.hero-icon{
+  width:65px;
+  height:65px;
+
+  display:grid;
+  place-items:center;
+
+  flex-shrink:0;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--cyan)
+    );
+
+  font-size:28px;
+
+  box-shadow:
+    0 18px 40px
+    rgba(79,140,255,.24);
+}
+
+.hero h1{
+  font-size:31px;
+
+  font-weight:950;
+
+  letter-spacing:-1.1px;
+}
+
+.hero p{
+  max-width:700px;
+
+  margin-top:6px;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  line-height:1.55;
+}
+
+.hero-actions{
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+  min-height:41px;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:7px;
+
+  padding:0 14px;
+
+  border:1px solid var(--line);
+
+  border-radius:10px;
+
+  background:var(--panel2);
+
+  color:#e7edf6;
+
+  font-size:11px;
+
+  font-weight:850;
+
+  transition:.2s ease;
+}
+
+.btn:hover{
+  border-color:#40536f;
+
+  transform:translateY(-1px);
+}
+
+.btn-primary{
+  border-color:transparent;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      #3974e8
+    );
+
+  box-shadow:
+    0 10px 25px
+    rgba(79,140,255,.18);
+}
+
+.btn-success{
+  color:#63dfa5;
+}
+
+.btn-warning{
+  color:#f5cc70;
+}
+
+
+/* =========================================================
+   KPI
+========================================================= */
+
+.stats{
+  display:grid;
+
+  grid-template-columns:
+    repeat(6,minmax(0,1fr));
+
+  gap:12px;
+
+  margin-bottom:20px;
+}
+
+.stat{
+  min-width:0;
+
+  padding:17px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:1px solid var(--line);
+
+  transition:.2s ease;
+}
+
+.stat:hover{
+  border-color:#33465f;
+
+  transform:translateY(-2px);
+}
+
+.stat-top{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+}
+
+.stat-icon{
+  width:36px;
+  height:36px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:10px;
+
+  background:#172337;
+}
+
+.stat-arrow{
+  color:var(--green);
+
+  font-size:10px;
+
+  font-weight:900;
+}
+
+.stat-label{
+  margin-top:12px;
+
+  color:var(--muted);
+
+  font-size:10px;
+
+  font-weight:750;
+}
+
+.stat-value{
+  margin-top:4px;
+
+  font-size:21px;
+
+  font-weight:950;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+}
+
+.stat-note{
+  margin-top:4px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+
+/* =========================================================
+   SECTION GRID
+========================================================= */
+
+.grid-2{
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1.45fr)
+    minmax(350px,.85fr);
+
+  gap:16px;
+
+  margin-bottom:16px;
+}
+
+.panel{
+  min-width:0;
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:1px solid var(--line);
+
+  box-shadow:
+    0 15px 40px
+    rgba(0,0,0,.18);
+}
+
+.panel-header{
+  min-height:68px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  padding:15px 18px;
+
+  border-bottom:1px solid var(--line);
+}
+
+.panel-title{
+  font-size:13px;
+
+  font-weight:950;
+}
+
+.panel-subtitle{
+  margin-top:4px;
+
+  color:var(--muted);
+
+  font-size:9px;
+}
+
+.panel-link{
+  color:#79a9ff;
+
+  font-size:10px;
+
+  font-weight:850;
+}
+
+.panel-body{
+  padding:18px;
+}
+
+
+/* =========================================================
+   BUSINESS PERFORMANCE
+========================================================= */
+
+.business-list{
+  display:grid;
+
+  gap:10px;
+}
+
+.business-row{
+  display:grid;
+
+  grid-template-columns:
+    44px
+    minmax(130px,1fr)
+    minmax(130px,1.3fr)
+    100px
+    100px;
+
+  align-items:center;
+
+  gap:12px;
+
+  padding:12px;
+
+  border:1px solid #223047;
+
+  border-radius:13px;
+
+  background:
+    rgba(21,30,44,.55);
+
+  transition:.2s ease;
+}
+
+.business-row:hover{
+  border-color:#344864;
+
+  background:#172233;
+}
+
+.business-logo{
+  width:40px;
+  height:40px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.18),
+      rgba(40,215,255,.09)
+    );
+
+  border:1px solid #30415c;
+
+  font-weight:950;
+}
+
+.business-name{
+  font-size:11px;
+
+  font-weight:900;
+}
+
+.business-category{
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:8px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.6px;
+}
+
+.business-progress{
+  min-width:0;
+}
+
+.progress-top{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  margin-bottom:6px;
+
+  color:var(--muted);
+
+  font-size:8px;
+}
+
+.progress{
+  height:7px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:#0b121b;
+}
+
+.progress span{
+  display:block;
+
+  height:100%;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--blue),
+      var(--cyan)
+    );
+}
+
+.business-number{
+  text-align:right;
+
+  font-size:11px;
+
+  font-weight:900;
+}
+
+.business-small{
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:8px;
+}
+
+
+/* =========================================================
+   REVENUE CHART
+========================================================= */
+
+.chart{
+  height:255px;
+
+  display:flex;
+
+  align-items:flex-end;
+
+  gap:13px;
+
+  padding:
+    20px 8px 28px;
+
+  border-bottom:1px solid #243249;
+}
+
+.chart-column{
+  flex:1;
+
+  height:100%;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:flex-end;
+
+  gap:7px;
+
+  min-width:30px;
+}
+
+.chart-bars{
+  height:200px;
+
+  display:flex;
+
+  align-items:flex-end;
+
+  justify-content:center;
+
+  gap:5px;
+}
+
+.bar{
+  width:20px;
+
+  max-height:180px;
+
+  min-height:4px;
+
+  border-radius:
+    5px 5px 2px 2px;
+}
+
+.bar-revenue{
+  background:
+    linear-gradient(
+      180deg,
+      var(--blue),
+      rgba(79,140,255,.28)
+    );
+}
+
+.bar-expense{
+  background:
+    linear-gradient(
+      180deg,
+      var(--orange),
+      rgba(255,155,91,.22)
+    );
+}
+
+.chart-label{
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:8px;
+}
+
+.chart-legend{
+  display:flex;
+
+  align-items:center;
+
+  gap:15px;
+
+  padding-top:13px;
+
+  color:var(--muted);
+
+  font-size:9px;
+}
+
+.legend-item{
+  display:flex;
+
+  align-items:center;
+
+  gap:6px;
+}
+
+.legend-dot{
+  width:8px;
+  height:8px;
+
+  border-radius:3px;
+}
+
+.legend-revenue{
+  background:var(--blue);
+}
+
+.legend-expense{
+  background:var(--orange);
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:9px;
+}
+
+.quick{
+  min-height:82px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+  gap:7px;
+
+  padding:12px;
+
+  border:1px solid #243249;
+
+  border-radius:12px;
+
+  background:#111a28;
+
+  transition:.2s ease;
+}
+
+.quick:hover{
+  transform:translateY(-2px);
+
+  border-color:#40536f;
+
+  background:#172233;
+}
+
+.quick-icon{
+  font-size:18px;
+}
+
+.quick-title{
+  font-size:10px;
+
+  font-weight:900;
+}
+
+.quick-desc{
+  color:var(--muted);
+
+  font-size:8px;
+}
+
+
+/* =========================================================
+   RECENT TABLE
+========================================================= */
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+.table{
+  width:100%;
+
+  border-collapse:collapse;
+
+  min-width:620px;
+}
+
+.table th{
+  padding:
+    12px 15px;
+
+  color:var(--muted2);
+
+  background:#0c131d;
+
+  border-bottom:1px solid var(--line);
+
+  font-size:8px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+
+  text-align:left;
+}
+
+.table td{
+  padding:
+    13px 15px;
+
+  border-bottom:1px solid
+    rgba(37,50,71,.65);
+
+  font-size:10px;
+}
+
+.table tr:last-child td{
+  border-bottom:0;
+}
+
+.customer-cell{
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+}
+
+.customer-avatar{
+  width:30px;
+  height:30px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:9px;
+
+  background:#172337;
+
+  color:#8eb7ff;
+
+  font-size:9px;
+
+  font-weight:950;
+}
+
+.customer-name{
+  font-weight:850;
+}
+
+.customer-business{
+  margin-top:2px;
+
+  color:var(--muted);
+
+  font-size:8px;
+}
+
+.amount{
+  font-weight:900;
+}
+
+.status{
+  display:inline-flex;
+
+  align-items:center;
+
+  min-height:22px;
+
+  padding:0 8px;
+
+  border-radius:99px;
+
+  font-size:8px;
+
+  font-weight:900;
+}
+
+.status-paid,
+.status-completed{
+  color:#63dfa5;
+
+  background:
+    rgba(34,201,131,.09);
+
+  border:1px solid
+    rgba(34,201,131,.16);
+}
+
+.status-pending,
+.status-partial{
+  color:#f3cc6d;
+
+  background:
+    rgba(244,189,79,.09);
+
+  border:1px solid
+    rgba(244,189,79,.16);
+}
+
+.status-overdue{
+  color:#ff8c9b;
+
+  background:
+    rgba(255,102,120,.09);
+
+  border:1px solid
+    rgba(255,102,120,.16);
+}
+
+
+/* =========================================================
+   ACTIVITY
+========================================================= */
+
+.activity-list{
+  display:grid;
+}
+
+.activity{
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:11px;
+
+  padding:13px 0;
+
+  border-bottom:1px solid
+    rgba(37,50,71,.65);
+}
+
+.activity:last-child{
+  border-bottom:0;
+}
+
+.activity-icon{
+  width:34px;
+  height:34px;
+
+  display:grid;
+  place-items:center;
+
+  flex-shrink:0;
+
+  border-radius:10px;
+
+  background:#172337;
+
+  font-size:14px;
+}
+
+.activity-title{
+  font-size:10px;
+
+  font-weight:850;
+}
+
+.activity-meta{
+  margin-top:4px;
+
+  color:var(--muted);
+
+  font-size:8px;
+
+  line-height:1.5;
+}
+
+
+/* =========================================================
+   ALERT STRIP
+========================================================= */
+
+.alert-strip{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:10px;
+
+  margin-bottom:16px;
+}
+
+.alert-card{
+  padding:15px;
+
+  border-radius:14px;
+
+  border:1px solid var(--line);
+
+  background:var(--panel);
+}
+
+.alert-card-top{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+}
+
+.alert-card-icon{
+  width:35px;
+  height:35px;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:10px;
+
+  background:#172337;
+}
+
+.alert-card-value{
+  font-size:21px;
+
+  font-weight:950;
+}
+
+.alert-card-label{
+  margin-top:9px;
+
+  color:var(--muted);
+
+  font-size:9px;
+}
+
+.alert-card-link{
+  display:inline-block;
+
+  margin-top:7px;
+
+  color:#79a9ff;
+
+  font-size:8px;
+
+  font-weight:850;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+  padding:38px 15px;
+
+  text-align:center;
+
+  color:var(--muted);
+}
+
+.empty-icon{
+  width:48px;
+  height:48px;
+
+  display:grid;
+
+  place-items:center;
+
+  margin:0 auto 10px;
+
+  border-radius:14px;
+
+  background:#151f2f;
+
+  font-size:20px;
+}
+
+.empty h3{
+  color:#edf2f8;
+
+  font-size:13px;
+}
+
+.empty p{
+  margin-top:5px;
+
+  font-size:9px;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+  position:fixed;
+
+  right:24px;
+  bottom:24px;
+
+  z-index:5000;
+
+  min-width:280px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:14px 16px;
+
+  border-radius:13px;
+
+  background:#121c2b;
+
+  border:1px solid #30415b;
+
+  box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.4);
+
+  transform:translateY(25px);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:.25s ease;
+}
+
+.toast.show{
+  transform:translateY(0);
+
+  opacity:1;
+}
+
+.toast-dot{
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:var(--green);
+}
+
+.toast-text{
+  color:#e8eef7;
+
+  font-size:12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1250px){
+
+  .stats{
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+  }
+
+  .business-row{
+    grid-template-columns:
+      44px
+      minmax(120px,1fr)
+      minmax(110px,1fr)
+      90px;
+  }
+
+  .business-row .business-number:last-child{
+    display:none;
+  }
+
+}
+
+@media(max-width:1050px){
+
+  .grid-2{
+    grid-template-columns:1fr;
+  }
+
+  .alert-strip{
+    grid-template-columns:
+      repeat(3,1fr);
+  }
+
+}
+
+@media(max-width:850px){
+
+  .sidebar{
+    transform:translateX(-100%);
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .topbar{
+    padding:13px 18px;
+  }
+
+  .business-selector{
+    display:none;
+  }
+
+  .content{
+    padding:22px 18px;
+  }
+
+  .hero-content{
+    align-items:flex-start;
+
+    flex-direction:column;
+  }
+
+  .hero-actions{
+    width:100%;
+  }
+
+  .alert-strip{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:650px){
+
+  .stats{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .hero{
+    padding:21px;
+  }
+
+  .hero h1{
+    font-size:25px;
+  }
+
+  .hero-left{
+    align-items:flex-start;
+  }
+
+  .business-row{
+    grid-template-columns:
+      40px
+      1fr
+      80px;
+  }
+
+  .business-progress{
+    display:none;
+  }
+
+  .quick-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .top-actions .icon-btn:first-child{
+    display:none;
+  }
+
+}
+
+@media(max-width:450px){
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .quick-grid{
+    grid-template-columns:1fr;
+  }
+
+  .avatar-btn{
+    display:none;
+  }
+
+}
+
+@media print{
+
+  body{
+    background:#fff;
+
+    color:#111;
+  }
+
+  .sidebar,
+  .topbar,
+  .hero-actions,
+  .toast{
+    display:none!important;
+  }
+
+  .main{
+    margin:0;
+  }
+
+  .content{
+    padding:0;
+  }
+
+  .panel,
+  .stat,
+  .hero{
+    box-shadow:none;
+
+    border:1px solid #ddd;
+  }
+
+}
+</style>
 </head>
+
 
 <body>
 
-<div class="app">
 
-  <!-- =========================
-       SIDEBAR
-  ========================== -->
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
 
-  <aside class="sidebar" id="sidebar">
+<aside
+  class="sidebar"
+  id="sidebar"
+>
 
-    <div class="brand">
-      <div class="brand-logo">SNK</div>
+  <div class="brand">
 
-      <div class="brand-text">
-        <strong>SNK Business</strong>
-        <span>Business Command Center</span>
-      </div>
+    <div class="brand-logo">
+      SN
     </div>
 
-    <div class="section-label">Workspace</div>
+    <div>
 
-    <nav class="nav">
+      <div class="brand-title">
+        SNK Business
+      </div>
 
-      <button class="nav-item active">
-        <span class="nav-icon">⌂</span>
-        <span class="nav-text">Dashboard</span>
-      </button>
+      <div class="brand-subtitle">
+        Business Management
+      </div>
 
-      <button class="nav-item" onclick="openBusinesses()">
-        <span class="nav-icon">▦</span>
-        <span class="nav-text">My Businesses</span>
-        <span class="nav-badge">3</span>
-      </button>
+    </div>
 
-      <button class="nav-item">
-        <span class="nav-icon">◉</span>
-        <span class="nav-text">Customers</span>
-      </button>
+  </div>
 
-      <button class="nav-item">
-        <span class="nav-icon">৳</span>
-        <span class="nav-text">Payments</span>
-        <span class="nav-badge">8</span>
-      </button>
 
-      <button class="nav-item">
-        <span class="nav-icon">▣</span>
-        <span class="nav-text">Inventory</span>
-      </button>
+  <div class="nav-title">
+    Workspace
+  </div>
 
-      <button class="nav-item">
-        <span class="nav-icon">▤</span>
-        <span class="nav-text">Invoices</span>
-      </button>
 
-    </nav>
+  <nav class="nav">
 
-    <div class="section-label">Management</div>
+    <a
+      href="index.html"
+      class="active"
+    >
+      <span class="nav-icon">⌂</span>
+      <span class="nav-label">Dashboard</span>
+    </a>
 
-    <nav class="nav">
 
-      <button class="nav-item">
-        <span class="nav-icon">◫</span>
-        <span class="nav-text">Projects</span>
-      </button>
+    <a href="businesses.html">
+      <span class="nav-icon">▣</span>
+      <span class="nav-label">My Businesses</span>
+    </a>
 
-      <button class="nav-item">
-        <span class="nav-icon">⌁</span>
-        <span class="nav-text">Digital Marketing</span>
-      </button>
 
-      <button class="nav-item">
-        <span class="nav-icon">◴</span>
-        <span class="nav-text">Tasks</span>
-      </button>
+    <a href="customers.html">
+      <span class="nav-icon">♙</span>
+      <span class="nav-label">Customers</span>
+    </a>
 
-      <button class="nav-item">
-        <span class="nav-icon">◌</span>
-        <span class="nav-text">Reports</span>
-      </button>
 
-    </nav>
+    <a href="payments.html">
+      <span class="nav-icon">৳</span>
+      <span class="nav-label">Payments</span>
+    </a>
 
-    <div class="sidebar-bottom">
 
-      <div class="upgrade-box">
-        <strong>Premium Business Suite</strong>
+    <a href="inventory.html">
+      <span class="nav-icon">▤</span>
+      <span class="nav-label">Inventory</span>
+    </a>
 
-        <p>
-          Manage multiple businesses, customers,
-          payments and projects from one place.
+
+    <a href="invoices.html">
+      <span class="nav-icon">▥</span>
+      <span class="nav-label">Invoices</span>
+    </a>
+
+
+    <a href="expenses.html">
+      <span class="nav-icon">−</span>
+      <span class="nav-label">Expenses</span>
+    </a>
+
+
+    <a href="projects.html">
+      <span class="nav-icon">◫</span>
+      <span class="nav-label">Projects</span>
+    </a>
+
+
+    <a href="digital-marketing.html">
+      <span class="nav-icon">◉</span>
+      <span class="nav-label">Digital Marketing</span>
+    </a>
+
+
+    <a href="tasks.html">
+      <span class="nav-icon">✓</span>
+      <span class="nav-label">Tasks</span>
+    </a>
+
+
+    <a href="employees.html">
+      <span class="nav-icon">♟</span>
+      <span class="nav-label">Staff / Team</span>
+    </a>
+
+
+    <a href="reports.html">
+      <span class="nav-icon">▥</span>
+      <span class="nav-label">Reports</span>
+    </a>
+
+
+    <a href="notifications.html">
+
+      <span class="nav-icon">
+        🔔
+      </span>
+
+      <span class="nav-label">
+        Notifications
+      </span>
+
+      <span
+        class="nav-count"
+        id="notificationCount"
+      >
+        0
+      </span>
+
+    </a>
+
+  </nav>
+
+
+  <div class="admin-card">
+
+    <div class="mini">
+      Premium Business Suite
+    </div>
+
+    <strong>
+      Super Admin
+    </strong>
+
+    <span>
+      Owner • Full Access
+    </span>
+
+  </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="main">
+
+
+<header class="topbar">
+
+  <div class="top-left">
+
+    <button
+      class="mobile-menu"
+      id="mobileMenu"
+      type="button"
+    >
+      ☰
+    </button>
+
+
+    <div class="page-location">
+
+      SNK Business
+
+      <strong>
+        / Global Dashboard
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <div class="top-actions">
+
+    <select
+      id="businessSelector"
+      class="business-selector"
+    >
+      <option value="">
+        All Businesses
+      </option>
+    </select>
+
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="window.print()"
+      title="Print Dashboard"
+    >
+      🖨
+    </button>
+
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="refreshDashboard()"
+      title="Refresh Dashboard"
+    >
+      ↻
+    </button>
+
+
+    <button
+      class="icon-btn"
+      type="button"
+      onclick="openNotifications()"
+      title="Notifications"
+    >
+
+      🔔
+
+      <span
+        class="bell-count"
+        id="topNotificationCount"
+      >
+        0
+      </span>
+
+    </button>
+
+
+    <button
+      class="avatar-btn"
+      type="button"
+    >
+
+      <span class="avatar">
+        SA
+      </span>
+
+      Admin
+
+    </button>
+
+  </div>
+
+</header>
+
+
+<section class="content">
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="hero-left">
+
+      <div class="hero-icon">
+        ◈
+      </div>
+
+      <div>
+
+        <h1 id="heroTitle">
+          Business Command Center
+        </h1>
+
+        <p id="heroDescription">
+          Manage your businesses, customers,
+          payments, projects, expenses and team
+          from one premium workspace.
         </p>
 
-        <button class="upgrade-btn">
-          Business Settings
-        </button>
       </div>
 
-      <div class="admin-mini">
+    </div>
 
-        <div class="avatar">SU</div>
 
-        <div class="admin-info">
-          <strong>Super Admin</strong>
-          <span>Owner • Full Access</span>
+    <div class="hero-actions">
+
+      <button
+        class="btn btn-primary"
+        onclick="goNewCustomer()"
+      >
+        ＋ New Customer
+      </button>
+
+
+      <button
+        class="btn"
+        onclick="goPayment()"
+      >
+        ৳ Add Payment
+      </button>
+
+
+      <button
+        class="btn"
+        onclick="goInvoice()"
+      >
+        ▥ Create Invoice
+      </button>
+
+
+      <button
+        class="btn"
+        onclick="goProject()"
+      >
+        ◫ New Project
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     KPI STATS
+====================================================== -->
+
+<section class="stats">
+
+
+  <div class="stat">
+
+    <div class="stat-top">
+
+      <div class="stat-icon">
+        💰
+      </div>
+
+      <div
+        class="stat-arrow"
+        id="revenueTrend"
+      >
+        LIVE
+      </div>
+
+    </div>
+
+    <div class="stat-label">
+      Total Received
+    </div>
+
+    <div
+      class="stat-value"
+      id="receivedValue"
+    >
+      ৳0
+    </div>
+
+    <div class="stat-note">
+      Payment transactions
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-top">
+
+      <div class="stat-icon">
+        ⏳
+      </div>
+
+    </div>
+
+    <div class="stat-label">
+      Outstanding
+    </div>
+
+    <div
+      class="stat-value"
+      id="dueValue"
+    >
+      ৳0
+    </div>
+
+    <div class="stat-note">
+      Customer balances
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-top">
+
+      <div class="stat-icon">
+        💸
+      </div>
+
+    </div>
+
+    <div class="stat-label">
+      Expenses
+    </div>
+
+    <div
+      class="stat-value"
+      id="expenseValue"
+    >
+      ৳0
+    </div>
+
+    <div class="stat-note">
+      Recorded expenses
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-top">
+
+      <div class="stat-icon">
+        📈
+      </div>
+
+    </div>
+
+    <div class="stat-label">
+      Net Cash
+    </div>
+
+    <div
+      class="stat-value"
+      id="netValue"
+    >
+      ৳0
+    </div>
+
+    <div class="stat-note">
+      Received − expenses
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-top">
+
+      <div class="stat-icon">
+        👥
+      </div>
+
+    </div>
+
+    <div class="stat-label">
+      Customers
+    </div>
+
+    <div
+      class="stat-value"
+      id="customerValue"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      Linked customers
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-top">
+
+      <div class="stat-icon">
+        ◫
+      </div>
+
+    </div>
+
+    <div class="stat-label">
+      Active Projects
+    </div>
+
+    <div
+      class="stat-value"
+      id="projectValue"
+    >
+      0
+    </div>
+
+    <div class="stat-note">
+      Current projects
+    </div>
+
+  </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     ALERT SUMMARY
+====================================================== -->
+
+<section class="alert-strip">
+
+
+  <div class="alert-card">
+
+    <div class="alert-card-top">
+
+      <div class="alert-card-icon">
+        🔴
+      </div>
+
+      <div
+        class="alert-card-value"
+        id="criticalAlerts"
+      >
+        0
+      </div>
+
+    </div>
+
+    <div class="alert-card-label">
+      Critical Alerts
+    </div>
+
+    <a
+      href="notifications.html"
+      class="alert-card-link"
+    >
+      View alerts →
+    </a>
+
+  </div>
+
+
+  <div class="alert-card">
+
+    <div class="alert-card-top">
+
+      <div class="alert-card-icon">
+        🟡
+      </div>
+
+      <div
+        class="alert-card-value"
+        id="warningAlerts"
+      >
+        0
+      </div>
+
+    </div>
+
+    <div class="alert-card-label">
+      Payment / Work Warnings
+    </div>
+
+    <a
+      href="notifications.html"
+      class="alert-card-link"
+    >
+      Review warnings →
+    </a>
+
+  </div>
+
+
+  <div class="alert-card">
+
+    <div class="alert-card-top">
+
+      <div class="alert-card-icon">
+        🔔
+      </div>
+
+      <div
+        class="alert-card-value"
+        id="unreadAlerts"
+      >
+        0
+      </div>
+
+    </div>
+
+    <div class="alert-card-label">
+      Unread Notifications
+    </div>
+
+    <a
+      href="notifications.html"
+      class="alert-card-link"
+    >
+      Open notification center →
+    </a>
+
+  </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     BUSINESS PERFORMANCE + CHART
+====================================================== -->
+
+<section class="grid-2">
+
+
+  <div class="panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <div class="panel-title">
+          Business Performance
         </div>
 
-        <span style="color:#657184;">⋮</span>
+        <div class="panel-subtitle">
+          Live performance across your businesses
+        </div>
+
+      </div>
+
+
+      <a
+        href="businesses.html"
+        class="panel-link"
+      >
+        Manage Businesses →
+      </a>
+
+    </div>
+
+
+    <div
+      class="panel-body"
+      id="businessList"
+    ></div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <div class="panel-title">
+          Cash Flow Overview
+        </div>
+
+        <div class="panel-subtitle">
+          Last 6 months
+        </div>
+
+      </div>
+
+      <a
+        href="reports.html"
+        class="panel-link"
+      >
+        Full Reports →
+      </a>
+
+    </div>
+
+
+    <div class="panel-body">
+
+      <div
+        class="chart"
+        id="cashChart"
+      ></div>
+
+
+      <div class="chart-legend">
+
+        <div class="legend-item">
+
+          <span
+            class="legend-dot legend-revenue"
+          ></span>
+
+          Received
+
+        </div>
+
+
+        <div class="legend-item">
+
+          <span
+            class="legend-dot legend-expense"
+          ></span>
+
+          Expenses
+
+        </div>
 
       </div>
 
     </div>
 
-  </aside>
+  </div>
 
 
-  <!-- =========================
-       MAIN
-  ========================== -->
+</section>
 
-  <main class="main">
 
-    <header class="topbar">
+<!-- =====================================================
+     RECENT PAYMENTS + QUICK ACTIONS
+====================================================== -->
 
-      <div style="display:flex;align-items:center;gap:12px;">
+<section class="grid-2">
 
-        <button
-          class="mobile-menu"
-          onclick="toggleSidebar()"
-          aria-label="Open menu"
-        >
-          ☰
-        </button>
 
-        <div class="page-title">
-          <h1>Business Dashboard</h1>
-          <p>Manage your complete business ecosystem</p>
+  <div class="panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <div class="panel-title">
+          Recent Payments
         </div>
 
-      </div>
-
-      <div class="top-actions">
-
-        <select class="business-select" id="businessSelect">
-          <option value="all">All Businesses</option>
-          <option value="sarakat">Sarakat Agency</option>
-          <option value="website">Website Sale</option>
-          <option value="marketing">Digital Marketing</option>
-        </select>
-
-        <button class="icon-btn">
-          🔍
-        </button>
-
-        <button class="icon-btn">
-          🔔
-          <span class="notification-dot"></span>
-        </button>
-
-      </div>
-
-    </header>
-
-
-    <section class="content">
-
-      <!-- HERO -->
-
-      <div class="hero">
-
-        <div class="hero-content">
-
-          <span class="eyebrow">
-            <span class="live-dot"></span>
-            Business Center Online
-          </span>
-
-          <h2>
-            Welcome to<br>
-            SNK Business.
-          </h2>
-
-          <p>
-            One premium workspace for managing your businesses,
-            customers, websites, marketing projects, payments,
-            invoices and business operations.
-          </p>
-
-          <div class="hero-actions">
-
-            <button
-              class="primary-btn"
-              onclick="addBusiness()"
-            >
-              + Add New Business
-            </button>
-
-            <button
-              class="secondary-btn"
-              onclick="openBusinesses()"
-            >
-              View All Businesses
-            </button>
-
-          </div>
-
+        <div class="panel-subtitle">
+          Latest recorded transactions
         </div>
 
       </div>
 
 
-      <!-- STATISTICS -->
+      <a
+        href="payments.html"
+        class="panel-link"
+      >
+        View All →
+      </a>
 
-      <div class="section-head">
-        <h3>Business Overview</h3>
-        <span>September 2026</span>
-      </div>
+    </div>
 
-      <div class="stats">
 
-        <div class="stat-card">
+    <div class="table-wrap">
 
-          <div class="stat-top">
-            <span class="stat-label">Total Revenue</span>
-            <div class="stat-icon">৳</div>
-          </div>
+      <table class="table">
 
-          <div class="stat-value">৳4,20,000</div>
+        <thead>
 
-          <div class="stat-bottom">
-            <span class="positive">+18.4%</span>
-            <span class="stat-note">vs last month</span>
-          </div>
+          <tr>
 
+            <th>
+              Customer
+            </th>
+
+            <th>
+              Business
+            </th>
+
+            <th>
+              Amount
+            </th>
+
+            <th>
+              Method
+            </th>
+
+            <th>
+              Date
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody
+          id="paymentTable"
+        ></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <div class="panel-title">
+          Quick Actions
         </div>
 
-
-        <div class="stat-card">
-
-          <div class="stat-top">
-            <span class="stat-label">Received</span>
-            <div
-              class="stat-icon"
-              style="
-                background:rgba(40,209,124,.09);
-                color:#45d98b;
-              "
-            >
-              ✓
-            </div>
-          </div>
-
-          <div class="stat-value">৳3,15,000</div>
-
-          <div class="stat-bottom">
-            <span class="positive">+12.8%</span>
-            <span class="stat-note">collected</span>
-          </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-          <div class="stat-top">
-            <span class="stat-label">Pending Payment</span>
-            <div
-              class="stat-icon"
-              style="
-                background:rgba(255,189,74,.09);
-                color:#ffca67;
-              "
-            >
-              !
-            </div>
-          </div>
-
-          <div class="stat-value">৳1,05,000</div>
-
-          <div class="stat-bottom">
-            <span class="negative">8 pending</span>
-            <span class="stat-note">payments</span>
-          </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-          <div class="stat-top">
-            <span class="stat-label">Customers</span>
-            <div
-              class="stat-icon"
-              style="
-                background:rgba(155,114,255,.09);
-                color:#b99cff;
-              "
-            >
-              ◉
-            </div>
-          </div>
-
-          <div class="stat-value">51</div>
-
-          <div class="stat-bottom">
-            <span class="positive">+7</span>
-            <span class="stat-note">this month</span>
-          </div>
-
+        <div class="panel-subtitle">
+          Common business operations
         </div>
 
       </div>
 
-
-      <!-- BUSINESSES -->
-
-      <div class="section-head">
-
-        <h3>My Businesses</h3>
-
-        <button
-          onclick="openBusinesses()"
-          style="
-            background:none;
-            border:0;
-            color:#709eff;
-            font-size:10px;
-            cursor:pointer;
-          "
-        >
-          View all →
-        </button>
-
-      </div>
+    </div>
 
 
-      <div class="business-grid">
+    <div class="panel-body">
+
+      <div class="quick-grid">
 
 
-        <!-- SARAKAT -->
-
-        <article
-          class="business-card"
-          onclick="openBusiness('sarakat')"
+        <a
+          class="quick"
+          href="customers.html?new=1"
         >
 
-          <div class="business-head">
-
-            <div class="business-icon sarakat">
-              SA
-            </div>
-
-            <span class="business-status">
-              ● Active
-            </span>
-
+          <div class="quick-icon">
+            👤
           </div>
 
-          <h4>Sarakat Agency</h4>
-
-          <p class="business-desc">
-            Digital agency, advertising, design and
-            client project management.
-          </p>
-
-          <div class="business-metrics">
-
-            <div class="metric">
-              <span>Customers</span>
-              <strong>18</strong>
-            </div>
-
-            <div class="metric">
-              <span>Projects</span>
-              <strong>12</strong>
-            </div>
-
-            <div class="metric">
-              <span>Pending</span>
-              <strong>৳25K</strong>
-            </div>
-
+          <div class="quick-title">
+            New Customer
           </div>
 
-          <div class="business-footer">
-
-            <span class="business-revenue">
-              ৳85,000 revenue
-            </span>
-
-            <span class="open-link">
-              Open Business →
-            </span>
-
+          <div class="quick-desc">
+            Add a new customer
           </div>
 
-        </article>
+        </a>
 
 
-        <!-- WEBSITE SALE -->
-
-        <article
-          class="business-card"
-          onclick="openBusiness('website')"
+        <a
+          class="quick"
+          href="payments.html?new=1"
         >
 
-          <div class="business-head">
-
-            <div class="business-icon website">
-              🌐
-            </div>
-
-            <span class="business-status">
-              ● Active
-            </span>
-
+          <div class="quick-icon">
+            💰
           </div>
 
-          <h4>Website Sale</h4>
-
-          <p class="business-desc">
-            Ready-made websites, business sites,
-            domain, hosting and website delivery.
-          </p>
-
-          <div class="business-metrics">
-
-            <div class="metric">
-              <span>Websites</span>
-              <strong>14</strong>
-            </div>
-
-            <div class="metric">
-              <span>Sold</span>
-              <strong>8</strong>
-            </div>
-
-            <div class="metric">
-              <span>Pending</span>
-              <strong>৳30K</strong>
-            </div>
-
+          <div class="quick-title">
+            Add Payment
           </div>
 
-          <div class="business-footer">
-
-            <span class="business-revenue">
-              ৳1,25,000 revenue
-            </span>
-
-            <span class="open-link">
-              Open Business →
-            </span>
-
+          <div class="quick-desc">
+            Record received money
           </div>
 
-        </article>
+        </a>
 
 
-        <!-- DIGITAL MARKETING -->
-
-        <article
-          class="business-card"
-          onclick="openBusiness('marketing')"
+        <a
+          class="quick"
+          href="invoices.html?new=1"
         >
 
-          <div class="business-head">
-
-            <div class="business-icon marketing">
-              📢
-            </div>
-
-            <span class="business-status">
-              ● Active
-            </span>
-
+          <div class="quick-icon">
+            🧾
           </div>
 
-          <h4>Digital Marketing</h4>
-
-          <p class="business-desc">
-            Facebook Ads, Google Ads, campaigns,
-            content and client marketing management.
-          </p>
-
-          <div class="business-metrics">
-
-            <div class="metric">
-              <span>Clients</span>
-              <strong>11</strong>
-            </div>
-
-            <div class="metric">
-              <span>Campaigns</span>
-              <strong>17</strong>
-            </div>
-
-            <div class="metric">
-              <span>Pending</span>
-              <strong>৳35K</strong>
-            </div>
-
+          <div class="quick-title">
+            New Invoice
           </div>
 
-          <div class="business-footer">
-
-            <span class="business-revenue">
-              ৳1,80,000 revenue
-            </span>
-
-            <span class="open-link">
-              Open Business →
-            </span>
-
+          <div class="quick-desc">
+            Create customer invoice
           </div>
 
-        </article>
+        </a>
 
 
-        <!-- ADD BUSINESS -->
-
-        <article
-          class="business-card add-business"
-          onclick="addBusiness()"
+        <a
+          class="quick"
+          href="projects.html?new=1"
         >
 
-          <div class="add-inner">
-
-            <div class="add-circle">
-              +
-            </div>
-
-            <strong>Add New Business</strong>
-
-            <span>
-              Create another business workspace
-            </span>
-
+          <div class="quick-icon">
+            ◫
           </div>
 
-        </article>
+          <div class="quick-title">
+            New Project
+          </div>
+
+          <div class="quick-desc">
+            Start a project
+          </div>
+
+        </a>
+
+
+        <a
+          class="quick"
+          href="tasks.html?new=1"
+        >
+
+          <div class="quick-icon">
+            ✓
+          </div>
+
+          <div class="quick-title">
+            New Task
+          </div>
+
+          <div class="quick-desc">
+            Assign a task
+          </div>
+
+        </a>
+
+
+        <a
+          class="quick"
+          href="expenses.html?new=1"
+        >
+
+          <div class="quick-icon">
+            💸
+          </div>
+
+          <div class="quick-title">
+            Add Expense
+          </div>
+
+          <div class="quick-desc">
+            Record business cost
+          </div>
+
+        </a>
+
+
+        <a
+          class="quick"
+          href="employees.html?new=1"
+        >
+
+          <div class="quick-icon">
+            👨‍💼
+          </div>
+
+          <div class="quick-title">
+            Add Staff
+          </div>
+
+          <div class="quick-desc">
+            Add team member
+          </div>
+
+        </a>
+
+
+        <a
+          class="quick"
+          href="businesses.html?new=1"
+        >
+
+          <div class="quick-icon">
+            🏢
+          </div>
+
+          <div class="quick-title">
+            Add Business
+          </div>
+
+          <div class="quick-desc">
+            Create business workspace
+          </div>
+
+        </a>
+
+
+        <a
+          class="quick"
+          href="reports.html"
+        >
+
+          <div class="quick-icon">
+            📊
+          </div>
+
+          <div class="quick-title">
+            View Reports
+          </div>
+
+          <div class="quick-desc">
+            Analyze business data
+          </div>
+
+        </a>
 
       </div>
 
+    </div>
 
-      <!-- LOWER SECTION -->
+  </div>
 
-      <div class="section-head">
-        <h3>Recent Activity</h3>
-        <span>Latest business transactions</span>
-      </div>
 
+</section>
 
-      <div class="lower-grid">
 
+<!-- =====================================================
+     ACTIVITY + OVERVIEW
+====================================================== -->
 
-        <!-- PAYMENTS -->
+<section class="grid-2">
 
-        <div class="panel">
 
-          <div class="panel-head">
+  <div class="panel">
 
-            <h3>Recent Payments</h3>
+    <div class="panel-header">
 
-            <button onclick="openPayments()">
-              View all →
-            </button>
+      <div>
 
-          </div>
-
-          <div class="table-wrap">
-
-            <table>
-
-              <thead>
-
-                <tr>
-                  <th>Customer</th>
-                  <th>Business</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>Date</th>
-                </tr>
-
-              </thead>
-
-              <tbody>
-
-                <tr>
-
-                  <td>
-
-                    <div class="customer">
-
-                      <div class="customer-avatar">
-                        AR
-                      </div>
-
-                      <div class="customer-name">
-                        <strong>Arif Rahman</strong>
-                        <span>Website Client</span>
-                      </div>
-
-                    </div>
-
-                  </td>
-
-                  <td>Website Sale</td>
-
-                  <td>৳15,000</td>
-
-                  <td>
-                    <span class="payment-status paid">
-                      Paid
-                    </span>
-                  </td>
-
-                  <td>30 Sep</td>
-
-                </tr>
-
-
-                <tr>
-
-                  <td>
-
-                    <div class="customer">
-
-                      <div class="customer-avatar">
-                        NS
-                      </div>
-
-                      <div class="customer-name">
-                        <strong>Nusrat Studio</strong>
-                        <span>Marketing Client</span>
-                      </div>
-
-                    </div>
-
-                  </td>
-
-                  <td>Digital Marketing</td>
-
-                  <td>৳20,000</td>
-
-                  <td>
-                    <span class="payment-status partial">
-                      Partial
-                    </span>
-                  </td>
-
-                  <td>29 Sep</td>
-
-                </tr>
-
-
-                <tr>
-
-                  <td>
-
-                    <div class="customer">
-
-                      <div class="customer-avatar">
-                        SK
-                      </div>
-
-                      <div class="customer-name">
-                        <strong>SK Fashion</strong>
-                        <span>Agency Client</span>
-                      </div>
-
-                    </div>
-
-                  </td>
-
-                  <td>Sarakat Agency</td>
-
-                  <td>৳12,000</td>
-
-                  <td>
-                    <span class="payment-status pending">
-                      Pending
-                    </span>
-                  </td>
-
-                  <td>28 Sep</td>
-
-                </tr>
-
-
-                <tr>
-
-                  <td>
-
-                    <div class="customer">
-
-                      <div class="customer-avatar">
-                        RA
-                      </div>
-
-                      <div class="customer-name">
-                        <strong>Rasel Ahmed</strong>
-                        <span>Website Client</span>
-                      </div>
-
-                    </div>
-
-                  </td>
-
-                  <td>Website Sale</td>
-
-                  <td>৳8,500</td>
-
-                  <td>
-                    <span class="payment-status paid">
-                      Paid
-                    </span>
-                  </td>
-
-                  <td>27 Sep</td>
-
-                </tr>
-
-              </tbody>
-
-            </table>
-
-          </div>
-
+        <div class="panel-title">
+          Recent Activity
         </div>
 
-
-        <!-- QUICK ACTIONS -->
-
-        <div class="panel">
-
-          <div class="panel-head">
-
-            <h3>Quick Actions</h3>
-
-            <span style="color:#667386;font-size:9px;">
-              Shortcuts
-            </span>
-
-          </div>
-
-
-          <div class="quick-actions">
-
-            <button
-              class="quick-btn"
-              onclick="newCustomer()"
-            >
-              <div class="quick-icon">👤</div>
-              <strong>New Customer</strong>
-              <span>Add a customer to a business</span>
-            </button>
-
-
-            <button
-              class="quick-btn"
-              onclick="newPayment()"
-            >
-              <div class="quick-icon">৳</div>
-              <strong>Add Payment</strong>
-              <span>Record received payment</span>
-            </button>
-
-
-            <button
-              class="quick-btn"
-              onclick="newWebsite()"
-            >
-              <div class="quick-icon">🌐</div>
-              <strong>Add Website</strong>
-              <span>Add website to inventory</span>
-            </button>
-
-
-            <button
-              class="quick-btn"
-              onclick="newInvoice()"
-            >
-              <div class="quick-icon">🧾</div>
-              <strong>Create Invoice</strong>
-              <span>Generate customer invoice</span>
-            </button>
-
-
-            <button
-              class="quick-btn"
-              onclick="newProject()"
-            >
-              <div class="quick-icon">📋</div>
-              <strong>New Project</strong>
-              <span>Create business project</span>
-            </button>
-
-
-            <button
-              class="quick-btn"
-              onclick="openReports()"
-            >
-              <div class="quick-icon">📊</div>
-              <strong>View Reports</strong>
-              <span>Revenue and business reports</span>
-            </button>
-
-          </div>
-
+        <div class="panel-subtitle">
+          Latest business events
         </div>
 
       </div>
 
-    </section>
+    </div>
 
-  </main>
+
+    <div
+      class="panel-body"
+      id="activityList"
+    ></div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <div class="panel-title">
+          Business Overview
+        </div>
+
+        <div class="panel-subtitle">
+          Current operational numbers
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel-body">
+
+      <div
+        class="activity-list"
+        id="overviewList"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+</section>
+
+
+</section>
+
+</main>
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+  class="toast"
+  id="toast"
+>
+
+  <span class="toast-dot"></span>
+
+  <span
+    class="toast-text"
+    id="toastText"
+  >
+    Dashboard updated.
+  </span>
 
 </div>
 
 
 <script>
 
-  /* ==========================================
-     SNK BUSINESS — MAIN DASHBOARD JS
-  ========================================== */
+/* =========================================================
+   SNK BUSINESS
+   STEP 3.13 — GLOBAL DASHBOARD
+========================================================= */
 
-  function toggleSidebar(){
-    const sidebar = document.getElementById("sidebar");
-    sidebar.classList.toggle("open");
+const KEYS = {
+
+  businesses:
+    "snkBusinesses",
+
+  customers:
+    "snkBusinessCustomers",
+
+  payments:
+    "snkBusinessPayments",
+
+  invoices:
+    "snkBusinessInvoices",
+
+  expenses:
+    "snkBusinessExpenses",
+
+  projects:
+    "snkBusinessProjects",
+
+  tasks:
+    "snkBusinessTasks",
+
+  employees:
+    "snkBusinessEmployees",
+
+  notifications:
+    "snkBusinessNotifications"
+
+};
+
+
+let businesses = [];
+let customers = [];
+let payments = [];
+let invoices = [];
+let expenses = [];
+let projects = [];
+let tasks = [];
+let employees = [];
+let notifications = [];
+
+let selectedBusiness = "";
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function $(id){
+
+  return document.getElementById(id);
+
+}
+
+
+function readStorage(key){
+
+  try{
+
+    const value =
+      JSON.parse(
+        localStorage.getItem(key)
+      );
+
+    return Array.isArray(value)
+      ? value
+      : [];
+
+  }catch(error){
+
+    return [];
+
   }
 
-
-  function openBusiness(type){
-
-    const names = {
-      sarakat: "Sarakat Agency",
-      website: "Website Sale",
-      marketing: "Digital Marketing"
-    };
-
-    const name = names[type] || "Business";
-
-    /*
-      Later:
-      window.location.href =
-      "business.html?business=" + type;
-    */
-
-    alert(
-      name +
-      " workspace will open in the next step."
-    );
-  }
+}
 
 
-  function openBusinesses(){
+function money(value){
 
-    /*
-      Later:
-      window.location.href = "businesses.html";
-    */
-
-    alert(
-      "Businesses Management page will be connected next."
-    );
-  }
-
-
-  function addBusiness(){
-
-    alert(
-      "New Business form will be added in the next step."
-    );
-  }
-
-
-  function openPayments(){
-
-    alert(
-      "Payments page will be connected next."
-    );
-  }
-
-
-  function newCustomer(){
-
-    alert(
-      "New Customer form will be added next."
-    );
-  }
-
-
-  function newPayment(){
-
-    alert(
-      "Payment form will be added next."
-    );
-  }
-
-
-  function newWebsite(){
-
-    alert(
-      "Website Inventory will be added next."
-    );
-  }
-
-
-  function newInvoice(){
-
-    alert(
-      "Invoice system will be added next."
-    );
-  }
-
-
-  function newProject(){
-
-    alert(
-      "Project management will be added next."
-    );
-  }
-
-
-  function openReports(){
-
-    alert(
-      "Reports dashboard will be added next."
-    );
-  }
-
-
-  /* ==========================================
-     BUSINESS FILTER
-  ========================================== */
-
-  const businessSelect =
-    document.getElementById("businessSelect");
-
-  if(businessSelect){
-
-    businessSelect.addEventListener(
-      "change",
-      function(){
-
-        const value = this.value;
-
-        if(value === "all"){
-          return;
-        }
-
-        openBusiness(value);
-
-      }
+  return "৳" +
+    (
+      Number(value) || 0
+    ).toLocaleString(
+      "en-BD"
     );
 
+}
+
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
+
+}
+
+
+function formatDate(value){
+
+  if(!value){
+    return "—";
+  }
+
+  const d =
+    new Date(value);
+
+  if(
+    Number.isNaN(
+      d.getTime()
+    )
+  ){
+
+    return value;
+
+  }
+
+  return d.toLocaleDateString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+function initials(name){
+
+  const parts =
+    String(
+      name || "SN"
+    )
+    .trim()
+    .split(/\s+/)
+    .slice(0,2);
+
+
+  return parts
+    .map(
+      part =>
+        part
+          .charAt(0)
+          .toUpperCase()
+    )
+    .join("");
+
+}
+
+
+function businessFor(
+  item
+){
+
+  const bid =
+    item?.businessId;
+
+
+  if(bid){
+
+    return businesses.find(
+      business =>
+        business.id === bid
+    );
+
   }
 
 
-  /* ==========================================
-     NAV ACTIVE STATE
-  ========================================== */
+  if(
+    item?.businessSlug
+  ){
 
-  document
-    .querySelectorAll(".nav-item")
-    .forEach(item => {
+    return businesses.find(
+      business =>
+        business.slug ===
+        item.businessSlug
+    );
 
-      item.addEventListener(
+  }
+
+
+  if(
+    item?.businessName
+  ){
+
+    return businesses.find(
+      business =>
+        String(
+          business.name
+        ).toLowerCase() ===
+        String(
+          item.businessName
+        ).toLowerCase()
+    );
+
+  }
+
+
+  return null;
+
+}
+
+
+function businessName(
+  item
+){
+
+  return (
+    businessFor(item)?.name ||
+    item?.businessName ||
+    "Unknown Business"
+  );
+
+}
+
+
+function itemBusinessId(
+  item
+){
+
+  return (
+    businessFor(item)?.id ||
+    item?.businessId ||
+    ""
+  );
+
+}
+
+
+function matchesBusiness(
+  item
+){
+
+  if(
+    !selectedBusiness
+  ){
+
+    return true;
+
+  }
+
+
+  return (
+    itemBusinessId(item) ===
+    selectedBusiness
+  );
+
+}
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+function loadData(){
+
+  businesses =
+    readStorage(
+      KEYS.businesses
+    );
+
+  customers =
+    readStorage(
+      KEYS.customers
+    );
+
+  payments =
+    readStorage(
+      KEYS.payments
+    );
+
+  invoices =
+    readStorage(
+      KEYS.invoices
+    );
+
+  expenses =
+    readStorage(
+      KEYS.expenses
+    );
+
+  projects =
+    readStorage(
+      KEYS.projects
+    );
+
+  tasks =
+    readStorage(
+      KEYS.tasks
+    );
+
+  employees =
+    readStorage(
+      KEYS.employees
+    );
+
+  notifications =
+    readStorage(
+      KEYS.notifications
+    );
+
+}
+
+
+/* =========================================================
+   BUSINESS SELECTOR
+========================================================= */
+
+function renderBusinessSelector(){
+
+  const select =
+    $("businessSelector");
+
+
+  const current =
+    selectedBusiness;
+
+
+  select.innerHTML = `
+
+    <option value="">
+      All Businesses
+    </option>
+
+  `;
+
+
+  businesses.forEach(
+    business => {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+
+      option.value =
+        business.id;
+
+
+      option.textContent =
+        business.name;
+
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+
+  select.value =
+    current;
+
+}
+
+
+$("businessSelector")
+  .addEventListener(
+    "change",
+    event => {
+
+      selectedBusiness =
+        event.target.value;
+
+      renderDashboard();
+
+    }
+  );
+
+
+/* =========================================================
+   FILTER DATA
+========================================================= */
+
+function filtered(
+  collection
+){
+
+  return collection.filter(
+    matchesBusiness
+  );
+
+}
+
+
+/* =========================================================
+   CALCULATIONS
+========================================================= */
+
+function getReceived(){
+
+  return filtered(
+    payments
+  )
+  .reduce(
+    (
+      total,
+      item
+    ) =>
+      total +
+      Number(
+        item.amount || 0
+      ),
+    0
+  );
+
+}
+
+
+function getCustomerDue(){
+
+  return filtered(
+    customers
+  )
+  .reduce(
+    (
+      total,
+      customer
+    ) => {
+
+      const value =
+        Number(
+          customer.total ||
+          customer.totalValue ||
+          0
+        );
+
+      const paid =
+        Number(
+          customer.paid ||
+          0
+        );
+
+
+      return total +
+        Math.max(
+          value - paid,
+          0
+        );
+
+    },
+    0
+  );
+
+}
+
+
+function getExpenses(){
+
+  return filtered(
+    expenses
+  )
+  .reduce(
+    (
+      total,
+      item
+    ) =>
+      total +
+      Number(
+        item.amount || 0
+      ),
+    0
+  );
+
+}
+
+
+function getActiveProjects(){
+
+  return filtered(
+    projects
+  )
+  .filter(
+    project =>
+      project.status !==
+        "Completed" &&
+      project.status !==
+        "Cancelled"
+  ).length;
+
+}
+
+
+function getActiveTasks(){
+
+  return filtered(
+    tasks
+  )
+  .filter(
+    task =>
+      task.status !==
+        "Completed" &&
+      task.status !==
+        "Cancelled"
+  ).length;
+
+}
+
+
+function getActiveStaff(){
+
+  return filtered(
+    employees
+  )
+  .filter(
+    employee =>
+      String(
+        employee.status ||
+        ""
+      ).toLowerCase() ===
+      "active"
+  ).length;
+
+}
+
+
+function getInvoiceDue(){
+
+  return filtered(
+    invoices
+  )
+  .reduce(
+    (
+      total,
+      invoice
+    ) =>
+      total +
+      Math.max(
+        Number(
+          invoice.total || 0
+        ) -
+        Number(
+          invoice.paid || 0
+        ),
+        0
+      ),
+    0
+  );
+
+}
+
+
+/* =========================================================
+   KPI
+========================================================= */
+
+function renderKPIs(){
+
+  const received =
+    getReceived();
+
+  const due =
+    getCustomerDue();
+
+  const expensesTotal =
+    getExpenses();
+
+  const net =
+    received -
+    expensesTotal;
+
+  const customerCount =
+    filtered(
+      customers
+    ).length;
+
+  const activeProjects =
+    getActiveProjects();
+
+
+  $("receivedValue")
+    .textContent =
+      money(received);
+
+
+  $("dueValue")
+    .textContent =
+      money(due);
+
+
+  $("expenseValue")
+    .textContent =
+      money(expensesTotal);
+
+
+  $("netValue")
+    .textContent =
+      money(net);
+
+
+  $("customerValue")
+    .textContent =
+      customerCount;
+
+
+  $("projectValue")
+    .textContent =
+      activeProjects;
+
+
+  $("revenueTrend")
+    .textContent =
+      selectedBusiness
+        ? "BUSINESS"
+        : "ALL";
+
+
+  if(
+    selectedBusiness
+  ){
+
+    const business =
+      businesses.find(
+        item =>
+          item.id ===
+          selectedBusiness
+      );
+
+
+    $("heroTitle")
+      .textContent =
+        business
+          ? business.name
+          : "Business Command Center";
+
+
+    $("heroDescription")
+      .textContent =
+        business
+          ? (
+              business.description ||
+              "Business workspace overview."
+            )
+          : "Manage your business from one premium workspace.";
+
+  }else{
+
+    $("heroTitle")
+      .textContent =
+        "Business Command Center";
+
+
+    $("heroDescription")
+      .textContent =
+        "Manage your businesses, customers, payments, projects, expenses and team from one premium workspace.";
+
+  }
+
+}
+
+
+/* =========================================================
+   BUSINESS PERFORMANCE
+========================================================= */
+
+function businessMetrics(
+  business
+){
+
+  const bid =
+    business.id;
+
+
+  const businessCustomers =
+    customers.filter(
+      item =>
+        itemBusinessId(item) ===
+        bid
+    );
+
+
+  const businessPayments =
+    payments.filter(
+      item =>
+        itemBusinessId(item) ===
+        bid
+    );
+
+
+  const businessExpenses =
+    expenses.filter(
+      item =>
+        itemBusinessId(item) ===
+        bid
+    );
+
+
+  const businessProjects =
+    projects.filter(
+      item =>
+        itemBusinessId(item) ===
+        bid
+    );
+
+
+  const received =
+    businessPayments.reduce(
+      (
+        total,
+        item
+      ) =>
+        total +
+        Number(
+          item.amount || 0
+        ),
+      0
+    );
+
+
+  const expense =
+    businessExpenses.reduce(
+      (
+        total,
+        item
+      ) =>
+        total +
+        Number(
+          item.amount || 0
+        ),
+      0
+    );
+
+
+  const due =
+    businessCustomers.reduce(
+      (
+        total,
+        customer
+      ) => {
+
+        const totalValue =
+          Number(
+            customer.total ||
+            customer.totalValue ||
+            0
+          );
+
+        const paid =
+          Number(
+            customer.paid ||
+            0
+          );
+
+
+        return total +
+          Math.max(
+            totalValue -
+            paid,
+            0
+          );
+
+      },
+      0
+    );
+
+
+  const activeProjects =
+    businessProjects.filter(
+      project =>
+        project.status !==
+          "Completed" &&
+        project.status !==
+          "Cancelled"
+    ).length;
+
+
+  return {
+
+    customers:
+      businessCustomers.length,
+
+    received,
+
+    expense,
+
+    due,
+
+    activeProjects,
+
+    net:
+      received -
+      expense
+
+  };
+
+}
+
+
+function renderBusinesses(){
+
+  const container =
+    $("businessList");
+
+
+  let list =
+    businesses;
+
+
+  if(
+    selectedBusiness
+  ){
+
+    list =
+      businesses.filter(
+        business =>
+          business.id ===
+          selectedBusiness
+      );
+
+  }
+
+
+  if(!list.length){
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          🏢
+        </div>
+
+        <h3>
+          No business found
+        </h3>
+
+        <p>
+          Add a business to start
+          managing your workspace.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    `<div class="business-list"></div>`;
+
+
+  const listContainer =
+    container.querySelector(
+      ".business-list"
+    );
+
+
+  list.forEach(
+    business => {
+
+      const metrics =
+        businessMetrics(
+          business
+        );
+
+
+      const target =
+        Number(
+          business.target || 0
+        );
+
+
+      const progress =
+        target > 0
+          ? Math.min(
+              (
+                metrics.received /
+                target
+              ) * 100,
+              100
+            )
+          : 0;
+
+
+      const row =
+        document.createElement(
+          "div"
+        );
+
+
+      row.className =
+        "business-row";
+
+
+      row.innerHTML = `
+
+        <div class="business-logo">
+          ${initials(
+            business.name
+          )}
+        </div>
+
+
+        <div>
+
+          <div class="business-name">
+            ${escapeHTML(
+              business.name
+            )}
+          </div>
+
+          <div class="business-category">
+            ${escapeHTML(
+              business.category ||
+              "Business"
+            )}
+          </div>
+
+        </div>
+
+
+        <div class="business-progress">
+
+          <div class="progress-top">
+
+            <span>
+              Revenue Progress
+            </span>
+
+            <span>
+              ${Math.round(
+                progress
+              )}%
+            </span>
+
+          </div>
+
+          <div class="progress">
+
+            <span
+              style="
+                width:${progress}%
+              "
+            ></span>
+
+          </div>
+
+        </div>
+
+
+        <div class="business-number">
+
+          ${money(
+            metrics.received
+          )}
+
+          <div class="business-small">
+            received
+          </div>
+
+        </div>
+
+
+        <div class="business-number">
+
+          ${metrics.customers}
+
+          <div class="business-small">
+            customers
+          </div>
+
+        </div>
+
+      `;
+
+
+      row.addEventListener(
         "click",
-        function(){
+        () => {
 
-          document
-            .querySelectorAll(".nav-item")
-            .forEach(nav => {
-              nav.classList.remove("active");
-            });
-
-          this.classList.add("active");
+          window.location.href =
+            "business.html?business=" +
+            encodeURIComponent(
+              business.id
+            );
 
         }
       );
 
+
+      row.style.cursor =
+        "pointer";
+
+
+      listContainer.appendChild(
+        row
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   MONTHLY CHART
+========================================================= */
+
+function monthKey(
+  date
+){
+
+  const d =
+    new Date(date);
+
+
+  if(
+    Number.isNaN(
+      d.getTime()
+    )
+  ){
+
+    return "";
+
+  }
+
+
+  return (
+    d.getFullYear() +
+    "-" +
+    String(
+      d.getMonth() + 1
+    ).padStart(2,"0")
+  );
+
+}
+
+
+function monthLabel(
+  date
+){
+
+  return new Date(
+    date
+  ).toLocaleDateString(
+    "en-US",
+    {
+      month:"short"
+    }
+  );
+
+}
+
+
+function lastSixMonths(){
+
+  const result =
+    [];
+
+  const now =
+    new Date();
+
+
+  for(
+    let i = 5;
+    i >= 0;
+    i--
+  ){
+
+    const date =
+      new Date(
+        now.getFullYear(),
+        now.getMonth() - i,
+        1
+      );
+
+
+    result.push({
+      key:
+        monthKey(date),
+
+      label:
+        monthLabel(date),
+
+      revenue:0,
+
+      expense:0
     });
 
+  }
 
-  /* ==========================================
-     MOBILE SIDEBAR CLOSE
-  ========================================== */
 
-  document.addEventListener(
-    "click",
-    function(event){
+  return result;
 
-      const sidebar =
-        document.getElementById("sidebar");
+}
 
-      const menu =
-        document.querySelector(".mobile-menu");
+
+function renderChart(){
+
+  const months =
+    lastSixMonths();
+
+
+  const map =
+    new Map(
+      months.map(
+        item =>
+          [
+            item.key,
+            item
+          ]
+      )
+    );
+
+
+  filtered(
+    payments
+  ).forEach(
+    payment => {
+
+      const key =
+        monthKey(
+          payment.date ||
+          payment.createdAt
+        );
+
 
       if(
-        window.innerWidth <= 850 &&
-        sidebar.classList.contains("open") &&
-        !sidebar.contains(event.target) &&
-        !menu.contains(event.target)
+        map.has(key)
       ){
 
-        sidebar.classList.remove("open");
+        map.get(key)
+          .revenue +=
+            Number(
+              payment.amount || 0
+            );
 
       }
 
     }
   );
 
+
+  filtered(
+    expenses
+  ).forEach(
+    expense => {
+
+      const key =
+        monthKey(
+          expense.date ||
+          expense.createdAt
+        );
+
+
+      if(
+        map.has(key)
+      ){
+
+        map.get(key)
+          .expense +=
+            Number(
+              expense.amount || 0
+            );
+
+      }
+
+    }
+  );
+
+
+  const max =
+    Math.max(
+      1,
+      ...months.flatMap(
+        item => [
+          item.revenue,
+          item.expense
+        ]
+      )
+    );
+
+
+  const chart =
+    $("cashChart");
+
+
+  chart.innerHTML =
+    "";
+
+
+  months.forEach(
+    item => {
+
+      const column =
+        document.createElement(
+          "div"
+        );
+
+
+      column.className =
+        "chart-column";
+
+
+      const revenueHeight =
+        (
+          item.revenue /
+          max
+        ) *
+        180;
+
+
+      const expenseHeight =
+        (
+          item.expense /
+          max
+        ) *
+        180;
+
+
+      column.innerHTML = `
+
+        <div class="chart-bars">
+
+          <div
+            class="bar bar-revenue"
+            style="
+              height:${Math.max(
+                revenueHeight,
+                item.revenue
+                  ? 5
+                  : 3
+              )}px
+            "
+            title="Received: ${money(
+              item.revenue
+            )}"
+          ></div>
+
+
+          <div
+            class="bar bar-expense"
+            style="
+              height:${Math.max(
+                expenseHeight,
+                item.expense
+                  ? 5
+                  : 3
+              )}px
+            "
+            title="Expenses: ${money(
+              item.expense
+            )}"
+          ></div>
+
+        </div>
+
+
+        <div class="chart-label">
+          ${item.label}
+        </div>
+
+      `;
+
+
+      chart.appendChild(
+        column
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   RECENT PAYMENTS
+========================================================= */
+
+function renderPayments(){
+
+  const tbody =
+    $("paymentTable");
+
+
+  let list =
+    filtered(
+      payments
+    )
+    .slice()
+    .sort(
+      (
+        a,
+        b
+      ) =>
+        String(
+          b.date ||
+          b.createdAt ||
+          ""
+        ).localeCompare(
+          String(
+            a.date ||
+            a.createdAt ||
+            ""
+          )
+        )
+    )
+    .slice(
+      0,
+      7
+    );
+
+
+  if(!list.length){
+
+    tbody.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="5"
+          style="
+            text-align:center;
+            color:var(--muted);
+            padding:35px;
+          "
+        >
+          No payment records yet.
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  tbody.innerHTML =
+    "";
+
+
+  list.forEach(
+    payment => {
+
+      const row =
+        document.createElement(
+          "tr"
+        );
+
+
+      row.innerHTML = `
+
+        <td>
+
+          <div class="customer-cell">
+
+            <div class="customer-avatar">
+              ${initials(
+                payment.customerName
+              )}
+            </div>
+
+            <div>
+
+              <div class="customer-name">
+                ${escapeHTML(
+                  payment.customerName ||
+                  "Customer"
+                )}
+              </div>
+
+              <div class="customer-business">
+                ${escapeHTML(
+                  payment.id ||
+                  ""
+                )}
+              </div>
+
+            </div>
+
+          </div>
+
+        </td>
+
+
+        <td>
+          ${escapeHTML(
+            businessName(
+              payment
+            )
+          )}
+        </td>
+
+
+        <td>
+
+          <span class="amount">
+            ${money(
+              payment.amount
+            )}
+          </span>
+
+        </td>
+
+
+        <td>
+          ${escapeHTML(
+            payment.method ||
+            "—"
+          )}
+        </td>
+
+
+        <td>
+          ${formatDate(
+            payment.date ||
+            payment.createdAt
+          )}
+        </td>
+
+      `;
+
+
+      tbody.appendChild(
+        row
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   NOTIFICATION SUMMARY
+========================================================= */
+
+function renderNotificationSummary(){
+
+  const relevant =
+    notifications.filter(
+      matchesBusiness
+    );
+
+
+  const critical =
+    relevant.filter(
+      item =>
+        item.type ===
+        "danger"
+    ).length;
+
+
+  const warning =
+    relevant.filter(
+      item =>
+        item.type ===
+        "warning"
+    ).length;
+
+
+  const unread =
+    relevant.filter(
+      item =>
+        !item.read
+    ).length;
+
+
+  $("criticalAlerts")
+    .textContent =
+      critical;
+
+
+  $("warningAlerts")
+    .textContent =
+      warning;
+
+
+  $("unreadAlerts")
+    .textContent =
+      unread;
+
+
+  $("notificationCount")
+    .textContent =
+      unread;
+
+
+  $("topNotificationCount")
+    .textContent =
+      unread;
+
+
+  $("notificationCount")
+    .style.display =
+      unread
+        ? "grid"
+        : "none";
+
+
+  $("topNotificationCount")
+    .style.display =
+      unread
+        ? "grid"
+        : "none";
+
+}
+
+
+/* =========================================================
+   RECENT ACTIVITY
+========================================================= */
+
+function renderActivity(){
+
+  const container =
+    $("activityList");
+
+
+  const activities =
+    [];
+
+
+  filtered(
+    payments
+  ).forEach(
+    payment => {
+
+      activities.push({
+
+        type:"payment",
+
+        icon:"💰",
+
+        title:
+          `Payment received from ${payment.customerName || "Customer"}`,
+
+        meta:
+          `${money(payment.amount)} • ${businessName(payment)} • ${formatDate(payment.date || payment.createdAt)}`,
+
+        date:
+          payment.date ||
+          payment.createdAt
+
+      });
+
+    }
+  );
+
+
+  filtered(
+    customers
+  ).forEach(
+    customer => {
+
+      activities.push({
+
+        type:"customer",
+
+        icon:"👤",
+
+        title:
+          `Customer ${customer.name || ""} added`,
+
+        meta:
+          `${businessName(customer)} • ${formatDate(customer.createdAt)}`,
+
+        date:
+          customer.createdAt
+
+      });
+
+    }
+  );
+
+
+  filtered(
+    projects
+  ).forEach(
+    project => {
+
+      activities.push({
+
+        type:"project",
+
+        icon:"◫",
+
+        title:
+          `Project ${project.name || ""}`,
+
+        meta:
+          `${businessName(project)} • ${project.status || "Active"}`,
+
+        date:
+          project.updatedAt ||
+          project.createdAt
+
+      });
+
+    }
+  );
+
+
+  filtered(
+    expenses
+  ).forEach(
+    expense => {
+
+      activities.push({
+
+        type:"expense",
+
+        icon:"💸",
+
+        title:
+          `Expense recorded: ${expense.title || expense.category || "Expense"}`,
+
+        meta:
+          `${money(expense.amount)} • ${businessName(expense)}`,
+
+        date:
+          expense.date ||
+          expense.createdAt
+
+      });
+
+    }
+  );
+
+
+  activities.sort(
+    (
+      a,
+      b
+    ) =>
+      String(
+        b.date || ""
+      ).localeCompare(
+        String(
+          a.date || ""
+        )
+      )
+  );
+
+
+  const list =
+    activities.slice(
+      0,
+      7
+    );
+
+
+  if(!list.length){
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          ◷
+        </div>
+
+        <h3>
+          No recent activity
+        </h3>
+
+        <p>
+          Business activity will appear here.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    `<div class="activity-list"></div>`;
+
+
+  const listContainer =
+    container.querySelector(
+      ".activity-list"
+    );
+
+
+  list.forEach(
+    activity => {
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+
+      item.className =
+        "activity";
+
+
+      item.innerHTML = `
+
+        <div class="activity-icon">
+          ${activity.icon}
+        </div>
+
+        <div>
+
+          <div class="activity-title">
+            ${escapeHTML(
+              activity.title
+            )}
+          </div>
+
+          <div class="activity-meta">
+            ${escapeHTML(
+              activity.meta
+            )}
+          </div>
+
+        </div>
+
+      `;
+
+
+      listContainer.appendChild(
+        item
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   OVERVIEW
+========================================================= */
+
+function renderOverview(){
+
+  const container =
+    $("overviewList");
+
+
+  const rows = [
+
+    {
+      icon:"👥",
+      title:"Customers",
+      value:
+        filtered(customers).length
+    },
+
+    {
+      icon:"💰",
+      title:"Payment Transactions",
+      value:
+        filtered(payments).length
+    },
+
+    {
+      icon:"🧾",
+      title:"Invoices",
+      value:
+        filtered(invoices).length
+    },
+
+    {
+      icon:"💸",
+      title:"Expense Transactions",
+      value:
+        filtered(expenses).length
+    },
+
+    {
+      icon:"◫",
+      title:"Projects",
+      value:
+        filtered(projects).length
+    },
+
+    {
+      icon:"✓",
+      title:"Active Tasks",
+      value:
+        getActiveTasks()
+    },
+
+    {
+      icon:"👨‍💼",
+      title:"Active Staff",
+      value:
+        getActiveStaff()
+    },
+
+    {
+      icon:"⏳",
+      title:"Invoice Outstanding",
+      value:
+        money(
+          getInvoiceDue()
+        )
+    }
+
+  ];
+
+
+  container.innerHTML =
+    "";
+
+
+  rows.forEach(
+    row => {
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+
+      item.className =
+        "activity";
+
+
+      item.innerHTML = `
+
+        <div class="activity-icon">
+          ${row.icon}
+        </div>
+
+        <div>
+
+          <div class="activity-title">
+            ${row.title}
+          </div>
+
+          <div class="activity-meta">
+            ${escapeHTML(
+              String(
+                row.value
+              )
+            )}
+          </div>
+
+        </div>
+
+      `;
+
+
+      container.appendChild(
+        item
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   QUICK NAVIGATION
+========================================================= */
+
+function queryBusiness(
+  url
+){
+
+  if(
+    !selectedBusiness
+  ){
+
+    return url;
+
+  }
+
+
+  const separator =
+    url.includes("?")
+      ? "&"
+      : "?";
+
+
+  return (
+    url +
+    separator +
+    "business=" +
+    encodeURIComponent(
+      selectedBusiness
+    )
+  );
+
+}
+
+
+function goNewCustomer(){
+
+  window.location.href =
+    queryBusiness(
+      "customers.html?new=1"
+    );
+
+}
+
+
+function goPayment(){
+
+  window.location.href =
+    queryBusiness(
+      "payments.html?new=1"
+    );
+
+}
+
+
+function goInvoice(){
+
+  window.location.href =
+    queryBusiness(
+      "invoices.html?new=1"
+    );
+
+}
+
+
+function goProject(){
+
+  window.location.href =
+    queryBusiness(
+      "projects.html?new=1"
+    );
+
+}
+
+
+function openNotifications(){
+
+  window.location.href =
+    queryBusiness(
+      "notifications.html"
+    );
+
+}
+
+
+/* =========================================================
+   DASHBOARD RENDER
+========================================================= */
+
+function renderDashboard(){
+
+  renderKPIs();
+
+  renderNotificationSummary();
+
+  renderBusinesses();
+
+  renderChart();
+
+  renderPayments();
+
+  renderActivity();
+
+  renderOverview();
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshDashboard(){
+
+  loadData();
+
+  renderBusinessSelector();
+
+  renderDashboard();
+
+  showToast(
+    "Dashboard refreshed from live business data."
+  );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function showToast(
+  message
+){
+
+  const toast =
+    $("toast");
+
+
+  $("toastText")
+    .textContent =
+      message;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2800
+    );
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+$("mobileMenu")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("sidebar")
+        .classList.toggle(
+          "open"
+        );
+
+    }
+  );
+
+
+document.addEventListener(
+  "click",
+  event => {
+
+    if(
+      window.innerWidth <= 850 &&
+      $("sidebar")
+        .classList
+        .contains("open") &&
+      !$("sidebar")
+        .contains(
+          event.target
+        ) &&
+      !$("mobileMenu")
+        .contains(
+          event.target
+        )
+    ){
+
+      $("sidebar")
+        .classList.remove(
+          "open"
+        );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   AUTO REFRESH WHEN TAB RETURNS
+========================================================= */
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+    if(
+      !document.hidden
+    ){
+
+      loadData();
+
+      renderBusinessSelector();
+
+      renderDashboard();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+function init(){
+
+  loadData();
+
+  renderBusinessSelector();
+
+  renderDashboard();
+
+}
+
+
+init();
+
 </script>
 
 </body>
 </html>
-```
