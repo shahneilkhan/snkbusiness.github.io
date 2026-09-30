@@ -1,0 +1,4816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reports | SNK Business</title>
+
+<meta
+  name="description"
+  content="Premium Business Reports & Analytics | SNK Business"
+/>
+
+<style>
+:root{
+  --bg:#070b12;
+  --bg2:#0b1019;
+  --panel:#101722;
+  --panel2:#151e2c;
+  --panel3:#1a2535;
+  --line:#253247;
+  --line2:#304057;
+
+  --text:#f5f7fb;
+  --muted:#8e9aae;
+  --muted2:#647086;
+
+  --blue:#4f8cff;
+  --blue2:#6da5ff;
+  --cyan:#28d7ff;
+  --green:#22c983;
+  --yellow:#f4bd4f;
+  --red:#ff6678;
+  --purple:#9b7cff;
+  --orange:#ff9b5b;
+
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+  --radius:18px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(79,140,255,.09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(40,215,255,.06),
+      transparent 28%
+    ),
+    var(--bg);
+
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+
+  width:270px;
+
+  padding:22px 16px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16,23,34,.98),
+      rgba(9,14,22,.98)
+    );
+
+  border-right:1px solid var(--line);
+
+  z-index:1000;
+
+  overflow-y:auto;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:6px 10px 24px;
+}
+
+.brand-logo{
+  width:42px;
+  height:42px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--cyan)
+    );
+
+  color:#fff;
+
+  font-weight:900;
+
+  box-shadow:
+    0 10px 30px rgba(79,140,255,.28);
+}
+
+.brand-title{
+  font-size:17px;
+  font-weight:900;
+  letter-spacing:-.4px;
+}
+
+.brand-subtitle{
+  margin-top:2px;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+.nav-title{
+  padding:12px 11px 8px;
+
+  color:var(--muted2);
+
+  font-size:10px;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.2px;
+
+  font-weight:800;
+}
+
+.nav{
+  display:grid;
+  gap:5px;
+}
+
+.nav a{
+  display:flex;
+  align-items:center;
+  gap:11px;
+
+  min-height:43px;
+
+  padding:0 12px;
+
+  color:#aeb8c8;
+
+  border:1px solid transparent;
+
+  border-radius:12px;
+
+  transition:.2s ease;
+}
+
+.nav a:hover{
+  color:#fff;
+
+  background:#131c2a;
+
+  border-color:#26354b;
+
+  transform:translateX(2px);
+}
+
+.nav a.active{
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.18),
+      rgba(40,215,255,.07)
+    );
+
+  border-color:
+    rgba(79,140,255,.28);
+
+  box-shadow:
+    inset 3px 0 0 var(--blue);
+}
+
+.nav-icon{
+  width:22px;
+  text-align:center;
+
+  font-size:16px;
+}
+
+.nav-label{
+  font-size:13px;
+  font-weight:700;
+}
+
+.admin-card{
+  margin-top:22px;
+
+  padding:16px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79,140,255,.12),
+      rgba(155,124,255,.08)
+    );
+
+  border:1px solid #273752;
+}
+
+.admin-card .mini{
+  color:var(--blue2);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+}
+
+.admin-card strong{
+  display:block;
+
+  margin-top:7px;
+
+  font-size:14px;
+}
+
+.admin-card span{
+  display:block;
+
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+  margin-left:270px;
+
+  min-height:100vh;
+}
+
+.topbar{
+  height:76px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:20px;
+
+  padding:0 30px;
+
+  background:
+    rgba(7,11,18,.72);
+
+  border-bottom:1px solid var(--line);
+
+  backdrop-filter:blur(18px);
+
+  position:sticky;
+  top:0;
+
+  z-index:500;
+}
+
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  min-width:0;
+}
+
+.mobile-menu{
+  display:none;
+
+  width:40px;
+  height:40px;
+
+  border:1px solid var(--line);
+
+  border-radius:11px;
+
+  background:var(--panel);
+
+  color:white;
+}
+
+.page-location{
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+.page-location strong{
+  color:#fff;
+
+  font-size:13px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.icon-btn,
+.avatar-btn{
+  border:1px solid var(--line);
+
+  background:var(--panel);
+
+  color:#dce4f0;
+
+  border-radius:11px;
+
+  min-width:40px;
+  height:40px;
+
+  padding:0 12px;
+
+  transition:.2s ease;
+}
+
+.icon-btn:hover,
+.avatar-btn:hover{
+  border-color:#3a4c68;
+  background:var(--panel2);
+}
+
+.avatar-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  font-weight:800;
+}
+
+.avatar{
+  width:25px;
+  height:25px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--purple)
+    );
+
+  font-size:11px;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+  padding:30px;
+
+  max-width:1800px;
+
+  margin:auto;
+}
+
+.hero{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+
+  gap:25px;
+
+  margin-bottom:22px;
+}
+
+.hero-copy h1{
+  font-size:34px;
+
+  letter-spacing:-1.2px;
+
+  line-height:1.1;
+}
+
+.hero-copy p{
+  margin-top:9px;
+
+  color:var(--muted);
+
+  font-size:14px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+  min-height:42px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:8px;
+
+  padding:0 15px;
+
+  border-radius:11px;
+
+  border:1px solid var(--line);
+
+  background:var(--panel2);
+
+  color:#e9eef7;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  transition:.2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+
+  border-color:#3c506e;
+}
+
+.btn-primary{
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      #3974e8
+    );
+
+  border-color:transparent;
+
+  box-shadow:
+    0 10px 25px rgba(79,140,255,.2);
+}
+
+.btn-ghost{
+  background:transparent;
+}
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.filter-panel{
+  padding:15px;
+
+  margin-bottom:20px;
+
+  border:1px solid var(--line);
+
+  border-radius:17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.15);
+}
+
+.filters{
+  display:flex;
+  align-items:center;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+}
+
+.filter-group{
+  display:flex;
+  flex-direction:column;
+
+  gap:5px;
+
+  min-width:160px;
+}
+
+.filter-group label{
+  color:var(--muted2);
+
+  font-size:9px;
+
+  font-weight:800;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+}
+
+.filter{
+  height:41px;
+
+  padding:0 12px;
+
+  border:1px solid var(--line);
+
+  border-radius:10px;
+
+  background:#0b121c;
+
+  color:#dce4f0;
+
+  outline:none;
+}
+
+.filter:focus{
+  border-color:
+    rgba(79,140,255,.65);
+}
+
+.filter-actions{
+  margin-left:auto;
+
+  display:flex;
+  gap:8px;
+
+  align-self:flex-end;
+}
+
+/* =========================================================
+   KPI GRID
+========================================================= */
+
+.kpi-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(6,minmax(0,1fr));
+
+  gap:12px;
+
+  margin-bottom:20px;
+}
+
+.kpi{
+  position:relative;
+
+  padding:17px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:1px solid var(--line);
+
+  overflow:hidden;
+}
+
+.kpi::after{
+  content:"";
+
+  position:absolute;
+
+  width:90px;
+  height:90px;
+
+  right:-45px;
+  top:-45px;
+
+  border-radius:50%;
+
+  background:
+    rgba(79,140,255,.07);
+}
+
+.kpi-icon{
+  width:34px;
+  height:34px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:10px;
+
+  background:#172337;
+
+  margin-bottom:12px;
+}
+
+.kpi-label{
+  color:var(--muted);
+
+  font-size:10px;
+
+  font-weight:700;
+}
+
+.kpi-value{
+  margin-top:5px;
+
+  font-size:21px;
+
+  font-weight:900;
+
+  letter-spacing:-.5px;
+}
+
+.kpi-note{
+  margin-top:5px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+/* =========================================================
+   REPORT GRID
+========================================================= */
+
+.report-grid{
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1.5fr)
+    minmax(340px,1fr);
+
+  gap:18px;
+
+  margin-bottom:18px;
+}
+
+.panel{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,23,34,.98),
+      rgba(11,17,26,.98)
+    );
+
+  border:1px solid var(--line);
+
+  border-radius:18px;
+
+  box-shadow:var(--shadow);
+
+  overflow:hidden;
+}
+
+.panel-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:15px;
+
+  padding:18px 20px;
+
+  border-bottom:1px solid var(--line);
+}
+
+.panel-title{
+  font-size:14px;
+
+  font-weight:900;
+}
+
+.panel-subtitle{
+  margin-top:4px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.panel-body{
+  padding:20px;
+}
+
+/* =========================================================
+   CHART
+========================================================= */
+
+.chart-wrap{
+  position:relative;
+
+  height:310px;
+
+  display:flex;
+  flex-direction:column;
+}
+
+.chart{
+  flex:1;
+
+  display:flex;
+  align-items:flex-end;
+
+  gap:10px;
+
+  padding:
+    20px 5px 0;
+}
+
+.chart-column{
+  flex:1;
+
+  min-width:24px;
+
+  height:100%;
+
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+
+  position:relative;
+}
+
+.bar-group{
+  width:100%;
+
+  max-width:65px;
+
+  height:100%;
+
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+
+  gap:4px;
+}
+
+.bar{
+  width:calc(50% - 2px);
+
+  min-height:2px;
+
+  border-radius:7px 7px 2px 2px;
+
+  position:relative;
+
+  transition:
+    height .5s ease;
+}
+
+.bar.revenue{
+  background:
+    linear-gradient(
+      180deg,
+      var(--blue2),
+      var(--blue)
+    );
+}
+
+.bar.expense{
+  background:
+    linear-gradient(
+      180deg,
+      #ff8997,
+      var(--red)
+    );
+}
+
+.chart-label{
+  position:absolute;
+
+  bottom:-24px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+
+  white-space:nowrap;
+}
+
+.chart-legend{
+  display:flex;
+  gap:18px;
+
+  padding-top:28px;
+}
+
+.legend{
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+.legend-dot{
+  width:8px;
+  height:8px;
+
+  border-radius:50%;
+}
+
+.legend-dot.revenue{
+  background:var(--blue);
+}
+
+.legend-dot.expense{
+  background:var(--red);
+}
+
+/* =========================================================
+   PROFIT CARD
+========================================================= */
+
+.profit-card{
+  padding:20px;
+
+  border-radius:15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(34,201,131,.09),
+      rgba(79,140,255,.06)
+    );
+
+  border:1px solid
+    rgba(34,201,131,.18);
+
+  margin-bottom:15px;
+}
+
+.profit-label{
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+.profit-value{
+  margin-top:7px;
+
+  font-size:32px;
+
+  font-weight:900;
+
+  letter-spacing:-1px;
+}
+
+.profit-note{
+  margin-top:6px;
+
+  color:#78dcb1;
+
+  font-size:10px;
+}
+
+.money-row{
+  display:grid;
+
+  grid-template-columns:
+    1fr auto;
+
+  gap:12px;
+
+  padding:12px 0;
+
+  border-bottom:
+    1px solid
+    rgba(37,50,71,.7);
+}
+
+.money-row:last-child{
+  border-bottom:0;
+}
+
+.money-label{
+  color:#aab5c6;
+
+  font-size:11px;
+}
+
+.money-value{
+  color:#f0f4fa;
+
+  font-size:12px;
+
+  font-weight:900;
+}
+
+/* =========================================================
+   BUSINESS REPORT
+========================================================= */
+
+.business-table{
+  width:100%;
+
+  border-collapse:collapse;
+}
+
+.business-table th{
+  text-align:left;
+
+  padding:12px 14px;
+
+  color:#6f7c91;
+
+  background:#0c131e;
+
+  border-bottom:1px solid var(--line);
+
+  font-size:9px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+}
+
+.business-table td{
+  padding:14px;
+
+  border-bottom:
+    1px solid
+    rgba(37,50,71,.65);
+
+  font-size:11px;
+}
+
+.business-table tr:last-child td{
+  border-bottom:0;
+}
+
+.business-name{
+  color:#eef3fa;
+
+  font-weight:900;
+}
+
+.business-category{
+  margin-top:3px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+.number{
+  font-weight:800;
+}
+
+.revenue-text{
+  color:#70a6ff;
+}
+
+.expense-text{
+  color:#ff8493;
+}
+
+.profit-text{
+  color:#52dca2;
+}
+
+.due-text{
+  color:#f2c461;
+}
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress{
+  width:100%;
+
+  height:6px;
+
+  background:#172131;
+
+  border-radius:999px;
+
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--blue),
+      var(--cyan)
+    );
+}
+
+/* =========================================================
+   CATEGORY LIST
+========================================================= */
+
+.category-list{
+  display:grid;
+  gap:13px;
+}
+
+.category-item{
+  display:grid;
+
+  gap:7px;
+}
+
+.category-top{
+  display:flex;
+  justify-content:space-between;
+
+  gap:10px;
+}
+
+.category-label{
+  color:#cbd4e2;
+
+  font-size:11px;
+
+  font-weight:700;
+}
+
+.category-amount{
+  color:#f0f4fa;
+
+  font-size:11px;
+
+  font-weight:900;
+}
+
+/* =========================================================
+   PAYMENT METHOD
+========================================================= */
+
+.method-list{
+  display:grid;
+  gap:10px;
+}
+
+.method-row{
+  display:grid;
+
+  grid-template-columns:
+    1fr auto;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:11px;
+
+  border-radius:11px;
+
+  background:#0c131e;
+
+  border:1px solid
+    rgba(37,50,71,.75);
+}
+
+.method-name{
+  color:#dbe3ee;
+
+  font-size:11px;
+
+  font-weight:800;
+}
+
+.method-count{
+  margin-top:3px;
+
+  color:var(--muted2);
+
+  font-size:9px;
+}
+
+.method-amount{
+  color:#f0f4fa;
+
+  font-size:11px;
+
+  font-weight:900;
+}
+
+/* =========================================================
+   MONTHLY TABLE
+========================================================= */
+
+.monthly-table{
+  width:100%;
+
+  border-collapse:collapse;
+}
+
+.monthly-table th{
+  padding:12px 14px;
+
+  text-align:left;
+
+  color:#6f7c91;
+
+  font-size:9px;
+
+  background:#0c131e;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+
+  border-bottom:1px solid var(--line);
+}
+
+.monthly-table td{
+  padding:13px 14px;
+
+  border-bottom:
+    1px solid
+    rgba(37,50,71,.6);
+
+  font-size:11px;
+}
+
+.monthly-table tr:last-child td{
+  border-bottom:0;
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+  padding:55px 20px;
+
+  text-align:center;
+
+  color:var(--muted);
+}
+
+.empty-icon{
+  width:56px;
+  height:56px;
+
+  display:grid;
+  place-items:center;
+
+  margin:0 auto 12px;
+
+  border-radius:17px;
+
+  background:#151f2f;
+
+  font-size:23px;
+}
+
+.empty h3{
+  color:#e9eef6;
+
+  font-size:16px;
+}
+
+.empty p{
+  margin-top:5px;
+
+  font-size:11px;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+  position:fixed;
+
+  right:24px;
+  bottom:24px;
+
+  z-index:5000;
+
+  min-width:280px;
+
+  padding:14px 16px;
+
+  border-radius:13px;
+
+  background:#121c2b;
+
+  border:1px solid #30415b;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.4);
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  transform:
+    translateY(25px);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:.25s ease;
+}
+
+.toast.show{
+  transform:translateY(0);
+
+  opacity:1;
+}
+
+.toast-dot{
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:var(--green);
+}
+
+.toast-text{
+  color:#e8eef7;
+
+  font-size:12px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1250px){
+
+  .kpi-grid{
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+  }
+
+}
+
+@media(max-width:1050px){
+
+  .report-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:850px){
+
+  .sidebar{
+    transform:translateX(-100%);
+
+    transition:.25s ease;
+
+    box-shadow:
+      30px 0 70px rgba(0,0,0,.4);
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .topbar{
+    padding:0 18px;
+  }
+
+  .content{
+    padding:22px 18px;
+  }
+
+  .hero{
+    align-items:flex-start;
+
+    flex-direction:column;
+  }
+
+  .filter-group{
+    flex:1;
+    min-width:150px;
+  }
+
+  .filter-actions{
+    margin-left:0;
+  }
+
+}
+
+@media(max-width:620px){
+
+  .kpi-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .hero-copy h1{
+    font-size:28px;
+  }
+
+  .hero-actions{
+    width:100%;
+  }
+
+  .hero-actions .btn{
+    flex:1;
+  }
+
+  .filter-group{
+    width:100%;
+  }
+
+  .filter{
+    width:100%;
+  }
+
+  .filter-actions{
+    width:100%;
+  }
+
+  .filter-actions .btn{
+    flex:1;
+  }
+
+  .chart{
+    gap:3px;
+  }
+
+  .chart-label{
+    font-size:7px;
+  }
+
+  .toast{
+    left:15px;
+    right:15px;
+
+    min-width:0;
+
+    bottom:15px;
+  }
+
+}
+
+@media(max-width:430px){
+
+  .kpi-grid{
+    grid-template-columns:1fr;
+  }
+
+  .top-actions .icon-btn{
+    display:none;
+  }
+
+}
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+  body{
+    background:white;
+    color:#111;
+  }
+
+  .sidebar,
+  .topbar,
+  .hero-actions,
+  .filter-panel,
+  .toast{
+    display:none !important;
+  }
+
+  .main{
+    margin:0;
+  }
+
+  .content{
+    padding:0;
+  }
+
+  .panel,
+  .kpi{
+    box-shadow:none;
+
+    border:1px solid #ddd;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-logo">
+        SN
+      </div>
+
+      <div>
+
+        <div class="brand-title">
+          SNK Business
+        </div>
+
+        <div class="brand-subtitle">
+          Business Management
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="nav-title">
+      Main
+    </div>
+
+
+    <nav class="nav">
+
+      <a href="index.html">
+        <span class="nav-icon">⌂</span>
+        <span class="nav-label">Dashboard</span>
+      </a>
+
+      <a href="businesses.html">
+        <span class="nav-icon">▣</span>
+        <span class="nav-label">My Businesses</span>
+      </a>
+
+      <a href="customers.html">
+        <span class="nav-icon">♙</span>
+        <span class="nav-label">Customers</span>
+      </a>
+
+      <a href="payments.html">
+        <span class="nav-icon">৳</span>
+        <span class="nav-label">Payments</span>
+      </a>
+
+      <a href="inventory.html">
+        <span class="nav-icon">▤</span>
+        <span class="nav-label">Inventory</span>
+      </a>
+
+      <a href="invoices.html">
+        <span class="nav-icon">▥</span>
+        <span class="nav-label">Invoices</span>
+      </a>
+
+      <a href="expenses.html">
+        <span class="nav-icon">−</span>
+        <span class="nav-label">Expenses</span>
+      </a>
+
+      <a href="projects.html">
+        <span class="nav-icon">◫</span>
+        <span class="nav-label">Projects</span>
+      </a>
+
+      <a href="digital-marketing.html">
+        <span class="nav-icon">◉</span>
+        <span class="nav-label">Digital Marketing</span>
+      </a>
+
+      <a href="tasks.html">
+        <span class="nav-icon">✓</span>
+        <span class="nav-label">Tasks</span>
+      </a>
+
+      <a href="reports.html" class="active">
+        <span class="nav-icon">▥</span>
+        <span class="nav-label">Reports</span>
+      </a>
+
+    </nav>
+
+
+    <div class="admin-card">
+
+      <div class="mini">
+        Premium Business Suite
+      </div>
+
+      <strong>
+        Super Admin
+      </strong>
+
+      <span>
+        Owner • Full Access
+      </span>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="top-left">
+
+        <button
+          class="mobile-menu"
+          id="mobileMenu"
+          type="button"
+        >
+          ☰
+        </button>
+
+        <div class="page-location">
+          SNK Business
+          <strong>/ Reports & Analytics</strong>
+        </div>
+
+      </div>
+
+
+      <div class="top-actions">
+
+        <button
+          class="icon-btn"
+          type="button"
+          onclick="window.print()"
+          title="Print Report"
+        >
+          🖨
+        </button>
+
+        <button
+          class="icon-btn"
+          type="button"
+          onclick="exportReport()"
+          title="Export CSV"
+        >
+          ↓
+        </button>
+
+        <button
+          class="icon-btn"
+          type="button"
+          onclick="refreshReport()"
+          title="Refresh"
+        >
+          ↻
+        </button>
+
+        <button
+          class="avatar-btn"
+          type="button"
+        >
+          <span class="avatar">
+            SA
+          </span>
+          Admin
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <section class="content">
+
+      <!-- =================================================
+           HERO
+      ================================================== -->
+
+      <div class="hero">
+
+        <div class="hero-copy">
+
+          <h1>
+            Business Reports
+          </h1>
+
+          <p>
+            Revenue, payments, invoices, expenses and profit — all in one place.
+          </p>
+
+        </div>
+
+
+        <div class="hero-actions">
+
+          <button
+            class="btn btn-ghost"
+            type="button"
+            onclick="window.print()"
+          >
+            🖨 Print Report
+          </button>
+
+          <button
+            class="btn btn-primary"
+            type="button"
+            onclick="exportReport()"
+          >
+            ↓ Export Report
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           FILTERS
+      ================================================== -->
+
+      <section class="filter-panel">
+
+        <div class="filters">
+
+          <div class="filter-group">
+
+            <label>
+              Business
+            </label>
+
+            <select
+              id="businessFilter"
+              class="filter"
+            >
+
+              <option value="">
+                All Businesses
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="filter-group">
+
+            <label>
+              Date From
+            </label>
+
+            <input
+              id="dateFrom"
+              class="filter"
+              type="date"
+            >
+
+          </div>
+
+
+          <div class="filter-group">
+
+            <label>
+              Date To
+            </label>
+
+            <input
+              id="dateTo"
+              class="filter"
+              type="date"
+            >
+
+          </div>
+
+
+          <div class="filter-group">
+
+            <label>
+              Period
+            </label>
+
+            <select
+              id="periodFilter"
+              class="filter"
+            >
+
+              <option value="all">
+                All Time
+              </option>
+
+              <option value="month">
+                This Month
+              </option>
+
+              <option value="lastMonth">
+                Last Month
+              </option>
+
+              <option value="quarter">
+                This Quarter
+              </option>
+
+              <option value="year">
+                This Year
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="filter-actions">
+
+            <button
+              class="btn btn-ghost"
+              type="button"
+              onclick="resetFilters()"
+            >
+              Reset
+            </button>
+
+            <button
+              class="btn btn-primary"
+              type="button"
+              onclick="applyFilters()"
+            >
+              Apply Report
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           KPI
+      ================================================== -->
+
+      <section class="kpi-grid">
+
+        <div class="kpi">
+
+          <div class="kpi-icon">
+            💰
+          </div>
+
+          <div class="kpi-label">
+            Revenue
+          </div>
+
+          <div
+            class="kpi-value"
+            id="kpiRevenue"
+          >
+            ৳0
+          </div>
+
+          <div class="kpi-note">
+            Received payments
+          </div>
+
+        </div>
+
+
+        <div class="kpi">
+
+          <div class="kpi-icon">
+            💳
+          </div>
+
+          <div class="kpi-label">
+            Received
+          </div>
+
+          <div
+            class="kpi-value"
+            id="kpiReceived"
+          >
+            ৳0
+          </div>
+
+          <div class="kpi-note">
+            Payment transactions
+          </div>
+
+        </div>
+
+
+        <div class="kpi">
+
+          <div class="kpi-icon">
+            ⏳
+          </div>
+
+          <div class="kpi-label">
+            Outstanding
+          </div>
+
+          <div
+            class="kpi-value"
+            id="kpiOutstanding"
+          >
+            ৳0
+          </div>
+
+          <div class="kpi-note">
+            Customer due
+          </div>
+
+        </div>
+
+
+        <div class="kpi">
+
+          <div class="kpi-icon">
+            💸
+          </div>
+
+          <div class="kpi-label">
+            Expenses
+          </div>
+
+          <div
+            class="kpi-value"
+            id="kpiExpenses"
+          >
+            ৳0
+          </div>
+
+          <div class="kpi-note">
+            Business spending
+          </div>
+
+        </div>
+
+
+        <div class="kpi">
+
+          <div class="kpi-icon">
+            📈
+          </div>
+
+          <div class="kpi-label">
+            Net Profit
+          </div>
+
+          <div
+            class="kpi-value"
+            id="kpiProfit"
+          >
+            ৳0
+          </div>
+
+          <div class="kpi-note">
+            Received − expenses
+          </div>
+
+        </div>
+
+
+        <div class="kpi">
+
+          <div class="kpi-icon">
+            👥
+          </div>
+
+          <div class="kpi-label">
+            Customers
+          </div>
+
+          <div
+            class="kpi-value"
+            id="kpiCustomers"
+          >
+            0
+          </div>
+
+          <div class="kpi-note">
+            Linked customers
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           CHART + PROFIT
+      ================================================== -->
+
+      <section class="report-grid">
+
+        <div class="panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <div class="panel-title">
+                Revenue vs Expense
+              </div>
+
+              <div class="panel-subtitle">
+                Monthly financial movement
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="panel-body">
+
+            <div class="chart-wrap">
+
+              <div
+                class="chart"
+                id="monthlyChart"
+              ></div>
+
+              <div class="chart-legend">
+
+                <div class="legend">
+
+                  <span
+                    class="legend-dot revenue"
+                  ></span>
+
+                  Revenue
+
+                </div>
+
+
+                <div class="legend">
+
+                  <span
+                    class="legend-dot expense"
+                  ></span>
+
+                  Expenses
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <div class="panel-title">
+                Financial Summary
+              </div>
+
+              <div class="panel-subtitle">
+                Current report period
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="panel-body">
+
+            <div class="profit-card">
+
+              <div class="profit-label">
+                Net Profit
+              </div>
+
+              <div
+                class="profit-value"
+                id="summaryProfit"
+              >
+                ৳0
+              </div>
+
+              <div
+                class="profit-note"
+                id="summaryProfitNote"
+              >
+                Based on received payments minus expenses.
+              </div>
+
+            </div>
+
+
+            <div class="money-row">
+
+              <div class="money-label">
+                Revenue / Received
+              </div>
+
+              <div
+                class="money-value"
+                id="summaryRevenue"
+              >
+                ৳0
+              </div>
+
+            </div>
+
+
+            <div class="money-row">
+
+              <div class="money-label">
+                Total Expenses
+              </div>
+
+              <div
+                class="money-value"
+                id="summaryExpenses"
+              >
+                ৳0
+              </div>
+
+            </div>
+
+
+            <div class="money-row">
+
+              <div class="money-label">
+                Outstanding Due
+              </div>
+
+              <div
+                class="money-value"
+                id="summaryDue"
+              >
+                ৳0
+              </div>
+
+            </div>
+
+
+            <div class="money-row">
+
+              <div class="money-label">
+                Invoice Value
+              </div>
+
+              <div
+                class="money-value"
+                id="summaryInvoice"
+              >
+                ৳0
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           BUSINESS REPORT
+      ================================================== -->
+
+      <section class="panel" style="margin-bottom:18px;">
+
+        <div class="panel-header">
+
+          <div>
+
+            <div class="panel-title">
+              Business Performance
+            </div>
+
+            <div class="panel-subtitle">
+              Revenue, expenses, received amount and outstanding by business
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="table-wrap"
+          style="overflow-x:auto;"
+        >
+
+          <table class="business-table">
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Business
+                </th>
+
+                <th>
+                  Revenue
+                </th>
+
+                <th>
+                  Expenses
+                </th>
+
+                <th>
+                  Profit
+                </th>
+
+                <th>
+                  Outstanding
+                </th>
+
+                <th>
+                  Customers
+                </th>
+
+                <th>
+                  Expense Ratio
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody
+              id="businessReportBody"
+            ></tbody>
+
+          </table>
+
+
+          <div
+            class="empty"
+            id="businessEmpty"
+            style="display:none;"
+          >
+
+            <div class="empty-icon">
+              📊
+            </div>
+
+            <h3>
+              No business data
+            </h3>
+
+            <p>
+              Add businesses and transactions to generate reports.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           CATEGORY + PAYMENT METHOD
+      ================================================== -->
+
+      <section class="report-grid">
+
+        <div class="panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <div class="panel-title">
+                Expense Categories
+              </div>
+
+              <div class="panel-subtitle">
+                Where your business spending goes
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="panel-body">
+
+            <div
+              class="category-list"
+              id="categoryList"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <div class="panel-title">
+                Payment Methods
+              </div>
+
+              <div class="panel-subtitle">
+                Received payment breakdown
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="panel-body">
+
+            <div
+              class="method-list"
+              id="methodList"
+            ></div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           MONTHLY REPORT
+      ================================================== -->
+
+      <section class="panel" style="margin-top:18px;">
+
+        <div class="panel-header">
+
+          <div>
+
+            <div class="panel-title">
+              Monthly Financial Report
+            </div>
+
+            <div class="panel-subtitle">
+              Month-by-month revenue, expenses and net result
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="table-wrap"
+          style="overflow-x:auto;"
+        >
+
+          <table class="monthly-table">
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Month
+                </th>
+
+                <th>
+                  Revenue
+                </th>
+
+                <th>
+                  Expenses
+                </th>
+
+                <th>
+                  Net Profit
+                </th>
+
+                <th>
+                  Payments
+                </th>
+
+                <th>
+                  Expense Records
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody
+              id="monthlyTableBody"
+            ></tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+  class="toast"
+  id="toast"
+>
+
+  <span class="toast-dot"></span>
+
+  <span
+    class="toast-text"
+    id="toastText"
+  >
+    Report updated.
+  </span>
+
+</div>
+
+
+<script>
+/* =========================================================
+   SNK BUSINESS
+   STEP 3.7 — REPORTS & ANALYTICS
+
+   DATA SOURCES
+   - snkBusinesses
+   - snkBusinessCustomers
+   - snkBusinessPayments
+   - snkBusinessInvoices
+   - snkBusinessExpenses
+========================================================= */
+
+
+/* =========================================================
+   STORAGE KEYS
+========================================================= */
+
+const BUSINESS_KEY =
+  "snkBusinesses";
+
+const CUSTOMER_KEY =
+  "snkBusinessCustomers";
+
+const PAYMENT_KEY =
+  "snkBusinessPayments";
+
+const INVOICE_KEY =
+  "snkBusinessInvoices";
+
+const EXPENSE_KEY =
+  "snkBusinessExpenses";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let businesses = [];
+let customers = [];
+let payments = [];
+let invoices = [];
+let expenses = [];
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ = id =>
+  document.getElementById(id);
+
+
+/* =========================================================
+   MONEY
+========================================================= */
+
+function money(value){
+
+  const amount =
+    Number(value) || 0;
+
+  return "৳" +
+    amount.toLocaleString(
+      "en-BD",
+      {
+        minimumFractionDigits:0,
+        maximumFractionDigits:2
+      }
+    );
+
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+function number(value){
+
+  return (
+    Number(value) || 0
+  ).toLocaleString(
+    "en-BD"
+  );
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function parseDate(value){
+
+  if(!value){
+    return null;
+  }
+
+  const d =
+    new Date(value);
+
+  if(
+    Number.isNaN(
+      d.getTime()
+    )
+  ){
+
+    const parts =
+      String(value).split("-");
+
+    if(parts.length === 3){
+
+      const fallback =
+        new Date(
+          Number(parts[0]),
+          Number(parts[1])-1,
+          Number(parts[2])
+        );
+
+      if(
+        !Number.isNaN(
+          fallback.getTime()
+        )
+      ){
+        return fallback;
+      }
+
+    }
+
+    return null;
+  }
+
+  return d;
+
+}
+
+
+function todayISO(){
+
+  const d =
+    new Date();
+
+  const y =
+    d.getFullYear();
+
+  const m =
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0");
+
+  const day =
+    String(
+      d.getDate()
+    ).padStart(2,"0");
+
+  return `${y}-${m}-${day}`;
+
+}
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+function loadData(){
+
+  businesses =
+    readStorage(
+      BUSINESS_KEY
+    );
+
+  customers =
+    readStorage(
+      CUSTOMER_KEY
+    );
+
+  payments =
+    readStorage(
+      PAYMENT_KEY
+    );
+
+  invoices =
+    readStorage(
+      INVOICE_KEY
+    );
+
+  expenses =
+    readStorage(
+      EXPENSE_KEY
+    );
+
+}
+
+
+function readStorage(key){
+
+  try{
+
+    const data =
+      JSON.parse(
+        localStorage.getItem(key)
+      );
+
+    return Array.isArray(data)
+      ? data
+      : [];
+
+  }catch(error){
+
+    console.error(
+      `Could not read ${key}`,
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+/* =========================================================
+   URL
+========================================================= */
+
+function getUrlBusiness(){
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  return (
+    params.get("business") ||
+    ""
+  );
+
+}
+
+
+/* =========================================================
+   FIND BUSINESS
+========================================================= */
+
+function findBusiness(value){
+
+  if(!value){
+    return null;
+  }
+
+  const needle =
+    String(value)
+      .trim()
+      .toLowerCase();
+
+  return businesses.find(
+    business => {
+
+      return (
+
+        String(
+          business.id || ""
+        ).toLowerCase() ===
+          needle ||
+
+        String(
+          business.slug || ""
+        ).toLowerCase() ===
+          needle ||
+
+        String(
+          business.name || ""
+        ).toLowerCase() ===
+          needle
+
+      );
+
+    }
+  ) || null;
+
+}
+
+
+/* =========================================================
+   BUSINESS SELECT
+========================================================= */
+
+function populateBusinesses(){
+
+  const select =
+    $("businessFilter");
+
+
+  select.innerHTML =
+    `<option value="">
+      All Businesses
+    </option>`;
+
+
+  businesses.forEach(
+    business => {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+      option.value =
+        business.id;
+
+      option.textContent =
+        business.name;
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+
+  const urlBusiness =
+    findBusiness(
+      getUrlBusiness()
+    );
+
+
+  if(urlBusiness){
+
+    select.value =
+      urlBusiness.id;
+
+  }
+
+}
+
+
+/* =========================================================
+   PERIOD RANGE
+========================================================= */
+
+function getPeriodRange(){
+
+  const period =
+    $("periodFilter").value;
+
+
+  const now =
+    new Date();
+
+
+  let from = null;
+  let to = null;
+
+
+  if(period === "month"){
+
+    from =
+      new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        1
+      );
+
+    to =
+      new Date(
+        now.getFullYear(),
+        now.getMonth()+1,
+        0,
+        23,
+        59,
+        59
+      );
+
+  }
+
+
+  if(period === "lastMonth"){
+
+    from =
+      new Date(
+        now.getFullYear(),
+        now.getMonth()-1,
+        1
+      );
+
+    to =
+      new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        0,
+        23,
+        59,
+        59
+      );
+
+  }
+
+
+  if(period === "quarter"){
+
+    const quarter =
+      Math.floor(
+        now.getMonth()/3
+      );
+
+    from =
+      new Date(
+        now.getFullYear(),
+        quarter*3,
+        1
+      );
+
+    to =
+      new Date(
+        now.getFullYear(),
+        quarter*3+3,
+        0,
+        23,
+        59,
+        59
+      );
+
+  }
+
+
+  if(period === "year"){
+
+    from =
+      new Date(
+        now.getFullYear(),
+        0,
+        1
+      );
+
+    to =
+      new Date(
+        now.getFullYear(),
+        11,
+        31,
+        23,
+        59,
+        59
+      );
+
+  }
+
+
+  return {
+    from,
+    to
+  };
+
+}
+
+
+/* =========================================================
+   FILTERED DATE
+========================================================= */
+
+function dateIsInRange(
+  dateValue,
+  from,
+  to
+){
+
+  const date =
+    parseDate(
+      dateValue
+    );
+
+
+  if(!date){
+    return false;
+  }
+
+
+  if(from && date < from){
+    return false;
+  }
+
+
+  if(to && date > to){
+    return false;
+  }
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   FILTER DATA
+========================================================= */
+
+function getReportData(){
+
+  const businessId =
+    $("businessFilter").value;
+
+
+  const periodRange =
+    getPeriodRange();
+
+
+  let from =
+    periodRange.from;
+
+  let to =
+    periodRange.to;
+
+
+  const customFrom =
+    $("dateFrom").value;
+
+
+  const customTo =
+    $("dateTo").value;
+
+
+  if(customFrom){
+
+    from =
+      new Date(
+        customFrom +
+        "T00:00:00"
+      );
+
+  }
+
+
+  if(customTo){
+
+    to =
+      new Date(
+        customTo +
+        "T23:59:59"
+      );
+
+  }
+
+
+  const filterBusiness =
+    item => {
+
+      if(!businessId){
+        return true;
+      }
+
+      return (
+        item.businessId ===
+        businessId
+      );
+
+    };
+
+
+  const filteredPayments =
+    payments.filter(
+      payment => {
+
+        return (
+          filterBusiness(payment) &&
+          dateIsInRange(
+            payment.date ||
+            payment.createdAt,
+            from,
+            to
+          )
+        );
+
+      }
+    );
+
+
+  const filteredExpenses =
+    expenses.filter(
+      expense => {
+
+        return (
+          filterBusiness(expense) &&
+          dateIsInRange(
+            expense.date ||
+            expense.createdAt,
+            from,
+            to
+          )
+        );
+
+      }
+    );
+
+
+  const filteredInvoices =
+    invoices.filter(
+      invoice => {
+
+        return (
+          filterBusiness(invoice) &&
+          dateIsInRange(
+            invoice.date ||
+            invoice.createdAt,
+            from,
+            to
+          )
+        );
+
+      }
+    );
+
+
+  const filteredCustomers =
+    customers.filter(
+      customer => {
+
+        return filterBusiness(
+          customer
+        );
+
+      }
+    );
+
+
+  return {
+
+    businessId,
+
+    from,
+
+    to,
+
+    payments:
+      filteredPayments,
+
+    expenses:
+      filteredExpenses,
+
+    invoices:
+      filteredInvoices,
+
+    customers:
+      filteredCustomers
+
+  };
+
+}
+
+
+/* =========================================================
+   REVENUE
+========================================================= */
+
+function getReceived(
+  data
+){
+
+  return data.payments.reduce(
+    (sum,payment) =>
+      sum +
+      Number(
+        payment.amount || 0
+      ),
+    0
+  );
+
+}
+
+
+/* =========================================================
+   INVOICE TOTAL
+========================================================= */
+
+function getInvoiceTotal(
+  data
+){
+
+  return data.invoices.reduce(
+    (sum,invoice) =>
+      sum +
+      Number(
+        invoice.total || 0
+      ),
+    0
+  );
+
+}
+
+
+/* =========================================================
+   EXPENSE TOTAL
+========================================================= */
+
+function getExpenseTotal(
+  data
+){
+
+  return data.expenses.reduce(
+    (sum,expense) =>
+      sum +
+      Number(
+        expense.amount || 0
+      ),
+    0
+  );
+
+}
+
+
+/* =========================================================
+   OUTSTANDING
+========================================================= */
+
+function getOutstanding(){
+
+  const businessId =
+    $("businessFilter").value;
+
+
+  let list =
+    customers;
+
+
+  if(businessId){
+
+    list =
+      customers.filter(
+        customer =>
+          customer.businessId ===
+          businessId
+      );
+
+  }
+
+
+  return list.reduce(
+    (sum,customer) =>
+      sum +
+      Math.max(
+        Number(
+          customer.due || 0
+        ),
+        0
+      ),
+    0
+  );
+
+}
+
+
+/* =========================================================
+   KPI
+========================================================= */
+
+function renderKPI(){
+
+  const data =
+    getReportData();
+
+
+  const received =
+    getReceived(data);
+
+
+  const expensesTotal =
+    getExpenseTotal(data);
+
+
+  const invoiceTotal =
+    getInvoiceTotal(data);
+
+
+  const profit =
+    received -
+    expensesTotal;
+
+
+  const outstanding =
+    getOutstanding();
+
+
+  $("kpiRevenue")
+    .textContent =
+      money(received);
+
+
+  $("kpiReceived")
+    .textContent =
+      money(received);
+
+
+  $("kpiOutstanding")
+    .textContent =
+      money(outstanding);
+
+
+  $("kpiExpenses")
+    .textContent =
+      money(expensesTotal);
+
+
+  $("kpiProfit")
+    .textContent =
+      money(profit);
+
+
+  $("kpiCustomers")
+    .textContent =
+      number(
+        data.customers.length
+      );
+
+
+  $("summaryProfit")
+    .textContent =
+      money(profit);
+
+
+  $("summaryRevenue")
+    .textContent =
+      money(received);
+
+
+  $("summaryExpenses")
+    .textContent =
+      money(expensesTotal);
+
+
+  $("summaryDue")
+    .textContent =
+      money(outstanding);
+
+
+  $("summaryInvoice")
+    .textContent =
+      money(invoiceTotal);
+
+
+  $("summaryProfitNote")
+    .textContent =
+      profit >= 0
+        ? "Received payments are higher than recorded expenses."
+        : "Recorded expenses are higher than received payments.";
+
+}
+
+
+/* =========================================================
+   MONTH LABEL
+========================================================= */
+
+function monthLabel(
+  year,
+  month
+){
+
+  return new Date(
+    year,
+    month,
+    1
+  ).toLocaleDateString(
+    "en-US",
+    {
+      month:"short"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   MONTHLY DATA
+========================================================= */
+
+function buildMonthlyData(){
+
+  const data =
+    getReportData();
+
+
+  const map =
+    {};
+
+
+  function ensure(key){
+
+    if(!map[key]){
+
+      map[key] = {
+
+        revenue:0,
+
+        expense:0,
+
+        payments:0,
+
+        expenseRecords:0,
+
+        year:0,
+
+        month:0
+
+      };
+
+    }
+
+    return map[key];
+
+  }
+
+
+  data.payments.forEach(
+    payment => {
+
+      const d =
+        parseDate(
+          payment.date ||
+          payment.createdAt
+        );
+
+
+      if(!d){
+        return;
+      }
+
+
+      const key =
+        `${d.getFullYear()}-${String(
+          d.getMonth()+1
+        ).padStart(2,"0")}`;
+
+
+      const item =
+        ensure(key);
+
+
+      item.revenue +=
+        Number(
+          payment.amount || 0
+        );
+
+
+      item.payments++;
+
+      item.year =
+        d.getFullYear();
+
+      item.month =
+        d.getMonth();
+
+    }
+  );
+
+
+  data.expenses.forEach(
+    expense => {
+
+      const d =
+        parseDate(
+          expense.date ||
+          expense.createdAt
+        );
+
+
+      if(!d){
+        return;
+      }
+
+
+      const key =
+        `${d.getFullYear()}-${String(
+          d.getMonth()+1
+        ).padStart(2,"0")}`;
+
+
+      const item =
+        ensure(key);
+
+
+      item.expense +=
+        Number(
+          expense.amount || 0
+        );
+
+
+      item.expenseRecords++;
+
+      item.year =
+        d.getFullYear();
+
+      item.month =
+        d.getMonth();
+
+    }
+  );
+
+
+  return Object.values(
+    map
+  )
+  .sort(
+    (a,b) => {
+
+      if(a.year !== b.year){
+
+        return (
+          a.year -
+          b.year
+        );
+
+      }
+
+      return (
+        a.month -
+        b.month
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CHART
+========================================================= */
+
+function renderChart(){
+
+  const chart =
+    $("monthlyChart");
+
+
+  const data =
+    buildMonthlyData();
+
+
+  chart.innerHTML =
+    "";
+
+
+  if(!data.length){
+
+    chart.innerHTML = `
+
+      <div class="empty" style="width:100%;">
+        <div class="empty-icon">
+          📈
+        </div>
+
+        <h3>
+          No chart data
+        </h3>
+
+        <p>
+          Add payments or expenses to see monthly analytics.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const max =
+    Math.max(
+      ...data.flatMap(
+        item => [
+          item.revenue,
+          item.expense
+        ]
+      ),
+      1
+    );
+
+
+  data.forEach(
+    item => {
+
+      const column =
+        document.createElement(
+          "div"
+        );
+
+      column.className =
+        "chart-column";
+
+
+      const group =
+        document.createElement(
+          "div"
+        );
+
+      group.className =
+        "bar-group";
+
+
+      const revenueBar =
+        document.createElement(
+          "div"
+        );
+
+      revenueBar.className =
+        "bar revenue";
+
+
+      const expenseBar =
+        document.createElement(
+          "div"
+        );
+
+      expenseBar.className =
+        "bar expense";
+
+
+      revenueBar.style.height =
+        `${Math.max(
+          2,
+          (item.revenue/max)*100
+        )}%`;
+
+
+      expenseBar.style.height =
+        `${Math.max(
+          2,
+          (item.expense/max)*100
+        )}%`;
+
+
+      revenueBar.title =
+        `Revenue: ${money(
+          item.revenue
+        )}`;
+
+
+      expenseBar.title =
+        `Expenses: ${money(
+          item.expense
+        )}`;
+
+
+      group.appendChild(
+        revenueBar
+      );
+
+      group.appendChild(
+        expenseBar
+      );
+
+
+      const label =
+        document.createElement(
+          "div"
+        );
+
+      label.className =
+        "chart-label";
+
+      label.textContent =
+        `${monthLabel(
+          item.year,
+          item.month
+        )} ${String(
+          item.year
+        ).slice(-2)}`;
+
+
+      column.appendChild(
+        group
+      );
+
+      column.appendChild(
+        label
+      );
+
+
+      chart.appendChild(
+        column
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   BUSINESS REPORT
+========================================================= */
+
+function renderBusinessReport(){
+
+  const tbody =
+    $("businessReportBody");
+
+
+  tbody.innerHTML =
+    "";
+
+
+  const data =
+    getReportData();
+
+
+  let list =
+    businesses;
+
+
+  if(data.businessId){
+
+    list =
+      businesses.filter(
+        business =>
+          business.id ===
+          data.businessId
+      );
+
+  }
+
+
+  $("businessEmpty")
+    .style.display =
+      list.length
+        ? "none"
+        : "block";
+
+
+  list.forEach(
+    business => {
+
+      const businessPayments =
+        data.payments.filter(
+          payment =>
+            payment.businessId ===
+            business.id
+        );
+
+
+      const businessExpenses =
+        data.expenses.filter(
+          expense =>
+            expense.businessId ===
+            business.id
+        );
+
+
+      const businessCustomers =
+        data.customers.filter(
+          customer =>
+            customer.businessId ===
+            business.id
+        );
+
+
+      const revenue =
+        businessPayments.reduce(
+          (sum,payment) =>
+            sum +
+            Number(
+              payment.amount || 0
+            ),
+          0
+        );
+
+
+      const expenseTotal =
+        businessExpenses.reduce(
+          (sum,expense) =>
+            sum +
+            Number(
+              expense.amount || 0
+            ),
+          0
+        );
+
+
+      const profit =
+        revenue -
+        expenseTotal;
+
+
+      const due =
+        businessCustomers.reduce(
+          (sum,customer) =>
+            sum +
+            Math.max(
+              Number(
+                customer.due || 0
+              ),
+              0
+            ),
+          0
+        );
+
+
+      const ratio =
+        revenue > 0
+          ? (
+              expenseTotal /
+              revenue
+            ) * 100
+          : 0;
+
+
+      const tr =
+        document.createElement(
+          "tr"
+        );
+
+
+      tr.innerHTML = `
+
+        <td>
+
+          <div class="business-name">
+            ${escapeHTML(
+              business.name ||
+              "Unnamed Business"
+            )}
+          </div>
+
+          <div class="business-category">
+            ${escapeHTML(
+              business.category ||
+              "Business"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+          <span class="number revenue-text">
+            ${money(revenue)}
+          </span>
+        </td>
+
+
+        <td>
+          <span class="number expense-text">
+            ${money(expenseTotal)}
+          </span>
+        </td>
+
+
+        <td>
+          <span class="number profit-text">
+            ${money(profit)}
+          </span>
+        </td>
+
+
+        <td>
+          <span class="number due-text">
+            ${money(due)}
+          </span>
+        </td>
+
+
+        <td>
+          <span class="number">
+            ${number(
+              businessCustomers.length
+            )}
+          </span>
+        </td>
+
+
+        <td style="min-width:130px;">
+
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            margin-bottom:6px;
+          ">
+
+            <span style="
+              color:var(--muted2);
+              font-size:9px;
+            ">
+              Expense Ratio
+            </span>
+
+            <strong style="
+              font-size:10px;
+            ">
+              ${ratio.toFixed(1)}%
+            </strong>
+
+          </div>
+
+          <div class="progress">
+
+            <div
+              class="progress-bar"
+              style="
+                width:${Math.min(
+                  100,
+                  ratio
+                )}%;
+              "
+            ></div>
+
+          </div>
+
+        </td>
+
+      `;
+
+
+      tbody.appendChild(
+        tr
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CATEGORY REPORT
+========================================================= */
+
+function renderCategories(){
+
+  const container =
+    $("categoryList");
+
+
+  const data =
+    getReportData();
+
+
+  const map =
+    {};
+
+
+  data.expenses.forEach(
+    expense => {
+
+      const category =
+        expense.category ||
+        "Other";
+
+
+      if(!map[category]){
+
+        map[category] = 0;
+
+      }
+
+
+      map[category] +=
+        Number(
+          expense.amount || 0
+        );
+
+    }
+  );
+
+
+  const entries =
+    Object.entries(
+      map
+    )
+    .sort(
+      (a,b) =>
+        b[1] -
+        a[1]
+    );
+
+
+  container.innerHTML =
+    "";
+
+
+  if(!entries.length){
+
+    container.innerHTML = `
+
+      <div class="empty">
+        <div class="empty-icon">
+          💸
+        </div>
+
+        <h3>
+          No expenses
+        </h3>
+
+        <p>
+          Expense categories will appear here.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const total =
+    entries.reduce(
+      (sum,item) =>
+        sum + item[1],
+      0
+    );
+
+
+  entries
+    .slice(0,8)
+    .forEach(
+      ([category,amount]) => {
+
+        const percent =
+          total > 0
+            ? (
+                amount /
+                total
+              ) * 100
+            : 0;
+
+
+        const row =
+          document.createElement(
+            "div"
+          );
+
+        row.className =
+          "category-item";
+
+
+        row.innerHTML = `
+
+          <div class="category-top">
+
+            <div class="category-label">
+              ${escapeHTML(
+                category
+              )}
+            </div>
+
+            <div class="category-amount">
+              ${money(amount)}
+            </div>
+
+          </div>
+
+
+          <div class="progress">
+
+            <div
+              class="progress-bar"
+              style="
+                width:${percent}%;
+              "
+            ></div>
+
+          </div>
+
+        `;
+
+
+        container.appendChild(
+          row
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   PAYMENT METHOD REPORT
+========================================================= */
+
+function renderMethods(){
+
+  const container =
+    $("methodList");
+
+
+  const data =
+    getReportData();
+
+
+  const map =
+    {};
+
+
+  data.payments.forEach(
+    payment => {
+
+      const method =
+        payment.method ||
+        "Other";
+
+
+      if(!map[method]){
+
+        map[method] = {
+
+          amount:0,
+
+          count:0
+
+        };
+
+      }
+
+
+      map[method].amount +=
+        Number(
+          payment.amount || 0
+        );
+
+
+      map[method].count++;
+
+    }
+  );
+
+
+  const entries =
+    Object.entries(
+      map
+    )
+    .sort(
+      (a,b) =>
+        b[1].amount -
+        a[1].amount
+    );
+
+
+  container.innerHTML =
+    "";
+
+
+  if(!entries.length){
+
+    container.innerHTML = `
+
+      <div class="empty">
+        <div class="empty-icon">
+          💳
+        </div>
+
+        <h3>
+          No payment data
+        </h3>
+
+        <p>
+          Payment methods will appear here.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  entries.forEach(
+    ([method,data]) => {
+
+      const row =
+        document.createElement(
+          "div"
+        );
+
+      row.className =
+        "method-row";
+
+
+      row.innerHTML = `
+
+        <div>
+
+          <div class="method-name">
+            ${escapeHTML(
+              method
+            )}
+          </div>
+
+          <div class="method-count">
+            ${number(
+              data.count
+            )}
+            transaction${
+              data.count === 1
+                ? ""
+                : "s"
+            }
+          </div>
+
+        </div>
+
+
+        <div class="method-amount">
+          ${money(
+            data.amount
+          )}
+        </div>
+
+      `;
+
+
+      container.appendChild(
+        row
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   MONTHLY TABLE
+========================================================= */
+
+function renderMonthlyTable(){
+
+  const tbody =
+    $("monthlyTableBody");
+
+
+  const data =
+    buildMonthlyData();
+
+
+  tbody.innerHTML =
+    "";
+
+
+  if(!data.length){
+
+    tbody.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="6"
+          style="
+            text-align:center;
+            color:var(--muted);
+            padding:40px;
+          "
+        >
+          No monthly financial data available.
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  data
+    .slice()
+    .reverse()
+    .forEach(
+      item => {
+
+        const profit =
+          item.revenue -
+          item.expense;
+
+
+        const tr =
+          document.createElement(
+            "tr"
+          );
+
+
+        tr.innerHTML = `
+
+          <td>
+
+            <strong>
+              ${monthLabel(
+                item.year,
+                item.month
+              )}
+              ${item.year}
+            </strong>
+
+          </td>
+
+
+          <td>
+
+            <span class="revenue-text">
+              ${money(
+                item.revenue
+              )}
+            </span>
+
+          </td>
+
+
+          <td>
+
+            <span class="expense-text">
+              ${money(
+                item.expense
+              )}
+            </span>
+
+          </td>
+
+
+          <td>
+
+            <span
+              class="${
+                profit >= 0
+                  ? "profit-text"
+                  : "expense-text"
+              }"
+            >
+              ${money(
+                profit
+              )}
+            </span>
+
+          </td>
+
+
+          <td>
+            ${number(
+              item.payments
+            )}
+          </td>
+
+
+          <td>
+            ${number(
+              item.expenseRecords
+            )}
+          </td>
+
+        `;
+
+
+        tbody.appendChild(
+          tr
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER EVERYTHING
+========================================================= */
+
+function renderReport(){
+
+  renderKPI();
+
+  renderChart();
+
+  renderBusinessReport();
+
+  renderCategories();
+
+  renderMethods();
+
+  renderMonthlyTable();
+
+}
+
+
+/* =========================================================
+   APPLY FILTERS
+========================================================= */
+
+function applyFilters(){
+
+  renderReport();
+
+  showToast(
+    "Report updated successfully."
+  );
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetFilters(){
+
+  $("businessFilter").value =
+    "";
+
+  $("dateFrom").value =
+    "";
+
+  $("dateTo").value =
+    "";
+
+  $("periodFilter").value =
+    "all";
+
+
+  renderReport();
+
+  showToast(
+    "Report filters reset."
+  );
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshReport(){
+
+  loadData();
+
+  populateBusinesses();
+
+  renderReport();
+
+  showToast(
+    "Report data refreshed."
+  );
+
+}
+
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+function exportReport(){
+
+  const data =
+    getReportData();
+
+
+  const rows = [];
+
+
+  rows.push([
+    "SNK Business Report"
+  ]);
+
+
+  rows.push([]);
+
+
+  rows.push([
+    "Metric",
+    "Value"
+  ]);
+
+
+  const received =
+    getReceived(data);
+
+
+  const expenseTotal =
+    getExpenseTotal(data);
+
+
+  const outstanding =
+    getOutstanding();
+
+
+  const invoiceTotal =
+    getInvoiceTotal(data);
+
+
+  rows.push([
+    "Revenue / Received",
+    received
+  ]);
+
+
+  rows.push([
+    "Expenses",
+    expenseTotal
+  ]);
+
+
+  rows.push([
+    "Net Profit",
+    received -
+    expenseTotal
+  ]);
+
+
+  rows.push([
+    "Outstanding",
+    outstanding
+  ]);
+
+
+  rows.push([
+    "Invoice Value",
+    invoiceTotal
+  ]);
+
+
+  rows.push([]);
+
+
+  rows.push([
+    "Business",
+    "Revenue",
+    "Expenses",
+    "Profit",
+    "Outstanding",
+    "Customers"
+  ]);
+
+
+  businesses.forEach(
+    business => {
+
+      if(
+        data.businessId &&
+        business.id !==
+          data.businessId
+      ){
+
+        return;
+
+      }
+
+
+      const revenue =
+        data.payments
+          .filter(
+            payment =>
+              payment.businessId ===
+              business.id
+          )
+          .reduce(
+            (sum,payment) =>
+              sum +
+              Number(
+                payment.amount || 0
+              ),
+            0
+          );
+
+
+      const expensesValue =
+        data.expenses
+          .filter(
+            expense =>
+              expense.businessId ===
+              business.id
+          )
+          .reduce(
+            (sum,expense) =>
+              sum +
+              Number(
+                expense.amount || 0
+              ),
+            0
+          );
+
+
+      const customerList =
+        data.customers.filter(
+          customer =>
+            customer.businessId ===
+            business.id
+        );
+
+
+      const due =
+        customerList.reduce(
+          (sum,customer) =>
+            sum +
+            Math.max(
+              Number(
+                customer.due || 0
+              ),
+              0
+            ),
+          0
+        );
+
+
+      rows.push([
+        business.name,
+        revenue,
+        expensesValue,
+        revenue -
+          expensesValue,
+        due,
+        customerList.length
+      ]);
+
+    }
+  );
+
+
+  const csv =
+    rows
+      .map(
+        row =>
+          row
+            .map(
+              value =>
+                `"${String(
+                  value ?? ""
+                )
+                .replace(
+                  /"/g,
+                  '""'
+                )}"`
+            )
+            .join(",")
+      )
+      .join("\n");
+
+
+  const blob =
+    new Blob(
+      [csv],
+      {
+        type:
+          "text/csv;charset=utf-8;"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const a =
+    document.createElement(
+      "a"
+    );
+
+
+  a.href =
+    url;
+
+
+  a.download =
+    `snk-business-report-${todayISO()}.csv`;
+
+
+  document.body.appendChild(
+    a
+  );
+
+
+  a.click();
+
+  a.remove();
+
+
+  URL.revokeObjectURL(
+    url
+  );
+
+
+  showToast(
+    "Business report exported."
+  );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer = null;
+
+
+function showToast(
+  message
+){
+
+  const toast =
+    $("toast");
+
+
+  $("toastText")
+    .textContent =
+      message;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2800
+    );
+
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =========================================================
+   FILTER EVENTS
+========================================================= */
+
+$("businessFilter")
+  .addEventListener(
+    "change",
+    renderReport
+  );
+
+
+$("periodFilter")
+  .addEventListener(
+    "change",
+    () => {
+
+      $("dateFrom").value =
+        "";
+
+      $("dateTo").value =
+        "";
+
+      renderReport();
+
+    }
+  );
+
+
+$("dateFrom")
+  .addEventListener(
+    "change",
+    () => {
+
+      $("periodFilter").value =
+        "all";
+
+    }
+  );
+
+
+$("dateTo")
+  .addEventListener(
+    "change",
+    () => {
+
+      $("periodFilter").value =
+        "all";
+
+    }
+  );
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+$("mobileMenu")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("sidebar")
+        .classList.toggle(
+          "open"
+        );
+
+    }
+  );
+
+
+document.addEventListener(
+  "click",
+  event => {
+
+    const sidebar =
+      $("sidebar");
+
+    const menu =
+      $("mobileMenu");
+
+
+    if(
+      window.innerWidth <= 850 &&
+      sidebar.classList.contains(
+        "open"
+      ) &&
+      !sidebar.contains(
+        event.target
+      ) &&
+      !menu.contains(
+        event.target
+      )
+    ){
+
+      sidebar.classList.remove(
+        "open"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+function init(){
+
+  loadData();
+
+  populateBusinesses();
+
+  renderReport();
+
+}
+
+
+init();
+
+</script>
+
+</body>
+</html>
