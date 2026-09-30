@@ -1,0 +1,2906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Customers | SNK Business</title>
+
+<style>
+:root{
+  --bg:#070b12;
+  --panel:#0f1623;
+  --panel2:#121c2b;
+  --panel3:#182437;
+  --line:#243247;
+  --text:#f5f7fb;
+  --muted:#8d9ab0;
+  --blue:#4f8cff;
+  --blue2:#6ea8ff;
+  --green:#22c55e;
+  --yellow:#f59e0b;
+  --red:#ef4444;
+  --purple:#8b5cf6;
+  --cyan:#06b6d4;
+  --shadow:0 18px 50px rgba(0,0,0,.25);
+  --radius:18px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:
+    radial-gradient(circle at top right,rgba(79,140,255,.09),transparent 28%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:270px;
+  background:rgba(10,15,24,.97);
+  border-right:1px solid var(--line);
+  padding:22px 16px;
+  z-index:1000;
+  overflow-y:auto;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:4px 10px 25px;
+}
+
+.logo-mark{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#4f8cff,#7c3aed);
+  font-weight:900;
+  font-size:18px;
+  box-shadow:0 10px 30px rgba(79,140,255,.25);
+}
+
+.logo h2{
+  font-size:18px;
+}
+
+.logo span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+.nav-title{
+  color:#66758d;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  padding:14px 12px 8px;
+}
+
+.nav a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:11px 12px;
+  border-radius:11px;
+  color:#aab6c9;
+  font-size:13px;
+  margin-bottom:4px;
+  transition:.2s;
+}
+
+.nav a:hover{
+  background:#141f30;
+  color:#fff;
+}
+
+.nav a.active{
+  background:linear-gradient(
+    90deg,
+    rgba(79,140,255,.18),
+    rgba(79,140,255,.06)
+  );
+  color:#fff;
+  border:1px solid rgba(79,140,255,.18);
+}
+
+.nav-icon{
+  width:22px;
+  text-align:center;
+  font-size:15px;
+}
+
+.admin-card{
+  margin-top:20px;
+  padding:15px;
+  border-radius:15px;
+  background:linear-gradient(
+    135deg,
+    rgba(79,140,255,.14),
+    rgba(139,92,246,.09)
+  );
+  border:1px solid rgba(79,140,255,.16);
+}
+
+.admin-card small{
+  color:#7f8da3;
+}
+
+.admin-card strong{
+  display:block;
+  margin-top:4px;
+  font-size:13px;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+  margin-left:270px;
+  min-height:100vh;
+}
+
+.topbar{
+  height:72px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 30px;
+  background:rgba(7,11,18,.72);
+  backdrop-filter:blur(18px);
+  position:sticky;
+  top:0;
+  z-index:500;
+}
+
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.menu-btn{
+  display:none;
+  width:40px;
+  height:40px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  color:white;
+  border-radius:10px;
+}
+
+.top-title{
+  font-size:14px;
+  color:#aab6c9;
+}
+
+.top-title strong{
+  color:#fff;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.icon-btn{
+  width:40px;
+  height:40px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  color:#cbd5e1;
+  border-radius:11px;
+}
+
+.avatar{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#4f8cff,#7c3aed);
+  font-weight:800;
+  font-size:13px;
+}
+
+/* ================= CONTENT ================= */
+
+.content{
+  padding:30px;
+  max-width:1700px;
+  margin:auto;
+}
+
+.page-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:25px;
+}
+
+.eyebrow{
+  color:#6ea8ff;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1.7px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.page-head h1{
+  font-size:30px;
+  letter-spacing:-.8px;
+}
+
+.page-head p{
+  color:var(--muted);
+  margin-top:8px;
+  font-size:13px;
+}
+
+.head-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:1px solid var(--line);
+  background:var(--panel);
+  color:#dbe4f0;
+  padding:11px 15px;
+  border-radius:11px;
+  font-weight:700;
+  font-size:12px;
+}
+
+.btn:hover{
+  border-color:#3a4c68;
+}
+
+.btn-primary{
+  border:none;
+  background:linear-gradient(135deg,#4f8cff,#6d5dfc);
+  color:white;
+  box-shadow:0 10px 25px rgba(79,140,255,.2);
+}
+
+/* ================= STATS ================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:22px;
+}
+
+.stat{
+  background:linear-gradient(145deg,#101927,#0d1420);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:19px;
+  box-shadow:var(--shadow);
+}
+
+.stat-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.stat-icon{
+  width:35px;
+  height:35px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  background:rgba(79,140,255,.12);
+  color:#76aaff;
+}
+
+.stat-value{
+  font-size:25px;
+  font-weight:800;
+  margin-top:15px;
+}
+
+.stat-sub{
+  color:#738198;
+  font-size:11px;
+  margin-top:6px;
+}
+
+/* ================= TOOLBAR ================= */
+
+.toolbar{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:15px;
+  margin-bottom:17px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.search{
+  flex:1;
+  min-width:220px;
+  position:relative;
+}
+
+.search span{
+  position:absolute;
+  left:13px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#66758d;
+}
+
+.search input{
+  width:100%;
+  padding:11px 13px 11px 38px;
+  border-radius:11px;
+  border:1px solid var(--line);
+  background:#0b121d;
+  color:white;
+  outline:none;
+}
+
+.search input:focus{
+  border-color:var(--blue);
+}
+
+.filter{
+  min-width:170px;
+  padding:11px 12px;
+  border-radius:11px;
+  border:1px solid var(--line);
+  background:#0b121d;
+  color:#dce4ef;
+  outline:none;
+}
+
+/* ================= TABLE ================= */
+
+.table-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+
+.table-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:17px 20px;
+  border-bottom:1px solid var(--line);
+}
+
+.table-head strong{
+  font-size:14px;
+}
+
+.table-head span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:950px;
+}
+
+th{
+  text-align:left;
+  color:#738198;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  padding:13px 18px;
+  background:#0b121d;
+  border-bottom:1px solid var(--line);
+}
+
+td{
+  padding:15px 18px;
+  border-bottom:1px solid rgba(36,50,71,.65);
+  font-size:12px;
+  color:#d8e0eb;
+}
+
+tr:hover td{
+  background:rgba(79,140,255,.025);
+}
+
+.customer-cell{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.customer-avatar{
+  width:39px;
+  height:39px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#243a61,#192b47);
+  color:#dce9ff;
+  font-weight:800;
+  font-size:12px;
+  flex:none;
+}
+
+.customer-name{
+  font-weight:700;
+  color:#fff;
+}
+
+.customer-id{
+  color:#65748b;
+  font-size:10px;
+  margin-top:3px;
+}
+
+.business-name{
+  color:#c9d7eb;
+  font-weight:600;
+}
+
+.service{
+  color:#8291a8;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.money{
+  font-weight:700;
+}
+
+.paid{
+  color:#4ade80;
+}
+
+.due{
+  color:#fbbf24;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:6px 9px;
+  border-radius:30px;
+  font-size:10px;
+  font-weight:800;
+  text-transform:capitalize;
+}
+
+.badge::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:currentColor;
+}
+
+.badge-paid{
+  color:#4ade80;
+  background:rgba(34,197,94,.09);
+}
+
+.badge-partial{
+  color:#60a5fa;
+  background:rgba(96,165,250,.09);
+}
+
+.badge-pending{
+  color:#fbbf24;
+  background:rgba(245,158,11,.09);
+}
+
+.badge-overdue{
+  color:#f87171;
+  background:rgba(239,68,68,.09);
+}
+
+.badge-active{
+  color:#a78bfa;
+  background:rgba(139,92,246,.09);
+}
+
+.actions{
+  display:flex;
+  gap:6px;
+}
+
+.action-btn{
+  width:32px;
+  height:32px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:#0b121d;
+  color:#9eabc0;
+}
+
+.action-btn:hover{
+  color:white;
+  border-color:#3b4e6c;
+}
+
+.action-btn.delete:hover{
+  color:#f87171;
+  border-color:#6d3030;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
+  padding:60px 20px;
+  text-align:center;
+  color:#748198;
+}
+
+.empty-icon{
+  font-size:35px;
+  margin-bottom:12px;
+}
+
+.empty strong{
+  display:block;
+  color:#dbe4ef;
+  margin-bottom:6px;
+}
+
+/* ================= MODAL ================= */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(7px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:2000;
+}
+
+.overlay.show{
+  display:flex;
+}
+
+.modal{
+  width:min(720px,100%);
+  max-height:90vh;
+  overflow-y:auto;
+  background:#101925;
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:0 30px 100px rgba(0,0,0,.5);
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px;
+  border-bottom:1px solid var(--line);
+}
+
+.modal-head h3{
+  font-size:17px;
+}
+
+.close{
+  width:35px;
+  height:35px;
+  border-radius:9px;
+  border:1px solid var(--line);
+  background:#0b121d;
+  color:#9aa8bc;
+}
+
+.modal-body{
+  padding:20px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+.form-group label{
+  color:#98a5b9;
+  font-size:11px;
+  font-weight:700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  border:1px solid var(--line);
+  background:#0b121d;
+  color:#f4f7fb;
+  border-radius:10px;
+  padding:11px 12px;
+  outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:var(--blue);
+}
+
+.form-group textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.modal-foot{
+  display:flex;
+  justify-content:flex-end;
+  gap:9px;
+  padding:16px 20px;
+  border-top:1px solid var(--line);
+}
+
+/* ================= DETAILS ================= */
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.detail-item{
+  background:#0b121d;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:13px;
+}
+
+.detail-item small{
+  color:#718096;
+  display:block;
+  font-size:10px;
+  margin-bottom:6px;
+}
+
+.detail-item strong{
+  font-size:13px;
+}
+
+.detail-money{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.money-box{
+  background:#0b121d;
+  border:1px solid var(--line);
+  padding:14px;
+  border-radius:12px;
+}
+
+.money-box small{
+  display:block;
+  color:#75839a;
+  font-size:10px;
+  margin-bottom:7px;
+}
+
+.money-box strong{
+  font-size:16px;
+}
+
+.notes{
+  margin-top:14px;
+  background:#0b121d;
+  border:1px solid var(--line);
+  padding:14px;
+  border-radius:12px;
+  color:#aebacd;
+  line-height:1.6;
+  font-size:12px;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  background:#101925;
+  border:1px solid var(--line);
+  color:#eaf0f8;
+  padding:13px 16px;
+  border-radius:12px;
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
+  transform:translateY(20px);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  z-index:5000;
+  font-size:12px;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:1100px){
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:800px){
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.25s;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .topbar{
+    padding:0 15px;
+  }
+
+  .content{
+    padding:20px 15px;
+  }
+
+  .page-head{
+    flex-direction:column;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+
+  .detail-money{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:560px){
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .top-title{
+    display:none;
+  }
+
+  .page-head h1{
+    font-size:25px;
+  }
+
+  .toolbar{
+    align-items:stretch;
+  }
+
+  .search,
+  .filter{
+    width:100%;
+    min-width:100%;
+  }
+
+  .head-actions{
+    width:100%;
+  }
+
+  .head-actions .btn{
+    flex:1;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+  <div class="logo">
+    <div class="logo-mark">SNK</div>
+    <div>
+      <h2>SNK Business</h2>
+      <span>Business Management</span>
+    </div>
+  </div>
+
+  <div class="nav-title">Main</div>
+
+  <nav class="nav">
+
+    <a href="index.html">
+      <span class="nav-icon">⌂</span>
+      Dashboard
+    </a>
+
+    <a href="businesses.html">
+      <span class="nav-icon">▣</span>
+      My Businesses
+    </a>
+
+    <a href="customers.html" class="active">
+      <span class="nav-icon">♙</span>
+      Customers
+    </a>
+
+    <a href="payments.html">
+      <span class="nav-icon">৳</span>
+      Payments
+    </a>
+
+    <a href="inventory.html">
+      <span class="nav-icon">▤</span>
+      Inventory
+    </a>
+
+    <a href="invoices.html">
+      <span class="nav-icon">▧</span>
+      Invoices
+    </a>
+
+    <a href="projects.html">
+      <span class="nav-icon">◈</span>
+      Projects
+    </a>
+
+    <a href="marketing.html">
+      <span class="nav-icon">⌁</span>
+      Digital Marketing
+    </a>
+
+    <a href="tasks.html">
+      <span class="nav-icon">✓</span>
+      Tasks
+    </a>
+
+    <a href="reports.html">
+      <span class="nav-icon">▥</span>
+      Reports
+    </a>
+
+  </nav>
+
+  <div class="admin-card">
+    <small>Super Admin</small>
+    <strong>Owner • Full Access</strong>
+  </div>
+
+</aside>
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+  <header class="topbar">
+
+    <div class="top-left">
+      <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+
+      <div class="top-title">
+        SNK Business / <strong>Customers</strong>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <button class="icon-btn" onclick="exportCustomers()" title="Export">
+        ⇩
+      </button>
+
+      <button class="icon-btn" onclick="location.reload()" title="Refresh">
+        ↻
+      </button>
+
+      <div class="avatar">SA</div>
+    </div>
+
+  </header>
+
+  <section class="content">
+
+    <!-- PAGE HEAD -->
+
+    <div class="page-head">
+
+      <div>
+        <div class="eyebrow">Customer Management</div>
+
+        <h1>Customers</h1>
+
+        <p>
+          Manage customers across all your businesses from one place.
+        </p>
+      </div>
+
+      <div class="head-actions">
+
+        <button class="btn" onclick="exportCustomers()">
+          ⇩ Export CSV
+        </button>
+
+        <button class="btn btn-primary" onclick="openAddCustomer()">
+          + New Customer
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+      <div class="stat">
+        <div class="stat-top">
+          <div class="stat-label">Total Customers</div>
+          <div class="stat-icon">♙</div>
+        </div>
+
+        <div class="stat-value" id="totalCustomers">
+          0
+        </div>
+
+        <div class="stat-sub">
+          Across all businesses
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-top">
+          <div class="stat-label">Active Customers</div>
+          <div class="stat-icon">✓</div>
+        </div>
+
+        <div class="stat-value" id="activeCustomers">
+          0
+        </div>
+
+        <div class="stat-sub">
+          Active / paid / partial
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-top">
+          <div class="stat-label">Customer Value</div>
+          <div class="stat-icon">৳</div>
+        </div>
+
+        <div class="stat-value" id="customerValue">
+          ৳0
+        </div>
+
+        <div class="stat-sub">
+          Total customer value
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-top">
+          <div class="stat-label">Pending Amount</div>
+          <div class="stat-icon">!</div>
+        </div>
+
+        <div class="stat-value" id="pendingAmount">
+          ৳0
+        </div>
+
+        <div class="stat-sub">
+          Total outstanding due
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TOOLBAR -->
+
+    <div class="toolbar">
+
+      <div class="search">
+        <span>⌕</span>
+
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="Search customer, phone, email..."
+          oninput="renderCustomers()"
+        >
+      </div>
+
+      <select
+        class="filter"
+        id="businessFilter"
+        onchange="renderCustomers()"
+      >
+        <option value="">All Businesses</option>
+      </select>
+
+      <select
+        class="filter"
+        id="statusFilter"
+        onchange="renderCustomers()"
+      >
+        <option value="">All Status</option>
+        <option value="active">Active</option>
+        <option value="paid">Paid</option>
+        <option value="partial">Partial</option>
+        <option value="pending">Pending</option>
+        <option value="overdue">Overdue</option>
+      </select>
+
+      <button class="btn" onclick="resetFilters()">
+        Reset
+      </button>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="table-card">
+
+      <div class="table-head">
+        <div>
+          <strong>Customer Directory</strong>
+          <span id="resultCount">0 customers</span>
+        </div>
+
+        <span>
+          Live business-linked data
+        </span>
+      </div>
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Business</th>
+              <th>Phone</th>
+              <th>Total Value</th>
+              <th>Paid</th>
+              <th>Due</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody id="customerTableBody"></tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<!-- ================= CUSTOMER MODAL ================= -->
+
+<div class="overlay" id="customerOverlay">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3 id="customerModalTitle">
+        New Customer
+      </h3>
+
+      <button class="close" onclick="closeCustomerModal()">
+        ×
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <input type="hidden" id="customerId">
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Customer Name *</label>
+
+          <input
+            id="customerName"
+            type="text"
+            placeholder="Customer name"
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Phone *</label>
+
+          <input
+            id="customerPhone"
+            type="tel"
+            placeholder="01XXXXXXXXX"
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+
+          <input
+            id="customerEmail"
+            type="email"
+            placeholder="customer@email.com"
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Business *</label>
+
+          <select id="customerBusiness"></select>
+        </div>
+
+        <div class="form-group">
+          <label>Service / Package</label>
+
+          <input
+            id="customerService"
+            type="text"
+            placeholder="Facebook Marketing"
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Status</label>
+
+          <select id="customerStatus">
+            <option value="active">Active</option>
+            <option value="paid">Paid</option>
+            <option value="partial">Partial</option>
+            <option value="pending">Pending</option>
+            <option value="overdue">Overdue</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Total Value</label>
+
+          <input
+            id="customerTotal"
+            type="number"
+            min="0"
+            step="1"
+            value="0"
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Paid Amount</label>
+
+          <input
+            id="customerPaid"
+            type="number"
+            min="0"
+            step="1"
+            value="0"
+          >
+        </div>
+
+        <div class="form-group full">
+          <label>Address</label>
+
+          <input
+            id="customerAddress"
+            type="text"
+            placeholder="Customer address"
+          >
+        </div>
+
+        <div class="form-group full">
+          <label>Notes</label>
+
+          <textarea
+            id="customerNotes"
+            placeholder="Additional notes..."
+          ></textarea>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-foot">
+
+      <button class="btn" onclick="closeCustomerModal()">
+        Cancel
+      </button>
+
+      <button class="btn btn-primary" onclick="saveCustomer()">
+        Save Customer
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================= DETAILS MODAL ================= -->
+
+<div class="overlay" id="detailsOverlay">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3>Customer Details</h3>
+
+      <button class="close" onclick="closeDetailsModal()">
+        ×
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div id="customerDetails"></div>
+
+    </div>
+
+    <div class="modal-foot">
+
+      <button class="btn" onclick="closeDetailsModal()">
+        Close
+      </button>
+
+      <button
+        class="btn btn-primary"
+        id="detailEditButton"
+      >
+        Edit Customer
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================= TOAST ================= -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* =========================================================
+   SNK BUSINESS — CUSTOMER MANAGEMENT
+   STEP 3.2
+========================================================= */
+
+const CUSTOMER_KEY = "snkBusinessCustomers";
+const BUSINESS_KEY = "snkBusinesses";
+
+let customers = [];
+let businesses = [];
+
+/* =========================================================
+   DEMO CUSTOMERS
+========================================================= */
+
+const demoCustomers = [
+
+  {
+    id:"CUS-1001",
+    name:"Anjona Ladies Tailors",
+    phone:"01711000001",
+    email:"anjona@example.com",
+
+    business:"Sarakat Agency",
+    businessId:"BUS-SARAKAT",
+    businessSlug:"sarakat",
+
+    service:"Facebook Marketing",
+
+    total:15000,
+    paid:15000,
+    status:"paid",
+
+    address:"Moulvibazar, Sylhet",
+    notes:"Monthly Facebook marketing client.",
+
+    createdAt:"2026-09-01"
+  },
+
+  {
+    id:"CUS-1002",
+    name:"Local Food House",
+    phone:"01711000002",
+    email:"foodhouse@example.com",
+
+    business:"Digital Marketing",
+    businessId:"BUS-MARKETING",
+    businessSlug:"marketing",
+
+    service:"Digital Marketing Package",
+
+    total:25000,
+    paid:15000,
+    status:"partial",
+
+    address:"Moulvibazar",
+    notes:"Package payment partially received.",
+
+    createdAt:"2026-09-03"
+  },
+
+  {
+    id:"CUS-1003",
+    name:"SNK Local Services",
+    phone:"01711000003",
+    email:"snklocal@example.com",
+
+    business:"Website Sale",
+    businessId:"BUS-WEBSITE",
+    businessSlug:"website",
+
+    service:"Business Website",
+
+    total:30000,
+    paid:20000,
+    status:"partial",
+
+    address:"Sylhet",
+    notes:"Website delivery after remaining payment.",
+
+    createdAt:"2026-09-05"
+  },
+
+  {
+    id:"CUS-1004",
+    name:"Local Attar Shop",
+    phone:"01711000004",
+    email:"attar@example.com",
+
+    business:"Website Sale",
+    businessId:"BUS-WEBSITE",
+    businessSlug:"website",
+
+    service:"Ecommerce Website",
+
+    total:45000,
+    paid:45000,
+    status:"paid",
+
+    address:"Moulvibazar",
+    notes:"Ecommerce website completed.",
+
+    createdAt:"2026-09-07"
+  },
+
+  {
+    id:"CUS-1005",
+    name:"Rahman Enterprise",
+    phone:"01711000005",
+    email:"rahman@example.com",
+
+    business:"Sarakat Agency",
+    businessId:"BUS-SARAKAT",
+    businessSlug:"sarakat",
+
+    service:"Facebook Ads",
+
+    total:18000,
+    paid:5000,
+    status:"overdue",
+
+    address:"Sylhet",
+    notes:"Payment follow-up required.",
+
+    createdAt:"2026-09-08"
+  }
+
+];
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+  loadBusinesses();
+
+  loadCustomers();
+
+  populateBusinessFilters();
+
+  applyBusinessFromURL();
+
+  renderCustomers();
+
+});
+
+/* =========================================================
+   BUSINESS
+========================================================= */
+
+function loadBusinesses(){
+
+  try{
+
+    businesses =
+      JSON.parse(
+        localStorage.getItem(BUSINESS_KEY)
+      ) || [];
+
+  }catch(error){
+
+    businesses = [];
+
+  }
+
+  if(!businesses.length){
+
+    businesses = [
+
+      {
+        id:"BUS-SARAKAT",
+        slug:"sarakat",
+        name:"Sarakat Agency",
+        category:"agency",
+        description:"Digital agency and marketing services.",
+        target:120000,
+        revenue:85000,
+        customers:18,
+        projects:12,
+        pending:25000,
+        status:"active",
+        createdAt:new Date().toISOString()
+      },
+
+      {
+        id:"BUS-WEBSITE",
+        slug:"website",
+        name:"Website Sale",
+        category:"website",
+        description:"Website design and sales.",
+        target:150000,
+        revenue:125000,
+        customers:22,
+        projects:8,
+        pending:30000,
+        status:"active",
+        createdAt:new Date().toISOString()
+      },
+
+      {
+        id:"BUS-MARKETING",
+        slug:"marketing",
+        name:"Digital Marketing",
+        category:"marketing",
+        description:"Digital marketing and advertising.",
+        target:200000,
+        revenue:180000,
+        customers:11,
+        projects:17,
+        pending:35000,
+        status:"active",
+        createdAt:new Date().toISOString()
+      }
+
+    ];
+
+    localStorage.setItem(
+      BUSINESS_KEY,
+      JSON.stringify(businesses)
+    );
+
+  }
+
+}
+
+/* =========================================================
+   CUSTOMERS
+========================================================= */
+
+function loadCustomers(){
+
+  try{
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem(CUSTOMER_KEY)
+      );
+
+    if(Array.isArray(saved) && saved.length){
+
+      customers = saved;
+
+    }else{
+
+      customers = demoCustomers;
+
+      saveCustomers(false);
+
+    }
+
+  }catch(error){
+
+    customers = demoCustomers;
+
+    saveCustomers(false);
+
+  }
+
+  normalizeCustomers();
+
+}
+
+/* =========================================================
+   NORMALIZE
+========================================================= */
+
+function normalizeCustomers(){
+
+  customers = customers.map(customer=>{
+
+    const business = findBusiness(
+      customer.businessId,
+      customer.businessSlug,
+      customer.business
+    );
+
+    if(business){
+
+      customer.businessId = business.id;
+      customer.businessSlug = business.slug;
+      customer.business = business.name;
+
+    }
+
+    customer.total =
+      Number(customer.total) || 0;
+
+    customer.paid =
+      Number(customer.paid) || 0;
+
+    customer.paid =
+      Math.max(
+        0,
+        Math.min(customer.paid,customer.total || customer.paid)
+      );
+
+    customer.due =
+      Math.max(
+        customer.total - customer.paid,
+        0
+      );
+
+    return customer;
+
+  });
+
+  saveCustomers(false);
+
+}
+
+/* =========================================================
+   FIND BUSINESS
+========================================================= */
+
+function findBusiness(id,slug,name){
+
+  return businesses.find(b=>
+    String(b.id) === String(id) ||
+    String(b.slug) === String(slug) ||
+    String(b.name).toLowerCase() ===
+      String(name || "").toLowerCase()
+  );
+
+}
+
+/* =========================================================
+   SAVE CUSTOMERS
+========================================================= */
+
+function saveCustomers(sync=true){
+
+  localStorage.setItem(
+    CUSTOMER_KEY,
+    JSON.stringify(customers)
+  );
+
+  if(sync){
+
+    syncBusinessMetrics();
+
+  }
+
+}
+
+/* =========================================================
+   BUSINESS FILTER
+========================================================= */
+
+function populateBusinessFilters(){
+
+  const filter =
+    document.getElementById("businessFilter");
+
+  const select =
+    document.getElementById("customerBusiness");
+
+  filter.innerHTML =
+    `<option value="">All Businesses</option>`;
+
+  select.innerHTML =
+    `<option value="">Select Business</option>`;
+
+  businesses.forEach(business=>{
+
+    filter.insertAdjacentHTML(
+      "beforeend",
+      `
+      <option value="${escapeHTML(business.id)}">
+        ${escapeHTML(business.name)}
+      </option>
+      `
+    );
+
+    select.insertAdjacentHTML(
+      "beforeend",
+      `
+      <option value="${escapeHTML(business.id)}">
+        ${escapeHTML(business.name)}
+      </option>
+      `
+    );
+
+  });
+
+}
+
+/* =========================================================
+   URL BUSINESS FILTER
+========================================================= */
+
+function applyBusinessFromURL(){
+
+  const params =
+    new URLSearchParams(location.search);
+
+  const businessParam =
+    params.get("business");
+
+  if(!businessParam) return;
+
+  const business =
+    findBusiness(
+      businessParam,
+      businessParam,
+      businessParam
+    );
+
+  if(!business) return;
+
+  document.getElementById(
+    "businessFilter"
+  ).value = business.id;
+
+}
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderCustomers(){
+
+  const search =
+    document.getElementById("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const businessId =
+    document.getElementById("businessFilter").value;
+
+  const status =
+    document.getElementById("statusFilter").value;
+
+  const filtered =
+    customers.filter(customer=>{
+
+      const haystack = [
+        customer.name,
+        customer.phone,
+        customer.email,
+        customer.business,
+        customer.service,
+        customer.id
+      ]
+      .join(" ")
+      .toLowerCase();
+
+      const matchesSearch =
+        !search ||
+        haystack.includes(search);
+
+      const matchesBusiness =
+        !businessId ||
+        customer.businessId === businessId;
+
+      const matchesStatus =
+        !status ||
+        customer.status === status;
+
+      return (
+        matchesSearch &&
+        matchesBusiness &&
+        matchesStatus
+      );
+
+    });
+
+  const body =
+    document.getElementById("customerTableBody");
+
+  if(!filtered.length){
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="8">
+          <div class="empty">
+            <div class="empty-icon">♙</div>
+            <strong>No customers found</strong>
+            Try changing your search or filters.
+          </div>
+        </td>
+      </tr>
+    `;
+
+  }else{
+
+    body.innerHTML =
+      filtered
+        .map(customerRow)
+        .join("");
+
+  }
+
+  document.getElementById(
+    "resultCount"
+  ).textContent =
+    `${filtered.length} customer${filtered.length === 1 ? "" : "s"}`;
+
+  updateStats(filtered);
+
+}
+
+/* =========================================================
+   CUSTOMER ROW
+========================================================= */
+
+function customerRow(customer){
+
+  const due =
+    Math.max(
+      Number(customer.total || 0) -
+      Number(customer.paid || 0),
+      0
+    );
+
+  const initials =
+    getInitials(customer.name);
+
+  return `
+    <tr>
+
+      <td>
+
+        <div class="customer-cell">
+
+          <div class="customer-avatar">
+            ${escapeHTML(initials)}
+          </div>
+
+          <div>
+
+            <div class="customer-name">
+              ${escapeHTML(customer.name)}
+            </div>
+
+            <div class="customer-id">
+              ${escapeHTML(customer.id)}
+            </div>
+
+          </div>
+
+        </div>
+
+      </td>
+
+      <td>
+
+        <div class="business-name">
+          ${escapeHTML(customer.business || "—")}
+        </div>
+
+        <div class="service">
+          ${escapeHTML(customer.service || "General")}
+        </div>
+
+      </td>
+
+      <td>
+        ${escapeHTML(customer.phone || "—")}
+      </td>
+
+      <td>
+        <span class="money">
+          ${money(customer.total)}
+        </span>
+      </td>
+
+      <td>
+        <span class="money paid">
+          ${money(customer.paid)}
+        </span>
+      </td>
+
+      <td>
+        <span class="money due">
+          ${money(due)}
+        </span>
+      </td>
+
+      <td>
+        ${statusBadge(customer.status)}
+      </td>
+
+      <td>
+
+        <div class="actions">
+
+          <button
+            class="action-btn"
+            title="View"
+            onclick="viewCustomer('${customer.id}')"
+          >
+            👁
+          </button>
+
+          <button
+            class="action-btn"
+            title="Edit"
+            onclick="editCustomer('${customer.id}')"
+          >
+            ✎
+          </button>
+
+          <button
+            class="action-btn delete"
+            title="Delete"
+            onclick="deleteCustomer('${customer.id}')"
+          >
+            ×
+          </button>
+
+        </div>
+
+      </td>
+
+    </tr>
+  `;
+
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(list){
+
+  const total =
+    list.length;
+
+  const active =
+    list.filter(c=>
+      ["active","paid","partial"].includes(c.status)
+    ).length;
+
+  const value =
+    list.reduce(
+      (sum,c)=>sum + Number(c.total || 0),
+      0
+    );
+
+  const pending =
+    list.reduce(
+      (sum,c)=>
+        sum +
+        Math.max(
+          Number(c.total || 0) -
+          Number(c.paid || 0),
+          0
+        ),
+      0
+    );
+
+  document.getElementById(
+    "totalCustomers"
+  ).textContent = total;
+
+  document.getElementById(
+    "activeCustomers"
+  ).textContent = active;
+
+  document.getElementById(
+    "customerValue"
+  ).textContent = money(value);
+
+  document.getElementById(
+    "pendingAmount"
+  ).textContent = money(pending);
+
+}
+
+/* =========================================================
+   ADD
+========================================================= */
+
+function openAddCustomer(){
+
+  document.getElementById(
+    "customerModalTitle"
+  ).textContent = "New Customer";
+
+  clearCustomerForm();
+
+  const selectedBusiness =
+    document.getElementById(
+      "businessFilter"
+    ).value;
+
+  if(selectedBusiness){
+
+    document.getElementById(
+      "customerBusiness"
+    ).value = selectedBusiness;
+
+  }
+
+  document.getElementById(
+    "customerOverlay"
+  ).classList.add("show");
+
+}
+
+/* =========================================================
+   CLEAR FORM
+========================================================= */
+
+function clearCustomerForm(){
+
+  document.getElementById("customerId").value = "";
+
+  document.getElementById("customerName").value = "";
+
+  document.getElementById("customerPhone").value = "";
+
+  document.getElementById("customerEmail").value = "";
+
+  document.getElementById("customerBusiness").value = "";
+
+  document.getElementById("customerService").value = "";
+
+  document.getElementById("customerTotal").value = "0";
+
+  document.getElementById("customerPaid").value = "0";
+
+  document.getElementById("customerStatus").value = "active";
+
+  document.getElementById("customerAddress").value = "";
+
+  document.getElementById("customerNotes").value = "";
+
+}
+
+/* =========================================================
+   EDIT
+========================================================= */
+
+function editCustomer(id){
+
+  const customer =
+    customers.find(c=>c.id === id);
+
+  if(!customer) return;
+
+  document.getElementById(
+    "customerModalTitle"
+  ).textContent = "Edit Customer";
+
+  document.getElementById("customerId").value =
+    customer.id;
+
+  document.getElementById("customerName").value =
+    customer.name || "";
+
+  document.getElementById("customerPhone").value =
+    customer.phone || "";
+
+  document.getElementById("customerEmail").value =
+    customer.email || "";
+
+  document.getElementById("customerBusiness").value =
+    customer.businessId || "";
+
+  document.getElementById("customerService").value =
+    customer.service || "";
+
+  document.getElementById("customerTotal").value =
+    customer.total || 0;
+
+  document.getElementById("customerPaid").value =
+    customer.paid || 0;
+
+  document.getElementById("customerStatus").value =
+    customer.status || "active";
+
+  document.getElementById("customerAddress").value =
+    customer.address || "";
+
+  document.getElementById("customerNotes").value =
+    customer.notes || "";
+
+  document.getElementById(
+    "customerOverlay"
+  ).classList.add("show");
+
+}
+
+/* =========================================================
+   SAVE CUSTOMER
+========================================================= */
+
+function saveCustomer(){
+
+  const id =
+    document.getElementById("customerId").value.trim();
+
+  const name =
+    document.getElementById("customerName").value.trim();
+
+  const phone =
+    document.getElementById("customerPhone").value.trim();
+
+  const email =
+    document.getElementById("customerEmail").value.trim();
+
+  const businessId =
+    document.getElementById("customerBusiness").value;
+
+  const service =
+    document.getElementById("customerService").value.trim();
+
+  const total =
+    Math.max(
+      Number(
+        document.getElementById("customerTotal").value
+      ) || 0,
+      0
+    );
+
+  const paid =
+    Math.max(
+      Number(
+        document.getElementById("customerPaid").value
+      ) || 0,
+      0
+    );
+
+  const selectedStatus =
+    document.getElementById("customerStatus").value;
+
+  const address =
+    document.getElementById("customerAddress").value.trim();
+
+  const notes =
+    document.getElementById("customerNotes").value.trim();
+
+  if(!name){
+
+    showToast("Customer name is required.");
+
+    return;
+
+  }
+
+  if(!phone){
+
+    showToast("Phone number is required.");
+
+    return;
+
+  }
+
+  if(!businessId){
+
+    showToast("Please select a business.");
+
+    return;
+
+  }
+
+  const business =
+    businesses.find(
+      b=>b.id === businessId
+    );
+
+  if(!business){
+
+    showToast("Selected business was not found.");
+
+    return;
+
+  }
+
+  const safePaid =
+    total > 0
+      ? Math.min(paid,total)
+      : paid;
+
+  let status =
+    selectedStatus;
+
+  if(total > 0){
+
+    if(safePaid >= total){
+
+      status = "paid";
+
+    }else if(safePaid > 0){
+
+      status = "partial";
+
+    }else if(
+      selectedStatus !== "overdue" &&
+      selectedStatus !== "active"
+    ){
+
+      status = "pending";
+
+    }
+
+  }
+
+  if(!id){
+
+    const newCustomer = {
+
+      id:generateCustomerId(),
+
+      name,
+      phone,
+      email,
+
+      business:business.name,
+      businessId:business.id,
+      businessSlug:business.slug,
+
+      service,
+
+      total,
+      paid:safePaid,
+
+      status,
+
+      address,
+      notes,
+
+      createdAt:
+        new Date().toISOString()
+
+    };
+
+    customers.unshift(newCustomer);
+
+    saveCustomers(true);
+
+    closeCustomerModal();
+
+    renderCustomers();
+
+    showToast("Customer added successfully.");
+
+    return;
+
+  }
+
+  const index =
+    customers.findIndex(
+      c=>c.id === id
+    );
+
+  if(index === -1){
+
+    showToast("Customer not found.");
+
+    return;
+
+  }
+
+  customers[index] = {
+
+    ...customers[index],
+
+    name,
+    phone,
+    email,
+
+    business:business.name,
+    businessId:business.id,
+    businessSlug:business.slug,
+
+    service,
+
+    total,
+    paid:safePaid,
+
+    status,
+
+    address,
+    notes
+
+  };
+
+  saveCustomers(true);
+
+  closeCustomerModal();
+
+  renderCustomers();
+
+  showToast("Customer updated successfully.");
+
+}
+
+/* =========================================================
+   GENERATE CUSTOMER ID
+========================================================= */
+
+function generateCustomerId(){
+
+  let max = 1000;
+
+  customers.forEach(customer=>{
+
+    const match =
+      String(customer.id)
+        .match(/^CUS-(\d+)$/);
+
+    if(match){
+
+      max =
+        Math.max(
+          max,
+          Number(match[1])
+        );
+
+    }
+
+  });
+
+  return `CUS-${max + 1}`;
+
+}
+
+/* =========================================================
+   VIEW CUSTOMER
+========================================================= */
+
+function viewCustomer(id){
+
+  const customer =
+    customers.find(c=>c.id === id);
+
+  if(!customer) return;
+
+  const due =
+    Math.max(
+      Number(customer.total || 0) -
+      Number(customer.paid || 0),
+      0
+    );
+
+  document.getElementById(
+    "customerDetails"
+  ).innerHTML = `
+
+    <div class="detail-money">
+
+      <div class="money-box">
+        <small>Total Value</small>
+        <strong>${money(customer.total)}</strong>
+      </div>
+
+      <div class="money-box">
+        <small>Paid</small>
+        <strong style="color:#4ade80">
+          ${money(customer.paid)}
+        </strong>
+      </div>
+
+      <div class="money-box">
+        <small>Due</small>
+        <strong style="color:#fbbf24">
+          ${money(due)}
+        </strong>
+      </div>
+
+    </div>
+
+    <div class="detail-grid">
+
+      <div class="detail-item">
+        <small>Customer ID</small>
+        <strong>${escapeHTML(customer.id)}</strong>
+      </div>
+
+      <div class="detail-item">
+        <small>Status</small>
+        ${statusBadge(customer.status)}
+      </div>
+
+      <div class="detail-item">
+        <small>Customer</small>
+        <strong>${escapeHTML(customer.name)}</strong>
+      </div>
+
+      <div class="detail-item">
+        <small>Phone</small>
+        <strong>${escapeHTML(customer.phone || "—")}</strong>
+      </div>
+
+      <div class="detail-item">
+        <small>Email</small>
+        <strong>${escapeHTML(customer.email || "—")}</strong>
+      </div>
+
+      <div class="detail-item">
+        <small>Business</small>
+        <strong>${escapeHTML(customer.business || "—")}</strong>
+      </div>
+
+      <div class="detail-item">
+        <small>Service / Package</small>
+        <strong>${escapeHTML(customer.service || "—")}</strong>
+      </div>
+
+      <div class="detail-item">
+        <small>Created</small>
+        <strong>${formatDate(customer.createdAt)}</strong>
+      </div>
+
+      <div class="detail-item" style="grid-column:1/-1">
+        <small>Address</small>
+        <strong>${escapeHTML(customer.address || "—")}</strong>
+      </div>
+
+    </div>
+
+    <div class="notes">
+      <strong style="color:#fff">
+        Notes
+      </strong>
+
+      <br>
+
+      ${escapeHTML(customer.notes || "No notes added.")}
+    </div>
+
+  `;
+
+  document.getElementById(
+    "detailEditButton"
+  ).onclick = ()=>{
+
+    closeDetailsModal();
+
+    editCustomer(id);
+
+  };
+
+  document.getElementById(
+    "detailsOverlay"
+  ).classList.add("show");
+
+}
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function deleteCustomer(id){
+
+  const customer =
+    customers.find(c=>c.id === id);
+
+  if(!customer) return;
+
+  const confirmed =
+    confirm(
+      `Delete customer "${customer.name}"?`
+    );
+
+  if(!confirmed) return;
+
+  customers =
+    customers.filter(
+      c=>c.id !== id
+    );
+
+  saveCustomers(true);
+
+  renderCustomers();
+
+  showToast("Customer deleted.");
+
+}
+
+/* =========================================================
+   CLOSE MODALS
+========================================================= */
+
+function closeCustomerModal(){
+
+  document.getElementById(
+    "customerOverlay"
+  ).classList.remove("show");
+
+}
+
+function closeDetailsModal(){
+
+  document.getElementById(
+    "detailsOverlay"
+  ).classList.remove("show");
+
+}
+
+/* =========================================================
+   RESET FILTERS
+========================================================= */
+
+function resetFilters(){
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
+
+  document.getElementById(
+    "businessFilter"
+  ).value = "";
+
+  document.getElementById(
+    "statusFilter"
+  ).value = "";
+
+  history.replaceState(
+    {},
+    "",
+    "customers.html"
+  );
+
+  renderCustomers();
+
+}
+
+/* =========================================================
+   SYNC BUSINESS METRICS
+========================================================= */
+
+function syncBusinessMetrics(){
+
+  let changed = false;
+
+  businesses =
+    businesses.map(business=>{
+
+      const linked =
+        customers.filter(customer=>
+          customer.businessId === business.id ||
+          customer.businessSlug === business.slug
+        );
+
+      const customerCount =
+        linked.length;
+
+      const revenue =
+        linked.reduce(
+          (sum,customer)=>
+            sum + Number(customer.paid || 0),
+          0
+        );
+
+      const pending =
+        linked.reduce(
+          (sum,customer)=>
+            sum +
+            Math.max(
+              Number(customer.total || 0) -
+              Number(customer.paid || 0),
+              0
+            ),
+          0
+        );
+
+      if(
+        business.customers !== customerCount ||
+        business.revenue !== revenue ||
+        business.pending !== pending
+      ){
+
+        changed = true;
+
+      }
+
+      return {
+
+        ...business,
+
+        customers:customerCount,
+        revenue,
+        pending
+
+      };
+
+    });
+
+  if(changed){
+
+    localStorage.setItem(
+      BUSINESS_KEY,
+      JSON.stringify(businesses)
+    );
+
+  }
+
+}
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+function exportCustomers(){
+
+  const rows = [
+
+    [
+      "Customer ID",
+      "Customer",
+      "Business",
+      "Phone",
+      "Email",
+      "Service",
+      "Total",
+      "Paid",
+      "Due",
+      "Status",
+      "Address",
+      "Created"
+    ]
+
+  ];
+
+  customers.forEach(customer=>{
+
+    rows.push([
+
+      customer.id,
+      customer.name,
+      customer.business,
+      customer.phone,
+      customer.email,
+      customer.service,
+      customer.total,
+      customer.paid,
+      Math.max(
+        customer.total - customer.paid,
+        0
+      ),
+      customer.status,
+      customer.address,
+      customer.createdAt
+
+    ]);
+
+  });
+
+  const csv =
+    rows
+      .map(row=>
+        row
+          .map(value=>
+            `"${String(value ?? "")
+              .replace(/"/g,'""')}"`
+          )
+          .join(",")
+      )
+      .join("\n");
+
+  const blob =
+    new Blob(
+      [csv],
+      {type:"text/csv;charset=utf-8;"}
+    );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const link =
+    document.createElement("a");
+
+  link.href = url;
+
+  link.download =
+    `snk-business-customers-${new Date()
+      .toISOString()
+      .slice(0,10)}.csv`;
+
+  link.click();
+
+  URL.revokeObjectURL(url);
+
+}
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function money(value){
+
+  return "৳" +
+    Number(value || 0)
+      .toLocaleString("en-BD");
+
+}
+
+function getInitials(name){
+
+  return String(name || "C")
+    .split(" ")
+    .filter(Boolean)
+    .slice(0,2)
+    .map(word=>word[0])
+    .join("")
+    .toUpperCase();
+
+}
+
+function statusBadge(status){
+
+  const labels = {
+
+    paid:"Paid",
+    partial:"Partial",
+    pending:"Pending",
+    overdue:"Overdue",
+    active:"Active"
+
+  };
+
+  const safeStatus =
+    labels[status]
+      ? status
+      : "active";
+
+  return `
+    <span class="badge badge-${safeStatus}">
+      ${labels[safeStatus]}
+    </span>
+  `;
+
+}
+
+function formatDate(date){
+
+  if(!date) return "—";
+
+  const parsed =
+    new Date(date);
+
+  if(isNaN(parsed)) return "—";
+
+  return parsed.toLocaleDateString(
+    "en-BD",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+function toggleSidebar(){
+
+  document
+    .getElementById("sidebar")
+    .classList.toggle("open");
+
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent =
+    message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(
+      ()=>{
+        toast.classList.remove("show");
+      },
+      2600
+    );
+
+}
+
+/* =========================================================
+   OUTSIDE CLICK
+========================================================= */
+
+document.addEventListener("click",event=>{
+
+  const customerOverlay =
+    document.getElementById("customerOverlay");
+
+  const detailsOverlay =
+    document.getElementById("detailsOverlay");
+
+  if(event.target === customerOverlay){
+
+    closeCustomerModal();
+
+  }
+
+  if(event.target === detailsOverlay){
+
+    closeDetailsModal();
+
+  }
+
+});
+
+/* =========================================================
+   ESC
+========================================================= */
+
+document.addEventListener("keydown",event=>{
+
+  if(event.key === "Escape"){
+
+    closeCustomerModal();
+
+    closeDetailsModal();
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
